@@ -1,6 +1,6 @@
 # Searena App 
 **Nama Kelompok : Wong Atos Group**  
-Anggota 1 : Freddy Tanusina (20/456841/TK/50665)  
+Anggota 1 : Freddy Tanusina (20/456841/TK/50665 ) 
 Anggota 2 : Nevrita Natasya Putriana (23/514635/TK/56500)  
 Anggota 3 : Joecelyn Aurora Majesty (23/514716/TK/56510)  
 
@@ -19,3 +19,7 @@ Searena merupakan Aplikasi *Desktop* yang dikembangkan menggunakan program C# de
 ___
 
 Dikembangkan oleh Freddy, Nevrita, dan Joecelyn | Junior Project DTETI 2025 | Wong Atos Group: 'Edisi Industri Maritim'
+
+
+
+ 
