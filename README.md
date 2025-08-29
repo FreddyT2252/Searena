@@ -16,11 +16,6 @@ Searena merupakan Aplikasi *Desktop* yang dikembangkan menggunakan program C# de
 * User Experience yang Intuitif: Interface user-friendly dengan desain yang modern dan dilengkapi dengan fitur yang mudah digunakan pengguna.
 * Eksplorasi Mudah: Pengguna dapat mencari destinasi wisata berdasarkan lokasi, kategori, dan preferensi aktivitas.
 
-**Cara Instalasi**
-
-___
-
-Ukir ceritamu bersama Searena. Perjalanan terbaik akan selalu membawamu kembali ke tempat itu. Datang lagi ya, Searena akan selalu ada untuk Anda!
 ___
 
 Dikembangkan oleh Freddy, Nevrita, dan Joecelyn | Junior Project DTETI 2025 | Wong Atos Group: 'Edisi Industri Maritim'
