@@ -17,9 +17,7 @@ Searena merupakan Aplikasi *Desktop* yang dikembangkan menggunakan program C# de
 * Eksplorasi Mudah: Pengguna dapat mencari destinasi wisata berdasarkan lokasi, kategori, dan preferensi aktivitas.
 
 **Class Diagram dari Searena ⚓🛟**
-<img width="818" height="841" alt="Searena-class diagram searena drawio (1)" src="https://github.com/user-attachments/assets/18d4cf5e-e031-461d-a35a-bb2af1a7bb8d" />
 
-___
 
 ![Class Diagram](docs/Class_Diagram.png)
 
