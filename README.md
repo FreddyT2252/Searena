@@ -21,6 +21,8 @@ Searena merupakan Aplikasi *Desktop* yang dikembangkan menggunakan program C# de
 
 ___
 
+![Class Diagram](docs/Class_Diagram.png)
+
 Dikembangkan oleh Freddy, Nevrita, dan Joecelyn | Junior Project DTETI 2025 | Wong Atos Group: 'Edisi Industri Maritim'
 
 
