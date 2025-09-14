@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,43 +6,34 @@ using System.Threading.Tasks;
 
 namespace SearenaApp
 {
-    public class Admin : Person
+    public class Bookmark
     {
-        private int adminId;
-        private string username;
-        public int AdminId
+        private int bookmarkId;
+        private int userId;
+        private int destinationId;
+        public int BookmarkId
         {
-            get { return adminId; }
-            set { adminId = value; }
+            get { return bookmarkId; }
+            set { bookmarkId = value; }
         }
-        public string Username
+        public int UserId
         {
-            get { return username; }
-            set { username = value; }
+            get { return userId; }
+            set { userId = value; }
         }
-        public void AddDestination(string name, string location, string description, string image)
+        public int DestinationId
         {
-            throw new NotImplementedException();
+            get { return destinationId; }
+            set { destinationId = value; }
         }
-        public void UpdateDestination(int destinationId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteDestination(int destinationId)
+        public void AddBookmark()
         {
             throw new NotImplementedException();
         }
-        public void DeleteReview(int reviewId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-        public void UpdateWeather(string location, float temperature, string condition)
+        public void RemoveBookmark()
         {
             throw new NotImplementedException();
         }
     }
 }
+
