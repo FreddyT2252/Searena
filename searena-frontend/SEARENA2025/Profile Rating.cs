@@ -12,11 +12,53 @@ namespace SEARENA2025
 {
     public partial class Form2 : Form
     {
-        private const string Conn = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        private Form dashboardParent;
 
-        public Form2()
+        private const string Conn = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
+
+        public Form2(Form dashboard = null)
         {
+
+
             InitializeComponent();
+            dashboardParent = dashboard;
+            LoadUserProfile();
+        }
+        private async void LoadUserProfile()
+        {
+            try
+            {
+                using (var conn = new Npgsql.NpgsqlConnection("Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345"))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new Npgsql.NpgsqlCommand("SELECT nama_lengkap, email, no_telepon, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                lblNama.Text = reader["nama_lengkap"]?.ToString() ?? "-";
+                                lblEmail.Text = reader["email"]?.ToString() ?? "-";
+                                lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
+                                guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
+                                lblPengguna.Text = "Pengguna"; // bisa dari role
+                                lblBergabung.Text = "Bergabung sejak " + ((DateTime)reader["tanggal_bergabung"]).ToString("d MMMM yyyy");
+                            }
+                            else
+                            {
+                                MessageBox.Show("User tidak ditemukan.");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data profil: " + ex.Message);
+            }
         }
 
         private void Form2_Load(object sender, System.EventArgs e)
@@ -50,9 +92,9 @@ namespace SEARENA2025
                     await conn.OpenAsync();
                     using (var cmd = new NpgsqlCommand(@"
                 SELECT r.tanggal_review AS ""Tanggal"",
-                       COALESCE(d.nama, 'ID '||r.destinasi_id::text) AS ""Destinasi"",
+                       COALESCE(d.nama_destinasi, 'ID '||r.destinasi_id::text) AS ""Destinasi"",
                        r.rating AS ""Rating"",
-                       r.ulasan AS ""Ulasan""
+                       r.review_text AS ""Ulasan""
                 FROM public.reviews r
                 LEFT JOIN public.destinasi d ON d.destinasi_id = r.destinasi_id
                 WHERE r.user_id = @uid
@@ -140,16 +182,12 @@ namespace SEARENA2025
 
         private void btnBookmark_Click(object sender, EventArgs e)
         {
-            // Navigasi ke halaman bookmark (Form3)
-            if (btnBookmark != null)
-                btnBookmark.FillColor = Color.LightGreen;
-            if (btnRatingReview != null)
-                btnRatingReview.FillColor = Color.FloralWhite;
+           
 
             // Buka Form3 dan tutup Form2
-            Form3 form3 = new Form3();
+            Form3 form3 = new Form3(this);
             form3.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btnLihatLainnya_Click(object sender, EventArgs e)
@@ -249,9 +287,8 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // Kembali ke DashboardUtama
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
+            if (dashboardParent != null)
+                dashboardParent.Show();  // Tampilkan dashboard lagi
             this.Close();
         }
 

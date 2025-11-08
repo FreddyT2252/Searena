@@ -33,5 +33,10 @@ namespace SEARENA2025
             loginForm.Show();
             this.Hide();
         }
+
+        private void Beranda_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

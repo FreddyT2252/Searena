@@ -13,23 +13,59 @@ namespace SEARENA2025
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        private Form2 parentForm;
+        public Form3(Form2 parent)
         {
             InitializeComponent();
+            parentForm = parent;
             LoadBookmarkData();
+            LoadUserProfile();
             AttachNavbarEvents();
         }
+
+        private async void LoadUserProfile()
+        {
+            try
+            {
+                using (var conn = new Npgsql.NpgsqlConnection("Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345"))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new Npgsql.NpgsqlCommand("SELECT nama_lengkap, email, no_telepon, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                lblNama.Text = reader["nama_lengkap"]?.ToString() ?? "-";
+                                lblEmail.Text = reader["email"]?.ToString() ?? "-";
+                                lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
+                                guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
+                                lblPengguna.Text = "Pengguna"; // bisa dari role
+                                lblBergabung.Text = "Bergabung sejak " + ((DateTime)reader["tanggal_bergabung"]).ToString("d MMMM yyyy");
+                            }
+                            else
+                            {
+                                MessageBox.Show("User tidak ditemukan.");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data profil: " + ex.Message);
+            }
+        }
+
 
         private void LoadBookmarkData()
         {
             try
             {
-                // Set data pengguna
-                lblNama.Text = "Tasya Aurora";
-                lblPengguna.Text = "Pengguna";
-                lblBergabung.Text = "Bergabung sejak 2021";
-                lblEmail.Text = "tasyaaurora@gmail.com";
-                lblTelepon.Text = "08213867890";
+                
 
                 // Set data destinasi bookmark
                 lblDestinasi1.Text = "Raja Ampat Marine Park";
@@ -69,7 +105,9 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // Kembali ke DashboardUtama
+            if (parentForm != null)
+                parentForm.Close();  // pastikan Form2 ditutup
+
             DashboardUtama dashboard = new DashboardUtama();
             dashboard.Show();
             this.Close();
@@ -96,16 +134,7 @@ namespace SEARENA2025
             LoadBookmarkData();
         }
 
-        private void btnRatingReview_Click(object sender, EventArgs e)
-        {
-            // Navigasi ke halaman rating dan review (Form2)
-            btnRatingReview.FillColor = Color.LightGreen;
-            btnBookmark.FillColor = Color.FloralWhite;
-
-            Form2 form2 = new Form2();
-            form2.Show();
-            this.Hide();
-        }
+      
 
         // Event handler untuk navigasi menu navbar
         private void Beranda_Click(object sender, EventArgs e)
@@ -136,10 +165,7 @@ namespace SEARENA2025
 
         private void lblProfile_Click(object sender, EventArgs e)
         {
-            // Navigasi ke profile rating (Form2)
-            Form2 form2 = new Form2();
-            form2.Show();
-            this.Hide();
+            MessageBox.Show("Anda sudah berada di halaman profile", "Profile");
         }
 
         private void btnHapusBookmark1_Click(object sender, EventArgs e)
@@ -218,6 +244,47 @@ namespace SEARENA2025
             {
                 ProfilePage.Image = Image.FromFile(openFileDialog.FileName);
             }
+        }
+
+        private void lblBergabung_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRatingReview_Click_1(object sender, EventArgs e)
+        {
+            if (parentForm != null)
+            {
+                parentForm.Show();  // Tampilkan kembali form rating
+                this.Close();       // Tutup form bookmark
+            }
+        }
+
+        private void btnKembali_Click_1(object sender, EventArgs e)
+        {
+            if (parentForm != null)
+                parentForm.Close();  // pastikan Form2 ditutup
+
+            DashboardUtama dashboard = new DashboardUtama();
+            dashboard.Show();
+            this.Close();
+        }
+
+        private void lblProfile_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void Navbar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Profile_Click_1(object sender, EventArgs e)
+        {
+            
+                
+               
+            
         }
     }
 }

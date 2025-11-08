@@ -36,7 +36,7 @@ namespace SEARENA2025
             SetupDestinationPanels();
 
             // Handle ketika form ditutup
-            this.FormClosed += (s, e) => Application.Exit();
+            //this.FormClosed += (s, e) => Application.Exit();
         }
 
         private void SetupEventHandlers()
@@ -652,6 +652,11 @@ namespace SEARENA2025
         }
 
         private void Navbar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblProfile_Click(object sender, EventArgs e)
         {
 
         }

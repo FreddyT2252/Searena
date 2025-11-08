@@ -122,6 +122,7 @@
             this.Beranda.Size = new System.Drawing.Size(62, 23);
             this.Beranda.TabIndex = 2;
             this.Beranda.Text = "Beranda";
+            this.Beranda.Click += new System.EventHandler(this.Beranda_Click);
             // 
             // Logo
             // 

@@ -144,6 +144,7 @@
             this.Navbar.Name = "Navbar";
             this.Navbar.Size = new System.Drawing.Size(802, 44);
             this.Navbar.TabIndex = 1;
+            this.Navbar.Paint += new System.Windows.Forms.PaintEventHandler(this.Navbar_Paint);
             // 
             // lblProfile
             // 
@@ -154,6 +155,7 @@
             this.lblProfile.Size = new System.Drawing.Size(44, 17);
             this.lblProfile.TabIndex = 7;
             this.lblProfile.Text = "Profile";
+            this.lblProfile.Click += new System.EventHandler(this.lblProfile_Click_1);
             // 
             // Profile
             // 
@@ -166,6 +168,7 @@
             this.Profile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Profile.TabIndex = 6;
             this.Profile.TabStop = false;
+            this.Profile.Click += new System.EventHandler(this.Profile_Click_1);
             // 
             // TentangKami
             // 
@@ -238,6 +241,7 @@
             this.btnKembali.TabIndex = 6;
             this.btnKembali.Text = "Kembali";
             this.btnKembali.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnKembali.Click += new System.EventHandler(this.btnKembali_Click_1);
             // 
             // PnlProfile
             // 
@@ -265,13 +269,15 @@
             // 
             // lblBergabung
             // 
+            this.lblBergabung.AutoSize = false;
             this.lblBergabung.BackColor = System.Drawing.Color.Transparent;
             this.lblBergabung.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBergabung.Location = new System.Drawing.Point(125, 67);
             this.lblBergabung.Name = "lblBergabung";
-            this.lblBergabung.Size = new System.Drawing.Size(107, 15);
+            this.lblBergabung.Size = new System.Drawing.Size(107, 32);
             this.lblBergabung.TabIndex = 2;
             this.lblBergabung.Text = "Bergabung sejak 2021";
+            this.lblBergabung.Click += new System.EventHandler(this.lblBergabung_Click);
             // 
             // lblPengguna
             // 
@@ -486,6 +492,7 @@
             this.btnRatingReview.Size = new System.Drawing.Size(180, 25);
             this.btnRatingReview.TabIndex = 0;
             this.btnRatingReview.Text = "Rating dan Review";
+            this.btnRatingReview.Click += new System.EventHandler(this.btnRatingReview_Click_1);
             // 
             // guna2HtmlLabel2
             // 

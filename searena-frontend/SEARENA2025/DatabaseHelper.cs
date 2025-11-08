@@ -8,7 +8,7 @@ namespace SEARENA2025
 {
     public class DatabaseHelper
     {
-        private static string connectionString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        private static string connectionString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
 
         public static NpgsqlConnection GetConnection()
         {
@@ -359,12 +359,12 @@ namespace SEARENA2025
                     if (conn == null) return false;
 
                     string query = @"INSERT INTO reviews (user_id, destinasi_id, rating, ulasan) 
-                                    VALUES (@user_id, @dest_id, @rating, @ulasan) RETURNING review_id";
+                                    VALUES (@user_id, @destination_id, @rating, @ulasan) RETURNING review_id";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@user_id", userId);
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
                         cmd.Parameters.AddWithValue("@rating", rating);
                         cmd.Parameters.AddWithValue("@ulasan", ulasan ?? "");
 
@@ -446,13 +446,13 @@ namespace SEARENA2025
                     if (conn == null) return;
 
                     string query = @"UPDATE destinasi 
-                                    SET rating_avg = (SELECT AVG(rating) FROM reviews WHERE destinasi_id = @dest_id),
-                                        total_review = (SELECT COUNT(*) FROM reviews WHERE destinasi_id = @dest_id)
-                                    WHERE destinasi_id = @dest_id";
+                                    SET rating_avg = (SELECT AVG(rating) FROM reviews WHERE destinasi_id = @destination_id),
+                                        total_review = (SELECT COUNT(*) FROM reviews WHERE destinasi_id = @destination_id)
+                                    WHERE destinasi_id = @destination_id";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -520,12 +520,12 @@ namespace SEARENA2025
                                            r.ulasan, r.tanggal_review, u.nama_lengkap
                                     FROM reviews r
                                     JOIN users u ON r.user_id = u.user_id
-                                    WHERE r.destinasi_id = @dest_id
+                                    WHERE r.destinasi_id = @destination_id
                                     ORDER BY r.tanggal_review DESC";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -580,14 +580,14 @@ namespace SEARENA2025
                     if (conn == null) return false;
 
                     string query = @"INSERT INTO bookmarks (user_id, destinasi_id) 
-                                    VALUES (@user_id, @dest_id) 
+                                    VALUES (@user_id, @destination_id) 
                                     ON CONFLICT (user_id, destinasi_id) DO NOTHING 
                                     RETURNING bookmark_id";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@user_id", userId);
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
 
                         var result = cmd.ExecuteScalar();
                         if (result != null)
@@ -614,11 +614,11 @@ namespace SEARENA2025
                 {
                     if (conn == null) return false;
 
-                    string query = "DELETE FROM bookmarks WHERE user_id = @user_id AND destinasi_id = @dest_id";
+                    string query = "DELETE FROM bookmarks WHERE user_id = @user_id AND destinasi_id = @destination_id";
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@user_id", userId);
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
                         return cmd.ExecuteNonQuery() > 0;
                     }
                 }
@@ -638,11 +638,11 @@ namespace SEARENA2025
                 {
                     if (conn == null) return false;
 
-                    string query = "SELECT COUNT(*) FROM bookmarks WHERE user_id = @user_id AND destinasi_id = @dest_id";
+                    string query = "SELECT COUNT(*) FROM bookmarks WHERE user_id = @user_id AND destinasi_id = @destination_id";
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@user_id", userId);
-                        cmd.Parameters.AddWithValue("@dest_id", destinasiId);
+                        cmd.Parameters.AddWithValue("@destination_id", destinasiId);
                         return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
                     }
                 }

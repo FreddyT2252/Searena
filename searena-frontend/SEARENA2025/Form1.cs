@@ -1,4 +1,5 @@
 ﻿// Form1.cs - Login dan Register (PERBAIKAN)
+using Npgsql;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -445,36 +446,30 @@ namespace SEARENA2025
         // === METHOD LOGIN & REGISTER DENGAN DATABASE ===
         private void Login()
         {
-            // Validasi input
-            if (string.IsNullOrWhiteSpace(_txtEmail.Text))
+            if (string.IsNullOrWhiteSpace(_txtEmail.Text) || string.IsNullOrWhiteSpace(_txtPassword.Text))
             {
-                MessageBox.Show("Email harus diisi", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtEmail.Focus();
+                MessageBox.Show("Email dan password wajib diisi");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_txtPassword.Text))
-            {
-                MessageBox.Show("Password harus diisi", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtPassword.Focus();
-                return;
-            }
-
-            // Login dengan database
             var user = User.Login(_txtEmail.Text.Trim(), _txtPassword.Text);
-
-            if (user != null)
-            {
-                MessageBox.Show($"Selamat datang, {user.NamaLengkap}!", "Login Berhasil",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                PindahKeDashboard();
-            }
-            else
+            if (user == null)
             {
                 MessageBox.Show("Email atau password salah", "Login Gagal",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            // pakai Id dari DatabaseHelper.User
+            UserSession.SetUser(user.Id, user.NamaLengkap, user.Email);
+
+            MessageBox.Show($"Selamat datang, {user.NamaLengkap}!", "Login Berhasil",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            PindahKeDashboard();
         }
+
+
+
 
         private void Register()
         {
@@ -608,4 +603,9 @@ namespace SEARENA2025
             }
         }
     }
+
+
 }
+
+
+

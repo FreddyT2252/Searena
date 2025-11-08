@@ -18,11 +18,9 @@ namespace SEARENA2025
         private readonly string _destName;
         private readonly string _destLocation;
 
-        // Simulated current user info
-        private readonly int _currentUserId = 1;
-        private readonly string _currentUsername = "Tasya Aurora";
+       
 
-        private const string ConnString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        private const string ConnString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
 
         public DetailDestinasi(int destId, string destName, string destLocation)
         {
@@ -91,12 +89,12 @@ namespace SEARENA2025
                         review_id      SERIAL PRIMARY KEY,
                         user_id        INT NOT NULL,
                         username       TEXT NOT NULL,
-                        dest_id        INT NOT NULL,
+                        destinasi_id        INT NOT NULL,
                         dest_name      TEXT NOT NULL,
                         dest_location  TEXT NOT NULL,
                         review_text    TEXT NOT NULL,
                         rating         INT  NOT NULL CHECK (rating BETWEEN 1 AND 5),
-                        created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        tanggal_review     TIMESTAMPTZ NOT NULL DEFAULT NOW()
                     );";
                     using (var cmdCreate = new NpgsqlCommand(createSql, conn))
                         await cmdCreate.ExecuteNonQueryAsync();
@@ -104,15 +102,15 @@ namespace SEARENA2025
                     // insert review
                     string insertSql = @"
                     INSERT INTO public.reviews
-                        (user_id, username, dest_id, dest_name, dest_location, review_text, rating)
+                        (user_id, username, destinasi_id, dest_name, dest_location, review_text, rating)
                     VALUES
-                        (@uid, @uname, @did, @dname, @dloc, @txt, @rate);";
+                        (@uid, @uname, @destinasi_id, @dname, @dloc, @txt, @rate);";
 
                     using (var cmd = new NpgsqlCommand(insertSql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@uid", _currentUserId);
-                        cmd.Parameters.AddWithValue("@uname", _currentUsername);
-                        cmd.Parameters.AddWithValue("@did", _destId);
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+                        cmd.Parameters.AddWithValue("@uname", UserSession.Username);
+                        cmd.Parameters.AddWithValue("@destinasi_id", _destId);
                         cmd.Parameters.AddWithValue("@dname", string.IsNullOrWhiteSpace(_destName) ? lblDestinasi1.Text : _destName);
                         cmd.Parameters.AddWithValue("@dloc", string.IsNullOrWhiteSpace(_destLocation) ? lblLokasi1.Text : _destLocation);
                         cmd.Parameters.AddWithValue("@txt", ulasan);
