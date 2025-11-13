@@ -20,23 +20,19 @@ namespace SEARENA2025
         private Guna2CheckBox _chkIngatSaya;
         private LinkLabel _lnkLupaSandi;
         private Guna2Button _btnMasuk;
-        private Label _lblAtauMasuk;
-        private Guna2ImageButton _btnGoogleLogin, _btnAppleLogin, _btnFacebookLogin;
 
         // Register Form Controls
         private Guna2TextBox _txtRegNama, _txtRegEmail, _txtRegPassword;
         private Guna2CheckBox _chkSetuju;
         private Guna2Button _btnDaftar;
-        private Label _lblAtauDaftar;
-        private Guna2ImageButton _btnGoogleReg, _btnAppleReg, _btnFacebookReg;
 
         // Ukuran dan Warna
         private const int PANEL_WIDTH = 400;
         private const int CONTENT_WIDTH = 330;
         private const int FORM_WIDTH = 900;
         private const int FORM_HEIGHT = 600;
-        private const int PANEL_HEIGHT_LOGIN = 420;
-        private const int PANEL_HEIGHT_REGISTER = 480;
+        private const int PANEL_HEIGHT_LOGIN = 360;
+        private const int PANEL_HEIGHT_REGISTER = 420;
         private const int BORDER_RADIUS = 25;
 
         private static readonly Color COLOR_PRIMARY = Color.FromArgb(109, 175, 207);
@@ -164,7 +160,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Alamat E-mail",  
+                PlaceholderText = "Alamat E-mail",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White
@@ -187,7 +183,7 @@ namespace SEARENA2025
                 TextOffset = new Point(5, 10),
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",  
+                PlaceholderText = "Kata Sandi",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White
@@ -239,34 +235,6 @@ namespace SEARENA2025
             };
             _btnMasuk.Click += (s, e) => Login();
             _mainPanel.Controls.Add(_btnMasuk);
-
-            currentY += _btnMasuk.Height + 15;
-
-            _lblAtauMasuk = new Label
-            {
-                Text = "Atau Masuk Dengan",
-                Font = new Font("Segoe UI", 8.5F),
-                ForeColor = COLOR_TEXT_LIGHT,
-                BackColor = Color.Transparent,
-                AutoSize = true
-            };
-            _lblAtauMasuk.Location = new Point((PANEL_WIDTH - _lblAtauMasuk.Width) / 2, currentY);
-            _mainPanel.Controls.Add(_lblAtauMasuk);
-
-            currentY += _lblAtauMasuk.Height + 8;
-
-            int buttonSize = 35;
-            int spacing = 18;
-            int totalSocialWidth = buttonSize * 3 + spacing * 2;
-            int socialStartX = (PANEL_WIDTH - totalSocialWidth) / 2;
-
-            _btnGoogleLogin = CreateSocialButton(socialStartX, currentY, "Icons/material-icon-theme_google.png", buttonSize);
-            _btnAppleLogin = CreateSocialButton(socialStartX + buttonSize + spacing, currentY, "Icons/streamline-logos_apple-logo-block.png", buttonSize);
-            _btnFacebookLogin = CreateSocialButton(socialStartX + (buttonSize + spacing) * 2, currentY, "Icons/devicon_facebook.png", buttonSize);
-
-            _mainPanel.Controls.Add(_btnGoogleLogin);
-            _mainPanel.Controls.Add(_btnAppleLogin);
-            _mainPanel.Controls.Add(_btnFacebookLogin);
         }
 
         private void CreateRegisterForm()
@@ -284,7 +252,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/Vector.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Nama Lengkap",  
+                PlaceholderText = "Nama Lengkap",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -305,7 +273,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Alamat E-mail",  
+                PlaceholderText = "Alamat E-mail",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -329,7 +297,7 @@ namespace SEARENA2025
                 TextOffset = new Point(5, 10),
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",  
+                PlaceholderText = "Kata Sandi",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -371,39 +339,6 @@ namespace SEARENA2025
             };
             _btnDaftar.Click += (s, e) => Register();
             _mainPanel.Controls.Add(_btnDaftar);
-
-            currentY += _btnDaftar.Height + 15;
-
-            _lblAtauDaftar = new Label
-            {
-                Text = "Atau Daftar Dengan",
-                Font = new Font("Segoe UI", 8.5F),
-                ForeColor = COLOR_TEXT_LIGHT,
-                BackColor = Color.Transparent,
-                AutoSize = true,
-                Visible = false
-            };
-            _lblAtauDaftar.Location = new Point((PANEL_WIDTH - _lblAtauDaftar.Width) / 2, currentY);
-            _mainPanel.Controls.Add(_lblAtauDaftar);
-
-            currentY += _lblAtauDaftar.Height + 8;
-
-            int buttonSize = 35;
-            int spacing = 18;
-            int totalSocialWidth = buttonSize * 3 + spacing * 2;
-            int socialStartX = (PANEL_WIDTH - totalSocialWidth) / 2;
-
-            _btnGoogleReg = CreateSocialButton(socialStartX, currentY, "Icons/material-icon-theme_google.png", buttonSize);
-            _btnAppleReg = CreateSocialButton(socialStartX + buttonSize + spacing, currentY, "Icons/streamline-logos_apple-logo-block.png", buttonSize);
-            _btnFacebookReg = CreateSocialButton(socialStartX + (buttonSize + spacing) * 2, currentY, "Icons/devicon_facebook.png", buttonSize);
-
-            _btnGoogleReg.Visible = false;
-            _btnAppleReg.Visible = false;
-            _btnFacebookReg.Visible = false;
-
-            _mainPanel.Controls.Add(_btnGoogleReg);
-            _mainPanel.Controls.Add(_btnAppleReg);
-            _mainPanel.Controls.Add(_btnFacebookReg);
         }
 
         private void ShowLoginForm()
@@ -420,8 +355,8 @@ namespace SEARENA2025
             _btnTabDaftar.ForeColor = COLOR_TEXT_LIGHT;
             _btnTabDaftar.Font = new Font("Segoe UI", 11F);
 
-            SetControlsVisibility(true, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk, _lblAtauMasuk, _btnGoogleLogin, _btnAppleLogin, _btnFacebookLogin);
-            SetControlsVisibility(false, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar, _lblAtauDaftar, _btnGoogleReg, _btnAppleReg, _btnFacebookReg);
+            SetControlsVisibility(true, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk);
+            SetControlsVisibility(false, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar);
         }
 
         private void ShowRegisterForm()
@@ -438,8 +373,8 @@ namespace SEARENA2025
             _btnTabMasuk.ForeColor = COLOR_TEXT_LIGHT;
             _btnTabMasuk.Font = new Font("Segoe UI", 11F);
 
-            SetControlsVisibility(false, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk, _lblAtauMasuk, _btnGoogleLogin, _btnAppleLogin, _btnFacebookLogin);
-            SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar, _lblAtauDaftar, _btnGoogleReg, _btnAppleReg, _btnFacebookReg);
+            SetControlsVisibility(false, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk);
+            SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar);
         }
 
         // Method Login dan Register
@@ -459,16 +394,12 @@ namespace SEARENA2025
                 return;
             }
 
-            // pakai Id dari DatabaseHelper.User
             UserSession.SetUser(user.Id, user.NamaLengkap, user.Email);
 
             MessageBox.Show($"Selamat datang, {user.NamaLengkap}!", "Login Berhasil",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             PindahKeDashboard();
         }
-
-
-
 
         private void Register()
         {
@@ -522,7 +453,6 @@ namespace SEARENA2025
                 MessageBox.Show("Registrasi berhasil! Silakan login dengan akun Anda.", "Sukses",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Pindah ke form login
                 ShowLoginForm();
                 _txtEmail.Text = newUser.Email;
                 _txtPassword.Focus();
@@ -537,9 +467,9 @@ namespace SEARENA2025
         private void PindahKeDashboard()
         {
             DashboardUtama dashboard = new DashboardUtama();
-            dashboard.FormClosed += (s, args) => Application.Exit(); // Keluar aplikasi jika dashboard ditutup
+            dashboard.FormClosed += (s, args) => Application.Exit();
             dashboard.Show();
-            this.Hide(); 
+            this.Hide();
         }
 
         private Label CreateInnerLabel(string text, int x, int y)
@@ -553,29 +483,6 @@ namespace SEARENA2025
                 AutoSize = true,
                 Location = new Point(x, y)
             };
-        }
-
-        private Guna2ImageButton CreateSocialButton(int x, int y, string imagePath, int size)
-        {
-            var button = new Guna2ImageButton
-            {
-                Image = Image.FromFile(imagePath),
-                ImageSize = new Size(28, 28),
-                Location = new Point(x, y),
-                Size = new Size(size, size),
-                BackColor = Color.Transparent,
-                Cursor = Cursors.Hand,
-                HoverState = { ImageSize = new Size(30, 30) },
-                PressedState = { ImageSize = new Size(26, 26) }
-            };
-
-            button.Click += (s, e) =>
-            {
-                MessageBox.Show($"Login dengan {System.IO.Path.GetFileNameWithoutExtension(imagePath)} akan segera tersedia",
-                    "Social Login");
-            };
-
-            return button;
         }
 
         private void TogglePasswordVisibility(Guna2TextBox textBox)
@@ -602,9 +509,4 @@ namespace SEARENA2025
             }
         }
     }
-
-
 }
-
-
-

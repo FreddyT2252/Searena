@@ -186,7 +186,7 @@ namespace SEARENA2025
                     {
                         cmd.Parameters.AddWithValue("@nama", namaLengkap);
                         cmd.Parameters.AddWithValue("@email", email);
-                        cmd.Parameters.AddWithValue("@password", HashPassword(password));
+                        cmd.Parameters.AddWithValue("@password", Password);
                         cmd.Parameters.AddWithValue("@telepon", noTelepon ?? "");
 
                         id = Convert.ToInt32(cmd.ExecuteScalar());

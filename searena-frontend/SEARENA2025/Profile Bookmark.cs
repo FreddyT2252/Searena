@@ -41,7 +41,6 @@ namespace SEARENA2025
                             {
                                 lblNama.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblEmail.Text = reader["email"]?.ToString() ?? "-";
-                                lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
                                 guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblPengguna.Text = "Pengguna"; // bisa dari role
                                 lblBergabung.Text = "Bergabung sejak " + ((DateTime)reader["tanggal_bergabung"]).ToString("d MMMM yyyy");
@@ -207,11 +206,6 @@ namespace SEARENA2025
         // Method untuk menambahkan event handler ke kontrol navbar
         public void AttachNavbarEvents()
         {
-            // Pastikan kontrol ini ada di Designer
-            if (Beranda != null) Beranda.Click += Beranda_Click;
-            if (Destinasi != null) Destinasi.Click += Destinasi_Click;
-            if (Kontak != null) Kontak.Click += Kontak_Click;
-            if (TentangKami != null) TentangKami.Click += TentangKami_Click;
             if (lblProfile != null) lblProfile.Click += lblProfile_Click;
 
             // Event handler untuk logo
@@ -285,6 +279,11 @@ namespace SEARENA2025
                 
                
             
+        }
+
+        private void Destinasi_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

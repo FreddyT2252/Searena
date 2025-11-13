@@ -28,7 +28,7 @@ namespace SEARENA2025
         {
             try
             {
-                using (var conn = new Npgsql.NpgsqlConnection("Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345"))
+                using (var conn = new Npgsql.NpgsqlConnection("Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123"))
                 {
                     await conn.OpenAsync();
 

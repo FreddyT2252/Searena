@@ -41,12 +41,7 @@ namespace SEARENA2025
 
         private void SetupEventHandlers()
         {
-            // Event handler untuk navigasi
-            Beranda.Click += (s, e) => ScrollToTop();
-            Destinasi.Click += (s, e) => ScrollToDestinations();
-            Kontak.Click += (s, e) => ScrollToContact();
-            TentangKami.Click += (s, e) => ScrollToAbout();
-
+            
             // Event handler untuk profile picture
             PctProfile.Click += (s, e) => OpenProfilePage();
 
@@ -142,22 +137,7 @@ namespace SEARENA2025
 
         private void SetupScrollBars()
         {
-            // Setup scrollbar untuk destinasi (ScrBarDasboardUtama)
-            if (ScrBarDasboardUtama != null && panelDestinasi1 != null)
-            {
-                ScrBarDasboardUtama.Minimum = 0;
-                ScrBarDasboardUtama.Maximum = Math.Max(0, panelDestinasi1.Height - 400);
-                ScrBarDasboardUtama.LargeChange = 100;
-                ScrBarDasboardUtama.SmallChange = 10;
-                ScrBarDasboardUtama.Visible = true;
-
-                ScrBarDasboardUtama.Scroll += (s, e) =>
-                {
-                    panelDestinasi1.Top = -ScrBarDasboardUtama.Value;
-                };
-            }
-
-            // Setup scrollbar untuk filter pulau (ScrollPulau)
+              // Setup scrollbar untuk filter pulau (ScrollPulau)
             if (ScrollPulau != null && PnlPulau != null)
             {
                 ScrollPulau.Minimum = 0;
@@ -554,13 +534,7 @@ namespace SEARENA2025
 
         private void panelDestinasi1_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (ScrBarDasboardUtama != null && ScrBarDasboardUtama.Visible)
-            {
-                int newValue = ScrBarDasboardUtama.Value - (e.Delta / 2);
-                newValue = Math.Max(ScrBarDasboardUtama.Minimum, Math.Min(ScrBarDasboardUtama.Maximum, newValue));
-                ScrBarDasboardUtama.Value = newValue;
-                if (panelDestinasi1 != null) panelDestinasi1.Top = -newValue;
-            }
+            
         }
 
         // Panggil ini dari ctor setelah InitializeComponent(): SetupDestinationPanels();
