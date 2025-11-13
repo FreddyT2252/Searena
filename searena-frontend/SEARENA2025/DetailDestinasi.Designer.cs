@@ -82,6 +82,7 @@
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.PnlKirimRatingReview = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.tbUlasan = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnKirim = new Guna.UI2.WinForms.Guna2Button();
             this.guna2RatingStar1 = new Guna.UI2.WinForms.Guna2RatingStar();
             this.guna2HtmlLabel45 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -117,7 +118,6 @@
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFasilitas1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel40 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.tbUlasan = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).BeginInit();
@@ -156,10 +156,9 @@
             // 
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(21, 26);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(14, 17);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(274, 162);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(183, 105);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
@@ -182,10 +181,9 @@
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel3);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel2.Controls.Add(this.guna2PictureBox2);
-            this.guna2Panel2.Location = new System.Drawing.Point(-2, 557);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel2.Location = new System.Drawing.Point(-1, 362);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(1203, 135);
+            this.guna2Panel2.Size = new System.Drawing.Size(802, 88);
             this.guna2Panel2.TabIndex = 5;
             this.guna2Panel2.UseWaitCursor = true;
             // 
@@ -193,10 +191,9 @@
             // 
             this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel11.Font = new System.Drawing.Font("Malgun Gothic Semilight", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel11.Location = new System.Drawing.Point(520, 105);
-            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel11.Location = new System.Drawing.Point(347, 68);
             this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
-            this.guna2HtmlLabel11.Size = new System.Drawing.Size(175, 21);
+            this.guna2HtmlLabel11.Size = new System.Drawing.Size(114, 14);
             this.guna2HtmlLabel11.TabIndex = 13;
             this.guna2HtmlLabel11.Text = "wongatosgroup@gmail.com";
             this.guna2HtmlLabel11.UseWaitCursor = true;
@@ -205,10 +202,9 @@
             // 
             this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel10.Font = new System.Drawing.Font("Malgun Gothic Semilight", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel10.Location = new System.Drawing.Point(519, 78);
-            this.guna2HtmlLabel10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(346, 51);
             this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            this.guna2HtmlLabel10.Size = new System.Drawing.Size(117, 21);
+            this.guna2HtmlLabel10.Size = new System.Drawing.Size(75, 14);
             this.guna2HtmlLabel10.TabIndex = 12;
             this.guna2HtmlLabel10.Text = "+62 89515332274";
             this.guna2HtmlLabel10.UseWaitCursor = true;
@@ -217,10 +213,9 @@
             // 
             this.guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel9.Font = new System.Drawing.Font("Malgun Gothic Semilight", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel9.Location = new System.Drawing.Point(519, 49);
-            this.guna2HtmlLabel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel9.Location = new System.Drawing.Point(346, 32);
             this.guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            this.guna2HtmlLabel9.Size = new System.Drawing.Size(283, 21);
+            this.guna2HtmlLabel9.Size = new System.Drawing.Size(189, 14);
             this.guna2HtmlLabel9.TabIndex = 11;
             this.guna2HtmlLabel9.Text = "Kec. Mlati, Daerah Istimewa Yogyakarta, 55281";
             this.guna2HtmlLabel9.UseWaitCursor = true;
@@ -229,10 +224,9 @@
             // 
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Malgun Gothic Semilight", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(519, 31);
-            this.guna2HtmlLabel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(346, 20);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
-            this.guna2HtmlLabel8.Size = new System.Drawing.Size(486, 21);
+            this.guna2HtmlLabel8.Size = new System.Drawing.Size(319, 14);
             this.guna2HtmlLabel8.TabIndex = 10;
             this.guna2HtmlLabel8.Text = "Komplek Fakultas Teknik UGM, Jl. Grafika No.2, Yogyakarta, Sendowo, Sinduadi,";
             this.guna2HtmlLabel8.UseWaitCursor = true;
@@ -241,10 +235,9 @@
             // 
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
-            this.guna2PictureBox5.Location = new System.Drawing.Point(488, 108);
-            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox5.Location = new System.Drawing.Point(325, 70);
             this.guna2PictureBox5.Name = "guna2PictureBox5";
-            this.guna2PictureBox5.Size = new System.Drawing.Size(26, 17);
+            this.guna2PictureBox5.Size = new System.Drawing.Size(17, 11);
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox5.TabIndex = 9;
             this.guna2PictureBox5.TabStop = false;
@@ -254,10 +247,9 @@
             // 
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(490, 75);
-            this.guna2PictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(327, 49);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
-            this.guna2PictureBox4.Size = new System.Drawing.Size(22, 23);
+            this.guna2PictureBox4.Size = new System.Drawing.Size(15, 15);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox4.TabIndex = 8;
             this.guna2PictureBox4.TabStop = false;
@@ -267,10 +259,9 @@
             // 
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(490, 32);
-            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(327, 21);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
-            this.guna2PictureBox3.Size = new System.Drawing.Size(20, 23);
+            this.guna2PictureBox3.Size = new System.Drawing.Size(13, 15);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox3.TabIndex = 7;
             this.guna2PictureBox3.TabStop = false;
@@ -280,10 +271,9 @@
             // 
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(32, 95);
-            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(21, 62);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(378, 25);
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(239, 15);
             this.guna2HtmlLabel7.TabIndex = 6;
             this.guna2HtmlLabel7.Text = "dengan panduan cuaca terkini, ulasan wisatawan.";
             this.guna2HtmlLabel7.UseWaitCursor = true;
@@ -292,10 +282,9 @@
             // 
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(33, 74);
-            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(22, 48);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            this.guna2HtmlLabel6.Size = new System.Drawing.Size(427, 25);
+            this.guna2HtmlLabel6.Size = new System.Drawing.Size(270, 15);
             this.guna2HtmlLabel6.TabIndex = 5;
             this.guna2HtmlLabel6.Text = "terbaik di Indonesia. Temukan keindahan laut nusantara";
             this.guna2HtmlLabel6.UseWaitCursor = true;
@@ -304,10 +293,9 @@
             // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(33, 52);
-            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(22, 34);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(408, 25);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(261, 15);
             this.guna2HtmlLabel5.TabIndex = 4;
             this.guna2HtmlLabel5.Text = "Searena merupakan platform destinasi wisata maritim";
             this.guna2HtmlLabel5.UseWaitCursor = true;
@@ -316,10 +304,9 @@
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(34, 31);
-            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(23, 20);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(214, 25);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(140, 15);
             this.guna2HtmlLabel4.TabIndex = 3;
             this.guna2HtmlLabel4.Text = "Selamat datang, Sea-Mates! ";
             this.guna2HtmlLabel4.UseWaitCursor = true;
@@ -328,10 +315,9 @@
             // 
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(490, 6);
-            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(327, 4);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(64, 27);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(44, 17);
             this.guna2HtmlLabel3.TabIndex = 2;
             this.guna2HtmlLabel3.Text = "Kontak";
             this.guna2HtmlLabel3.UseWaitCursor = true;
@@ -340,10 +326,9 @@
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(38, 6);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(25, 4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(123, 27);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(84, 17);
             this.guna2HtmlLabel2.TabIndex = 1;
             this.guna2HtmlLabel2.Text = "Tentang Kami";
             this.guna2HtmlLabel2.UseWaitCursor = true;
@@ -352,10 +337,9 @@
             // 
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(1035, 23);
-            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(690, 15);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
-            this.guna2PictureBox2.Size = new System.Drawing.Size(196, 83);
+            this.guna2PictureBox2.Size = new System.Drawing.Size(131, 54);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox2.TabIndex = 0;
             this.guna2PictureBox2.TabStop = false;
@@ -371,10 +355,9 @@
             this.Navbar.Controls.Add(this.Destinasi);
             this.Navbar.Controls.Add(this.Beranda);
             this.Navbar.Controls.Add(this.Logo);
-            this.Navbar.Location = new System.Drawing.Point(-2, 0);
-            this.Navbar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Navbar.Location = new System.Drawing.Point(-1, 0);
             this.Navbar.Name = "Navbar";
-            this.Navbar.Size = new System.Drawing.Size(1203, 68);
+            this.Navbar.Size = new System.Drawing.Size(802, 44);
             this.Navbar.TabIndex = 6;
             this.Navbar.UseWaitCursor = true;
             // 
@@ -382,10 +365,9 @@
             // 
             this.lblProfile.AutoSize = true;
             this.lblProfile.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfile.Location = new System.Drawing.Point(1118, 25);
-            this.lblProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProfile.Location = new System.Drawing.Point(745, 16);
             this.lblProfile.Name = "lblProfile";
-            this.lblProfile.Size = new System.Drawing.Size(66, 28);
+            this.lblProfile.Size = new System.Drawing.Size(44, 17);
             this.lblProfile.TabIndex = 7;
             this.lblProfile.Text = "Profile";
             this.lblProfile.UseWaitCursor = true;
@@ -394,11 +376,10 @@
             // 
             this.Profile.Image = ((System.Drawing.Image)(resources.GetObject("Profile.Image")));
             this.Profile.ImageRotate = 0F;
-            this.Profile.Location = new System.Drawing.Point(1052, 9);
-            this.Profile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Profile.Location = new System.Drawing.Point(701, 6);
             this.Profile.Name = "Profile";
             this.Profile.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.Profile.Size = new System.Drawing.Size(57, 54);
+            this.Profile.Size = new System.Drawing.Size(38, 35);
             this.Profile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Profile.TabIndex = 6;
             this.Profile.TabStop = false;
@@ -408,10 +389,9 @@
             // 
             this.TentangKami.BackColor = System.Drawing.Color.Transparent;
             this.TentangKami.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TentangKami.Location = new System.Drawing.Point(576, 18);
-            this.TentangKami.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TentangKami.Location = new System.Drawing.Point(384, 12);
             this.TentangKami.Name = "TentangKami";
-            this.TentangKami.Size = new System.Drawing.Size(152, 34);
+            this.TentangKami.Size = new System.Drawing.Size(104, 23);
             this.TentangKami.TabIndex = 5;
             this.TentangKami.Text = "Tentang Kami";
             this.TentangKami.UseWaitCursor = true;
@@ -420,10 +400,9 @@
             // 
             this.Kontak.BackColor = System.Drawing.Color.Transparent;
             this.Kontak.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Kontak.Location = new System.Drawing.Point(470, 18);
-            this.Kontak.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Kontak.Location = new System.Drawing.Point(313, 12);
             this.Kontak.Name = "Kontak";
-            this.Kontak.Size = new System.Drawing.Size(77, 34);
+            this.Kontak.Size = new System.Drawing.Size(53, 23);
             this.Kontak.TabIndex = 4;
             this.Kontak.Text = "Kontak";
             this.Kontak.UseWaitCursor = true;
@@ -432,10 +411,9 @@
             // 
             this.Destinasi.BackColor = System.Drawing.Color.Transparent;
             this.Destinasi.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Destinasi.Location = new System.Drawing.Point(340, 18);
-            this.Destinasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Destinasi.Location = new System.Drawing.Point(227, 12);
             this.Destinasi.Name = "Destinasi";
-            this.Destinasi.Size = new System.Drawing.Size(99, 34);
+            this.Destinasi.Size = new System.Drawing.Size(68, 23);
             this.Destinasi.TabIndex = 3;
             this.Destinasi.Text = "Destinasi";
             this.Destinasi.UseWaitCursor = true;
@@ -444,10 +422,9 @@
             // 
             this.Beranda.BackColor = System.Drawing.Color.Transparent;
             this.Beranda.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Beranda.Location = new System.Drawing.Point(222, 18);
-            this.Beranda.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Beranda.Location = new System.Drawing.Point(148, 12);
             this.Beranda.Name = "Beranda";
-            this.Beranda.Size = new System.Drawing.Size(90, 34);
+            this.Beranda.Size = new System.Drawing.Size(62, 23);
             this.Beranda.TabIndex = 2;
             this.Beranda.Text = "Beranda";
             this.Beranda.UseWaitCursor = true;
@@ -457,10 +434,9 @@
             this.Logo.BackColor = System.Drawing.Color.FloralWhite;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.ImageRotate = 0F;
-            this.Logo.Location = new System.Drawing.Point(3, 5);
-            this.Logo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Logo.Location = new System.Drawing.Point(2, 3);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(189, 58);
+            this.Logo.Size = new System.Drawing.Size(126, 38);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 1;
             this.Logo.TabStop = false;
@@ -478,10 +454,9 @@
             this.btnKembali.ForeColor = System.Drawing.Color.Black;
             this.btnKembali.Image = ((System.Drawing.Image)(resources.GetObject("btnKembali.Image")));
             this.btnKembali.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnKembali.Location = new System.Drawing.Point(57, 92);
-            this.btnKembali.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnKembali.Location = new System.Drawing.Point(38, 60);
             this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(116, 28);
+            this.btnKembali.Size = new System.Drawing.Size(77, 18);
             this.btnKembali.TabIndex = 7;
             this.btnKembali.Text = "Kembali";
             this.btnKembali.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -502,11 +477,10 @@
             this.PnlDetailDestinasi.Controls.Add(this.lblDestinasi1);
             this.PnlDetailDestinasi.Controls.Add(this.guna2PictureBox1);
             this.PnlDetailDestinasi.FillColor = System.Drawing.Color.White;
-            this.PnlDetailDestinasi.Location = new System.Drawing.Point(36, 138);
-            this.PnlDetailDestinasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlDetailDestinasi.Location = new System.Drawing.Point(24, 90);
             this.PnlDetailDestinasi.Name = "PnlDetailDestinasi";
             this.PnlDetailDestinasi.ShadowColor = System.Drawing.Color.Black;
-            this.PnlDetailDestinasi.Size = new System.Drawing.Size(318, 409);
+            this.PnlDetailDestinasi.Size = new System.Drawing.Size(212, 266);
             this.PnlDetailDestinasi.TabIndex = 8;
             this.PnlDetailDestinasi.UseWaitCursor = true;
             // 
@@ -514,10 +488,9 @@
             // 
             this.Bookmark.Image = ((System.Drawing.Image)(resources.GetObject("Bookmark.Image")));
             this.Bookmark.ImageRotate = 0F;
-            this.Bookmark.Location = new System.Drawing.Point(256, 34);
-            this.Bookmark.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Bookmark.Location = new System.Drawing.Point(171, 22);
             this.Bookmark.Name = "Bookmark";
-            this.Bookmark.Size = new System.Drawing.Size(30, 35);
+            this.Bookmark.Size = new System.Drawing.Size(20, 23);
             this.Bookmark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Bookmark.TabIndex = 10;
             this.Bookmark.TabStop = false;
@@ -527,10 +500,9 @@
             // 
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
-            this.guna2PictureBox8.Location = new System.Drawing.Point(18, 355);
-            this.guna2PictureBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox8.Location = new System.Drawing.Point(12, 231);
             this.guna2PictureBox8.Name = "guna2PictureBox8";
-            this.guna2PictureBox8.Size = new System.Drawing.Size(24, 23);
+            this.guna2PictureBox8.Size = new System.Drawing.Size(16, 15);
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox8.TabIndex = 9;
             this.guna2PictureBox8.TabStop = false;
@@ -540,10 +512,9 @@
             // 
             this.guna2PictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox6.Image")));
             this.guna2PictureBox6.ImageRotate = 0F;
-            this.guna2PictureBox6.Location = new System.Drawing.Point(18, 294);
-            this.guna2PictureBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox6.Location = new System.Drawing.Point(12, 191);
             this.guna2PictureBox6.Name = "guna2PictureBox6";
-            this.guna2PictureBox6.Size = new System.Drawing.Size(24, 23);
+            this.guna2PictureBox6.Size = new System.Drawing.Size(16, 15);
             this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox6.TabIndex = 9;
             this.guna2PictureBox6.TabStop = false;
@@ -553,10 +524,9 @@
             // 
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(45, 357);
-            this.guna2HtmlLabel14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(30, 232);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
-            this.guna2HtmlLabel14.Size = new System.Drawing.Size(171, 25);
+            this.guna2HtmlLabel14.Size = new System.Drawing.Size(110, 15);
             this.guna2HtmlLabel14.TabIndex = 9;
             this.guna2HtmlLabel14.Text = "Rp 500.000 - 1.000.000";
             this.guna2HtmlLabel14.UseWaitCursor = true;
@@ -565,10 +535,9 @@
             // 
             this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(44, 295);
-            this.guna2HtmlLabel13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(29, 192);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
-            this.guna2HtmlLabel13.Size = new System.Drawing.Size(239, 25);
+            this.guna2HtmlLabel13.Size = new System.Drawing.Size(153, 15);
             this.guna2HtmlLabel13.TabIndex = 8;
             this.guna2HtmlLabel13.Text = "Oktober, November, Desember";
             this.guna2HtmlLabel13.UseWaitCursor = true;
@@ -577,10 +546,9 @@
             // 
             this.guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel12.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel12.Location = new System.Drawing.Point(20, 326);
-            this.guna2HtmlLabel12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(13, 212);
             this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
-            this.guna2HtmlLabel12.Size = new System.Drawing.Size(165, 27);
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(115, 17);
             this.guna2HtmlLabel12.TabIndex = 7;
             this.guna2HtmlLabel12.Text = "Harga Tiket Masuk";
             this.guna2HtmlLabel12.UseWaitCursor = true;
@@ -589,10 +557,9 @@
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(21, 262);
-            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(14, 170);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(232, 27);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(159, 17);
             this.guna2HtmlLabel1.TabIndex = 6;
             this.guna2HtmlLabel1.Text = "Waktu Terbaik Berkunjung";
             this.guna2HtmlLabel1.UseWaitCursor = true;
@@ -602,10 +569,9 @@
             this.guna2PictureBox7.BackColor = System.Drawing.Color.White;
             this.guna2PictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox7.Image")));
             this.guna2PictureBox7.ImageRotate = 0F;
-            this.guna2PictureBox7.Location = new System.Drawing.Point(18, 228);
-            this.guna2PictureBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox7.Location = new System.Drawing.Point(12, 148);
             this.guna2PictureBox7.Name = "guna2PictureBox7";
-            this.guna2PictureBox7.Size = new System.Drawing.Size(24, 23);
+            this.guna2PictureBox7.Size = new System.Drawing.Size(16, 15);
             this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox7.TabIndex = 5;
             this.guna2PictureBox7.TabStop = false;
@@ -615,10 +581,9 @@
             // 
             this.lblLokasi1.BackColor = System.Drawing.Color.Transparent;
             this.lblLokasi1.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLokasi1.Location = new System.Drawing.Point(44, 228);
-            this.lblLokasi1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblLokasi1.Location = new System.Drawing.Point(29, 148);
             this.lblLokasi1.Name = "lblLokasi1";
-            this.lblLokasi1.Size = new System.Drawing.Size(249, 25);
+            this.lblLokasi1.Size = new System.Drawing.Size(158, 15);
             this.lblLokasi1.TabIndex = 4;
             this.lblLokasi1.Text = "Waisai, Raja Ampat, Papua Barat";
             this.lblLokasi1.UseWaitCursor = true;
@@ -627,10 +592,9 @@
             // 
             this.lblDestinasi1.BackColor = System.Drawing.Color.Transparent;
             this.lblDestinasi1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDestinasi1.Location = new System.Drawing.Point(20, 194);
-            this.lblDestinasi1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblDestinasi1.Location = new System.Drawing.Point(13, 126);
             this.lblDestinasi1.Name = "lblDestinasi1";
-            this.lblDestinasi1.Size = new System.Drawing.Size(214, 27);
+            this.lblDestinasi1.Size = new System.Drawing.Size(146, 17);
             this.lblDestinasi1.TabIndex = 3;
             this.lblDestinasi1.Text = "Raja Ampat Marine Park";
             this.lblDestinasi1.UseWaitCursor = true;
@@ -654,11 +618,10 @@
             this.PnlRatingReview.Controls.Add(this.guna2HtmlLabel16);
             this.PnlRatingReview.Controls.Add(this.guna2HtmlLabel15);
             this.PnlRatingReview.FillColor = System.Drawing.Color.White;
-            this.PnlRatingReview.Location = new System.Drawing.Point(849, 148);
-            this.PnlRatingReview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlRatingReview.Location = new System.Drawing.Point(566, 96);
             this.PnlRatingReview.Name = "PnlRatingReview";
             this.PnlRatingReview.ShadowColor = System.Drawing.Color.Black;
-            this.PnlRatingReview.Size = new System.Drawing.Size(300, 252);
+            this.PnlRatingReview.Size = new System.Drawing.Size(200, 164);
             this.PnlRatingReview.TabIndex = 9;
             this.PnlRatingReview.UseWaitCursor = true;
             // 
@@ -666,10 +629,9 @@
             // 
             this.guna2HtmlLabel25.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel25.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel25.Location = new System.Drawing.Point(80, 158);
-            this.guna2HtmlLabel25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel25.Location = new System.Drawing.Point(53, 103);
             this.guna2HtmlLabel25.Name = "guna2HtmlLabel25";
-            this.guna2HtmlLabel25.Size = new System.Drawing.Size(199, 25);
+            this.guna2HtmlLabel25.Size = new System.Drawing.Size(125, 15);
             this.guna2HtmlLabel25.TabIndex = 14;
             this.guna2HtmlLabel25.Text = "Bintang 10 jos markotopp.";
             this.guna2HtmlLabel25.UseWaitCursor = true;
@@ -678,10 +640,9 @@
             // 
             this.guna2HtmlLabel24.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel24.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel24.Location = new System.Drawing.Point(80, 95);
-            this.guna2HtmlLabel24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel24.Location = new System.Drawing.Point(53, 62);
             this.guna2HtmlLabel24.Name = "guna2HtmlLabel24";
-            this.guna2HtmlLabel24.Size = new System.Drawing.Size(99, 25);
+            this.guna2HtmlLabel24.Size = new System.Drawing.Size(65, 15);
             this.guna2HtmlLabel24.TabIndex = 13;
             this.guna2HtmlLabel24.Text = "Worth to try!";
             this.guna2HtmlLabel24.UseWaitCursor = true;
@@ -690,10 +651,9 @@
             // 
             this.guna2HtmlLabel23.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel23.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel23.Location = new System.Drawing.Point(80, 72);
-            this.guna2HtmlLabel23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel23.Location = new System.Drawing.Point(53, 47);
             this.guna2HtmlLabel23.Name = "guna2HtmlLabel23";
-            this.guna2HtmlLabel23.Size = new System.Drawing.Size(193, 25);
+            this.guna2HtmlLabel23.Size = new System.Drawing.Size(125, 15);
             this.guna2HtmlLabel23.TabIndex = 12;
             this.guna2HtmlLabel23.Text = "Tempatnya sangat bagus ";
             this.guna2HtmlLabel23.UseWaitCursor = true;
@@ -702,10 +662,9 @@
             // 
             this.guna2HtmlLabel22.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel22.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel22.Location = new System.Drawing.Point(51, 188);
-            this.guna2HtmlLabel22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel22.Location = new System.Drawing.Point(34, 122);
             this.guna2HtmlLabel22.Name = "guna2HtmlLabel22";
-            this.guna2HtmlLabel22.Size = new System.Drawing.Size(13, 25);
+            this.guna2HtmlLabel22.Size = new System.Drawing.Size(9, 15);
             this.guna2HtmlLabel22.TabIndex = 11;
             this.guna2HtmlLabel22.Text = "5";
             this.guna2HtmlLabel22.UseWaitCursor = true;
@@ -714,10 +673,9 @@
             // 
             this.guna2HtmlLabel21.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel21.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel21.Location = new System.Drawing.Point(51, 100);
-            this.guna2HtmlLabel21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel21.Location = new System.Drawing.Point(34, 65);
             this.guna2HtmlLabel21.Name = "guna2HtmlLabel21";
-            this.guna2HtmlLabel21.Size = new System.Drawing.Size(13, 25);
+            this.guna2HtmlLabel21.Size = new System.Drawing.Size(9, 15);
             this.guna2HtmlLabel21.TabIndex = 10;
             this.guna2HtmlLabel21.Text = "5";
             this.guna2HtmlLabel21.UseWaitCursor = true;
@@ -726,10 +684,9 @@
             // 
             this.guna2HtmlLabel20.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel20.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel20.Location = new System.Drawing.Point(183, 132);
-            this.guna2HtmlLabel20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel20.Location = new System.Drawing.Point(122, 86);
             this.guna2HtmlLabel20.Name = "guna2HtmlLabel20";
-            this.guna2HtmlLabel20.Size = new System.Drawing.Size(86, 25);
+            this.guna2HtmlLabel20.Size = new System.Drawing.Size(57, 15);
             this.guna2HtmlLabel20.TabIndex = 9;
             this.guna2HtmlLabel20.Text = "12/08/2024";
             this.guna2HtmlLabel20.UseWaitCursor = true;
@@ -738,10 +695,9 @@
             // 
             this.guna2HtmlLabel19.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel19.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel19.Location = new System.Drawing.Point(183, 48);
-            this.guna2HtmlLabel19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel19.Location = new System.Drawing.Point(122, 31);
             this.guna2HtmlLabel19.Name = "guna2HtmlLabel19";
-            this.guna2HtmlLabel19.Size = new System.Drawing.Size(86, 25);
+            this.guna2HtmlLabel19.Size = new System.Drawing.Size(57, 15);
             this.guna2HtmlLabel19.TabIndex = 8;
             this.guna2HtmlLabel19.Text = "12/08/2024";
             this.guna2HtmlLabel19.UseWaitCursor = true;
@@ -750,10 +706,9 @@
             // 
             this.guna2HtmlLabel18.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel18.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel18.Location = new System.Drawing.Point(80, 132);
-            this.guna2HtmlLabel18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel18.Location = new System.Drawing.Point(53, 86);
             this.guna2HtmlLabel18.Name = "guna2HtmlLabel18";
-            this.guna2HtmlLabel18.Size = new System.Drawing.Size(54, 25);
+            this.guna2HtmlLabel18.Size = new System.Drawing.Size(37, 15);
             this.guna2HtmlLabel18.TabIndex = 7;
             this.guna2HtmlLabel18.Text = "Hanah";
             this.guna2HtmlLabel18.UseWaitCursor = true;
@@ -762,10 +717,9 @@
             // 
             this.guna2HtmlLabel17.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel17.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel17.Location = new System.Drawing.Point(80, 48);
-            this.guna2HtmlLabel17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel17.Location = new System.Drawing.Point(53, 31);
             this.guna2HtmlLabel17.Name = "guna2HtmlLabel17";
-            this.guna2HtmlLabel17.Size = new System.Drawing.Size(96, 25);
+            this.guna2HtmlLabel17.Size = new System.Drawing.Size(63, 15);
             this.guna2HtmlLabel17.TabIndex = 6;
             this.guna2HtmlLabel17.Text = "Budi Speed";
             this.guna2HtmlLabel17.UseWaitCursor = true;
@@ -774,10 +728,9 @@
             // 
             this.guna2PictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox10.Image")));
             this.guna2PictureBox10.ImageRotate = 0F;
-            this.guna2PictureBox10.Location = new System.Drawing.Point(26, 185);
-            this.guna2PictureBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox10.Location = new System.Drawing.Point(17, 120);
             this.guna2PictureBox10.Name = "guna2PictureBox10";
-            this.guna2PictureBox10.Size = new System.Drawing.Size(22, 26);
+            this.guna2PictureBox10.Size = new System.Drawing.Size(15, 17);
             this.guna2PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox10.TabIndex = 5;
             this.guna2PictureBox10.TabStop = false;
@@ -787,10 +740,9 @@
             // 
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
-            this.guna2PictureBox9.Location = new System.Drawing.Point(24, 95);
-            this.guna2PictureBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox9.Location = new System.Drawing.Point(16, 62);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
-            this.guna2PictureBox9.Size = new System.Drawing.Size(22, 26);
+            this.guna2PictureBox9.Size = new System.Drawing.Size(15, 17);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox9.TabIndex = 4;
             this.guna2PictureBox9.TabStop = false;
@@ -800,11 +752,10 @@
             // 
             this.guna2CirclePictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox2.Image")));
             this.guna2CirclePictureBox2.ImageRotate = 0F;
-            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(22, 132);
-            this.guna2CirclePictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(15, 86);
             this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
             this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(48, 49);
+            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(32, 32);
             this.guna2CirclePictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2CirclePictureBox2.TabIndex = 3;
             this.guna2CirclePictureBox2.TabStop = false;
@@ -814,11 +765,10 @@
             // 
             this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(22, 46);
-            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(15, 30);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(48, 49);
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(32, 32);
             this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2CirclePictureBox1.TabIndex = 2;
             this.guna2CirclePictureBox1.TabStop = false;
@@ -828,10 +778,9 @@
             // 
             this.guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel16.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel16.Location = new System.Drawing.Point(92, 214);
-            this.guna2HtmlLabel16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel16.Location = new System.Drawing.Point(61, 139);
             this.guna2HtmlLabel16.Name = "guna2HtmlLabel16";
-            this.guna2HtmlLabel16.Size = new System.Drawing.Size(122, 25);
+            this.guna2HtmlLabel16.Size = new System.Drawing.Size(83, 15);
             this.guna2HtmlLabel16.TabIndex = 1;
             this.guna2HtmlLabel16.Text = "Lihat Lainnya...";
             this.guna2HtmlLabel16.UseWaitCursor = true;
@@ -840,10 +789,9 @@
             // 
             this.guna2HtmlLabel15.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel15.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel15.Location = new System.Drawing.Point(16, 15);
-            this.guna2HtmlLabel15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel15.Location = new System.Drawing.Point(11, 10);
             this.guna2HtmlLabel15.Name = "guna2HtmlLabel15";
-            this.guna2HtmlLabel15.Size = new System.Drawing.Size(158, 25);
+            this.guna2HtmlLabel15.Size = new System.Drawing.Size(107, 15);
             this.guna2HtmlLabel15.TabIndex = 0;
             this.guna2HtmlLabel15.Text = "Ulasan Pengunjung";
             this.guna2HtmlLabel15.UseWaitCursor = true;
@@ -857,13 +805,34 @@
             this.PnlKirimRatingReview.Controls.Add(this.guna2HtmlLabel45);
             this.PnlKirimRatingReview.Controls.Add(this.guna2HtmlLabel26);
             this.PnlKirimRatingReview.FillColor = System.Drawing.Color.White;
-            this.PnlKirimRatingReview.Location = new System.Drawing.Point(849, 409);
-            this.PnlKirimRatingReview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlKirimRatingReview.Location = new System.Drawing.Point(566, 266);
             this.PnlKirimRatingReview.Name = "PnlKirimRatingReview";
             this.PnlKirimRatingReview.ShadowColor = System.Drawing.Color.Black;
-            this.PnlKirimRatingReview.Size = new System.Drawing.Size(300, 138);
+            this.PnlKirimRatingReview.Size = new System.Drawing.Size(200, 90);
             this.PnlKirimRatingReview.TabIndex = 10;
             this.PnlKirimRatingReview.UseWaitCursor = true;
+            // 
+            // tbUlasan
+            // 
+            this.tbUlasan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.tbUlasan.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.tbUlasan.DefaultText = "";
+            this.tbUlasan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.tbUlasan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.tbUlasan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbUlasan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbUlasan.FillColor = System.Drawing.Color.PapayaWhip;
+            this.tbUlasan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbUlasan.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbUlasan.ForeColor = System.Drawing.Color.Black;
+            this.tbUlasan.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbUlasan.Location = new System.Drawing.Point(9, 40);
+            this.tbUlasan.Name = "tbUlasan";
+            this.tbUlasan.PlaceholderText = "Berikan Ulasanmu...";
+            this.tbUlasan.SelectedText = "";
+            this.tbUlasan.Size = new System.Drawing.Size(175, 20);
+            this.tbUlasan.TabIndex = 20;
+            this.tbUlasan.UseWaitCursor = true;
             // 
             // btnKirim
             // 
@@ -875,20 +844,18 @@
             this.btnKirim.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnKirim.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKirim.ForeColor = System.Drawing.Color.Black;
-            this.btnKirim.Location = new System.Drawing.Point(82, 100);
-            this.btnKirim.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnKirim.Location = new System.Drawing.Point(55, 65);
             this.btnKirim.Name = "btnKirim";
-            this.btnKirim.Size = new System.Drawing.Size(120, 25);
+            this.btnKirim.Size = new System.Drawing.Size(80, 16);
             this.btnKirim.TabIndex = 19;
             this.btnKirim.Text = "Kirim";
             this.btnKirim.UseWaitCursor = true;
             // 
             // guna2RatingStar1
             // 
-            this.guna2RatingStar1.Location = new System.Drawing.Point(75, 34);
-            this.guna2RatingStar1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2RatingStar1.Location = new System.Drawing.Point(50, 22);
             this.guna2RatingStar1.Name = "guna2RatingStar1";
-            this.guna2RatingStar1.Size = new System.Drawing.Size(134, 25);
+            this.guna2RatingStar1.Size = new System.Drawing.Size(89, 16);
             this.guna2RatingStar1.TabIndex = 17;
             this.guna2RatingStar1.UseWaitCursor = true;
             // 
@@ -896,10 +863,9 @@
             // 
             this.guna2HtmlLabel45.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel45.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel45.Location = new System.Drawing.Point(12, 34);
-            this.guna2HtmlLabel45.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel45.Location = new System.Drawing.Point(8, 22);
             this.guna2HtmlLabel45.Name = "guna2HtmlLabel45";
-            this.guna2HtmlLabel45.Size = new System.Drawing.Size(52, 25);
+            this.guna2HtmlLabel45.Size = new System.Drawing.Size(36, 15);
             this.guna2HtmlLabel45.TabIndex = 16;
             this.guna2HtmlLabel45.Text = "Rating";
             this.guna2HtmlLabel45.UseWaitCursor = true;
@@ -908,10 +874,9 @@
             // 
             this.guna2HtmlLabel26.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel26.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel26.Location = new System.Drawing.Point(12, 12);
-            this.guna2HtmlLabel26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel26.Location = new System.Drawing.Point(8, 8);
             this.guna2HtmlLabel26.Name = "guna2HtmlLabel26";
-            this.guna2HtmlLabel26.Size = new System.Drawing.Size(190, 25);
+            this.guna2HtmlLabel26.Size = new System.Drawing.Size(122, 15);
             this.guna2HtmlLabel26.TabIndex = 15;
             this.guna2HtmlLabel26.Text = "Kirim Rating & Review";
             this.guna2HtmlLabel26.UseWaitCursor = true;
@@ -930,10 +895,9 @@
             this.PnlRekomendasiCuaca.Controls.Add(this.guna2PictureBox11);
             this.PnlRekomendasiCuaca.Controls.Add(this.guna2Panel3);
             this.PnlRekomendasiCuaca.Controls.Add(this.guna2HtmlLabel27);
-            this.PnlRekomendasiCuaca.Location = new System.Drawing.Point(363, 148);
-            this.PnlRekomendasiCuaca.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlRekomendasiCuaca.Location = new System.Drawing.Point(242, 96);
             this.PnlRekomendasiCuaca.Name = "PnlRekomendasiCuaca";
-            this.PnlRekomendasiCuaca.Size = new System.Drawing.Size(477, 94);
+            this.PnlRekomendasiCuaca.Size = new System.Drawing.Size(318, 61);
             this.PnlRekomendasiCuaca.TabIndex = 11;
             this.PnlRekomendasiCuaca.UseWaitCursor = true;
             // 
@@ -941,10 +905,9 @@
             // 
             this.guna2HtmlLabel34.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel34.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel34.Location = new System.Drawing.Point(368, 58);
-            this.guna2HtmlLabel34.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel34.Location = new System.Drawing.Point(245, 38);
             this.guna2HtmlLabel34.Name = "guna2HtmlLabel34";
-            this.guna2HtmlLabel34.Size = new System.Drawing.Size(35, 25);
+            this.guna2HtmlLabel34.Size = new System.Drawing.Size(24, 15);
             this.guna2HtmlLabel34.TabIndex = 25;
             this.guna2HtmlLabel34.Text = "75%";
             this.guna2HtmlLabel34.UseWaitCursor = true;
@@ -953,10 +916,9 @@
             // 
             this.guna2HtmlLabel33.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel33.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel33.Location = new System.Drawing.Point(66, 58);
-            this.guna2HtmlLabel33.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel33.Location = new System.Drawing.Point(44, 38);
             this.guna2HtmlLabel33.Name = "guna2HtmlLabel33";
-            this.guna2HtmlLabel33.Size = new System.Drawing.Size(38, 25);
+            this.guna2HtmlLabel33.Size = new System.Drawing.Size(26, 15);
             this.guna2HtmlLabel33.TabIndex = 24;
             this.guna2HtmlLabel33.Text = "28 C";
             this.guna2HtmlLabel33.UseWaitCursor = true;
@@ -966,10 +928,9 @@
             // 
             this.guna2HtmlLabel32.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel32.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel32.Location = new System.Drawing.Point(220, 58);
-            this.guna2HtmlLabel32.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel32.Location = new System.Drawing.Point(147, 38);
             this.guna2HtmlLabel32.Name = "guna2HtmlLabel32";
-            this.guna2HtmlLabel32.Size = new System.Drawing.Size(68, 25);
+            this.guna2HtmlLabel32.Size = new System.Drawing.Size(45, 15);
             this.guna2HtmlLabel32.TabIndex = 23;
             this.guna2HtmlLabel32.Text = "12 km/h";
             this.guna2HtmlLabel32.UseWaitCursor = true;
@@ -978,10 +939,9 @@
             // 
             this.guna2HtmlLabel31.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel31.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel31.Location = new System.Drawing.Point(366, 35);
-            this.guna2HtmlLabel31.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel31.Location = new System.Drawing.Point(244, 23);
             this.guna2HtmlLabel31.Name = "guna2HtmlLabel31";
-            this.guna2HtmlLabel31.Size = new System.Drawing.Size(103, 25);
+            this.guna2HtmlLabel31.Size = new System.Drawing.Size(68, 15);
             this.guna2HtmlLabel31.TabIndex = 22;
             this.guna2HtmlLabel31.Text = "Kelembapan";
             this.guna2HtmlLabel31.UseWaitCursor = true;
@@ -990,10 +950,9 @@
             // 
             this.guna2HtmlLabel30.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel30.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel30.Location = new System.Drawing.Point(220, 35);
-            this.guna2HtmlLabel30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel30.Location = new System.Drawing.Point(147, 23);
             this.guna2HtmlLabel30.Name = "guna2HtmlLabel30";
-            this.guna2HtmlLabel30.Size = new System.Drawing.Size(51, 25);
+            this.guna2HtmlLabel30.Size = new System.Drawing.Size(35, 15);
             this.guna2HtmlLabel30.TabIndex = 21;
             this.guna2HtmlLabel30.Text = "Angin";
             this.guna2HtmlLabel30.UseWaitCursor = true;
@@ -1002,10 +961,9 @@
             // 
             this.guna2HtmlLabel29.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel29.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel29.Location = new System.Drawing.Point(69, 37);
-            this.guna2HtmlLabel29.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel29.Location = new System.Drawing.Point(46, 24);
             this.guna2HtmlLabel29.Name = "guna2HtmlLabel29";
-            this.guna2HtmlLabel29.Size = new System.Drawing.Size(43, 25);
+            this.guna2HtmlLabel29.Size = new System.Drawing.Size(30, 15);
             this.guna2HtmlLabel29.TabIndex = 20;
             this.guna2HtmlLabel29.Text = "Suhu";
             this.guna2HtmlLabel29.UseWaitCursor = true;
@@ -1014,10 +972,9 @@
             // 
             this.guna2PictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox13.Image")));
             this.guna2PictureBox13.ImageRotate = 0F;
-            this.guna2PictureBox13.Location = new System.Drawing.Point(316, 38);
-            this.guna2PictureBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox13.Location = new System.Drawing.Point(211, 25);
             this.guna2PictureBox13.Name = "guna2PictureBox13";
-            this.guna2PictureBox13.Size = new System.Drawing.Size(42, 38);
+            this.guna2PictureBox13.Size = new System.Drawing.Size(28, 25);
             this.guna2PictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox13.TabIndex = 19;
             this.guna2PictureBox13.TabStop = false;
@@ -1027,10 +984,9 @@
             // 
             this.guna2PictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox12.Image")));
             this.guna2PictureBox12.ImageRotate = 0F;
-            this.guna2PictureBox12.Location = new System.Drawing.Point(165, 38);
-            this.guna2PictureBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox12.Location = new System.Drawing.Point(110, 25);
             this.guna2PictureBox12.Name = "guna2PictureBox12";
-            this.guna2PictureBox12.Size = new System.Drawing.Size(42, 38);
+            this.guna2PictureBox12.Size = new System.Drawing.Size(28, 25);
             this.guna2PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox12.TabIndex = 18;
             this.guna2PictureBox12.TabStop = false;
@@ -1040,10 +996,9 @@
             // 
             this.guna2PictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox11.Image")));
             this.guna2PictureBox11.ImageRotate = 0F;
-            this.guna2PictureBox11.Location = new System.Drawing.Point(15, 38);
-            this.guna2PictureBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox11.Location = new System.Drawing.Point(10, 25);
             this.guna2PictureBox11.Name = "guna2PictureBox11";
-            this.guna2PictureBox11.Size = new System.Drawing.Size(42, 38);
+            this.guna2PictureBox11.Size = new System.Drawing.Size(28, 25);
             this.guna2PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox11.TabIndex = 17;
             this.guna2PictureBox11.TabStop = false;
@@ -1054,10 +1009,9 @@
             this.guna2Panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2Panel3.Controls.Add(this.guna2HtmlLabel28);
             this.guna2Panel3.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Panel3.Location = new System.Drawing.Point(190, 5);
-            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel3.Location = new System.Drawing.Point(127, 3);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(128, 25);
+            this.guna2Panel3.Size = new System.Drawing.Size(85, 16);
             this.guna2Panel3.TabIndex = 16;
             this.guna2Panel3.UseWaitCursor = true;
             // 
@@ -1065,10 +1019,9 @@
             // 
             this.guna2HtmlLabel28.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel28.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel28.Location = new System.Drawing.Point(22, 2);
-            this.guna2HtmlLabel28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel28.Location = new System.Drawing.Point(15, 1);
             this.guna2HtmlLabel28.Name = "guna2HtmlLabel28";
-            this.guna2HtmlLabel28.Size = new System.Drawing.Size(84, 21);
+            this.guna2HtmlLabel28.Size = new System.Drawing.Size(53, 14);
             this.guna2HtmlLabel28.TabIndex = 0;
             this.guna2HtmlLabel28.Text = "Sangat Baik";
             this.guna2HtmlLabel28.UseWaitCursor = true;
@@ -1077,10 +1030,9 @@
             // 
             this.guna2HtmlLabel27.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel27.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel27.Location = new System.Drawing.Point(16, 5);
-            this.guna2HtmlLabel27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel27.Location = new System.Drawing.Point(11, 3);
             this.guna2HtmlLabel27.Name = "guna2HtmlLabel27";
-            this.guna2HtmlLabel27.Size = new System.Drawing.Size(164, 25);
+            this.guna2HtmlLabel27.Size = new System.Drawing.Size(108, 15);
             this.guna2HtmlLabel27.TabIndex = 15;
             this.guna2HtmlLabel27.Text = "Rekomendasi Cuaca";
             this.guna2HtmlLabel27.UseWaitCursor = true;
@@ -1093,20 +1045,19 @@
             this.PnlDeskripsi.Controls.Add(this.guna2HtmlLabel37);
             this.PnlDeskripsi.Controls.Add(this.guna2HtmlLabel36);
             this.PnlDeskripsi.Controls.Add(this.guna2HtmlLabel35);
-            this.PnlDeskripsi.Location = new System.Drawing.Point(363, 266);
-            this.PnlDeskripsi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlDeskripsi.Location = new System.Drawing.Point(242, 173);
             this.PnlDeskripsi.Name = "PnlDeskripsi";
-            this.PnlDeskripsi.Size = new System.Drawing.Size(477, 154);
+            this.PnlDeskripsi.Size = new System.Drawing.Size(318, 100);
             this.PnlDeskripsi.TabIndex = 12;
             this.PnlDeskripsi.UseWaitCursor = true;
             // 
             // guna2HtmlLabel39
             // 
             this.guna2HtmlLabel39.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel39.Location = new System.Drawing.Point(12, 122);
-            this.guna2HtmlLabel39.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel39.Location = new System.Drawing.Point(8, 79);
+            this.guna2HtmlLabel39.MaximumSize = new System.Drawing.Size(450, 0);
             this.guna2HtmlLabel39.Name = "guna2HtmlLabel39";
-            this.guna2HtmlLabel39.Size = new System.Drawing.Size(395, 22);
+            this.guna2HtmlLabel39.Size = new System.Drawing.Size(266, 15);
             this.guna2HtmlLabel39.TabIndex = 29;
             this.guna2HtmlLabel39.Text = "karang. Keindahan alam bawah laut Raja Ampat bagus.";
             this.guna2HtmlLabel39.UseWaitCursor = true;
@@ -1114,21 +1065,22 @@
             // guna2HtmlLabel38
             // 
             this.guna2HtmlLabel38.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel38.Location = new System.Drawing.Point(12, 92);
-            this.guna2HtmlLabel38.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel38.Location = new System.Drawing.Point(8, 60);
+            this.guna2HtmlLabel38.MaximumSize = new System.Drawing.Size(450, 0);
             this.guna2HtmlLabel38.Name = "guna2HtmlLabel38";
-            this.guna2HtmlLabel38.Size = new System.Drawing.Size(451, 22);
+            this.guna2HtmlLabel38.Size = new System.Drawing.Size(303, 15);
             this.guna2HtmlLabel38.TabIndex = 28;
             this.guna2HtmlLabel38.Text = "penyelam dengan lebih dari 1,500 spesies ikan dan 600 spesies ";
             this.guna2HtmlLabel38.UseWaitCursor = true;
+            this.guna2HtmlLabel38.Click += new System.EventHandler(this.guna2HtmlLabel38_Click);
             // 
             // guna2HtmlLabel37
             // 
             this.guna2HtmlLabel37.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel37.Location = new System.Drawing.Point(12, 63);
-            this.guna2HtmlLabel37.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel37.Location = new System.Drawing.Point(8, 41);
+            this.guna2HtmlLabel37.MaximumSize = new System.Drawing.Size(450, 0);
             this.guna2HtmlLabel37.Name = "guna2HtmlLabel37";
-            this.guna2HtmlLabel37.Size = new System.Drawing.Size(429, 22);
+            this.guna2HtmlLabel37.Size = new System.Drawing.Size(289, 15);
             this.guna2HtmlLabel37.TabIndex = 27;
             this.guna2HtmlLabel37.Text = "Papua, Indonesia. Kepulauan ini terkenal sebagai surga bagi ";
             this.guna2HtmlLabel37.UseWaitCursor = true;
@@ -1137,10 +1089,10 @@
             // 
             this.guna2HtmlLabel36.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel36.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel36.Location = new System.Drawing.Point(12, 37);
-            this.guna2HtmlLabel36.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel36.Location = new System.Drawing.Point(8, 24);
+            this.guna2HtmlLabel36.MaximumSize = new System.Drawing.Size(450, 0);
             this.guna2HtmlLabel36.Name = "guna2HtmlLabel36";
-            this.guna2HtmlLabel36.Size = new System.Drawing.Size(477, 25);
+            this.guna2HtmlLabel36.Size = new System.Drawing.Size(301, 15);
             this.guna2HtmlLabel36.TabIndex = 15;
             this.guna2HtmlLabel36.Text = "Raja Ampat adalah kepulauan yang terletak di ujung barat laut ";
             this.guna2HtmlLabel36.UseWaitCursor = true;
@@ -1149,10 +1101,9 @@
             // 
             this.guna2HtmlLabel35.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel35.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel35.Location = new System.Drawing.Point(8, 8);
-            this.guna2HtmlLabel35.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel35.Location = new System.Drawing.Point(5, 5);
             this.guna2HtmlLabel35.Name = "guna2HtmlLabel35";
-            this.guna2HtmlLabel35.Size = new System.Drawing.Size(149, 25);
+            this.guna2HtmlLabel35.Size = new System.Drawing.Size(97, 15);
             this.guna2HtmlLabel35.TabIndex = 26;
             this.guna2HtmlLabel35.Text = "Tentang Destinasi";
             this.guna2HtmlLabel35.UseWaitCursor = true;
@@ -1166,10 +1117,9 @@
             this.PnlAktivitas.Controls.Add(this.guna2Panel7);
             this.PnlAktivitas.Controls.Add(this.guna2Panel6);
             this.PnlAktivitas.Controls.Add(this.guna2HtmlLabel40);
-            this.PnlAktivitas.Location = new System.Drawing.Point(363, 445);
-            this.PnlAktivitas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PnlAktivitas.Location = new System.Drawing.Point(242, 289);
             this.PnlAktivitas.Name = "PnlAktivitas";
-            this.PnlAktivitas.Size = new System.Drawing.Size(477, 83);
+            this.PnlAktivitas.Size = new System.Drawing.Size(318, 54);
             this.PnlAktivitas.TabIndex = 13;
             this.PnlAktivitas.UseWaitCursor = true;
             // 
@@ -1177,10 +1127,9 @@
             // 
             this.guna2Panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel10.Controls.Add(this.guna2HtmlLabel44);
-            this.guna2Panel10.Location = new System.Drawing.Point(368, 38);
-            this.guna2Panel10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel10.Location = new System.Drawing.Point(245, 25);
             this.guna2Panel10.Name = "guna2Panel10";
-            this.guna2Panel10.Size = new System.Drawing.Size(78, 32);
+            this.guna2Panel10.Size = new System.Drawing.Size(52, 21);
             this.guna2Panel10.TabIndex = 33;
             this.guna2Panel10.UseWaitCursor = true;
             // 
@@ -1188,10 +1137,9 @@
             // 
             this.guna2HtmlLabel44.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel44.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel44.Location = new System.Drawing.Point(9, 6);
-            this.guna2HtmlLabel44.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel44.Location = new System.Drawing.Point(6, 4);
             this.guna2HtmlLabel44.Name = "guna2HtmlLabel44";
-            this.guna2HtmlLabel44.Size = new System.Drawing.Size(64, 21);
+            this.guna2HtmlLabel44.Size = new System.Drawing.Size(41, 14);
             this.guna2HtmlLabel44.TabIndex = 1;
             this.guna2HtmlLabel44.Text = "Camping";
             this.guna2HtmlLabel44.UseWaitCursor = true;
@@ -1200,10 +1148,9 @@
             // 
             this.guna2Panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel9.Controls.Add(this.guna2HtmlLabel43);
-            this.guna2Panel9.Location = new System.Drawing.Point(280, 38);
-            this.guna2Panel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel9.Location = new System.Drawing.Point(187, 25);
             this.guna2Panel9.Name = "guna2Panel9";
-            this.guna2Panel9.Size = new System.Drawing.Size(78, 32);
+            this.guna2Panel9.Size = new System.Drawing.Size(52, 21);
             this.guna2Panel9.TabIndex = 32;
             this.guna2Panel9.UseWaitCursor = true;
             // 
@@ -1211,10 +1158,9 @@
             // 
             this.guna2HtmlLabel43.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel43.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel43.Location = new System.Drawing.Point(8, 6);
-            this.guna2HtmlLabel43.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel43.Location = new System.Drawing.Point(5, 4);
             this.guna2HtmlLabel43.Name = "guna2HtmlLabel43";
-            this.guna2HtmlLabel43.Size = new System.Drawing.Size(65, 21);
+            this.guna2HtmlLabel43.Size = new System.Drawing.Size(43, 14);
             this.guna2HtmlLabel43.TabIndex = 1;
             this.guna2HtmlLabel43.Text = "Fotografi";
             this.guna2HtmlLabel43.UseWaitCursor = true;
@@ -1223,10 +1169,9 @@
             // 
             this.guna2Panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel8.Controls.Add(this.guna2HtmlLabel42);
-            this.guna2Panel8.Location = new System.Drawing.Point(194, 38);
-            this.guna2Panel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel8.Location = new System.Drawing.Point(129, 25);
             this.guna2Panel8.Name = "guna2Panel8";
-            this.guna2Panel8.Size = new System.Drawing.Size(78, 32);
+            this.guna2Panel8.Size = new System.Drawing.Size(52, 21);
             this.guna2Panel8.TabIndex = 15;
             this.guna2Panel8.UseWaitCursor = true;
             // 
@@ -1234,10 +1179,9 @@
             // 
             this.guna2HtmlLabel42.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel42.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel42.Location = new System.Drawing.Point(4, 5);
-            this.guna2HtmlLabel42.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel42.Location = new System.Drawing.Point(3, 3);
             this.guna2HtmlLabel42.Name = "guna2HtmlLabel42";
-            this.guna2HtmlLabel42.Size = new System.Drawing.Size(77, 21);
+            this.guna2HtmlLabel42.Size = new System.Drawing.Size(48, 14);
             this.guna2HtmlLabel42.TabIndex = 1;
             this.guna2HtmlLabel42.Text = "Snorkeling";
             this.guna2HtmlLabel42.UseWaitCursor = true;
@@ -1246,10 +1190,9 @@
             // 
             this.guna2Panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel7.Controls.Add(this.guna2HtmlLabel41);
-            this.guna2Panel7.Location = new System.Drawing.Point(106, 38);
-            this.guna2Panel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel7.Location = new System.Drawing.Point(71, 25);
             this.guna2Panel7.Name = "guna2Panel7";
-            this.guna2Panel7.Size = new System.Drawing.Size(78, 32);
+            this.guna2Panel7.Size = new System.Drawing.Size(52, 21);
             this.guna2Panel7.TabIndex = 14;
             this.guna2Panel7.UseWaitCursor = true;
             // 
@@ -1257,10 +1200,9 @@
             // 
             this.guna2HtmlLabel41.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel41.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel41.Location = new System.Drawing.Point(18, 5);
-            this.guna2HtmlLabel41.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel41.Location = new System.Drawing.Point(12, 3);
             this.guna2HtmlLabel41.Name = "guna2HtmlLabel41";
-            this.guna2HtmlLabel41.Size = new System.Drawing.Size(47, 21);
+            this.guna2HtmlLabel41.Size = new System.Drawing.Size(30, 14);
             this.guna2HtmlLabel41.TabIndex = 1;
             this.guna2HtmlLabel41.Text = "Diving";
             this.guna2HtmlLabel41.UseWaitCursor = true;
@@ -1269,10 +1211,9 @@
             // 
             this.guna2Panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel6.Controls.Add(this.lblFasilitas1);
-            this.guna2Panel6.Location = new System.Drawing.Point(16, 38);
-            this.guna2Panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2Panel6.Location = new System.Drawing.Point(11, 25);
             this.guna2Panel6.Name = "guna2Panel6";
-            this.guna2Panel6.Size = new System.Drawing.Size(78, 32);
+            this.guna2Panel6.Size = new System.Drawing.Size(52, 21);
             this.guna2Panel6.TabIndex = 31;
             this.guna2Panel6.UseWaitCursor = true;
             // 
@@ -1280,10 +1221,9 @@
             // 
             this.lblFasilitas1.BackColor = System.Drawing.Color.Transparent;
             this.lblFasilitas1.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFasilitas1.Location = new System.Drawing.Point(18, 5);
-            this.lblFasilitas1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblFasilitas1.Location = new System.Drawing.Point(12, 3);
             this.lblFasilitas1.Name = "lblFasilitas1";
-            this.lblFasilitas1.Size = new System.Drawing.Size(48, 21);
+            this.lblFasilitas1.Size = new System.Drawing.Size(30, 14);
             this.lblFasilitas1.TabIndex = 1;
             this.lblFasilitas1.Text = "Sunset";
             this.lblFasilitas1.UseWaitCursor = true;
@@ -1292,42 +1232,19 @@
             // 
             this.guna2HtmlLabel40.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel40.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel40.Location = new System.Drawing.Point(15, 9);
-            this.guna2HtmlLabel40.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel40.Location = new System.Drawing.Point(10, 6);
             this.guna2HtmlLabel40.Name = "guna2HtmlLabel40";
-            this.guna2HtmlLabel40.Size = new System.Drawing.Size(74, 25);
+            this.guna2HtmlLabel40.Size = new System.Drawing.Size(48, 15);
             this.guna2HtmlLabel40.TabIndex = 30;
             this.guna2HtmlLabel40.Text = "Aktivitas";
             this.guna2HtmlLabel40.UseWaitCursor = true;
             // 
-            // tbUlasan
-            // 
-            this.tbUlasan.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.tbUlasan.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbUlasan.DefaultText = "";
-            this.tbUlasan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.tbUlasan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.tbUlasan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbUlasan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbUlasan.FillColor = System.Drawing.Color.PapayaWhip;
-            this.tbUlasan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbUlasan.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tbUlasan.ForeColor = System.Drawing.Color.Black;
-            this.tbUlasan.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbUlasan.Location = new System.Drawing.Point(14, 62);
-            this.tbUlasan.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbUlasan.Name = "tbUlasan";
-            this.tbUlasan.PlaceholderText = "Berikan Ulasanmu...";
-            this.tbUlasan.SelectedText = "";
-            this.tbUlasan.Size = new System.Drawing.Size(263, 31);
-            this.tbUlasan.TabIndex = 20;
-            // 
             // DetailDestinasi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PapayaWhip;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.PnlAktivitas);
             this.Controls.Add(this.PnlDeskripsi);
             this.Controls.Add(this.PnlRekomendasiCuaca);
@@ -1337,7 +1254,6 @@
             this.Controls.Add(this.btnKembali);
             this.Controls.Add(this.Navbar);
             this.Controls.Add(this.guna2Panel2);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DetailDestinasi";
             this.Text = "Form4";
             this.UseWaitCursor = true;

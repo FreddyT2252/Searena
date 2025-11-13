@@ -1,5 +1,4 @@
-﻿// Form1.cs - Login dan Register (PERBAIKAN)
-using Npgsql;
+﻿using Npgsql;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -10,7 +9,7 @@ namespace SEARENA2025
 {
     public partial class Form1 : Form
     {
-        // === DEKLARASI KONTROL ===
+        // Kontrol Utama
         private Guna2BorderlessForm _gunaBorderlessForm;
         private Guna2Panel _mainPanel;
         private Label _lblTitle;
@@ -31,7 +30,7 @@ namespace SEARENA2025
         private Label _lblAtauDaftar;
         private Guna2ImageButton _btnGoogleReg, _btnAppleReg, _btnFacebookReg;
 
-        // === KONSTANTA UKURAN & WARNA ===
+        // Ukuran dan Warna
         private const int PANEL_WIDTH = 400;
         private const int CONTENT_WIDTH = 330;
         private const int FORM_WIDTH = 900;
@@ -155,7 +154,7 @@ namespace SEARENA2025
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
             int currentY = 90;
 
-            // Email TextBox dengan Placeholder YANG BENAR
+            // Email TextBox
             _txtEmail = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -165,7 +164,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Alamat E-mail",  // PERBAIKAN: Gunakan PlaceholderText
+                PlaceholderText = "Alamat E-mail",  
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White
@@ -175,7 +174,7 @@ namespace SEARENA2025
 
             currentY += _txtEmail.Height + 10;
 
-            // Password TextBox dengan Placeholder YANG BENAR
+            // Password TextBox 
             _txtPassword = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -188,7 +187,7 @@ namespace SEARENA2025
                 TextOffset = new Point(5, 10),
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",  // PERBAIKAN: Gunakan PlaceholderText
+                PlaceholderText = "Kata Sandi",  
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White
@@ -275,7 +274,7 @@ namespace SEARENA2025
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
             int currentY = 90;
 
-            // Nama TextBox dengan Placeholder
+            // Nama TextBox
             _txtRegNama = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -285,7 +284,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/Vector.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Nama Lengkap",  // PERBAIKAN
+                PlaceholderText = "Nama Lengkap",  
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -296,7 +295,7 @@ namespace SEARENA2025
 
             currentY += _txtRegNama.Height + 10;
 
-            // Email TextBox dengan Placeholder
+            // Email TextBox 
             _txtRegEmail = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -306,7 +305,7 @@ namespace SEARENA2025
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
                 TextOffset = new Point(5, 10),
-                PlaceholderText = "Alamat E-mail",  // PERBAIKAN
+                PlaceholderText = "Alamat E-mail",  
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -317,7 +316,7 @@ namespace SEARENA2025
 
             currentY += _txtRegEmail.Height + 10;
 
-            // Password TextBox dengan Placeholder
+            // Password TextBox 
             _txtRegPassword = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -330,7 +329,7 @@ namespace SEARENA2025
                 TextOffset = new Point(5, 10),
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",  // PERBAIKAN
+                PlaceholderText = "Kata Sandi",  
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
@@ -443,7 +442,7 @@ namespace SEARENA2025
             SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar, _lblAtauDaftar, _btnGoogleReg, _btnAppleReg, _btnFacebookReg);
         }
 
-        // === METHOD LOGIN & REGISTER DENGAN DATABASE ===
+        // Method Login dan Register
         private void Login()
         {
             if (string.IsNullOrWhiteSpace(_txtEmail.Text) || string.IsNullOrWhiteSpace(_txtPassword.Text))
@@ -514,9 +513,9 @@ namespace SEARENA2025
             {
                 NamaLengkap = _txtRegNama.Text.Trim(),
                 Email = _txtRegEmail.Text.Trim(),
-                Password = _txtRegPassword.Text,
                 NoTelepon = ""
             };
+            newUser.SetPassword(_txtRegPassword.Text);
 
             if (newUser.Save())
             {
@@ -540,7 +539,7 @@ namespace SEARENA2025
             DashboardUtama dashboard = new DashboardUtama();
             dashboard.FormClosed += (s, args) => Application.Exit(); // Keluar aplikasi jika dashboard ditutup
             dashboard.Show();
-            this.Hide(); // Sembunyikan form login, jangan Close()
+            this.Hide(); 
         }
 
         private Label CreateInnerLabel(string text, int x, int y)

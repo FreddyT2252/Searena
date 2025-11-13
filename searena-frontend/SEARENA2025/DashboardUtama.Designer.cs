@@ -1010,12 +1010,11 @@
             // 
             // Kontak
             // 
-            this.Kontak.AutoSize = false;
             this.Kontak.BackColor = System.Drawing.Color.Transparent;
             this.Kontak.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Kontak.Location = new System.Drawing.Point(313, 12);
+            this.Kontak.Location = new System.Drawing.Point(312, 12);
             this.Kontak.Name = "Kontak";
-            this.Kontak.Size = new System.Drawing.Size(53, 23);
+            this.Kontak.Size = new System.Drawing.Size(53, 22);
             this.Kontak.TabIndex = 4;
             this.Kontak.Text = "Kontak";
             // 

@@ -14,7 +14,7 @@ namespace SEARENA2025
     {
         private Form dashboardParent;
 
-        private const string Conn = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
+        private const string Conn = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public Form2(Form dashboard = null)
         {

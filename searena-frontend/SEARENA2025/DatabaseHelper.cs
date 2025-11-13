@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace SEARENA2025
 {
-    public class DatabaseHelper
+    internal static class DatabaseHelper
     {
-        private static string connectionString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
+        private static readonly string connectionString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public static NpgsqlConnection GetConnection()
         {
@@ -102,7 +102,7 @@ namespace SEARENA2025
         }
     }
 
-    // ===== BASE CLASS - ENCAPSULATION =====
+    // Class Entity - Base class untuk model
     public abstract class Entity
     {
         protected int id;
@@ -125,7 +125,7 @@ namespace SEARENA2025
         public abstract bool Delete();
     }
 
-    // ===== USER MODEL - INHERITANCE =====
+    // User Model - Inheritance
     public class User : Entity
     {
         private string namaLengkap;
@@ -147,10 +147,13 @@ namespace SEARENA2025
             set { email = value; }
         }
 
-        public string Password
+        public string Password { get; private set; }
+
+        public void SetPassword(string raw)
         {
-            get { return password; }
-            set { password = value; }
+            if (string.IsNullOrWhiteSpace(raw) || raw.Length < 6)
+                throw new ArgumentException("Password harus minimal 6 karakter.");
+            Password = HashPassword(raw);
         }
 
         public string NoTelepon
@@ -304,7 +307,7 @@ namespace SEARENA2025
         }
     }
 
-    // ===== REVIEW MODEL - INHERITANCE =====
+    // Model Review - Inheritance
     public class Review : Entity
     {
         private int userId;
@@ -553,7 +556,7 @@ namespace SEARENA2025
         }
     }
 
-    // ===== BOOKMARK MODEL =====
+    // Model Bookmark - Inheritance
     public class Bookmark : Entity
     {
         private int userId;
@@ -701,7 +704,7 @@ namespace SEARENA2025
         }
     }
 
-    // ===== DESTINASI MODEL =====
+    // Model Destinasi
     public class Destinasi
     {
         public int Id { get; set; }

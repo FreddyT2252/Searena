@@ -13,7 +13,7 @@ namespace SEARENA2025
 {
     public partial class DashboardUtama : Form
     {
-        public class DestInfo
+        internal sealed class DestInfo
         {
             public int Id { get; set; }
             public string Nama { get; set; }
@@ -24,7 +24,7 @@ namespace SEARENA2025
         {
             // Satu tempat untuk connection string
             public static readonly string ConnString =
-                "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+                "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
         }
 
         public DashboardUtama()

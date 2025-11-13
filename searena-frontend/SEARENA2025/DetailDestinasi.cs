@@ -20,7 +20,7 @@ namespace SEARENA2025
 
        
 
-        private const string ConnString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=12345";
+        private const string ConnString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public DetailDestinasi(int destId, string destName, string destLocation)
         {
@@ -53,6 +53,13 @@ namespace SEARENA2025
 
         }
 
+        private void FixLabelWrap(Guna.UI2.WinForms.Guna2HtmlLabel lbl)
+        {
+            lbl.AutoSize = false;
+            lbl.AutoSizeHeightOnly = true;
+            lbl.MaximumSize = new Size(300, 0); // sesuaikan dengan lebar panel (318 total - padding)
+        }
+
         private void DetailDestinasi_Load(object sender, EventArgs e)
         {
             // tampilkan nama & lokasi (kalau ctor param dipakai, nilainya terisi)
@@ -61,6 +68,10 @@ namespace SEARENA2025
 
             // default rating bintang
             if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
+            FixLabelWrap(guna2HtmlLabel36);
+            FixLabelWrap(guna2HtmlLabel37);
+            FixLabelWrap(guna2HtmlLabel38);
+            FixLabelWrap(guna2HtmlLabel39);
         }
 
         private async void BtnKirim_Click(object sender, EventArgs e)
@@ -137,6 +148,11 @@ namespace SEARENA2025
                 MessageBox.Show($"Gagal menyimpan ulasan: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void guna2HtmlLabel38_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
