@@ -173,7 +173,7 @@
             this.Navbar.Controls.Add(this.Profile);
             this.Navbar.Controls.Add(this.Logo);
             this.Navbar.Location = new System.Drawing.Point(-1, 0);
-            this.Navbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Navbar.Margin = new System.Windows.Forms.Padding(4);
             this.Navbar.Name = "Navbar";
             this.Navbar.Size = new System.Drawing.Size(1069, 54);
             this.Navbar.TabIndex = 1;
@@ -196,7 +196,7 @@
             this.Profile.Image = ((System.Drawing.Image)(resources.GetObject("Profile.Image")));
             this.Profile.ImageRotate = 0F;
             this.Profile.Location = new System.Drawing.Point(935, 7);
-            this.Profile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Profile.Margin = new System.Windows.Forms.Padding(4);
             this.Profile.Name = "Profile";
             this.Profile.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.Profile.Size = new System.Drawing.Size(51, 43);
@@ -211,7 +211,7 @@
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.ImageRotate = 0F;
             this.Logo.Location = new System.Drawing.Point(3, 4);
-            this.Logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Logo.Margin = new System.Windows.Forms.Padding(4);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(168, 47);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -232,7 +232,7 @@
             this.btnKembali.Image = ((System.Drawing.Image)(resources.GetObject("btnKembali.Image")));
             this.btnKembali.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnKembali.Location = new System.Drawing.Point(51, 81);
-            this.btnKembali.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKembali.Margin = new System.Windows.Forms.Padding(4);
             this.btnKembali.Name = "btnKembali";
             this.btnKembali.Size = new System.Drawing.Size(103, 22);
             this.btnKembali.TabIndex = 6;
@@ -249,7 +249,7 @@
             this.PnlProfile.Controls.Add(this.guna2HtmlLabel1);
             this.PnlProfile.Controls.Add(this.ProfilePage);
             this.PnlProfile.Location = new System.Drawing.Point(51, 132);
-            this.PnlProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PnlProfile.Margin = new System.Windows.Forms.Padding(4);
             this.PnlProfile.Name = "PnlProfile";
             this.PnlProfile.Size = new System.Drawing.Size(317, 126);
             this.PnlProfile.TabIndex = 7;
@@ -259,7 +259,7 @@
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
             this.guna2PictureBox1.Location = new System.Drawing.Point(139, 80);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(24, 25);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -272,7 +272,7 @@
             this.lblBergabung.BackColor = System.Drawing.Color.Transparent;
             this.lblBergabung.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBergabung.Location = new System.Drawing.Point(167, 82);
-            this.lblBergabung.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblBergabung.Margin = new System.Windows.Forms.Padding(4);
             this.lblBergabung.Name = "lblBergabung";
             this.lblBergabung.Size = new System.Drawing.Size(143, 39);
             this.lblBergabung.TabIndex = 2;
@@ -284,7 +284,7 @@
             this.lblPengguna.BackColor = System.Drawing.Color.Transparent;
             this.lblPengguna.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPengguna.Location = new System.Drawing.Point(139, 49);
-            this.lblPengguna.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblPengguna.Margin = new System.Windows.Forms.Padding(4);
             this.lblPengguna.Name = "lblPengguna";
             this.lblPengguna.Size = new System.Drawing.Size(73, 23);
             this.lblPengguna.TabIndex = 2;
@@ -295,7 +295,7 @@
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(139, 18);
-            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(104, 23);
             this.guna2HtmlLabel1.TabIndex = 2;
@@ -306,7 +306,7 @@
             this.ProfilePage.Image = ((System.Drawing.Image)(resources.GetObject("ProfilePage.Image")));
             this.ProfilePage.ImageRotate = 0F;
             this.ProfilePage.Location = new System.Drawing.Point(5, 18);
-            this.ProfilePage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProfilePage.Margin = new System.Windows.Forms.Padding(4);
             this.ProfilePage.Name = "ProfilePage";
             this.ProfilePage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.ProfilePage.Size = new System.Drawing.Size(111, 86);
@@ -326,7 +326,7 @@
             this.PanelProfile2.Controls.Add(this.guna2CirclePictureBox2);
             this.PanelProfile2.Controls.Add(this.guna2PictureBox3);
             this.PanelProfile2.Location = new System.Drawing.Point(51, 290);
-            this.PanelProfile2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelProfile2.Margin = new System.Windows.Forms.Padding(4);
             this.PanelProfile2.Name = "PanelProfile2";
             this.PanelProfile2.Size = new System.Drawing.Size(317, 181);
             this.PanelProfile2.TabIndex = 8;
@@ -336,7 +336,7 @@
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel7.Location = new System.Drawing.Point(15, 101);
-            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             this.guna2HtmlLabel7.Size = new System.Drawing.Size(46, 21);
             this.guna2HtmlLabel7.TabIndex = 3;
@@ -347,7 +347,7 @@
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
             this.guna2PictureBox2.Location = new System.Drawing.Point(13, 92);
-            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
             this.guna2PictureBox2.Size = new System.Drawing.Size(235, 12);
             this.guna2PictureBox2.TabIndex = 3;
@@ -358,7 +358,7 @@
             this.lblEmail.BackColor = System.Drawing.Color.Transparent;
             this.lblEmail.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(16, 125);
-            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(150, 21);
             this.lblEmail.TabIndex = 4;
@@ -369,7 +369,7 @@
             this.lblNama.BackColor = System.Drawing.Color.Transparent;
             this.lblNama.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNama.Location = new System.Drawing.Point(13, 66);
-            this.lblNama.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblNama.Margin = new System.Windows.Forms.Padding(4);
             this.lblNama.Name = "lblNama";
             this.lblNama.Size = new System.Drawing.Size(83, 21);
             this.lblNama.TabIndex = 3;
@@ -380,7 +380,7 @@
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel6.Location = new System.Drawing.Point(12, 44);
-            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(106, 21);
             this.guna2HtmlLabel6.TabIndex = 3;
@@ -391,7 +391,7 @@
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(48, 9);
-            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(159, 23);
             this.guna2HtmlLabel5.TabIndex = 3;
@@ -402,7 +402,7 @@
             this.guna2CirclePictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox2.Image")));
             this.guna2CirclePictureBox2.ImageRotate = 0F;
             this.guna2CirclePictureBox2.Location = new System.Drawing.Point(10, 8);
-            this.guna2CirclePictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CirclePictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
             this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CirclePictureBox2.Size = new System.Drawing.Size(35, 33);
@@ -414,7 +414,7 @@
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
             this.guna2PictureBox3.Location = new System.Drawing.Point(16, 151);
-            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
             this.guna2PictureBox3.Size = new System.Drawing.Size(235, 12);
             this.guna2PictureBox3.TabIndex = 6;
@@ -425,7 +425,7 @@
             this.btnLogOut.BackColor = System.Drawing.Color.Red;
             this.btnLogOut.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.Location = new System.Drawing.Point(139, 486);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(109, 47);
             this.btnLogOut.TabIndex = 9;
@@ -439,7 +439,7 @@
             this.guna2Panel3.Controls.Add(this.btnRatingReview);
             this.guna2Panel3.FillColor = System.Drawing.Color.FloralWhite;
             this.guna2Panel3.Location = new System.Drawing.Point(455, 75);
-            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.Size = new System.Drawing.Size(503, 38);
             this.guna2Panel3.TabIndex = 10;
@@ -454,7 +454,7 @@
             this.btnBookmark.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookmark.ForeColor = System.Drawing.Color.Black;
             this.btnBookmark.Location = new System.Drawing.Point(259, 4);
-            this.btnBookmark.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBookmark.Margin = new System.Windows.Forms.Padding(4);
             this.btnBookmark.Name = "btnBookmark";
             this.btnBookmark.Size = new System.Drawing.Size(240, 31);
             this.btnBookmark.TabIndex = 1;
@@ -470,7 +470,7 @@
             this.btnRatingReview.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRatingReview.ForeColor = System.Drawing.Color.Black;
             this.btnRatingReview.Location = new System.Drawing.Point(4, 4);
-            this.btnRatingReview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRatingReview.Margin = new System.Windows.Forms.Padding(4);
             this.btnRatingReview.Name = "btnRatingReview";
             this.btnRatingReview.Size = new System.Drawing.Size(240, 31);
             this.btnRatingReview.TabIndex = 0;
@@ -482,7 +482,7 @@
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(455, 126);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(214, 30);
             this.guna2HtmlLabel2.TabIndex = 11;
@@ -504,7 +504,7 @@
             this.panelDestinasi1.Controls.Add(this.guna2PictureBox5);
             this.panelDestinasi1.FillColor = System.Drawing.Color.White;
             this.panelDestinasi1.Location = new System.Drawing.Point(279, 4);
-            this.panelDestinasi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelDestinasi1.Margin = new System.Windows.Forms.Padding(4);
             this.panelDestinasi1.Name = "panelDestinasi1";
             this.panelDestinasi1.ShadowColor = System.Drawing.Color.Black;
             this.panelDestinasi1.Size = new System.Drawing.Size(267, 297);
@@ -515,7 +515,7 @@
             this.guna2Panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel5.Controls.Add(this.lblFasilitas3);
             this.guna2Panel5.Location = new System.Drawing.Point(179, 231);
-            this.guna2Panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel5.Name = "guna2Panel5";
             this.guna2Panel5.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel5.TabIndex = 11;
@@ -525,7 +525,7 @@
             this.lblFasilitas3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.lblFasilitas3.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas3.Location = new System.Drawing.Point(11, 5);
-            this.lblFasilitas3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas3.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas3.Name = "lblFasilitas3";
             this.lblFasilitas3.Size = new System.Drawing.Size(44, 15);
             this.lblFasilitas3.TabIndex = 17;
@@ -536,7 +536,7 @@
             this.guna2Panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel4.Controls.Add(this.lblFasilitas2);
             this.guna2Panel4.Location = new System.Drawing.Point(99, 233);
-            this.guna2Panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel4.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel4.Name = "guna2Panel4";
             this.guna2Panel4.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel4.TabIndex = 10;
@@ -547,7 +547,7 @@
             this.lblFasilitas2.BackColor = System.Drawing.Color.Transparent;
             this.lblFasilitas2.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas2.Location = new System.Drawing.Point(15, 4);
-            this.lblFasilitas2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas2.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas2.Name = "lblFasilitas2";
             this.lblFasilitas2.Size = new System.Drawing.Size(37, 15);
             this.lblFasilitas2.TabIndex = 2;
@@ -558,7 +558,7 @@
             this.guna2Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel2.Controls.Add(this.lblFasilitas1);
             this.guna2Panel2.Location = new System.Drawing.Point(16, 233);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel2.TabIndex = 9;
@@ -568,7 +568,7 @@
             this.lblFasilitas1.BackColor = System.Drawing.Color.Transparent;
             this.lblFasilitas1.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas1.Location = new System.Drawing.Point(16, 4);
-            this.lblFasilitas1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas1.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas1.Name = "lblFasilitas1";
             this.lblFasilitas1.Size = new System.Drawing.Size(38, 15);
             this.lblFasilitas1.TabIndex = 1;
@@ -580,7 +580,7 @@
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
             this.guna2PictureBox8.Location = new System.Drawing.Point(19, 263);
-            this.guna2PictureBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox8.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox8.Name = "guna2PictureBox8";
             this.guna2PictureBox8.Size = new System.Drawing.Size(23, 23);
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -592,7 +592,7 @@
             this.lblWaktu1.BackColor = System.Drawing.Color.Transparent;
             this.lblWaktu1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWaktu1.Location = new System.Drawing.Point(43, 266);
-            this.lblWaktu1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblWaktu1.Margin = new System.Windows.Forms.Padding(4);
             this.lblWaktu1.Name = "lblWaktu1";
             this.lblWaktu1.Size = new System.Drawing.Size(195, 22);
             this.lblWaktu1.TabIndex = 7;
@@ -603,7 +603,7 @@
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel11);
             this.guna2Panel1.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Panel1.Location = new System.Drawing.Point(19, 204);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(113, 20);
             this.guna2Panel1.TabIndex = 6;
@@ -612,8 +612,8 @@
             // 
             this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel11.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel11.Location = new System.Drawing.Point(20, 1);
-            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel11.Location = new System.Drawing.Point(20, 2);
+            this.guna2HtmlLabel11.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
             this.guna2HtmlLabel11.Size = new System.Drawing.Size(65, 15);
             this.guna2HtmlLabel11.TabIndex = 0;
@@ -624,7 +624,7 @@
             this.lblDeskripsi1.BackColor = System.Drawing.Color.Transparent;
             this.lblDeskripsi1.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDeskripsi1.Location = new System.Drawing.Point(13, 180);
-            this.lblDeskripsi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDeskripsi1.Margin = new System.Windows.Forms.Padding(4);
             this.lblDeskripsi1.Name = "lblDeskripsi1";
             this.lblDeskripsi1.Size = new System.Drawing.Size(216, 21);
             this.lblDeskripsi1.TabIndex = 5;
@@ -636,7 +636,7 @@
             this.guna2PictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox7.Image")));
             this.guna2PictureBox7.ImageRotate = 0F;
             this.guna2PictureBox7.Location = new System.Drawing.Point(16, 159);
-            this.guna2PictureBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox7.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox7.Name = "guna2PictureBox7";
             this.guna2PictureBox7.Size = new System.Drawing.Size(21, 18);
             this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -648,7 +648,7 @@
             this.lblLokasi1.BackColor = System.Drawing.Color.Transparent;
             this.lblLokasi1.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLokasi1.Location = new System.Drawing.Point(37, 159);
-            this.lblLokasi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLokasi1.Margin = new System.Windows.Forms.Padding(4);
             this.lblLokasi1.Name = "lblLokasi1";
             this.lblLokasi1.Size = new System.Drawing.Size(198, 21);
             this.lblLokasi1.TabIndex = 3;
@@ -659,7 +659,7 @@
             this.lblDestinasi1.BackColor = System.Drawing.Color.Transparent;
             this.lblDestinasi1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDestinasi1.Location = new System.Drawing.Point(16, 137);
-            this.lblDestinasi1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDestinasi1.Margin = new System.Windows.Forms.Padding(4);
             this.lblDestinasi1.Name = "lblDestinasi1";
             this.lblDestinasi1.Size = new System.Drawing.Size(176, 22);
             this.lblDestinasi1.TabIndex = 2;
@@ -670,7 +670,7 @@
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
             this.guna2PictureBox5.Location = new System.Drawing.Point(16, 16);
-            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox5.Name = "guna2PictureBox5";
             this.guna2PictureBox5.Size = new System.Drawing.Size(232, 118);
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -693,7 +693,7 @@
             this.panelDestinasi2.Controls.Add(this.guna2PictureBox12);
             this.panelDestinasi2.FillColor = System.Drawing.Color.White;
             this.panelDestinasi2.Location = new System.Drawing.Point(4, 309);
-            this.panelDestinasi2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelDestinasi2.Margin = new System.Windows.Forms.Padding(4);
             this.panelDestinasi2.Name = "panelDestinasi2";
             this.panelDestinasi2.ShadowColor = System.Drawing.Color.Black;
             this.panelDestinasi2.Size = new System.Drawing.Size(267, 297);
@@ -704,7 +704,7 @@
             this.guna2Panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel6.Controls.Add(this.lblFasilitas6);
             this.guna2Panel6.Location = new System.Drawing.Point(179, 231);
-            this.guna2Panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel6.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel6.Name = "guna2Panel6";
             this.guna2Panel6.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel6.TabIndex = 11;
@@ -714,7 +714,7 @@
             this.lblFasilitas6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.lblFasilitas6.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas6.Location = new System.Drawing.Point(11, 5);
-            this.lblFasilitas6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas6.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas6.Name = "lblFasilitas6";
             this.lblFasilitas6.Size = new System.Drawing.Size(44, 15);
             this.lblFasilitas6.TabIndex = 17;
@@ -725,7 +725,7 @@
             this.guna2Panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel7.Controls.Add(this.lblFasilitas5);
             this.guna2Panel7.Location = new System.Drawing.Point(99, 233);
-            this.guna2Panel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel7.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel7.Name = "guna2Panel7";
             this.guna2Panel7.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel7.TabIndex = 10;
@@ -735,7 +735,7 @@
             this.lblFasilitas5.BackColor = System.Drawing.Color.Transparent;
             this.lblFasilitas5.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas5.Location = new System.Drawing.Point(15, 4);
-            this.lblFasilitas5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas5.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas5.Name = "lblFasilitas5";
             this.lblFasilitas5.Size = new System.Drawing.Size(37, 15);
             this.lblFasilitas5.TabIndex = 2;
@@ -746,7 +746,7 @@
             this.guna2Panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.guna2Panel8.Controls.Add(this.lblFasilitas4);
             this.guna2Panel8.Location = new System.Drawing.Point(16, 233);
-            this.guna2Panel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel8.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel8.Name = "guna2Panel8";
             this.guna2Panel8.Size = new System.Drawing.Size(69, 26);
             this.guna2Panel8.TabIndex = 9;
@@ -756,7 +756,7 @@
             this.lblFasilitas4.BackColor = System.Drawing.Color.Transparent;
             this.lblFasilitas4.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFasilitas4.Location = new System.Drawing.Point(16, 4);
-            this.lblFasilitas4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFasilitas4.Margin = new System.Windows.Forms.Padding(4);
             this.lblFasilitas4.Name = "lblFasilitas4";
             this.lblFasilitas4.Size = new System.Drawing.Size(38, 15);
             this.lblFasilitas4.TabIndex = 1;
@@ -768,7 +768,7 @@
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
             this.guna2PictureBox9.Location = new System.Drawing.Point(19, 263);
-            this.guna2PictureBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox9.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
             this.guna2PictureBox9.Size = new System.Drawing.Size(23, 23);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -780,7 +780,7 @@
             this.lblWaktu2.BackColor = System.Drawing.Color.Transparent;
             this.lblWaktu2.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWaktu2.Location = new System.Drawing.Point(43, 266);
-            this.lblWaktu2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblWaktu2.Margin = new System.Windows.Forms.Padding(4);
             this.lblWaktu2.Name = "lblWaktu2";
             this.lblWaktu2.Size = new System.Drawing.Size(195, 22);
             this.lblWaktu2.TabIndex = 7;
@@ -791,7 +791,7 @@
             this.guna2Panel9.Controls.Add(this.guna2HtmlLabel20);
             this.guna2Panel9.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Panel9.Location = new System.Drawing.Point(19, 204);
-            this.guna2Panel9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel9.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel9.Name = "guna2Panel9";
             this.guna2Panel9.Size = new System.Drawing.Size(113, 20);
             this.guna2Panel9.TabIndex = 6;
@@ -801,7 +801,7 @@
             this.guna2HtmlLabel20.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel20.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel20.Location = new System.Drawing.Point(20, 1);
-            this.guna2HtmlLabel20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel20.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel20.Name = "guna2HtmlLabel20";
             this.guna2HtmlLabel20.Size = new System.Drawing.Size(65, 15);
             this.guna2HtmlLabel20.TabIndex = 0;
@@ -812,7 +812,7 @@
             this.lblDeskripsi2.BackColor = System.Drawing.Color.Transparent;
             this.lblDeskripsi2.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDeskripsi2.Location = new System.Drawing.Point(13, 180);
-            this.lblDeskripsi2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDeskripsi2.Margin = new System.Windows.Forms.Padding(4);
             this.lblDeskripsi2.Name = "lblDeskripsi2";
             this.lblDeskripsi2.Size = new System.Drawing.Size(216, 21);
             this.lblDeskripsi2.TabIndex = 5;
@@ -824,7 +824,7 @@
             this.guna2PictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox10.Image")));
             this.guna2PictureBox10.ImageRotate = 0F;
             this.guna2PictureBox10.Location = new System.Drawing.Point(16, 159);
-            this.guna2PictureBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox10.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox10.Name = "guna2PictureBox10";
             this.guna2PictureBox10.Size = new System.Drawing.Size(21, 18);
             this.guna2PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -836,7 +836,7 @@
             this.lblLokasi2.BackColor = System.Drawing.Color.Transparent;
             this.lblLokasi2.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLokasi2.Location = new System.Drawing.Point(37, 159);
-            this.lblLokasi2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLokasi2.Margin = new System.Windows.Forms.Padding(4);
             this.lblLokasi2.Name = "lblLokasi2";
             this.lblLokasi2.Size = new System.Drawing.Size(198, 21);
             this.lblLokasi2.TabIndex = 3;
@@ -847,7 +847,7 @@
             this.lblDestinasi2.BackColor = System.Drawing.Color.Transparent;
             this.lblDestinasi2.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDestinasi2.Location = new System.Drawing.Point(16, 137);
-            this.lblDestinasi2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDestinasi2.Margin = new System.Windows.Forms.Padding(4);
             this.lblDestinasi2.Name = "lblDestinasi2";
             this.lblDestinasi2.Size = new System.Drawing.Size(176, 22);
             this.lblDestinasi2.TabIndex = 2;
@@ -858,7 +858,7 @@
             this.guna2PictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox12.Image")));
             this.guna2PictureBox12.ImageRotate = 0F;
             this.guna2PictureBox12.Location = new System.Drawing.Point(16, 16);
-            this.guna2PictureBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2PictureBox12.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox12.Name = "guna2PictureBox12";
             this.guna2PictureBox12.Size = new System.Drawing.Size(232, 118);
             this.guna2PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -943,7 +943,7 @@
             // 
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(16, 4);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(16, 5);
             this.guna2HtmlLabel8.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             this.guna2HtmlLabel8.Size = new System.Drawing.Size(38, 15);
@@ -988,7 +988,7 @@
             // 
             this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel10.Font = new System.Drawing.Font("Malgun Gothic", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel10.Location = new System.Drawing.Point(20, 1);
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(20, 2);
             this.guna2HtmlLabel10.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             this.guna2HtmlLabel10.Size = new System.Drawing.Size(65, 15);
@@ -1279,7 +1279,7 @@
             this.Controls.Add(this.btnKembali);
             this.Controls.Add(this.Navbar);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form3";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);

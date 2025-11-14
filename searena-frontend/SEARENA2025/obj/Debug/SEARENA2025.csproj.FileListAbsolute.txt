@@ -117,3 +117,4 @@ C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.csproj.Cor
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2.3B3FDCF7.Up2Date
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.exe
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.pdb
+C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.PageAdmin.resources

@@ -319,5 +319,10 @@ namespace SEARENA2025
         {
 
         }
+
+        private void dgvRiwayat_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

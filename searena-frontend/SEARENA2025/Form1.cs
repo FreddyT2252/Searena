@@ -15,6 +15,12 @@ namespace SEARENA2025
         private Label _lblTitle;
         private Guna2Button _btnTabMasuk, _btnTabDaftar;
 
+        // Role Selection Controls
+        private Guna2Panel _roleSelectionPanel;
+        private Guna2Button _btnRoleAdmin, _btnRolePengguna;
+        private Label _lblRoleTitle;
+        private Label _lblRoleSubtitle;
+
         // Login Form Controls
         private Guna2TextBox _txtEmail, _txtPassword;
         private Guna2CheckBox _chkIngatSaya;
@@ -26,6 +32,9 @@ namespace SEARENA2025
         private Guna2CheckBox _chkSetuju;
         private Guna2Button _btnDaftar;
 
+        // Role yang dipilih
+        private string _selectedRole = "";
+
         // Ukuran dan Warna
         private const int PANEL_WIDTH = 400;
         private const int CONTENT_WIDTH = 330;
@@ -33,6 +42,7 @@ namespace SEARENA2025
         private const int FORM_HEIGHT = 600;
         private const int PANEL_HEIGHT_LOGIN = 360;
         private const int PANEL_HEIGHT_REGISTER = 420;
+        private const int PANEL_HEIGHT_ROLE = 300;
         private const int BORDER_RADIUS = 25;
 
         private static readonly Color COLOR_PRIMARY = Color.FromArgb(109, 175, 207);
@@ -46,6 +56,9 @@ namespace SEARENA2025
         private static readonly Color COLOR_TEXT_LIGHT = Color.FromArgb(130, 130, 130);
         private static readonly Color COLOR_LINK = Color.FromArgb(31, 95, 127);
 
+        // Database connection string
+        private const string CONNECTION_STRING = "Host=localhost;Username=postgres;Password=password;Database=searena";
+
         public Form1()
         {
             InitializeComponent();
@@ -55,12 +68,13 @@ namespace SEARENA2025
         {
             ConfigureForm();
             InitializeGunaBorderlessForm();
+            CreateRoleSelectionPanel();
             CreateMainPanel();
             CreateTitleLabel();
             CreateTabButtons();
             CreateLoginForm();
             CreateRegisterForm();
-            ShowLoginForm();
+            ShowRoleSelection();
         }
 
         private void ConfigureForm()
@@ -76,6 +90,82 @@ namespace SEARENA2025
             _gunaBorderlessForm = new Guna2BorderlessForm { ContainerControl = this, TransparentWhileDrag = true };
         }
 
+        private void CreateRoleSelectionPanel()
+        {
+            _roleSelectionPanel = new Guna2Panel
+            {
+                Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_ROLE),
+                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_ROLE) / 2 + 30),
+                BackColor = Color.Transparent,
+                BorderRadius = BORDER_RADIUS,
+                FillColor = COLOR_PANEL_BG
+            };
+            this.Controls.Add(_roleSelectionPanel);
+
+            _lblRoleTitle = new Label
+            {
+                Text = "Pilih Peran Anda",
+                Font = new Font("Segoe UI", 24F, FontStyle.Bold),
+                ForeColor = COLOR_TEXT_DARK,
+                BackColor = Color.Transparent,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Width = PANEL_WIDTH,
+                Height = 50,
+                Location = new Point(0, 20)
+            };
+            _roleSelectionPanel.Controls.Add(_lblRoleTitle);
+
+            _lblRoleSubtitle = new Label
+            {
+                Text = "Masuk sebagai admin atau pengguna biasa",
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = COLOR_TEXT_LIGHT,
+                BackColor = Color.Transparent,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Width = PANEL_WIDTH,
+                Height = 25,
+                Location = new Point(0, 70)
+            };
+            _roleSelectionPanel.Controls.Add(_lblRoleSubtitle);
+
+            int contentStartX = (PANEL_WIDTH - 300) / 2;
+
+            _btnRoleAdmin = new Guna2Button
+            {
+                Size = new Size(140, 100),
+                Location = new Point(contentStartX, 120),
+                Text = "Admin",
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                FillColor = COLOR_ACCENT_CYAN,
+                ForeColor = Color.Black,
+                BorderRadius = 15,
+                Cursor = Cursors.Hand
+            };
+            _btnRoleAdmin.Click += (s, e) => SelectRole("admin");
+            _roleSelectionPanel.Controls.Add(_btnRoleAdmin);
+
+            _btnRolePengguna = new Guna2Button
+            {
+                Size = new Size(140, 100),
+                Location = new Point(contentStartX + 160, 120),
+                Text = "Pengguna",
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                FillColor = COLOR_ACCENT_ORANGE,
+                ForeColor = Color.White,
+                BorderRadius = 15,
+                Cursor = Cursors.Hand
+            };
+            _btnRolePengguna.Click += (s, e) => SelectRole("pengguna");
+            _roleSelectionPanel.Controls.Add(_btnRolePengguna);
+        }
+
+        private void SelectRole(string role)
+        {
+            _selectedRole = role;
+            _roleSelectionPanel.Visible = false;
+            ShowLoginForm();
+        }
+
         private void CreateMainPanel()
         {
             _mainPanel = new Guna2Panel
@@ -84,9 +174,39 @@ namespace SEARENA2025
                 Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 30),
                 BackColor = Color.Transparent,
                 BorderRadius = BORDER_RADIUS,
-                FillColor = COLOR_PANEL_BG
+                FillColor = COLOR_PANEL_BG,
+                Visible = false
             };
             this.Controls.Add(_mainPanel);
+
+            // Tombol Kembali
+            Guna2Button btnKembali = new Guna2Button
+            {
+                Size = new Size(100, 35),
+                Location = new Point(10, 10),
+                Text = "← Kembali",
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                FillColor = Color.Transparent,
+                ForeColor = COLOR_TEXT_LIGHT,
+                BorderRadius = 10,
+                Cursor = Cursors.Hand
+            };
+            btnKembali.Click += (s, e) => KembaliKeRoleSelection();
+            _mainPanel.Controls.Add(btnKembali);
+        }
+
+        private void KembaliKeRoleSelection()
+        {
+            _selectedRole = "";
+            _mainPanel.Visible = false;
+            _roleSelectionPanel.Visible = true;
+            _txtEmail.Text = "";
+            _txtPassword.Text = "";
+            _txtRegNama.Text = "";
+            _txtRegEmail.Text = "";
+            _txtRegPassword.Text = "";
+            _chkIngatSaya.Checked = false;
+            _chkSetuju.Checked = false;
         }
 
         private void CreateTitleLabel()
@@ -99,7 +219,8 @@ namespace SEARENA2025
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Width = PANEL_WIDTH,
-                Height = 50
+                Height = 50,
+                Visible = false
             };
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
             this.Controls.Add(_lblTitle);
@@ -150,7 +271,6 @@ namespace SEARENA2025
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
             int currentY = 90;
 
-            // Email TextBox
             _txtEmail = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -170,7 +290,6 @@ namespace SEARENA2025
 
             currentY += _txtEmail.Height + 10;
 
-            // Password TextBox 
             _txtPassword = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -242,7 +361,6 @@ namespace SEARENA2025
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
             int currentY = 90;
 
-            // Nama TextBox
             _txtRegNama = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -263,7 +381,6 @@ namespace SEARENA2025
 
             currentY += _txtRegNama.Height + 10;
 
-            // Email TextBox 
             _txtRegEmail = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -284,7 +401,6 @@ namespace SEARENA2025
 
             currentY += _txtRegEmail.Height + 10;
 
-            // Password TextBox 
             _txtRegPassword = new Guna2TextBox
             {
                 Size = new Size(CONTENT_WIDTH, 55),
@@ -341,10 +457,20 @@ namespace SEARENA2025
             _mainPanel.Controls.Add(_btnDaftar);
         }
 
+        private void ShowRoleSelection()
+        {
+            _roleSelectionPanel.Visible = true;
+            _mainPanel.Visible = false;
+            _lblTitle.Visible = false;
+        }
+
         private void ShowLoginForm()
         {
+            _mainPanel.Visible = true;
+            _roleSelectionPanel.Visible = false;
             _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_LOGIN);
             _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 30);
+            _lblTitle.Visible = true;
             _lblTitle.Text = "Hai, Sea-Mates!";
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
 
@@ -361,8 +487,11 @@ namespace SEARENA2025
 
         private void ShowRegisterForm()
         {
+            _mainPanel.Visible = true;
+            _roleSelectionPanel.Visible = false;
             _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_REGISTER);
             _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_REGISTER) / 2 + 30);
+            _lblTitle.Visible = true;
             _lblTitle.Text = "Searena";
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
 
@@ -377,7 +506,6 @@ namespace SEARENA2025
             SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar);
         }
 
-        // Method Login dan Register
         private void Login()
         {
             if (string.IsNullOrWhiteSpace(_txtEmail.Text) || string.IsNullOrWhiteSpace(_txtPassword.Text))
@@ -386,24 +514,50 @@ namespace SEARENA2025
                 return;
             }
 
-            var user = User.Login(_txtEmail.Text.Trim(), _txtPassword.Text);
-            if (user == null)
+            try
             {
-                MessageBox.Show("Email atau password salah", "Login Gagal",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                using (var connection = new NpgsqlConnection(CONNECTION_STRING))
+                {
+                    connection.Open();
+                    string query = "SELECT id, nama_lengkap, email, role FROM users WHERE email = @email AND password = @password";
+
+                    using (var cmd = new NpgsqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@email", _txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", _txtPassword.Text);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = (int)reader["id"];
+                                string namaLengkap = reader["nama_lengkap"].ToString();
+                                string email = reader["email"].ToString();
+                                string role = reader["role"].ToString();
+
+                                UserSession.SetUser(userId, namaLengkap, email, role);
+
+                                MessageBox.Show($"Selamat datang, {namaLengkap}!", "Login Berhasil",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                PindahKeDashboard();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Email atau password salah", "Login Gagal",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
             }
-
-            UserSession.SetUser(user.Id, user.NamaLengkap, user.Email);
-
-            MessageBox.Show($"Selamat datang, {user.NamaLengkap}!", "Login Berhasil",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-            PindahKeDashboard();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Register()
         {
-            // Validasi input
             if (string.IsNullOrWhiteSpace(_txtRegNama.Text))
             {
                 MessageBox.Show("Nama lengkap harus diisi", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -439,37 +593,71 @@ namespace SEARENA2025
                 return;
             }
 
-            // Registrasi dengan database
-            var newUser = new User
+            try
             {
-                NamaLengkap = _txtRegNama.Text.Trim(),
-                Email = _txtRegEmail.Text.Trim(),
-                NoTelepon = ""
-            };
-            newUser.SetPassword(_txtRegPassword.Text);
+                using (var connection = new NpgsqlConnection(CONNECTION_STRING))
+                {
+                    connection.Open();
 
-            if (newUser.Save())
-            {
-                MessageBox.Show("Registrasi berhasil! Silakan login dengan akun Anda.", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Cek email sudah ada atau belum
+                    string checkQuery = "SELECT COUNT(*) FROM users WHERE email = @email";
+                    using (var cmd = new NpgsqlCommand(checkQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
+                        int count = (int)cmd.ExecuteScalar();
+                        if (count > 0)
+                        {
+                            MessageBox.Show("Email sudah terdaftar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
 
-                ShowLoginForm();
-                _txtEmail.Text = newUser.Email;
-                _txtPassword.Focus();
+                    // Insert user baru
+                    string insertQuery = @"INSERT INTO users (nama_lengkap, email, password, role) 
+                                          VALUES (@nama, @email, @password, @role)";
+
+                    using (var cmd = new NpgsqlCommand(insertQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nama", _txtRegNama.Text.Trim());
+                        cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", _txtRegPassword.Text);
+                        cmd.Parameters.AddWithValue("@role", _selectedRole);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Registrasi berhasil! Silakan login dengan akun Anda.", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ShowLoginForm();
+                        _txtEmail.Text = _txtRegEmail.Text.Trim();
+                        _txtPassword.Focus();
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Registrasi gagal. Email mungkin sudah terdaftar.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error Registrasi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void PindahKeDashboard()
         {
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.FormClosed += (s, args) => Application.Exit();
-            dashboard.Show();
-            this.Hide();
+            if (UserSession.IsAdmin())
+            {
+                // Redirect ke PageAdmin jika user adalah admin
+                PageAdmin pageAdmin = new PageAdmin();
+                pageAdmin.FormClosed += (s, args) => Application.Exit();
+                pageAdmin.Show();
+                this.Hide();
+            }
+            else
+            {
+                // Redirect ke DashboardUtama jika user biasa
+                DashboardUtama dashboard = new DashboardUtama();
+                dashboard.FormClosed += (s, args) => Application.Exit();
+                dashboard.Show();
+                this.Hide();
+            }
         }
 
         private Label CreateInnerLabel(string text, int x, int y)
