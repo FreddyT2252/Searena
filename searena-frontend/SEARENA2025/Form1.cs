@@ -57,7 +57,7 @@ namespace SEARENA2025
         private static readonly Color COLOR_LINK = Color.FromArgb(31, 95, 127);
 
         // Database connection string
-        private const string CONNECTION_STRING = "Host=localhost;Username=postgres;Password=password;Database=searena";
+        private const string CONNECTION_STRING = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public Form1()
         {
@@ -179,7 +179,6 @@ namespace SEARENA2025
             };
             this.Controls.Add(_mainPanel);
 
-            // Tombol Kembali
             Guna2Button btnKembali = new Guna2Button
             {
                 Size = new Size(100, 35),
@@ -519,7 +518,7 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = "SELECT id, nama_lengkap, email, role FROM users WHERE email = @email AND password = @password";
+                    string query = "SELECT user_id, nama_lengkap, email FROM users WHERE email = @email AND password = @password";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
@@ -530,12 +529,12 @@ namespace SEARENA2025
                         {
                             if (reader.Read())
                             {
-                                int userId = (int)reader["id"];
-                                string namaLengkap = reader["nama_lengkap"].ToString();
-                                string email = reader["email"].ToString();
-                                string role = reader["role"].ToString();
+                                string userId = reader["user_id"]?.ToString() ?? "0";
+                                string namaLengkap = reader["nama_lengkap"]?.ToString() ?? "User";
+                                string email = reader["email"]?.ToString() ?? "";
 
-                                UserSession.SetUser(userId, namaLengkap, email, role);
+                                // Set user session dengan role yang dipilih
+                                UserSession.SetUser(int.Parse(userId), namaLengkap, email, _selectedRole);
 
                                 MessageBox.Show($"Selamat datang, {namaLengkap}!", "Login Berhasil",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -593,6 +592,13 @@ namespace SEARENA2025
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(_selectedRole))
+            {
+                MessageBox.Show("Pilih peran terlebih dahulu (Admin atau Pengguna)", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
@@ -604,7 +610,7 @@ namespace SEARENA2025
                     using (var cmd = new NpgsqlCommand(checkQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
-                        int count = (int)cmd.ExecuteScalar();
+                        long count = Convert.ToInt64(cmd.ExecuteScalar() ?? 0);
                         if (count > 0)
                         {
                             MessageBox.Show("Email sudah terdaftar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -613,15 +619,17 @@ namespace SEARENA2025
                     }
 
                     // Insert user baru
-                    string insertQuery = @"INSERT INTO users (nama_lengkap, email, password, role) 
-                                          VALUES (@nama, @email, @password, @role)";
+                    string insertQuery = "INSERT INTO users (user_id, nama_lengkap, email, password) VALUES (@user_id, @nama, @email, @password)";
 
                     using (var cmd = new NpgsqlCommand(insertQuery, connection))
                     {
+                        // Generate user_id unik (integer)
+                        int newUserId = (int)(DateTime.Now.Ticks / 10000000);
+
+                        cmd.Parameters.AddWithValue("@user_id", newUserId);
                         cmd.Parameters.AddWithValue("@nama", _txtRegNama.Text.Trim());
                         cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
                         cmd.Parameters.AddWithValue("@password", _txtRegPassword.Text);
-                        cmd.Parameters.AddWithValue("@role", _selectedRole);
 
                         cmd.ExecuteNonQuery();
 
@@ -644,7 +652,6 @@ namespace SEARENA2025
         {
             if (UserSession.IsAdmin())
             {
-                // Redirect ke PageAdmin jika user adalah admin
                 PageAdmin pageAdmin = new PageAdmin();
                 pageAdmin.FormClosed += (s, args) => Application.Exit();
                 pageAdmin.Show();
@@ -652,7 +659,6 @@ namespace SEARENA2025
             }
             else
             {
-                // Redirect ke DashboardUtama jika user biasa
                 DashboardUtama dashboard = new DashboardUtama();
                 dashboard.FormClosed += (s, args) => Application.Exit();
                 dashboard.Show();
