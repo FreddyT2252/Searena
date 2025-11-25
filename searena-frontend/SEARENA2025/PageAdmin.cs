@@ -40,8 +40,9 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"SELECT id, nama, alamat, deskripsi, harga_tiket 
-                                     FROM destinasi ORDER BY id DESC";
+                    string query = @"SELECT destinasi_id, nama_destinasi, lokasi, pulau, deskripsi, 
+                                           harga_min, harga_max, rating_avg, total_review, waktu_terbaik
+                                    FROM destinasi ORDER BY destinasi_id DESC";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     using (var adapter = new NpgsqlDataAdapter(cmd))
@@ -49,7 +50,6 @@ namespace SEARENA2025
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        // Binding ke DataGridView jika ada
                         if (Controls.Find("dgvDestinasi", true).Length > 0)
                         {
                             ((DataGridView)Controls.Find("dgvDestinasi", true)[0]).DataSource = dt;
@@ -70,16 +70,41 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"SELECT id, destinasi_id, user_name, rating, review_text 
-                                     FROM reviews WHERE response IS NULL OR response = '' 
-                                     ORDER BY id DESC";
+                    string query = @"SELECT r.id, d.nama_destinasi, d.lokasi, 
+                                           r.rating, r.review_text
+                                     FROM reviews r
+                                     JOIN destinasi d ON r.destinasi_id = d.destinasi_id
+                                     WHERE r.response IS NULL OR r.response = '' 
+                                     ORDER BY r.tanggal_review DESC";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
-                    using (var adapter = new NpgsqlDataAdapter(cmd))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dgvRiwayat.DataSource = dt;
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            dgvRiwayat.Rows.Clear();
+
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string destinasi = reader.IsDBNull(1) ? "-" : reader.GetString(1);
+                                string lokasi = reader.IsDBNull(2) ? "-" : reader.GetString(2);
+                                int rating = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+                                string review = reader.IsDBNull(4) ? "-" : reader.GetString(4);
+
+                                // Buat string bintang
+                                string ratingStars = new string('★', Math.Max(0, Math.Min(5, rating)))
+                                                   + new string('☆', Math.Max(0, 5 - Math.Max(0, Math.Min(5, rating))));
+
+                                // Tambahkan row
+                                int rowIdx = dgvRiwayat.Rows.Add(destinasi, lokasi, ratingStars, review);
+                                dgvRiwayat.Rows[rowIdx].Tag = id;
+                            }
+
+                            // Font untuk mendukung bintang
+                            dgvRiwayat.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Symbol", 9f);
+                            dgvRiwayat.ReadOnly = true;
+                            dgvRiwayat.AllowUserToAddRows = false;
+                        }
                     }
                 }
             }
@@ -91,9 +116,67 @@ namespace SEARENA2025
 
         private void BtnInsert_Click(object sender, EventArgs e)
         {
+            // Validasi input wajib
             if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
                 MessageBox.Show("Nama destinasi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDeskripsi.Text))
+            {
+                MessageBox.Show("Deskripsi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtAlamatDestinasi.Text))
+            {
+                MessageBox.Show("Lokasi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPulau.Text))
+            {
+                MessageBox.Show("Pulau harus diisi!");
+                return;
+            }
+
+            // Validasi harga min
+            string hargaMinText = txtTiketMin.Text.Trim().Replace(".", "").Replace(",", "");
+            if (!int.TryParse(hargaMinText, out int hargaMin))
+            {
+                MessageBox.Show("Harga minimum harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi harga max
+            string hargaMaxText = txtTiketMax.Text.Trim().Replace(".", "").Replace(",", "");
+            if (!int.TryParse(hargaMaxText, out int hargaMax))
+            {
+                MessageBox.Show("Harga maksimum harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi rating
+            string ratingText = txtRating.Text.Trim();
+            if (!float.TryParse(ratingText, out float rating))
+            {
+                MessageBox.Show("Rating harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi total review
+            string totalReviewText = txtTotalReview.Text.Trim();
+            if (!int.TryParse(totalReviewText, out int totalReview))
+            {
+                MessageBox.Show("Total review harus berupa angka yang valid!");
+                return;
+            }
+
+            string waktuTerbaik = GetSelectedWaktu();
+            if (string.IsNullOrWhiteSpace(waktuTerbaik))
+            {
+                MessageBox.Show("Pilih minimal satu bulan untuk waktu terbaik!");
                 return;
             }
 
@@ -102,32 +185,21 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"INSERT INTO destinasi (nama, alamat, deskripsi, harga_tiket, rekomendasi_cuaca, aktivitas, waktu_terbaik) 
-                                     VALUES (@nama, @alamat, @deskripsi, @harga, @rekomendasi, @aktivitas, @waktu)";
-
-                    string aktivitas = GetSelectedAktivitas();
-                    string waktuTerbaik = GetSelectedWaktu();
-
-                    if (string.IsNullOrWhiteSpace(aktivitas))
-                    {
-                        MessageBox.Show("Pilih minimal satu aktivitas!");
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(waktuTerbaik))
-                    {
-                        MessageBox.Show("Pilih minimal satu bulan!");
-                        return;
-                    }
+                    string query = @"INSERT INTO destinasi (nama_destinasi, deskripsi, lokasi, pulau, 
+                                                           harga_min, harga_max, rating_avg, total_review, waktu_terbaik) 
+                                     VALUES (@nama, @deskripsi, @lokasi, @pulau, @harga_min, @harga_max, 
+                                             @rating, @total_review, @waktu)";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@alamat", txtAlamatDestinasi.Text.Trim());
                         cmd.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@harga", int.Parse(txtHargaTiket.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@rekomendasi", txtRekomendasiCuaca.Text.Trim());
-                        cmd.Parameters.AddWithValue("@aktivitas", aktivitas);
+                        cmd.Parameters.AddWithValue("@lokasi", txtAlamatDestinasi.Text.Trim());
+                        cmd.Parameters.AddWithValue("@pulau", txtPulau.Text.Trim());
+                        cmd.Parameters.AddWithValue("@harga_min", hargaMin);
+                        cmd.Parameters.AddWithValue("@harga_max", hargaMax);
+                        cmd.Parameters.AddWithValue("@rating", rating);
+                        cmd.Parameters.AddWithValue("@total_review", totalReview);
                         cmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
 
                         cmd.ExecuteNonQuery();
@@ -151,9 +223,67 @@ namespace SEARENA2025
                 return;
             }
 
+            // Validasi input wajib
             if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
                 MessageBox.Show("Nama destinasi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDeskripsi.Text))
+            {
+                MessageBox.Show("Deskripsi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtAlamatDestinasi.Text))
+            {
+                MessageBox.Show("Lokasi harus diisi!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPulau.Text))
+            {
+                MessageBox.Show("Pulau harus diisi!");
+                return;
+            }
+
+            // Validasi harga min
+            string hargaMinText = txtTiketMin.Text.Trim().Replace(".", "").Replace(",", "");
+            if (!int.TryParse(hargaMinText, out int hargaMin))
+            {
+                MessageBox.Show("Harga minimum harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi harga max
+            string hargaMaxText = txtTiketMax.Text.Trim().Replace(".", "").Replace(",", "");
+            if (!int.TryParse(hargaMaxText, out int hargaMax))
+            {
+                MessageBox.Show("Harga maksimum harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi rating
+            string ratingText = txtRating.Text.Trim();
+            if (!float.TryParse(ratingText, out float rating))
+            {
+                MessageBox.Show("Rating harus berupa angka yang valid!");
+                return;
+            }
+
+            // Validasi total review
+            string totalReviewText = txtTotalReview.Text.Trim();
+            if (!int.TryParse(totalReviewText, out int totalReview))
+            {
+                MessageBox.Show("Total review harus berupa angka yang valid!");
+                return;
+            }
+
+            string waktuTerbaik = GetSelectedWaktu();
+            if (string.IsNullOrWhiteSpace(waktuTerbaik))
+            {
+                MessageBox.Show("Pilih minimal satu bulan untuk waktu terbaik!");
                 return;
             }
 
@@ -162,22 +292,22 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"UPDATE destinasi SET nama=@nama, alamat=@alamat, deskripsi=@deskripsi, 
-                                     harga_tiket=@harga, rekomendasi_cuaca=@rekomendasi, aktivitas=@aktivitas, 
-                                     waktu_terbaik=@waktu WHERE id=@id";
-
-                    string aktivitas = GetSelectedAktivitas();
-                    string waktuTerbaik = GetSelectedWaktu();
+                    string query = @"UPDATE destinasi SET nama_destinasi=@nama, deskripsi=@deskripsi, 
+                                     lokasi=@lokasi, pulau=@pulau, harga_min=@harga_min, harga_max=@harga_max, 
+                                     rating_avg=@rating, total_review=@total_review, waktu_terbaik=@waktu 
+                                     WHERE destinasi_id=@id";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@id", selectedDestinasiId);
                         cmd.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@alamat", txtAlamatDestinasi.Text.Trim());
                         cmd.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@harga", int.Parse(txtHargaTiket.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@rekomendasi", txtRekomendasiCuaca.Text.Trim());
-                        cmd.Parameters.AddWithValue("@aktivitas", aktivitas);
+                        cmd.Parameters.AddWithValue("@lokasi", txtAlamatDestinasi.Text.Trim());
+                        cmd.Parameters.AddWithValue("@pulau", txtPulau.Text.Trim());
+                        cmd.Parameters.AddWithValue("@harga_min", hargaMin);
+                        cmd.Parameters.AddWithValue("@harga_max", hargaMax);
+                        cmd.Parameters.AddWithValue("@rating", rating);
+                        cmd.Parameters.AddWithValue("@total_review", totalReview);
                         cmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
 
                         cmd.ExecuteNonQuery();
@@ -209,7 +339,7 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = "DELETE FROM destinasi WHERE id=@id";
+                    string query = "DELETE FROM destinasi WHERE destinasi_id=@id";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
@@ -269,67 +399,29 @@ namespace SEARENA2025
 
         private void DgvReview_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && dgvRiwayat.Rows[e.RowIndex].Tag != null)
             {
-                DataGridViewRow row = dgvRiwayat.Rows[e.RowIndex];
-                selectedReviewId = (int)row.Cells["id"].Value;
+                selectedReviewId = Convert.ToInt32(dgvRiwayat.Rows[e.RowIndex].Tag);
             }
-        }
-
-        private string GetSelectedAktivitas()
-        {
-            List<string> aktivitas = new List<string>();
-
-            if (cbSnorkling.Checked) aktivitas.Add("Snorkling");
-            if (cbDiving.Checked) aktivitas.Add("Diving");
-            if (cbSunset.Checked) aktivitas.Add("Sunset");
-            if (cbCamping.Checked) aktivitas.Add("Camping");
-
-            return string.Join(", ", aktivitas);
         }
 
         private string GetSelectedWaktu()
         {
             List<string> waktu = new List<string>();
 
-            // Cari CheckBox untuk bulan
-            CheckBox cbJan = Controls.Find("cbJan", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbJan", true)[0] : null;
-            CheckBox cbFeb = Controls.Find("cbFeb", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbFeb", true)[0] : null;
-            CheckBox cbMar = Controls.Find("cbMar", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbMar", true)[0] : null;
-            CheckBox cbApr = Controls.Find("cbApr", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbApr", true)[0] : null;
-            CheckBox cbMei = Controls.Find("cbMei", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbMei", true)[0] : null;
-            CheckBox cbJun = Controls.Find("cbJun", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbJun", true)[0] : null;
-            CheckBox cbJul = Controls.Find("cbJul", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbJul", true)[0] : null;
-            CheckBox cbAug = Controls.Find("cbAug", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbAug", true)[0] : null;
-            CheckBox cbSept = Controls.Find("cbSept", true).Length > 0 ?
-                              (CheckBox)Controls.Find("cbSept", true)[0] : null;
-            CheckBox cbOkt = Controls.Find("cbOkt", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbOkt", true)[0] : null;
-            CheckBox cbNov = Controls.Find("cbNov", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbNov", true)[0] : null;
-            CheckBox cbDes = Controls.Find("cbDes", true).Length > 0 ?
-                             (CheckBox)Controls.Find("cbDes", true)[0] : null;
-
-            if (cbJan?.Checked == true) waktu.Add("Januari");
-            if (cbFeb?.Checked == true) waktu.Add("Februari");
-            if (cbMar?.Checked == true) waktu.Add("Maret");
-            if (cbApr?.Checked == true) waktu.Add("April");
-            if (cbMei?.Checked == true) waktu.Add("Mei");
-            if (cbJun?.Checked == true) waktu.Add("Juni");
-            if (cbJul?.Checked == true) waktu.Add("Juli");
-            if (cbAug?.Checked == true) waktu.Add("Agustus");
-            if (cbSept?.Checked == true) waktu.Add("September");
-            if (cbOkt?.Checked == true) waktu.Add("Oktober");
-            if (cbNov?.Checked == true) waktu.Add("November");
-            if (cbDes?.Checked == true) waktu.Add("Desember");
+            // Ambil semua checkbox bulan
+            if (cbJan.Checked) waktu.Add("Januari");
+            if (cbFeb.Checked) waktu.Add("Februari");
+            if (cbMar.Checked) waktu.Add("Maret");
+            if (cbApr.Checked) waktu.Add("April");
+            if (cbMei.Checked) waktu.Add("Mei");
+            if (cbJun.Checked) waktu.Add("Juni");
+            if (cbJul.Checked) waktu.Add("Juli");
+            if (cbAug.Checked) waktu.Add("Agustus");
+            if (cbSept.Checked) waktu.Add("September");
+            if (cbOkt.Checked) waktu.Add("Oktober");
+            if (cbNov.Checked) waktu.Add("November");
+            if (cbDec.Checked) waktu.Add("Desember");
 
             return string.Join(", ", waktu);
         }
@@ -337,17 +429,14 @@ namespace SEARENA2025
         private void ClearForm()
         {
             txtNamaDestinasi.Clear();
-            txtAlamatDestinasi.Clear();
             txtDeskripsi.Clear();
-            txtHargaTiket.Clear();
+            txtAlamatDestinasi.Clear();
+            txtPulau.Clear();
+            txtTiketMin.Clear();
+            txtTiketMax.Clear();
+            txtRating.Clear();
+            txtTotalReview.Clear();
             txtRekomendasiCuaca.Clear();
-
-            // Uncheck semua checkbox aktivitas
-            UncheckControl("cbSnorkling");
-            UncheckControl("cbDiving");
-            UncheckControl("cbSunset");
-            UncheckControl("cbFotografi");
-            UncheckControl("cbCamping");
 
             // Uncheck semua checkbox bulan
             UncheckControl("cbJan");
@@ -361,7 +450,13 @@ namespace SEARENA2025
             UncheckControl("cbSept");
             UncheckControl("cbOkt");
             UncheckControl("cbNov");
-            UncheckControl("cbDes");
+            UncheckControl("cbDec");
+
+            // Uncheck semua checkbox aktivitas (opsional)
+            UncheckControl("cbSnorkling");
+            UncheckControl("cbDiving");
+            UncheckControl("cbSunset");
+            UncheckControl("cbCamping");
 
             selectedDestinasiId = -1;
             txtBalasReview.Clear();

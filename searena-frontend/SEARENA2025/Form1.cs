@@ -23,13 +23,10 @@ namespace SEARENA2025
 
         // Login Form Controls
         private Guna2TextBox _txtEmail, _txtPassword;
-        private Guna2CheckBox _chkIngatSaya;
-        private LinkLabel _lnkLupaSandi;
         private Guna2Button _btnMasuk;
 
         // Register Form Controls
         private Guna2TextBox _txtRegNama, _txtRegEmail, _txtRegPassword;
-        private Guna2CheckBox _chkSetuju;
         private Guna2Button _btnDaftar;
 
         // Role yang dipilih
@@ -40,8 +37,8 @@ namespace SEARENA2025
         private const int CONTENT_WIDTH = 330;
         private const int FORM_WIDTH = 900;
         private const int FORM_HEIGHT = 600;
-        private const int PANEL_HEIGHT_LOGIN = 360;
-        private const int PANEL_HEIGHT_REGISTER = 420;
+        private const int PANEL_HEIGHT_LOGIN = 310;
+        private const int PANEL_HEIGHT_REGISTER = 380;
         private const int PANEL_HEIGHT_ROLE = 300;
         private const int BORDER_RADIUS = 25;
 
@@ -181,14 +178,15 @@ namespace SEARENA2025
 
             Guna2Button btnKembali = new Guna2Button
             {
-                Size = new Size(100, 35),
-                Location = new Point(10, 10),
+                Size = new Size(100, 30),
+                Location = new Point(12, 8),
                 Text = "← Kembali",
                 Font = new Font("Segoe UI", 9F, FontStyle.Bold),
                 FillColor = Color.Transparent,
-                ForeColor = COLOR_TEXT_LIGHT,
+                ForeColor = Color.Black,
                 BorderRadius = 10,
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                TextAlign = HorizontalAlignment.Left
             };
             btnKembali.Click += (s, e) => KembaliKeRoleSelection();
             _mainPanel.Controls.Add(btnKembali);
@@ -204,8 +202,6 @@ namespace SEARENA2025
             _txtRegNama.Text = "";
             _txtRegEmail.Text = "";
             _txtRegPassword.Text = "";
-            _chkIngatSaya.Checked = false;
-            _chkSetuju.Checked = false;
         }
 
         private void CreateTitleLabel()
@@ -268,7 +264,7 @@ namespace SEARENA2025
         private void CreateLoginForm()
         {
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 90;
+            int currentY = 85;
 
             _txtEmail = new Guna2TextBox
             {
@@ -287,7 +283,7 @@ namespace SEARENA2025
             _txtEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5));
             _mainPanel.Controls.Add(_txtEmail);
 
-            currentY += _txtEmail.Height + 10;
+            currentY += _txtEmail.Height + 15;
 
             _txtPassword = new Guna2TextBox
             {
@@ -310,35 +306,7 @@ namespace SEARENA2025
             _txtPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5));
             _mainPanel.Controls.Add(_txtPassword);
 
-            currentY += _txtPassword.Height + 20;
-
-            _chkIngatSaya = new Guna2CheckBox
-            {
-                Text = "Ingat Saya",
-                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                ForeColor = COLOR_TEXT_DARK,
-                BackColor = Color.Transparent,
-                Location = new Point(contentStartX, currentY),
-                AutoSize = true
-            };
-            _chkIngatSaya.CheckedState.BorderColor = COLOR_ACCENT_ORANGE;
-            _chkIngatSaya.CheckedState.FillColor = COLOR_ACCENT_ORANGE;
-            _mainPanel.Controls.Add(_chkIngatSaya);
-
-            _lnkLupaSandi = new LinkLabel
-            {
-                Text = "Lupa Kata Sandi",
-                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                LinkColor = COLOR_LINK,
-                BackColor = Color.Transparent,
-                AutoSize = true,
-                Cursor = Cursors.Hand
-            };
-            _lnkLupaSandi.Location = new Point(contentStartX + CONTENT_WIDTH - _lnkLupaSandi.Width, currentY + 2);
-            _lnkLupaSandi.Click += (s, e) => MessageBox.Show("Fitur lupa kata sandi akan segera tersedia", "Lupa Kata Sandi");
-            _mainPanel.Controls.Add(_lnkLupaSandi);
-
-            currentY += _chkIngatSaya.Height + 20;
+            currentY += _txtPassword.Height + 30;
 
             _btnMasuk = new Guna2Button
             {
@@ -358,7 +326,7 @@ namespace SEARENA2025
         private void CreateRegisterForm()
         {
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 90;
+            int currentY = 85;
 
             _txtRegNama = new Guna2TextBox
             {
@@ -378,7 +346,7 @@ namespace SEARENA2025
             _txtRegNama.Controls.Add(CreateInnerLabel("Nama Lengkap", 45, 5));
             _mainPanel.Controls.Add(_txtRegNama);
 
-            currentY += _txtRegNama.Height + 10;
+            currentY += _txtRegNama.Height + 15;
 
             _txtRegEmail = new Guna2TextBox
             {
@@ -398,7 +366,7 @@ namespace SEARENA2025
             _txtRegEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5));
             _mainPanel.Controls.Add(_txtRegEmail);
 
-            currentY += _txtRegEmail.Height + 10;
+            currentY += _txtRegEmail.Height + 15;
 
             _txtRegPassword = new Guna2TextBox
             {
@@ -422,23 +390,7 @@ namespace SEARENA2025
             _txtRegPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5));
             _mainPanel.Controls.Add(_txtRegPassword);
 
-            currentY += _txtRegPassword.Height + 25;
-
-            _chkSetuju = new Guna2CheckBox
-            {
-                Text = "Saya menyetujui syarat dan ketentuan",
-                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                ForeColor = COLOR_TEXT_DARK,
-                BackColor = Color.Transparent,
-                Location = new Point(contentStartX, currentY),
-                AutoSize = true,
-                Visible = false
-            };
-            _chkSetuju.CheckedState.BorderColor = COLOR_ACCENT_ORANGE;
-            _chkSetuju.CheckedState.FillColor = COLOR_ACCENT_ORANGE;
-            _mainPanel.Controls.Add(_chkSetuju);
-
-            currentY += _chkSetuju.Height + 20;
+            currentY += _txtRegPassword.Height + 30;
 
             _btnDaftar = new Guna2Button
             {
@@ -480,8 +432,8 @@ namespace SEARENA2025
             _btnTabDaftar.ForeColor = COLOR_TEXT_LIGHT;
             _btnTabDaftar.Font = new Font("Segoe UI", 11F);
 
-            SetControlsVisibility(true, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk);
-            SetControlsVisibility(false, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar);
+            SetControlsVisibility(true, _txtEmail, _txtPassword, _btnMasuk);
+            SetControlsVisibility(false, _txtRegNama, _txtRegEmail, _txtRegPassword, _btnDaftar);
         }
 
         private void ShowRegisterForm()
@@ -501,8 +453,8 @@ namespace SEARENA2025
             _btnTabMasuk.ForeColor = COLOR_TEXT_LIGHT;
             _btnTabMasuk.Font = new Font("Segoe UI", 11F);
 
-            SetControlsVisibility(false, _txtEmail, _txtPassword, _chkIngatSaya, _lnkLupaSandi, _btnMasuk);
-            SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _chkSetuju, _btnDaftar);
+            SetControlsVisibility(false, _txtEmail, _txtPassword, _btnMasuk);
+            SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _btnDaftar);
         }
 
         private void Login()
@@ -582,13 +534,6 @@ namespace SEARENA2025
             {
                 MessageBox.Show("Password minimal 6 karakter", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 _txtRegPassword.Focus();
-                return;
-            }
-
-            if (!_chkSetuju.Checked)
-            {
-                MessageBox.Show("Harus menyetujui syarat dan ketentuan", "Validasi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

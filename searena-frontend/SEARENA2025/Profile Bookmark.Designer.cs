@@ -120,6 +120,7 @@
             this.guna2PictureBox19 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2VScrollBar1 = new Guna.UI2.WinForms.Guna2VScrollBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUnbookmark = new Guna.UI2.WinForms.Guna2Button();
             this.Navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Profile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
@@ -1264,12 +1265,28 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(561, 436);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
+            // btnUnbookmark
+            // 
+            this.btnUnbookmark.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnUnbookmark.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnUnbookmark.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnUnbookmark.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnUnbookmark.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnUnbookmark.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUnbookmark.ForeColor = System.Drawing.Color.White;
+            this.btnUnbookmark.Location = new System.Drawing.Point(867, 121);
+            this.btnUnbookmark.Name = "btnUnbookmark";
+            this.btnUnbookmark.Size = new System.Drawing.Size(139, 28);
+            this.btnUnbookmark.TabIndex = 18;
+            this.btnUnbookmark.Text = "Unbookmark";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PapayaWhip;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.btnUnbookmark);
             this.Controls.Add(this.guna2VScrollBar1);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.guna2Panel3);
@@ -1448,5 +1465,6 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox19;
         private Guna.UI2.WinForms.Guna2VScrollBar guna2VScrollBar1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2Button btnUnbookmark;
     }
 }

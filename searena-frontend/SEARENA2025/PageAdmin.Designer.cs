@@ -37,12 +37,27 @@
             this.PctProfile = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.Logo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlTambahDestinasi = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.cbDec = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbNov = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbOkt = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbAug = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbJul = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbJun = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbApr = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbMar = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbFeb = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbSept = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbMei = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbJan = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbSunset = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbCamping = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cbDiving = new Guna.UI2.WinForms.Guna2CheckBox();
             this.cbSnorkling = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.btnUpdate = new Guna.UI2.WinForms.Guna2Button();
             this.btnInsert = new Guna.UI2.WinForms.Guna2Button();
             this.txtRekomendasiCuaca = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtHargaTiket = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtTiketMin = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtDeskripsi = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtAlamatDestinasi = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtNamaDestinasi = new Guna.UI2.WinForms.Guna2TextBox();
@@ -64,21 +79,14 @@
             this.dest_location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rating = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.review_text = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbDiving = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbCamping = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbSunset = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbJan = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbMei = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbSept = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbFeb = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbMar = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbApr = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbJun = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbJul = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbAug = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbOkt = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbNov = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.cbDec = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtPulau = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtTiketMax = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtRating = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtTotalReview = new Guna.UI2.WinForms.Guna2TextBox();
             this.Navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PctProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
@@ -139,6 +147,14 @@
             // pnlTambahDestinasi
             // 
             this.pnlTambahDestinasi.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTambahDestinasi.Controls.Add(this.txtTotalReview);
+            this.pnlTambahDestinasi.Controls.Add(this.guna2HtmlLabel13);
+            this.pnlTambahDestinasi.Controls.Add(this.txtRating);
+            this.pnlTambahDestinasi.Controls.Add(this.guna2HtmlLabel12);
+            this.pnlTambahDestinasi.Controls.Add(this.guna2HtmlLabel11);
+            this.pnlTambahDestinasi.Controls.Add(this.txtTiketMax);
+            this.pnlTambahDestinasi.Controls.Add(this.txtPulau);
+            this.pnlTambahDestinasi.Controls.Add(this.guna2HtmlLabel10);
             this.pnlTambahDestinasi.Controls.Add(this.cbDec);
             this.pnlTambahDestinasi.Controls.Add(this.cbNov);
             this.pnlTambahDestinasi.Controls.Add(this.cbOkt);
@@ -159,7 +175,7 @@
             this.pnlTambahDestinasi.Controls.Add(this.btnUpdate);
             this.pnlTambahDestinasi.Controls.Add(this.btnInsert);
             this.pnlTambahDestinasi.Controls.Add(this.txtRekomendasiCuaca);
-            this.pnlTambahDestinasi.Controls.Add(this.txtHargaTiket);
+            this.pnlTambahDestinasi.Controls.Add(this.txtTiketMin);
             this.pnlTambahDestinasi.Controls.Add(this.txtDeskripsi);
             this.pnlTambahDestinasi.Controls.Add(this.txtAlamatDestinasi);
             this.pnlTambahDestinasi.Controls.Add(this.txtNamaDestinasi);
@@ -176,6 +192,261 @@
             this.pnlTambahDestinasi.ShadowColor = System.Drawing.Color.Black;
             this.pnlTambahDestinasi.Size = new System.Drawing.Size(1039, 248);
             this.pnlTambahDestinasi.TabIndex = 4;
+            // 
+            // cbDec
+            // 
+            this.cbDec.AutoSize = true;
+            this.cbDec.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDec.CheckedState.BorderRadius = 0;
+            this.cbDec.CheckedState.BorderThickness = 0;
+            this.cbDec.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDec.Location = new System.Drawing.Point(420, 216);
+            this.cbDec.Name = "cbDec";
+            this.cbDec.Size = new System.Drawing.Size(54, 20);
+            this.cbDec.TabIndex = 47;
+            this.cbDec.Text = "Dec";
+            this.cbDec.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbDec.UncheckedState.BorderRadius = 0;
+            this.cbDec.UncheckedState.BorderThickness = 0;
+            this.cbDec.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbNov
+            // 
+            this.cbNov.AutoSize = true;
+            this.cbNov.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbNov.CheckedState.BorderRadius = 0;
+            this.cbNov.CheckedState.BorderThickness = 0;
+            this.cbNov.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbNov.Location = new System.Drawing.Point(344, 216);
+            this.cbNov.Name = "cbNov";
+            this.cbNov.Size = new System.Drawing.Size(54, 20);
+            this.cbNov.TabIndex = 46;
+            this.cbNov.Text = "Nov";
+            this.cbNov.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbNov.UncheckedState.BorderRadius = 0;
+            this.cbNov.UncheckedState.BorderThickness = 0;
+            this.cbNov.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbOkt
+            // 
+            this.cbOkt.AutoSize = true;
+            this.cbOkt.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbOkt.CheckedState.BorderRadius = 0;
+            this.cbOkt.CheckedState.BorderThickness = 0;
+            this.cbOkt.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbOkt.Location = new System.Drawing.Point(268, 216);
+            this.cbOkt.Name = "cbOkt";
+            this.cbOkt.Size = new System.Drawing.Size(49, 20);
+            this.cbOkt.TabIndex = 45;
+            this.cbOkt.Text = "Okt";
+            this.cbOkt.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbOkt.UncheckedState.BorderRadius = 0;
+            this.cbOkt.UncheckedState.BorderThickness = 0;
+            this.cbOkt.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbAug
+            // 
+            this.cbAug.AutoSize = true;
+            this.cbAug.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbAug.CheckedState.BorderRadius = 0;
+            this.cbAug.CheckedState.BorderThickness = 0;
+            this.cbAug.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbAug.Location = new System.Drawing.Point(420, 191);
+            this.cbAug.Name = "cbAug";
+            this.cbAug.Size = new System.Drawing.Size(53, 20);
+            this.cbAug.TabIndex = 44;
+            this.cbAug.Text = "Aug";
+            this.cbAug.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbAug.UncheckedState.BorderRadius = 0;
+            this.cbAug.UncheckedState.BorderThickness = 0;
+            this.cbAug.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbJul
+            // 
+            this.cbJul.AutoSize = true;
+            this.cbJul.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJul.CheckedState.BorderRadius = 0;
+            this.cbJul.CheckedState.BorderThickness = 0;
+            this.cbJul.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJul.Location = new System.Drawing.Point(344, 191);
+            this.cbJul.Name = "cbJul";
+            this.cbJul.Size = new System.Drawing.Size(46, 20);
+            this.cbJul.TabIndex = 43;
+            this.cbJul.Text = "Jul";
+            this.cbJul.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbJul.UncheckedState.BorderRadius = 0;
+            this.cbJul.UncheckedState.BorderThickness = 0;
+            this.cbJul.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbJun
+            // 
+            this.cbJun.AutoSize = true;
+            this.cbJun.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJun.CheckedState.BorderRadius = 0;
+            this.cbJun.CheckedState.BorderThickness = 0;
+            this.cbJun.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJun.Location = new System.Drawing.Point(268, 191);
+            this.cbJun.Name = "cbJun";
+            this.cbJun.Size = new System.Drawing.Size(50, 20);
+            this.cbJun.TabIndex = 42;
+            this.cbJun.Text = "Jun";
+            this.cbJun.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbJun.UncheckedState.BorderRadius = 0;
+            this.cbJun.UncheckedState.BorderThickness = 0;
+            this.cbJun.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbApr
+            // 
+            this.cbApr.AutoSize = true;
+            this.cbApr.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbApr.CheckedState.BorderRadius = 0;
+            this.cbApr.CheckedState.BorderThickness = 0;
+            this.cbApr.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbApr.Location = new System.Drawing.Point(420, 167);
+            this.cbApr.Name = "cbApr";
+            this.cbApr.Size = new System.Drawing.Size(50, 20);
+            this.cbApr.TabIndex = 41;
+            this.cbApr.Text = "Apr";
+            this.cbApr.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbApr.UncheckedState.BorderRadius = 0;
+            this.cbApr.UncheckedState.BorderThickness = 0;
+            this.cbApr.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbMar
+            // 
+            this.cbMar.AutoSize = true;
+            this.cbMar.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbMar.CheckedState.BorderRadius = 0;
+            this.cbMar.CheckedState.BorderThickness = 0;
+            this.cbMar.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbMar.Location = new System.Drawing.Point(344, 167);
+            this.cbMar.Name = "cbMar";
+            this.cbMar.Size = new System.Drawing.Size(52, 20);
+            this.cbMar.TabIndex = 40;
+            this.cbMar.Text = "Mar";
+            this.cbMar.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbMar.UncheckedState.BorderRadius = 0;
+            this.cbMar.UncheckedState.BorderThickness = 0;
+            this.cbMar.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbFeb
+            // 
+            this.cbFeb.AutoSize = true;
+            this.cbFeb.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbFeb.CheckedState.BorderRadius = 0;
+            this.cbFeb.CheckedState.BorderThickness = 0;
+            this.cbFeb.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbFeb.Location = new System.Drawing.Point(268, 167);
+            this.cbFeb.Name = "cbFeb";
+            this.cbFeb.Size = new System.Drawing.Size(53, 20);
+            this.cbFeb.TabIndex = 39;
+            this.cbFeb.Text = "Feb";
+            this.cbFeb.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbFeb.UncheckedState.BorderRadius = 0;
+            this.cbFeb.UncheckedState.BorderThickness = 0;
+            this.cbFeb.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbSept
+            // 
+            this.cbSept.AutoSize = true;
+            this.cbSept.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbSept.CheckedState.BorderRadius = 0;
+            this.cbSept.CheckedState.BorderThickness = 0;
+            this.cbSept.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbSept.Location = new System.Drawing.Point(193, 216);
+            this.cbSept.Name = "cbSept";
+            this.cbSept.Size = new System.Drawing.Size(57, 20);
+            this.cbSept.TabIndex = 38;
+            this.cbSept.Text = "Sept";
+            this.cbSept.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbSept.UncheckedState.BorderRadius = 0;
+            this.cbSept.UncheckedState.BorderThickness = 0;
+            this.cbSept.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbMei
+            // 
+            this.cbMei.AutoSize = true;
+            this.cbMei.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbMei.CheckedState.BorderRadius = 0;
+            this.cbMei.CheckedState.BorderThickness = 0;
+            this.cbMei.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbMei.Location = new System.Drawing.Point(193, 191);
+            this.cbMei.Name = "cbMei";
+            this.cbMei.Size = new System.Drawing.Size(51, 20);
+            this.cbMei.TabIndex = 37;
+            this.cbMei.Text = "Mei";
+            this.cbMei.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbMei.UncheckedState.BorderRadius = 0;
+            this.cbMei.UncheckedState.BorderThickness = 0;
+            this.cbMei.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbJan
+            // 
+            this.cbJan.AutoSize = true;
+            this.cbJan.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJan.CheckedState.BorderRadius = 0;
+            this.cbJan.CheckedState.BorderThickness = 0;
+            this.cbJan.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbJan.Location = new System.Drawing.Point(193, 167);
+            this.cbJan.Name = "cbJan";
+            this.cbJan.Size = new System.Drawing.Size(51, 20);
+            this.cbJan.TabIndex = 36;
+            this.cbJan.Text = "Jan";
+            this.cbJan.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbJan.UncheckedState.BorderRadius = 0;
+            this.cbJan.UncheckedState.BorderThickness = 0;
+            this.cbJan.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbSunset
+            // 
+            this.cbSunset.AutoSize = true;
+            this.cbSunset.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbSunset.CheckedState.BorderRadius = 0;
+            this.cbSunset.CheckedState.BorderThickness = 0;
+            this.cbSunset.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbSunset.Location = new System.Drawing.Point(322, 134);
+            this.cbSunset.Name = "cbSunset";
+            this.cbSunset.Size = new System.Drawing.Size(70, 20);
+            this.cbSunset.TabIndex = 35;
+            this.cbSunset.Text = "Sunset";
+            this.cbSunset.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbSunset.UncheckedState.BorderRadius = 0;
+            this.cbSunset.UncheckedState.BorderThickness = 0;
+            this.cbSunset.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbCamping
+            // 
+            this.cbCamping.AutoSize = true;
+            this.cbCamping.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbCamping.CheckedState.BorderRadius = 0;
+            this.cbCamping.CheckedState.BorderThickness = 0;
+            this.cbCamping.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbCamping.Location = new System.Drawing.Point(239, 134);
+            this.cbCamping.Name = "cbCamping";
+            this.cbCamping.Size = new System.Drawing.Size(83, 20);
+            this.cbCamping.TabIndex = 34;
+            this.cbCamping.Text = "Camping";
+            this.cbCamping.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbCamping.UncheckedState.BorderRadius = 0;
+            this.cbCamping.UncheckedState.BorderThickness = 0;
+            this.cbCamping.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // cbDiving
+            // 
+            this.cbDiving.AutoSize = true;
+            this.cbDiving.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDiving.CheckedState.BorderRadius = 0;
+            this.cbDiving.CheckedState.BorderThickness = 0;
+            this.cbDiving.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbDiving.Location = new System.Drawing.Point(167, 134);
+            this.cbDiving.Name = "cbDiving";
+            this.cbDiving.Size = new System.Drawing.Size(67, 20);
+            this.cbDiving.TabIndex = 33;
+            this.cbDiving.Text = "Diving";
+            this.cbDiving.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.cbDiving.UncheckedState.BorderRadius = 0;
+            this.cbDiving.UncheckedState.BorderThickness = 0;
+            this.cbDiving.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
             // cbSnorkling
             // 
@@ -203,7 +474,7 @@
             this.guna2Button3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.guna2Button3.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button3.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button3.Location = new System.Drawing.Point(728, 191);
+            this.guna2Button3.Location = new System.Drawing.Point(886, 191);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(137, 45);
             this.guna2Button3.TabIndex = 31;
@@ -218,7 +489,7 @@
             this.btnUpdate.FillColor = System.Drawing.Color.Cyan;
             this.btnUpdate.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdate.Location = new System.Drawing.Point(729, 139);
+            this.btnUpdate.Location = new System.Drawing.Point(719, 191);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(137, 45);
             this.btnUpdate.TabIndex = 30;
@@ -233,7 +504,7 @@
             this.btnInsert.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnInsert.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsert.ForeColor = System.Drawing.Color.Black;
-            this.btnInsert.Location = new System.Drawing.Point(728, 87);
+            this.btnInsert.Location = new System.Drawing.Point(546, 191);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(137, 45);
             this.btnInsert.TabIndex = 29;
@@ -258,24 +529,24 @@
             this.txtRekomendasiCuaca.Size = new System.Drawing.Size(281, 30);
             this.txtRekomendasiCuaca.TabIndex = 11;
             // 
-            // txtHargaTiket
+            // txtTiketMin
             // 
-            this.txtHargaTiket.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtHargaTiket.DefaultText = "";
-            this.txtHargaTiket.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtHargaTiket.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtHargaTiket.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtHargaTiket.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtHargaTiket.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtHargaTiket.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtHargaTiket.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtHargaTiket.Location = new System.Drawing.Point(600, 48);
-            this.txtHargaTiket.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtHargaTiket.Name = "txtHargaTiket";
-            this.txtHargaTiket.PlaceholderText = "";
-            this.txtHargaTiket.SelectedText = "";
-            this.txtHargaTiket.Size = new System.Drawing.Size(340, 30);
-            this.txtHargaTiket.TabIndex = 10;
+            this.txtTiketMin.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTiketMin.DefaultText = "";
+            this.txtTiketMin.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTiketMin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTiketMin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTiketMin.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTiketMin.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTiketMin.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTiketMin.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTiketMin.Location = new System.Drawing.Point(600, 83);
+            this.txtTiketMin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTiketMin.Name = "txtTiketMin";
+            this.txtTiketMin.PlaceholderText = "";
+            this.txtTiketMin.SelectedText = "";
+            this.txtTiketMin.Size = new System.Drawing.Size(147, 30);
+            this.txtTiketMin.TabIndex = 10;
             // 
             // txtDeskripsi
             // 
@@ -368,7 +639,7 @@
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Malgun Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(489, 52);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(489, 88);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(79, 19);
             this.guna2HtmlLabel4.TabIndex = 3;
@@ -574,260 +845,121 @@
             this.review_text.Name = "review_text";
             this.review_text.Width = 180;
             // 
-            // cbDiving
+            // guna2HtmlLabel10
             // 
-            this.cbDiving.AutoSize = true;
-            this.cbDiving.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbDiving.CheckedState.BorderRadius = 0;
-            this.cbDiving.CheckedState.BorderThickness = 0;
-            this.cbDiving.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbDiving.Location = new System.Drawing.Point(167, 134);
-            this.cbDiving.Name = "cbDiving";
-            this.cbDiving.Size = new System.Drawing.Size(67, 20);
-            this.cbDiving.TabIndex = 33;
-            this.cbDiving.Text = "Diving";
-            this.cbDiving.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbDiving.UncheckedState.BorderRadius = 0;
-            this.cbDiving.UncheckedState.BorderThickness = 0;
-            this.cbDiving.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel10.Font = new System.Drawing.Font("Malgun Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(487, 48);
+            this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
+            this.guna2HtmlLabel10.Size = new System.Drawing.Size(41, 19);
+            this.guna2HtmlLabel10.TabIndex = 48;
+            this.guna2HtmlLabel10.Text = "Pulau:";
             // 
-            // cbCamping
+            // txtPulau
             // 
-            this.cbCamping.AutoSize = true;
-            this.cbCamping.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbCamping.CheckedState.BorderRadius = 0;
-            this.cbCamping.CheckedState.BorderThickness = 0;
-            this.cbCamping.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbCamping.Location = new System.Drawing.Point(239, 134);
-            this.cbCamping.Name = "cbCamping";
-            this.cbCamping.Size = new System.Drawing.Size(83, 20);
-            this.cbCamping.TabIndex = 34;
-            this.cbCamping.Text = "Camping";
-            this.cbCamping.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbCamping.UncheckedState.BorderRadius = 0;
-            this.cbCamping.UncheckedState.BorderThickness = 0;
-            this.cbCamping.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.txtPulau.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPulau.DefaultText = "";
+            this.txtPulau.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtPulau.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtPulau.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPulau.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPulau.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPulau.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtPulau.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPulau.Location = new System.Drawing.Point(600, 48);
+            this.txtPulau.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPulau.Name = "txtPulau";
+            this.txtPulau.PlaceholderText = "";
+            this.txtPulau.SelectedText = "";
+            this.txtPulau.Size = new System.Drawing.Size(340, 30);
+            this.txtPulau.TabIndex = 49;
             // 
-            // cbSunset
+            // txtTiketMax
             // 
-            this.cbSunset.AutoSize = true;
-            this.cbSunset.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbSunset.CheckedState.BorderRadius = 0;
-            this.cbSunset.CheckedState.BorderThickness = 0;
-            this.cbSunset.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbSunset.Location = new System.Drawing.Point(322, 134);
-            this.cbSunset.Name = "cbSunset";
-            this.cbSunset.Size = new System.Drawing.Size(70, 20);
-            this.cbSunset.TabIndex = 35;
-            this.cbSunset.Text = "Sunset";
-            this.cbSunset.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbSunset.UncheckedState.BorderRadius = 0;
-            this.cbSunset.UncheckedState.BorderThickness = 0;
-            this.cbSunset.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.txtTiketMax.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTiketMax.DefaultText = "";
+            this.txtTiketMax.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTiketMax.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTiketMax.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTiketMax.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTiketMax.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTiketMax.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTiketMax.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTiketMax.Location = new System.Drawing.Point(792, 83);
+            this.txtTiketMax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTiketMax.Name = "txtTiketMax";
+            this.txtTiketMax.PlaceholderText = "";
+            this.txtTiketMax.SelectedText = "";
+            this.txtTiketMax.Size = new System.Drawing.Size(148, 30);
+            this.txtTiketMax.TabIndex = 50;
             // 
-            // cbJan
+            // guna2HtmlLabel11
             // 
-            this.cbJan.AutoSize = true;
-            this.cbJan.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJan.CheckedState.BorderRadius = 0;
-            this.cbJan.CheckedState.BorderThickness = 0;
-            this.cbJan.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJan.Location = new System.Drawing.Point(193, 167);
-            this.cbJan.Name = "cbJan";
-            this.cbJan.Size = new System.Drawing.Size(51, 20);
-            this.cbJan.TabIndex = 36;
-            this.cbJan.Text = "Jan";
-            this.cbJan.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbJan.UncheckedState.BorderRadius = 0;
-            this.cbJan.UncheckedState.BorderThickness = 0;
-            this.cbJan.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel11.Font = new System.Drawing.Font("Malgun Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel11.Location = new System.Drawing.Point(765, 88);
+            this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
+            this.guna2HtmlLabel11.Size = new System.Drawing.Size(8, 19);
+            this.guna2HtmlLabel11.TabIndex = 51;
+            this.guna2HtmlLabel11.Text = "-";
             // 
-            // cbMei
+            // guna2HtmlLabel12
             // 
-            this.cbMei.AutoSize = true;
-            this.cbMei.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbMei.CheckedState.BorderRadius = 0;
-            this.cbMei.CheckedState.BorderThickness = 0;
-            this.cbMei.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbMei.Location = new System.Drawing.Point(193, 191);
-            this.cbMei.Name = "cbMei";
-            this.cbMei.Size = new System.Drawing.Size(51, 20);
-            this.cbMei.TabIndex = 37;
-            this.cbMei.Text = "Mei";
-            this.cbMei.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbMei.UncheckedState.BorderRadius = 0;
-            this.cbMei.UncheckedState.BorderThickness = 0;
-            this.cbMei.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel12.Font = new System.Drawing.Font("Malgun Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(489, 126);
+            this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(46, 19);
+            this.guna2HtmlLabel12.TabIndex = 52;
+            this.guna2HtmlLabel12.Text = "Rating:";
             // 
-            // cbSept
+            // txtRating
             // 
-            this.cbSept.AutoSize = true;
-            this.cbSept.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbSept.CheckedState.BorderRadius = 0;
-            this.cbSept.CheckedState.BorderThickness = 0;
-            this.cbSept.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbSept.Location = new System.Drawing.Point(193, 216);
-            this.cbSept.Name = "cbSept";
-            this.cbSept.Size = new System.Drawing.Size(57, 20);
-            this.cbSept.TabIndex = 38;
-            this.cbSept.Text = "Sept";
-            this.cbSept.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbSept.UncheckedState.BorderRadius = 0;
-            this.cbSept.UncheckedState.BorderThickness = 0;
-            this.cbSept.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.txtRating.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtRating.DefaultText = "";
+            this.txtRating.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtRating.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtRating.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtRating.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtRating.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtRating.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtRating.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtRating.Location = new System.Drawing.Point(600, 120);
+            this.txtRating.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRating.Name = "txtRating";
+            this.txtRating.PlaceholderText = "";
+            this.txtRating.SelectedText = "";
+            this.txtRating.Size = new System.Drawing.Size(147, 30);
+            this.txtRating.TabIndex = 53;
             // 
-            // cbFeb
+            // guna2HtmlLabel13
             // 
-            this.cbFeb.AutoSize = true;
-            this.cbFeb.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbFeb.CheckedState.BorderRadius = 0;
-            this.cbFeb.CheckedState.BorderThickness = 0;
-            this.cbFeb.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbFeb.Location = new System.Drawing.Point(268, 167);
-            this.cbFeb.Name = "cbFeb";
-            this.cbFeb.Size = new System.Drawing.Size(53, 20);
-            this.cbFeb.TabIndex = 39;
-            this.cbFeb.Text = "Feb";
-            this.cbFeb.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbFeb.UncheckedState.BorderRadius = 0;
-            this.cbFeb.UncheckedState.BorderThickness = 0;
-            this.cbFeb.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel13.Font = new System.Drawing.Font("Malgun Gothic", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(489, 163);
+            this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
+            this.guna2HtmlLabel13.Size = new System.Drawing.Size(83, 19);
+            this.guna2HtmlLabel13.TabIndex = 54;
+            this.guna2HtmlLabel13.Text = "Total review:";
             // 
-            // cbMar
+            // txtTotalReview
             // 
-            this.cbMar.AutoSize = true;
-            this.cbMar.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbMar.CheckedState.BorderRadius = 0;
-            this.cbMar.CheckedState.BorderThickness = 0;
-            this.cbMar.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbMar.Location = new System.Drawing.Point(344, 167);
-            this.cbMar.Name = "cbMar";
-            this.cbMar.Size = new System.Drawing.Size(52, 20);
-            this.cbMar.TabIndex = 40;
-            this.cbMar.Text = "Mar";
-            this.cbMar.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbMar.UncheckedState.BorderRadius = 0;
-            this.cbMar.UncheckedState.BorderThickness = 0;
-            this.cbMar.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbApr
-            // 
-            this.cbApr.AutoSize = true;
-            this.cbApr.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbApr.CheckedState.BorderRadius = 0;
-            this.cbApr.CheckedState.BorderThickness = 0;
-            this.cbApr.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbApr.Location = new System.Drawing.Point(420, 167);
-            this.cbApr.Name = "cbApr";
-            this.cbApr.Size = new System.Drawing.Size(50, 20);
-            this.cbApr.TabIndex = 41;
-            this.cbApr.Text = "Apr";
-            this.cbApr.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbApr.UncheckedState.BorderRadius = 0;
-            this.cbApr.UncheckedState.BorderThickness = 0;
-            this.cbApr.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbJun
-            // 
-            this.cbJun.AutoSize = true;
-            this.cbJun.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJun.CheckedState.BorderRadius = 0;
-            this.cbJun.CheckedState.BorderThickness = 0;
-            this.cbJun.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJun.Location = new System.Drawing.Point(268, 191);
-            this.cbJun.Name = "cbJun";
-            this.cbJun.Size = new System.Drawing.Size(50, 20);
-            this.cbJun.TabIndex = 42;
-            this.cbJun.Text = "Jun";
-            this.cbJun.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbJun.UncheckedState.BorderRadius = 0;
-            this.cbJun.UncheckedState.BorderThickness = 0;
-            this.cbJun.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbJul
-            // 
-            this.cbJul.AutoSize = true;
-            this.cbJul.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJul.CheckedState.BorderRadius = 0;
-            this.cbJul.CheckedState.BorderThickness = 0;
-            this.cbJul.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbJul.Location = new System.Drawing.Point(344, 191);
-            this.cbJul.Name = "cbJul";
-            this.cbJul.Size = new System.Drawing.Size(46, 20);
-            this.cbJul.TabIndex = 43;
-            this.cbJul.Text = "Jul";
-            this.cbJul.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbJul.UncheckedState.BorderRadius = 0;
-            this.cbJul.UncheckedState.BorderThickness = 0;
-            this.cbJul.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbAug
-            // 
-            this.cbAug.AutoSize = true;
-            this.cbAug.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbAug.CheckedState.BorderRadius = 0;
-            this.cbAug.CheckedState.BorderThickness = 0;
-            this.cbAug.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbAug.Location = new System.Drawing.Point(420, 191);
-            this.cbAug.Name = "cbAug";
-            this.cbAug.Size = new System.Drawing.Size(53, 20);
-            this.cbAug.TabIndex = 44;
-            this.cbAug.Text = "Aug";
-            this.cbAug.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbAug.UncheckedState.BorderRadius = 0;
-            this.cbAug.UncheckedState.BorderThickness = 0;
-            this.cbAug.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbOkt
-            // 
-            this.cbOkt.AutoSize = true;
-            this.cbOkt.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbOkt.CheckedState.BorderRadius = 0;
-            this.cbOkt.CheckedState.BorderThickness = 0;
-            this.cbOkt.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbOkt.Location = new System.Drawing.Point(268, 216);
-            this.cbOkt.Name = "cbOkt";
-            this.cbOkt.Size = new System.Drawing.Size(49, 20);
-            this.cbOkt.TabIndex = 45;
-            this.cbOkt.Text = "Okt";
-            this.cbOkt.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbOkt.UncheckedState.BorderRadius = 0;
-            this.cbOkt.UncheckedState.BorderThickness = 0;
-            this.cbOkt.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbNov
-            // 
-            this.cbNov.AutoSize = true;
-            this.cbNov.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbNov.CheckedState.BorderRadius = 0;
-            this.cbNov.CheckedState.BorderThickness = 0;
-            this.cbNov.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbNov.Location = new System.Drawing.Point(344, 216);
-            this.cbNov.Name = "cbNov";
-            this.cbNov.Size = new System.Drawing.Size(54, 20);
-            this.cbNov.TabIndex = 46;
-            this.cbNov.Text = "Nov";
-            this.cbNov.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbNov.UncheckedState.BorderRadius = 0;
-            this.cbNov.UncheckedState.BorderThickness = 0;
-            this.cbNov.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // cbDec
-            // 
-            this.cbDec.AutoSize = true;
-            this.cbDec.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbDec.CheckedState.BorderRadius = 0;
-            this.cbDec.CheckedState.BorderThickness = 0;
-            this.cbDec.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbDec.Location = new System.Drawing.Point(420, 216);
-            this.cbDec.Name = "cbDec";
-            this.cbDec.Size = new System.Drawing.Size(54, 20);
-            this.cbDec.TabIndex = 47;
-            this.cbDec.Text = "Dec";
-            this.cbDec.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.cbDec.UncheckedState.BorderRadius = 0;
-            this.cbDec.UncheckedState.BorderThickness = 0;
-            this.cbDec.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.txtTotalReview.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTotalReview.DefaultText = "";
+            this.txtTotalReview.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTotalReview.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtTotalReview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTotalReview.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTotalReview.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTotalReview.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtTotalReview.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTotalReview.Location = new System.Drawing.Point(600, 158);
+            this.txtTotalReview.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTotalReview.Name = "txtTotalReview";
+            this.txtTotalReview.PlaceholderText = "";
+            this.txtTotalReview.SelectedText = "";
+            this.txtTotalReview.Size = new System.Drawing.Size(147, 30);
+            this.txtTotalReview.TabIndex = 55;
             // 
             // PageAdmin
             // 
@@ -874,7 +1006,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2TextBox txtRekomendasiCuaca;
-        private Guna.UI2.WinForms.Guna2TextBox txtHargaTiket;
+        private Guna.UI2.WinForms.Guna2TextBox txtTiketMin;
         private Guna.UI2.WinForms.Guna2TextBox txtDeskripsi;
         private Guna.UI2.WinForms.Guna2TextBox txtAlamatDestinasi;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
@@ -906,5 +1038,13 @@
         private Guna.UI2.WinForms.Guna2CheckBox cbSept;
         private Guna.UI2.WinForms.Guna2CheckBox cbMei;
         private Guna.UI2.WinForms.Guna2CheckBox cbJan;
+        private Guna.UI2.WinForms.Guna2TextBox txtTotalReview;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
+        private Guna.UI2.WinForms.Guna2TextBox txtRating;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
+        private Guna.UI2.WinForms.Guna2TextBox txtTiketMax;
+        private Guna.UI2.WinForms.Guna2TextBox txtPulau;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
     }
 }
