@@ -1,0 +1,9 @@
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.csproj.AssemblyReference.cache
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.Properties.Resources.resources
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.csproj.GenerateResource.cache
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.csproj.CoreCompileInputs.cache
+D:\Searena\src\SearenaApp\bin\Debug\SearenaApp.exe.config
+D:\Searena\src\SearenaApp\bin\Debug\SearenaApp.exe
+D:\Searena\src\SearenaApp\bin\Debug\SearenaApp.pdb
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.exe
+D:\Searena\src\SearenaApp\obj\Debug\SearenaApp.pdb
