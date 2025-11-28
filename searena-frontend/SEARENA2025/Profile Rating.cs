@@ -324,5 +324,64 @@ namespace SEARENA2025
         {
 
         }
+
+        private async void btnHapus_Click(object sender, EventArgs e)
+        {
+            if (dgvRiwayat.CurrentRow == null)
+            {
+                MessageBox.Show("Pilih dulu salah satu review yang mau dihapus.");
+                return;
+            }
+
+
+            var idObj = dgvRiwayat.CurrentRow.Cells["ReviewId"].Value;
+            if (idObj == null || idObj == DBNull.Value)
+            {
+                MessageBox.Show("Review ini tidak punya ID, tidak bisa dihapus.");
+                return;
+            }
+
+            int reviewId = Convert.ToInt32(idObj);
+
+
+            var confirm = MessageBox.Show(
+                "Yakin mau menghapus review ini?",
+                "Konfirmasi Hapus",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (var conn = new NpgsqlConnection(Conn))
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new NpgsqlCommand(
+                        "DELETE FROM reviews WHERE review_id = @id AND user_id = @uid", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", reviewId);
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+
+                        int affected = await cmd.ExecuteNonQueryAsync();
+
+                        if (affected > 0)
+                        {
+                            MessageBox.Show("Review berhasil dihapus.");
+                            LoadUserReviews();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Review tidak ditemukan atau bukan milik akun ini.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menghapus review: " + ex.Message);
+            }
+        }
     }
 }

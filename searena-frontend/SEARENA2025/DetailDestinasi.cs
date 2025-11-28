@@ -1,4 +1,5 @@
 ﻿// DetailDestinasi.cs
+// DetailDestinasi.cs
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,18 @@ namespace SEARENA2025
         private readonly string _destName;
         private readonly string _destLocation;
 
-        private const string ConnString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        // Pakai koneksi Supabase (punya kamu yang pertama)
+        private const string ConnString =
+            "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
+
+        // ===== Model review sederhana (untuk versi label tetap) =====
+        public class ReviewItem
+        {
+            public string Username { get; set; }
+            public int Rating { get; set; }
+            public string ReviewText { get; set; }
+            public DateTime Tanggal { get; set; }
+        }
 
         public DetailDestinasi(int destId, string destName, string destLocation)
         {
@@ -31,36 +43,85 @@ namespace SEARENA2025
 
             btnKirim.Click -= BtnKirim_Click;
             btnKirim.Click += BtnKirim_Click;
-            // gunakan handler designer untuk bookmark; jika belum terpasang, fallback ke handler ini
-            this.btnBookmark.Click -= btnBookmark_Click_1;
-            this.btnBookmark.Click += btnBookmark_Click_1;
+
+            if (btnBookmark != null)
+            {
+                btnBookmark.Click -= btnBookmark_Click_1;
+                btnBookmark.Click += btnBookmark_Click_1;
+            }
         }
 
         public DetailDestinasi()
         {
             InitializeComponent();
+
             this.Load += DetailDestinasi_Load;
+
             btnKirim.Click -= BtnKirim_Click;
             btnKirim.Click += BtnKirim_Click;
-            this.btnBookmark.Click -= btnBookmark_Click_1;
-            this.btnBookmark.Click += btnBookmark_Click_1;
+
+            if (btnBookmark != null)
+            {
+                btnBookmark.Click -= btnBookmark_Click_1;
+                btnBookmark.Click += btnBookmark_Click_1;
+            }
         }
 
-        private void guna2PictureBox2_Click(object sender, EventArgs e)
+        // =================== LOAD FORM ===================
+
+        private async void DetailDestinasi_Load(object sender, EventArgs e)
         {
+            // Tampilkan nama & lokasi dari ctor, kalau ada
+            if (!string.IsNullOrWhiteSpace(_destName)) lblDestinasi1.Text = _destName;
+            if (!string.IsNullOrWhiteSpace(_destLocation)) lblLokasi1.Text = _destLocation;
 
+            // Default rating
+            if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
+
+            // Perbaiki wrapping label deskripsi (kalau ada)
+            FixLabelWrap(lblDeskripsi);
+
+            try
+            {
+                // Load info destinasi dari tabel destinasi
+                if (_destId > 0)
+                {
+                    await LoadDestinasiInfoAsync();
+                }
+
+                // Pastikan tabel bookmark & review ada
+                await EnsureBookmarkTableAsync();
+                await EnsureReviewsTableAsync();
+
+                // Update status bookmark button
+                CheckBookmarkStatus();
+
+                // Load review ke panel dinamis
+                await LoadReviewsAsync();
+
+                // (Opsional) kalau mau juga pakai versi label tetap:
+                // var reviews = await GetReviewsAsync();
+                // TampilkanReviewsKeUI(reviews);
+
+                // Load cuaca
+                await LoadWeatherAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat detail destinasi: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void guna2HtmlLabel33_Click(object sender, EventArgs e)
-        {
-
-        }
+        // =================== HELPER WRAP LABEL ===================
 
         private void FixLabelWrap(Guna.UI2.WinForms.Guna2HtmlLabel lbl)
         {
+            if (lbl == null) return;
+
             lbl.AutoSize = false;
             lbl.AutoSizeHeightOnly = true;
-            // Sesuaikan lebar dengan panel deskripsi jika parent panel
+
             int maxWidth = 300;
             if (lbl.Parent != null)
             {
@@ -73,310 +134,192 @@ namespace SEARENA2025
             lbl.MaximumSize = new Size(maxWidth, 0);
         }
 
-        private async void DetailDestinasi_Load(object sender, EventArgs e)
+        // =================== LOAD DESTINASI INFO (DESKRIPSI / HARGA / WAKTU / AKTIVITAS) ===================
+
+        private async Task LoadDestinasiInfoAsync()
         {
-            // Load data destinasi dari database jika _destId valid
-            if (_destId > 0)
+            using (var conn = new NpgsqlConnection(ConnString))
             {
-                LoadDestinasiDetail();
-            }
-            else
-            {
-                // tampilkan nama & lokasi dari parameter (kalau ctor param dipakai, nilainya terisi)
-                if (!string.IsNullOrWhiteSpace(_destName)) lblDestinasi1.Text = _destName;
-                if (!string.IsNullOrWhiteSpace(_destLocation)) lblLokasi1.Text = _destLocation;
-            }
+                await conn.OpenAsync();
 
-            // default rating bintang
-            if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
-            FixLabelWrap(guna2HtmlLabel36);
-            FixLabelWrap(guna2HtmlLabel37);
-            FixLabelWrap(guna2HtmlLabel38);
-            FixLabelWrap(guna2HtmlLabel39);
+                string sql = @"
+                    SELECT deskripsi, harga_min, harga_max, waktu_terbaik, activity
+                    FROM destinasi
+                    WHERE destinasi_id = @id;
+                ";
 
-            // Check if already bookmarked dan ubah icon/warna button
-            await EnsureBookmarkTableAsync();
-            CheckBookmarkStatus();
-
-            // Muat review secara real-time
-            await EnsureReviewsTableAsync();
-            await LoadReviewsAsync();
-        }
-
-        // Check apakah destinasi ini sudah di-bookmark
-        private async void CheckBookmarkStatus()
-        {
-            try
-            {
-                using (var conn = new NpgsqlConnection(ConnString))
+                using (var cmd = new NpgsqlCommand(sql, conn))
                 {
-                    await conn.OpenAsync();
+                    cmd.Parameters.AddWithValue("@id", _destId);
 
-                    using (var cmd = new NpgsqlCommand(
-                        "SELECT COUNT(*) FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
-                        cmd.Parameters.AddWithValue("@did", _destId);
-
-                        var result = (long)await cmd.ExecuteScalarAsync();
-
-                        // Update button appearance
-                        if (result > 0)
+                        if (await reader.ReadAsync())
                         {
-                            // Sudah bookmark
-                            btnBookmark.Text = "Hapus dari Bookmark";
-                            btnBookmark.FillColor = Color.LightCoral;
-                            btnBookmark.Tag = "bookmarked"; // Mark sebagai bookmarked
-                        }
-                        else
-                        {
-                            // Belum bookmark
-                            btnBookmark.Text = "Bookmark";
-                            btnBookmark.FillColor = Color.LightBlue;
-                            btnBookmark.Tag = "not_bookmarked";
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error checking bookmark: {ex.Message}");
-            }
-        }
+                            string deskripsi   = reader.IsDBNull(0) ? "" : reader.GetString(0);
+                            decimal hargaMin   = reader.IsDBNull(1) ? 0 : reader.GetDecimal(1);
+                            decimal hargaMax   = reader.IsDBNull(2) ? 0 : reader.GetDecimal(2);
+                            string waktuTerbaik = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                            string aktivitasStr = reader.IsDBNull(4) ? "" : reader.GetString(4);
 
-        // Event handler untuk button bookmark (dipanggil dari designer)
-        private async void btnBookmark_Click_1(object sender, EventArgs e)
-        {
-            await EnsureBookmarkTableAsync();
-            BtnBookmark_Toggle();
-        }
+                            // Deskripsi
+                            lblDeskripsi.Text = deskripsi;
+                            FixLabelWrap(lblDeskripsi);
 
-        // Helper untuk toggle bookmark
-        private async void BtnBookmark_Toggle()
-        {
-            try
-            {
-                string status = btnBookmark.Tag?.ToString() ?? "not_bookmarked";
+                            // Harga tiket
+                            if (hargaMin > 0 || hargaMax > 0)
+                            {
+                                lblHargaTiket.Text = $"Rp {hargaMin:N0} - {hargaMax:N0}";
+                            }
+                            else
+                            {
+                                lblHargaTiket.Text = "-";
+                            }
 
-                if (status == "bookmarked")
-                {
-                    await RemoveBookmark();
-                }
-                else
-                {
-                    await AddBookmark();
-                }
+                            // Waktu terbaik
+                            if (!string.IsNullOrWhiteSpace(waktuTerbaik))
+                            {
+                                var formatted = string.Join(", ",
+                                    waktuTerbaik
+                                        .Split(',')
+                                        .Select(s => s.Trim())
+                                        .Where(s => s.Length > 0));
 
-                // Refresh status
-                CheckBookmarkStatus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-        }
+                                lblWaktuTerbaik.Text = formatted;
+                            }
+                            else
+                            {
+                                lblWaktuTerbaik.Text = "-";
+                            }
 
-        // Pastikan tabel bookmarks tersedia
-        private async Task EnsureBookmarkTableAsync()
-        {
-            try
-            {
-                using (var conn = new NpgsqlConnection(ConnString))
-                {
-                    await conn.OpenAsync();
-                    string createSql = @"
-                    CREATE TABLE IF NOT EXISTS public.bookmarks (
-                        id SERIAL PRIMARY KEY,
-                        user_id INT NOT NULL,
-                        destinasi_id INT NOT NULL,
-                        tanggal_bookmark TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-                        CONSTRAINT uq_user_dest UNIQUE(user_id, destinasi_id)
-                    );";
-                    using (var cmdCreate = new NpgsqlCommand(createSql, conn))
-                        await cmdCreate.ExecuteNonQueryAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error ensuring bookmark table: {ex.Message}");
-            }
-        }
+                            // Aktivitas
+                            if (!string.IsNullOrWhiteSpace(aktivitasStr))
+                            {
+                                var activities = aktivitasStr.Split(',');
 
-        // Event handler untuk button bookmark (lama) - tidak digunakan langsung
-        private async void BtnBookmark_Click(object sender, EventArgs e)
-        {
-            await EnsureBookmarkTableAsync();
-            BtnBookmark_Toggle();
-        }
+                                var lbls = new[]
+                                {
+                                    lblFasilitas1,
+                                    lblFasilitas2,
+                                    lblFasilitas3,
+                                    lblFasilitas4,
+                                    lblFasilitas5
+                                };
 
-        // Tambah bookmark ke database
-        private async Task AddBookmark()
-        {
-            try
-            {
-                using (var conn = new NpgsqlConnection(ConnString))
-                {
-                    await conn.OpenAsync();
+                                var panels = new[]
+                                {
+                                    PnlAktivitas1,
+                                    PnlAktivitas2,
+                                    PnlAktivitas3,
+                                    PnlAktivitas4,
+                                    PnlAktivitas5
+                                };
 
-                    using (var cmd = new NpgsqlCommand(
-                        @"INSERT INTO bookmarks (user_id, destinasi_id)
-                          VALUES (@uid, @did)
-                          ON CONFLICT (user_id, destinasi_id) DO NOTHING;", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
-                        cmd.Parameters.AddWithValue("@did", _destId);
-
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-
-                MessageBox.Show("Destinasi berhasil di-bookmark!", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Gagal menambah bookmark: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Hapus bookmark dari database
-        private async Task RemoveBookmark()
-        {
-            try
-            {
-                DialogResult result = MessageBox.Show("Hapus dari bookmark?", "Konfirmasi",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result != DialogResult.Yes) return;
-
-                using (var conn = new NpgsqlConnection(ConnString))
-                {
-                    await conn.OpenAsync();
-
-                    using (var cmd = new NpgsqlCommand(
-                        @"DELETE FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
-                        cmd.Parameters.AddWithValue("@did", _destId);
-
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-
-                MessageBox.Show("Bookmark berhasil dihapus!", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadDestinasiDetail()
-        {
-            try
-            {
-                var destData = SEARENA2025.Destinasi.GetById(_destId);
-                if (destData != null)
-                {
-                    // Update UI dengan data dari database
-                    if (lblDestinasi1 != null)
-                        lblDestinasi1.Text = destData.NamaDestinasi;
-                    
-                    if (lblLokasi1 != null)
-                        lblLokasi1.Text = destData.Lokasi;
-
-                    // Tampilkan deskripsi di PnlDeskripsi (auto wrap)
-                    PopulateDescriptionInPanel(destData.Deskripsi);
-
-                    // Update waktu terbaik jika ada label untuk itu
-                    var lblWaktuTerbaik = this.Controls.Find("lblWaktuTerbaik", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
-                    if (lblWaktuTerbaik != null && !string.IsNullOrEmpty(destData.WaktuTerbaik))
-                    {
-                        lblWaktuTerbaik.Text = "Waktu Terbaik: " + destData.WaktuTerbaik;
-                    }
-
-                    // Update rating average jika ada label untuk itu
-                    var lblRatingAvg = this.Controls.Find("lblRatingAvg", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
-                    if (lblRatingAvg != null)
-                    {
-                        lblRatingAvg.Text = $"★ {destData.RatingAvg:F1}";
-                    }
-
-                    // Update harga jika ada label untuk itu
-                    var lblHarga = this.Controls.Find("lblHarga", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
-                    if (lblHarga != null && destData.HargaMin > 0)
-                    {
-                        if (destData.HargaMax > destData.HargaMin)
-                        {
-                            lblHarga.Text = $"Rp {destData.HargaMin:N0} - Rp {destData.HargaMax:N0}";
-                        }
-                        else
-                        {
-                            lblHarga.Text = $"Mulai dari Rp {destData.HargaMin:N0}";
+                                for (int i = 0; i < lbls.Length; i++)
+                                {
+                                    if (i < activities.Length)
+                                    {
+                                        lbls[i].Text = activities[i].Trim();
+                                        panels[i].Visible = true;
+                                    }
+                                    else
+                                    {
+                                        panels[i].Visible = false;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                PnlAktivitas1.Visible = false;
+                                PnlAktivitas2.Visible = false;
+                                PnlAktivitas3.Visible = false;
+                                PnlAktivitas4.Visible = false;
+                                PnlAktivitas5.Visible = false;
+                            }
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading detail destinasi: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
-        // Render deskripsi pada panel khusus dengan auto-wrapping
-        private void PopulateDescriptionInPanel(string deskripsi)
+        // =================== REVIEW: VERSI LABEL TETAP (OPSIONAL) ===================
+
+        private async void TampilkanReviewsKeUI(List<ReviewItem> reviews)
         {
-            try
+            // Kosongkan dulu
+            lblNama1.Text = "";
+            lblTanggal1.Text = "";
+            lblReview1.Text = "";
+            ratingStar1.Text = "";
+
+            lblNama2.Text = "";
+            lblTanggal2.Text = "";
+            lblReview2.Text = "";
+            ratingStar2.Text = "";
+
+            // Review pertama
+            if (reviews.Count > 0)
             {
-                if (PnlDeskripsi == null) return;
-
-                // Simpan judul jika ada (guna2HtmlLabel35)
-                var title = PnlDeskripsi.Controls.OfType<Guna.UI2.WinForms.Guna2HtmlLabel>()
-                    .FirstOrDefault(x => x.Name == "guna2HtmlLabel35" || (x.Text != null && x.Text.Contains("Tentang Destinasi")));
-
-                // Bersihkan semua kontrol kecuali judul
-                var toRemove = PnlDeskripsi.Controls.Cast<Control>()
-                    .Where(c => c != title).ToList();
-                foreach (var c in toRemove) PnlDeskripsi.Controls.Remove(c);
-
-                if (title == null)
-                {
-                    title = new Guna.UI2.WinForms.Guna2HtmlLabel
-                    {
-                        Name = "lblTitleDeskripsi",
-                        Text = "Tentang Destinasi",
-                        Location = new Point(8, 8),
-                        Font = new Font("Malgun Gothic", 8.25f, FontStyle.Bold),
-                        BackColor = Color.Transparent
-                    };
-                    PnlDeskripsi.Controls.Add(title);
-                }
-
-                var lblDesc = new Guna.UI2.WinForms.Guna2HtmlLabel
-                {
-                    Name = "lblDeskripsiDetail",
-                    BackColor = Color.Transparent,
-                    Location = new Point(12, title.Bottom + 8),
-                    Font = new Font("Malgun Gothic Semilight", 8.25f, FontStyle.Regular)
-                };
-                lblDesc.Text = string.IsNullOrWhiteSpace(deskripsi) ? "Deskripsi belum tersedia." : deskripsi;
-                lblDesc.AutoSize = false;
-                lblDesc.AutoSizeHeightOnly = true;
-                lblDesc.MaximumSize = new Size(Math.Max(100, PnlDeskripsi.Width - 24), 0);
-
-                PnlDeskripsi.Controls.Add(lblDesc);
+                lblNama1.Text = reviews[0].Username;
+                lblTanggal1.Text = reviews[0].Tanggal.ToString("dd/MM/yyyy");
+                lblReview1.Text = reviews[0].ReviewText;
+                ratingStar1.Text = reviews[0].Rating.ToString();
             }
-            catch (Exception ex)
+
+            // Review kedua
+            if (reviews.Count > 1)
             {
-                MessageBox.Show($"Error rendering deskripsi: {ex.Message}");
+                lblNama2.Text = reviews[1].Username;
+                lblTanggal2.Text = reviews[1].Tanggal.ToString("dd/MM/yyyy");
+                lblReview2.Text = reviews[1].ReviewText;
+                ratingStar2.Text = reviews[1].Rating.ToString();
             }
+
+            // Kalau mau, bisa panggil lagi cuaca di sini
+            await LoadWeatherAsync();
         }
 
-        // Pastikan tabel reviews tersedia
+        private async Task<List<ReviewItem>> GetReviewsAsync()
+        {
+            var list = new List<ReviewItem>();
+
+            using (var conn = new NpgsqlConnection(ConnString))
+            {
+                await conn.OpenAsync();
+
+                string sql = @"
+                    SELECT username, rating, review_text, tanggal_review
+                    FROM public.reviews
+                    WHERE destinasi_id = @destId
+                    ORDER BY tanggal_review DESC
+                    LIMIT 3;
+                ";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@destId", _destId);
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            list.Add(new ReviewItem
+                            {
+                                Username   = reader.GetString(0),
+                                Rating     = reader.GetInt32(1),
+                                ReviewText = reader.GetString(2),
+                                Tanggal    = reader.GetDateTime(3)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        // =================== REVIEW: TABEL & PANEL DINAMIS ===================
+
         private async Task EnsureReviewsTableAsync()
         {
             try
@@ -386,17 +329,17 @@ namespace SEARENA2025
                     await conn.OpenAsync();
 
                     string createSql = @"
-                    CREATE TABLE IF NOT EXISTS public.reviews (
-                        review_id      SERIAL PRIMARY KEY,
-                        user_id        INT NOT NULL,
-                        username       TEXT NOT NULL,
-                        destinasi_id   INT NOT NULL,
-                        dest_name      TEXT NOT NULL,
-                        dest_location  TEXT NOT NULL,
-                        review_text    TEXT NOT NULL,
-                        rating         INT  NOT NULL CHECK (rating BETWEEN 1 AND 5),
-                        tanggal_review TIMESTAMPTZ NOT NULL DEFAULT NOW()
-                    );";
+                        CREATE TABLE IF NOT EXISTS public.reviews (
+                            review_id      SERIAL PRIMARY KEY,
+                            user_id        INT NOT NULL,
+                            username       TEXT NOT NULL,
+                            destinasi_id   INT NOT NULL,
+                            dest_name      TEXT NOT NULL,
+                            dest_location  TEXT NOT NULL,
+                            review_text    TEXT NOT NULL,
+                            rating         INT  NOT NULL CHECK (rating BETWEEN 1 AND 5),
+                            tanggal_review TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        );";
                     using (var cmdCreate = new NpgsqlCommand(createSql, conn))
                         await cmdCreate.ExecuteNonQueryAsync();
                 }
@@ -407,14 +350,12 @@ namespace SEARENA2025
             }
         }
 
-        // Muat review dari database dan tampilkan di panel
         private async Task LoadReviewsAsync()
         {
             try
             {
                 if (PnlRatingReview == null) return;
 
-                // Bersihkan panel dan tambahkan judul
                 PnlRatingReview.Controls.Clear();
 
                 var title = new Guna.UI2.WinForms.Guna2HtmlLabel
@@ -429,11 +370,13 @@ namespace SEARENA2025
                 using (var conn = new NpgsqlConnection(ConnString))
                 {
                     await conn.OpenAsync();
-                    var sql = @"SELECT username, rating, review_text, tanggal_review
-                                FROM public.reviews
-                                WHERE destinasi_id = @did
-                                ORDER BY tanggal_review DESC
-                                LIMIT 5";
+                    var sql = @"
+                        SELECT username, rating, review_text, tanggal_review
+                        FROM public.reviews
+                        WHERE destinasi_id = @did
+                        ORDER BY tanggal_review DESC
+                        LIMIT 5;
+                    ";
                     using (var cmd = new NpgsqlCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("@did", _destId);
@@ -441,13 +384,14 @@ namespace SEARENA2025
                         {
                             int y = title.Bottom + 10;
                             bool any = false;
+
                             while (await reader.ReadAsync())
                             {
                                 any = true;
                                 string uname = reader.GetString(0);
-                                int rate = reader.GetInt32(1);
-                                string text = reader.GetString(2);
-                                DateTime dt = reader.GetDateTime(3);
+                                int rate      = reader.GetInt32(1);
+                                string text   = reader.GetString(2);
+                                DateTime dt   = reader.GetDateTime(3);
 
                                 var lblUser = new Guna.UI2.WinForms.Guna2HtmlLabel
                                 {
@@ -472,7 +416,8 @@ namespace SEARENA2025
                                 };
                                 var star = new PictureBox
                                 {
-                                    Image = SystemIcons.Information.ToBitmap(), // placeholder icon
+                                    // TODO: ganti icon bintang yang bener
+                                    Image = SystemIcons.Information.ToBitmap(),
                                     SizeMode = PictureBoxSizeMode.StretchImage,
                                     Size = new Size(18, 18),
                                     Location = new Point(24, y + 8)
@@ -519,6 +464,8 @@ namespace SEARENA2025
             }
         }
 
+        // =================== KIRIM REVIEW ===================
+
         private async void BtnKirim_Click(object sender, EventArgs e)
         {
             try
@@ -532,35 +479,33 @@ namespace SEARENA2025
                     return;
                 }
 
-                // AMBIL DARI BINTANG, tidak ada numRating di sini
                 int rating = guna2RatingStar1 != null ? (int)guna2RatingStar1.Value : 5;
 
                 using (var conn = new NpgsqlConnection(ConnString))
                 {
                     await conn.OpenAsync();
 
-                    // safety: buat tabel kalau belum ada
+                    // pastikan tabel reviews ada
                     string createSql = @"
-                    CREATE TABLE IF NOT EXISTS public.reviews (
-                        review_id      SERIAL PRIMARY KEY,
-                        user_id        INT NOT NULL,
-                        username       TEXT NOT NULL,
-                        destinasi_id        INT NOT NULL,
-                        dest_name      TEXT NOT NULL,
-                        dest_location  TEXT NOT NULL,
-                        review_text    TEXT NOT NULL,
-                        rating         INT  NOT NULL CHECK (rating BETWEEN 1 AND 5),
-                        tanggal_review     TIMESTAMPTZ NOT NULL DEFAULT NOW()
-                    );";
+                        CREATE TABLE IF NOT EXISTS public.reviews (
+                            review_id      SERIAL PRIMARY KEY,
+                            user_id        INT NOT NULL,
+                            username       TEXT NOT NULL,
+                            destinasi_id   INT NOT NULL,
+                            dest_name      TEXT NOT NULL,
+                            dest_location  TEXT NOT NULL,
+                            review_text    TEXT NOT NULL,
+                            rating         INT  NOT NULL CHECK (rating BETWEEN 1 AND 5),
+                            tanggal_review TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                        );";
                     using (var cmdCreate = new NpgsqlCommand(createSql, conn))
                         await cmdCreate.ExecuteNonQueryAsync();
 
-                    // insert review
                     string insertSql = @"
-                    INSERT INTO public.reviews
-                        (user_id, username, destinasi_id, dest_name, dest_location, review_text, rating)
-                    VALUES
-                        (@uid, @uname, @destinasi_id, @dname, @dloc, @txt, @rate);";
+                        INSERT INTO public.reviews
+                            (user_id, username, destinasi_id, dest_name, dest_location, review_text, rating)
+                        VALUES
+                            (@uid, @uname, @destinasi_id, @dname, @dloc, @txt, @rate);";
 
                     using (var cmd = new NpgsqlCommand(insertSql, conn))
                     {
@@ -579,12 +524,14 @@ namespace SEARENA2025
                 MessageBox.Show("Ulasan & rating berhasil dikirim.", "Berhasil",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // reset input
                 if (tbUlasan != null) tbUlasan.Text = "";
                 if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
 
-                // refresh daftar review
+                // refresh UI review
                 await LoadReviewsAsync();
+                // atau kalau mau versi label:
+                // var reviews = await GetReviewsAsync();
+                // TampilkanReviewsKeUI(reviews);
             }
             catch (Exception ex)
             {
@@ -593,24 +540,240 @@ namespace SEARENA2025
             }
         }
 
-        private void guna2HtmlLabel38_Click(object sender, EventArgs e)
-        {
+        // =================== BOOKMARK ===================
 
+        private async Task EnsureBookmarkTableAsync()
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(ConnString))
+                {
+                    await conn.OpenAsync();
+                    string createSql = @"
+                        CREATE TABLE IF NOT EXISTS public.bookmarks (
+                            id SERIAL PRIMARY KEY,
+                            user_id INT NOT NULL,
+                            destinasi_id INT NOT NULL,
+                            tanggal_bookmark TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                            CONSTRAINT uq_user_dest UNIQUE(user_id, destinasi_id)
+                        );";
+                    using (var cmdCreate = new NpgsqlCommand(createSql, conn))
+                        await cmdCreate.ExecuteNonQueryAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error ensuring bookmark table: {ex.Message}");
+            }
         }
 
-        private void guna2HtmlLabel36_Click(object sender, EventArgs e)
+        private async void CheckBookmarkStatus()
         {
+            try
+            {
+                if (btnBookmark == null) return;
 
+                using (var conn = new NpgsqlConnection(ConnString))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new NpgsqlCommand(
+                        "SELECT COUNT(*) FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+                        cmd.Parameters.AddWithValue("@did", _destId);
+
+                        var result = (long)await cmd.ExecuteScalarAsync();
+
+                        if (result > 0)
+                        {
+                            btnBookmark.Text = "Hapus dari Bookmark";
+                            btnBookmark.FillColor = Color.LightCoral;
+                            btnBookmark.Tag = "bookmarked";
+                        }
+                        else
+                        {
+                            btnBookmark.Text = "Bookmark";
+                            btnBookmark.FillColor = Color.LightBlue;
+                            btnBookmark.Tag = "not_bookmarked";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking bookmark: {ex.Message}");
+            }
         }
 
-        private void PnlDeskripsi_Paint(object sender, PaintEventArgs e)
+        private async void btnBookmark_Click_1(object sender, EventArgs e)
         {
-
+            await EnsureBookmarkTableAsync();
+            BtnBookmark_Toggle();
         }
 
-        private void PnlRatingReview_Paint(object sender, PaintEventArgs e)
+        private async void BtnBookmark_Toggle()
         {
+            try
+            {
+                if (btnBookmark == null) return;
 
+                string status = btnBookmark.Tag?.ToString() ?? "not_bookmarked";
+
+                if (status == "bookmarked")
+                {
+                    await RemoveBookmark();
+                }
+                else
+                {
+                    await AddBookmark();
+                }
+
+                CheckBookmarkStatus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
+
+        private async Task AddBookmark()
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(ConnString))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new NpgsqlCommand(
+                        @"INSERT INTO bookmarks (user_id, destinasi_id)
+                          VALUES (@uid, @did)
+                          ON CONFLICT (user_id, destinasi_id) DO NOTHING;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+                        cmd.Parameters.AddWithValue("@did", _destId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+
+                MessageBox.Show("Destinasi berhasil di-bookmark!", "Sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal menambah bookmark: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task RemoveBookmark()
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("Hapus dari bookmark?", "Konfirmasi",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result != DialogResult.Yes) return;
+
+                using (var conn = new NpgsqlConnection(ConnString))
+                {
+                    await conn.OpenAsync();
+
+                    using (var cmd = new NpgsqlCommand(
+                        @"DELETE FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+                        cmd.Parameters.AddWithValue("@did", _destId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+
+                MessageBox.Show("Bookmark berhasil dihapus!", "Sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // =================== CUACA ===================
+
+        private async Task LoadWeatherAsync()
+        {
+            string lokasiFull = !string.IsNullOrWhiteSpace(_destLocation)
+                ? _destLocation
+                : lblLokasi1.Text;
+
+            if (string.IsNullOrWhiteSpace(lokasiFull))
+                return;
+
+            string lokasi = lokasiFull.Split(',')[0].Trim();
+
+            try
+            {
+                var w = await WeatherService.GetCurrentAsync(lokasi);
+
+                lblSuhu.Text        = string.Format("{0:F1} °C", w.TemperatureC);
+                lblAngin.Text       = string.Format("{0:F1} km/jam", w.WindSpeedKmh);
+                lblKelembapan.Text  = w.Humidity + " %";
+                lblDeskripsiCuaca.Text = w.Description;
+
+                string status;
+                if (w.Description.ToLower().Contains("rain") ||
+                    w.Description.ToLower().Contains("shower") ||
+                    w.Description.ToLower().Contains("storm"))
+                {
+                    status = "Kurang Baik";
+                    lblCuaca.BackColor = Color.OrangeRed;
+                }
+                else if (w.WindSpeedKmh > 25 || w.Humidity > 85)
+                {
+                    status = "Cukup Baik";
+                    lblCuaca.BackColor = Color.Gold;
+                }
+                else
+                {
+                    status = "Sangat Baik";
+                    lblCuaca.BackColor = Color.LightGreen;
+                }
+
+                lblCuaca.Text = status;
+            }
+            catch
+            {
+                lblCuaca.Text = "Tidak Ada Data";
+            }
+        }
+
+        // =================== EVENT-EVENT KECIL ===================
+
+        private void guna2PictureBox2_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel33_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel38_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel36_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel28_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel28_Click_1(object sender, EventArgs e) { }
+        private void lblCuaca_Click(object sender, EventArgs e) { }
+
+        private void PnlRekomendasiCuaca_Paint(object sender, PaintEventArgs e) { }
+        private void PnlDeskripsi_Paint(object sender, PaintEventArgs e) { }
+        private void PnlRatingReview_Paint(object sender, PaintEventArgs e) { }
+        private void pnlCuaca_Paint(object sender, PaintEventArgs e) { }
+
+        private void btnKembali_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnKembali_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void lblDeskripsi_Click(object sender, EventArgs e) { }
     }
 }

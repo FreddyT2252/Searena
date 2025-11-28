@@ -15,7 +15,7 @@ namespace SEARENA2025
     public partial class Form3 : Form
     {
         private Form2 parentForm;
-        private string connectionString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        private string connectionString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
         private List<BookmarkData> bookmarkList = new List<BookmarkData>();
         private int selectedBookmarkId = -1; // Menyimpan bookmark yang dipilih
         private FlowLayoutPanel flowBookmarks;
