@@ -14,6 +14,7 @@ namespace SEARENA2025
         private Guna2Panel _mainPanel;
         private Label _lblTitle;
         private Guna2Button _btnTabMasuk, _btnTabDaftar;
+        private Guna2Button _btnKembali; // Tombol kembali di-field-kan agar bisa diakses
 
         // Role Selection Controls
         private Guna2Panel _roleSelectionPanel;
@@ -32,14 +33,14 @@ namespace SEARENA2025
         // Role yang dipilih
         private string _selectedRole = "";
 
-        // Ukuran dan Warna
-        private const int PANEL_WIDTH = 400;
-        private const int CONTENT_WIDTH = 330;
-        private const int FORM_WIDTH = 900;
-        private const int FORM_HEIGHT = 600;
-        private const int PANEL_HEIGHT_LOGIN = 310;
-        private const int PANEL_HEIGHT_REGISTER = 380;
-        private const int PANEL_HEIGHT_ROLE = 300;
+        // PERBAIKI: Ukuran yang lebih besar untuk DPI awareness
+        private const int PANEL_WIDTH = 420;
+        private const int CONTENT_WIDTH = 350;
+        private const int FORM_WIDTH = 950;
+        private const int FORM_HEIGHT = 650;
+        private const int PANEL_HEIGHT_LOGIN = 360; // Tambah tinggi dari 310 ke 360
+        private const int PANEL_HEIGHT_REGISTER = 440; // Tambah tinggi dari 380 ke 440
+        private const int PANEL_HEIGHT_ROLE = 330; // Tambah tinggi dari 300 ke 330
         private const int BORDER_RADIUS = 25;
 
         private static readonly Color COLOR_PRIMARY = Color.FromArgb(109, 175, 207);
@@ -59,6 +60,9 @@ namespace SEARENA2025
         public Form1()
         {
             InitializeComponent();
+            
+            // PERBAIKI: DPI Awareness
+            this.AutoScaleMode = AutoScaleMode.Dpi;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -92,7 +96,7 @@ namespace SEARENA2025
             _roleSelectionPanel = new Guna2Panel
             {
                 Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_ROLE),
-                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_ROLE) / 2 + 30),
+                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_ROLE) / 2 + 20),
                 BackColor = Color.Transparent,
                 BorderRadius = BORDER_RADIUS,
                 FillColor = COLOR_PANEL_BG
@@ -102,55 +106,59 @@ namespace SEARENA2025
             _lblRoleTitle = new Label
             {
                 Text = "Pilih Peran Anda",
-                Font = new Font("Segoe UI", 24F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 22F, FontStyle.Bold), // Kurangi dari 24F ke 22F
                 ForeColor = COLOR_TEXT_DARK,
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Width = PANEL_WIDTH,
-                Height = 50,
-                Location = new Point(0, 20)
+                Height = 60, // Tambah dari 50 ke 60
+                Location = new Point(0, 25),
+                AutoSize = false // PERBAIKI: Matikan autosize
             };
             _roleSelectionPanel.Controls.Add(_lblRoleTitle);
 
             _lblRoleSubtitle = new Label
             {
                 Text = "Masuk sebagai admin atau pengguna biasa",
-                Font = new Font("Segoe UI", 9F),
+                Font = new Font("Segoe UI", 9.5F), // Tambah sedikit dari 9F
                 ForeColor = COLOR_TEXT_LIGHT,
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Width = PANEL_WIDTH,
-                Height = 25,
-                Location = new Point(0, 70)
+                Height = 30, // Tambah dari 25 ke 30
+                Location = new Point(0, 80),
+                AutoSize = false // PERBAIKI: Matikan autosize
             };
             _roleSelectionPanel.Controls.Add(_lblRoleSubtitle);
 
-            int contentStartX = (PANEL_WIDTH - 300) / 2;
+            int contentStartX = (PANEL_WIDTH - 310) / 2; // Sesuaikan dengan lebar tombol baru
 
             _btnRoleAdmin = new Guna2Button
             {
-                Size = new Size(140, 100),
-                Location = new Point(contentStartX, 120),
+                Size = new Size(145, 110), // Tambah ukuran dari 140x100
+                Location = new Point(contentStartX, 130),
                 Text = "Admin",
-                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 13F, FontStyle.Bold), // Tambah dari 12F
                 FillColor = COLOR_ACCENT_CYAN,
                 ForeColor = Color.Black,
                 BorderRadius = 15,
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                AutoSize = false // PERBAIKI: Matikan autosize
             };
             _btnRoleAdmin.Click += (s, e) => SelectRole("admin");
             _roleSelectionPanel.Controls.Add(_btnRoleAdmin);
 
             _btnRolePengguna = new Guna2Button
             {
-                Size = new Size(140, 100),
-                Location = new Point(contentStartX + 160, 120),
+                Size = new Size(145, 110), // Tambah ukuran dari 140x100
+                Location = new Point(contentStartX + 165, 130), // Adjust spacing
                 Text = "Pengguna",
-                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 13F, FontStyle.Bold), // Tambah dari 12F
                 FillColor = COLOR_ACCENT_ORANGE,
                 ForeColor = Color.White,
                 BorderRadius = 15,
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                AutoSize = false // PERBAIKI: Matikan autosize
             };
             _btnRolePengguna.Click += (s, e) => SelectRole("pengguna");
             _roleSelectionPanel.Controls.Add(_btnRolePengguna);
@@ -168,7 +176,7 @@ namespace SEARENA2025
             _mainPanel = new Guna2Panel
             {
                 Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_LOGIN),
-                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 30),
+                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 20),
                 BackColor = Color.Transparent,
                 BorderRadius = BORDER_RADIUS,
                 FillColor = COLOR_PANEL_BG,
@@ -176,20 +184,22 @@ namespace SEARENA2025
             };
             this.Controls.Add(_mainPanel);
 
-            Guna2Button btnKembali = new Guna2Button
+            // PERBAIKI: Tombol kembali di pojok kanan atas (lebih rapi)
+            _btnKembali = new Guna2Button
             {
-                Size = new Size(100, 30),
-                Location = new Point(12, 8),
-                Text = "← Kembali",
-                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                Size = new Size(35, 35),
+                Location = new Point(PANEL_WIDTH - 45, 10), // Pojok kanan atas
+                Text = "✕", // Gunakan simbol X
+                Font = new Font("Segoe UI", 14F, FontStyle.Bold),
                 FillColor = Color.Transparent,
-                ForeColor = Color.Black,
-                BorderRadius = 10,
+                ForeColor = COLOR_TEXT_DARK,
+                BorderRadius = 17,
                 Cursor = Cursors.Hand,
-                TextAlign = HorizontalAlignment.Left
+                TextAlign = HorizontalAlignment.Center,
+                AutoSize = false
             };
-            btnKembali.Click += (s, e) => KembaliKeRoleSelection();
-            _mainPanel.Controls.Add(btnKembali);
+            _btnKembali.Click += (s, e) => KembaliKeRoleSelection();
+            _mainPanel.Controls.Add(_btnKembali);
         }
 
         private void KembaliKeRoleSelection()
@@ -209,13 +219,14 @@ namespace SEARENA2025
             _lblTitle = new Label
             {
                 Text = "Hai, Sea-Mates!",
-                Font = new Font("Segoe UI", 26F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 24F, FontStyle.Bold), // Kurangi dari 26F
                 ForeColor = Color.White,
                 BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter,
                 Width = PANEL_WIDTH,
                 Height = 50,
-                Visible = false
+                Visible = false,
+                AutoSize = false // PERBAIKI: Matikan autosize
             };
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
             this.Controls.Add(_lblTitle);
@@ -225,23 +236,24 @@ namespace SEARENA2025
         {
             Guna2Panel tabContainer = new Guna2Panel
             {
-                Size = new Size(300, 45),
-                Location = new Point((PANEL_WIDTH - 300) / 2, 25),
+                Size = new Size(320, 48), // Tambah ukuran dari 300x45
+                Location = new Point((PANEL_WIDTH - 320) / 2, 55), // Turunkan dari 25 ke 55 (beri ruang untuk tombol X)
                 FillColor = COLOR_TAB_CONTAINER,
-                BorderRadius = 22
+                BorderRadius = 24
             };
             _mainPanel.Controls.Add(tabContainer);
 
             _btnTabMasuk = new Guna2Button
             {
                 Text = "Masuk",
-                Size = new Size(145, 38),
-                Location = new Point(4, 4),
-                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                Size = new Size(155, 42), // Tambah ukuran dari 145x38
+                Location = new Point(3, 3),
+                Font = new Font("Segoe UI", 11.5F, FontStyle.Bold), // Tambah dari 11F
                 FillColor = COLOR_ACCENT_CYAN,
                 ForeColor = Color.Black,
-                BorderRadius = 19,
-                Cursor = Cursors.Hand
+                BorderRadius = 21,
+                Cursor = Cursors.Hand,
+                AutoSize = false
             };
             _btnTabMasuk.Click += (s, e) => ShowLoginForm();
             tabContainer.Controls.Add(_btnTabMasuk);
@@ -249,13 +261,14 @@ namespace SEARENA2025
             _btnTabDaftar = new Guna2Button
             {
                 Text = "Daftar",
-                Size = new Size(145, 38),
-                Location = new Point(151, 4),
-                Font = new Font("Segoe UI", 11F),
+                Size = new Size(155, 42), // Tambah ukuran dari 145x38
+                Location = new Point(162, 3),
+                Font = new Font("Segoe UI", 11.5F), // Tambah dari 11F
                 FillColor = Color.Transparent,
                 ForeColor = COLOR_TEXT_LIGHT,
-                BorderRadius = 19,
-                Cursor = Cursors.Hand
+                BorderRadius = 21,
+                Cursor = Cursors.Hand,
+                AutoSize = false
             };
             _btnTabDaftar.Click += (s, e) => ShowRegisterForm();
             tabContainer.Controls.Add(_btnTabDaftar);
@@ -264,60 +277,63 @@ namespace SEARENA2025
         private void CreateLoginForm()
         {
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 85;
+            int currentY = 120; // Turunkan dari 85 ke 120 (beri ruang untuk tab buttons)
 
             _txtEmail = new Guna2TextBox
             {
-                Size = new Size(CONTENT_WIDTH, 55),
+                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
                 Location = new Point(contentStartX, currentY),
                 BorderRadius = 10,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 10),
+                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
                 PlaceholderText = "Alamat E-mail",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White
+                FillColor = Color.White,
+                AutoSize = false
             };
-            _txtEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5));
+            _txtEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5)); // Label di atas
             _mainPanel.Controls.Add(_txtEmail);
 
-            currentY += _txtEmail.Height + 15;
+            currentY += _txtEmail.Height + 18; // Tambah spacing dari 15
 
             _txtPassword = new Guna2TextBox
             {
-                Size = new Size(CONTENT_WIDTH, 55),
+                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
                 Location = new Point(contentStartX, currentY),
                 BorderRadius = 10,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
                 PasswordChar = '●',
                 IconLeft = Image.FromFile("Icons/Group 25.png"),
                 IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 10),
+                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
                 PlaceholderText = "Kata Sandi",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White
+                FillColor = Color.White,
+                AutoSize = false
             };
             _txtPassword.IconRightClick += (s, e) => TogglePasswordVisibility(_txtPassword);
-            _txtPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5));
+            _txtPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5)); // Label di atas
             _mainPanel.Controls.Add(_txtPassword);
 
-            currentY += _txtPassword.Height + 30;
+            currentY += _txtPassword.Height + 25; // Tambah spacing dari 30
 
             _btnMasuk = new Guna2Button
             {
-                Size = new Size(CONTENT_WIDTH, 48),
+                Size = new Size(CONTENT_WIDTH, 50), // Tambah tinggi dari 48
                 Location = new Point(contentStartX, currentY),
                 Text = "Masuk",
-                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold), // Tambah dari 11F
                 FillColor = COLOR_ACCENT_ORANGE,
                 ForeColor = Color.White,
-                BorderRadius = 24,
-                Cursor = Cursors.Hand
+                BorderRadius = 25,
+                Cursor = Cursors.Hand,
+                AutoSize = false
             };
             _btnMasuk.Click += (s, e) => Login();
             _mainPanel.Controls.Add(_btnMasuk);
@@ -326,83 +342,87 @@ namespace SEARENA2025
         private void CreateRegisterForm()
         {
             int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 85;
+            int currentY = 120; // Turunkan dari 85 ke 120
 
             _txtRegNama = new Guna2TextBox
             {
-                Size = new Size(CONTENT_WIDTH, 55),
+                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
                 Location = new Point(contentStartX, currentY),
                 BorderRadius = 10,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
                 IconLeft = Image.FromFile("Icons/Vector.png"),
                 IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 10),
+                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
                 PlaceholderText = "Nama Lengkap",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
-                Visible = false
+                Visible = false,
+                AutoSize = false
             };
-            _txtRegNama.Controls.Add(CreateInnerLabel("Nama Lengkap", 45, 5));
+            _txtRegNama.Controls.Add(CreateInnerLabel("Nama Lengkap", 45, 5)); // Label di atas
             _mainPanel.Controls.Add(_txtRegNama);
 
-            currentY += _txtRegNama.Height + 15;
+            currentY += _txtRegNama.Height + 18; // Tambah spacing dari 15
 
             _txtRegEmail = new Guna2TextBox
             {
-                Size = new Size(CONTENT_WIDTH, 55),
+                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
                 Location = new Point(contentStartX, currentY),
                 BorderRadius = 10,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
                 IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
                 IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 10),
+                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
                 PlaceholderText = "Alamat E-mail",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
-                Visible = false
+                Visible = false,
+                AutoSize = false
             };
-            _txtRegEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5));
+            _txtRegEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5)); // Label di atas
             _mainPanel.Controls.Add(_txtRegEmail);
 
-            currentY += _txtRegEmail.Height + 15;
+            currentY += _txtRegEmail.Height + 18; // Tambah spacing dari 15
 
             _txtRegPassword = new Guna2TextBox
             {
-                Size = new Size(CONTENT_WIDTH, 55),
+                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
                 Location = new Point(contentStartX, currentY),
                 BorderRadius = 10,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
                 PasswordChar = '●',
                 IconLeft = Image.FromFile("Icons/Group 25.png"),
                 IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 10),
+                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
                 IconRight = Image.FromFile("Icons/mdi_eye.png"),
                 IconRightCursor = Cursors.Hand,
                 PlaceholderText = "Kata Sandi",
                 BorderColor = Color.FromArgb(220, 220, 220),
                 FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
                 FillColor = Color.White,
-                Visible = false
+                Visible = false,
+                AutoSize = false
             };
             _txtRegPassword.IconRightClick += (s, e) => TogglePasswordVisibility(_txtRegPassword);
-            _txtRegPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5));
+            _txtRegPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5)); // Label di atas
             _mainPanel.Controls.Add(_txtRegPassword);
 
-            currentY += _txtRegPassword.Height + 30;
+            currentY += _txtRegPassword.Height + 25; // Tambah spacing dari 30
 
             _btnDaftar = new Guna2Button
             {
-                Size = new Size(CONTENT_WIDTH, 48),
+                Size = new Size(CONTENT_WIDTH, 50), // Tambah tinggi dari 48
                 Location = new Point(contentStartX, currentY),
                 Text = "Daftar",
-                Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold), // Tambah dari 11F
                 FillColor = COLOR_ACCENT_ORANGE,
                 ForeColor = Color.White,
-                BorderRadius = 24,
+                BorderRadius = 25,
                 Cursor = Cursors.Hand,
-                Visible = false
+                Visible = false,
+                AutoSize = false
             };
             _btnDaftar.Click += (s, e) => Register();
             _mainPanel.Controls.Add(_btnDaftar);
@@ -420,7 +440,7 @@ namespace SEARENA2025
             _mainPanel.Visible = true;
             _roleSelectionPanel.Visible = false;
             _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_LOGIN);
-            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 30);
+            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 20);
             _lblTitle.Visible = true;
             _lblTitle.Text = "Hai, Sea-Mates!";
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
@@ -441,7 +461,7 @@ namespace SEARENA2025
             _mainPanel.Visible = true;
             _roleSelectionPanel.Visible = false;
             _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_REGISTER);
-            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_REGISTER) / 2 + 30);
+            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_REGISTER) / 2 + 20);
             _lblTitle.Visible = true;
             _lblTitle.Text = "Searena";
             _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
@@ -618,10 +638,11 @@ namespace SEARENA2025
             return new Label
             {
                 Text = text,
-                Font = new Font("Segoe UI", 7.5F),
+                Font = new Font("Segoe UI", 8F), // Naikkan dari 7.5F ke 8F
                 ForeColor = COLOR_TEXT_LIGHT,
                 BackColor = Color.White,
-                AutoSize = true,
+                AutoSize = false, // PERBAIKI: Matikan AutoSize
+                Size = new Size(150, 16), // Set ukuran tetap
                 Location = new Point(x, y)
             };
         }
