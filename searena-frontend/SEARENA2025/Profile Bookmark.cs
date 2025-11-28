@@ -17,22 +17,16 @@ namespace SEARENA2025
         private Form2 parentForm;
         private string connectionString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
         private List<BookmarkData> bookmarkList = new List<BookmarkData>();
-        private int selectedBookmarkId = -1; // Menyimpan bookmark yang dipilih
         private FlowLayoutPanel flowBookmarks;
-        private List<Destinasi> bookmarkDestinasi = new List<Destinasi>();
-        private int selectedDestinasiId = -1;
+        private List<BookmarkWrapper> bookmarkWrappers = new List<BookmarkWrapper>();
+        private int selectedBookmarkId = -1;
 
-        public Form3(Form2 parent)
+        private class BookmarkWrapper
         {
-            InitializeComponent();
-            parentForm = parent;
-            EnsureFlowBookmarks();
-            LoadUserProfile();
-            LoadBookmarks();
-            AttachNavbarEvents();
+            public int BookmarkId { get; set; }
+            public Destinasi Destinasi { get; set; }
         }
 
-        // Class untuk menyimpan data bookmark
         private class BookmarkData
         {
             public int BookmarkId { get; set; }
@@ -49,9 +43,18 @@ namespace SEARENA2025
             public string Activity { get; set; }
         }
 
+        public Form3(Form2 parent)
+        {
+            InitializeComponent();
+            parentForm = parent;
+            EnsureFlowBookmarks();
+            LoadUserProfile();
+            LoadBookmarks();
+            AttachNavbarEvents();
+        }
+
         private void EnsureFlowBookmarks()
         {
-            // Create a FlowLayoutPanel to host dynamic cards if not already present
             flowBookmarks = new FlowLayoutPanel
             {
                 Name = "flowBookmarks",
@@ -112,9 +115,15 @@ namespace SEARENA2025
         {
             try
             {
-                selectedDestinasiId = -1;
-                bookmarkDestinasi = Bookmark.GetBookmarksByUserId(UserSession.UserId) ?? new List<Destinasi>();
-                guna2HtmlLabel2.Text = $"Riwayat Bookmark ({bookmarkDestinasi.Count})";
+                selectedBookmarkId = -1;
+                List<Destinasi> bookmarkDestinasi = Bookmark.GetBookmarksByUserId(UserSession.UserId) ?? new List<Destinasi>();
+
+                DebugLog($"LoadBookmarks: Ditemukan {bookmarkDestinasi.Count} destinasi");
+
+                LoadBookmarkDetailsWithIds(bookmarkDestinasi);
+
+                DebugLog($"LoadBookmarks: {bookmarkWrappers.Count} wrapper siap ditampilkan");
+                guna2HtmlLabel2.Text = $"Riwayat Bookmark ({bookmarkWrappers.Count})";
                 RenderBookmarkCards();
             }
             catch (Exception ex)
@@ -123,29 +132,81 @@ namespace SEARENA2025
             }
         }
 
+        private void LoadBookmarkDetailsWithIds(List<Destinasi> destinasiList)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+                    bookmarkWrappers.Clear();
+
+                    DebugLog($"LoadBookmarkDetailsWithIds: Membuka koneksi untuk {destinasiList.Count} destinasi");
+
+                    foreach (var destinasi in destinasiList)
+                    {
+                        using (var cmd = new NpgsqlCommand(
+                            "SELECT bookmark_id FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did LIMIT 1",
+                            conn))
+                        {
+                            cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
+                            cmd.Parameters.AddWithValue("@did", destinasi.Id);
+
+                            var result = cmd.ExecuteScalar();
+
+                            if (result != null && int.TryParse(result.ToString(), out int bookmarkId))
+                            {
+                                DebugLog($"  - Found BookmarkID {bookmarkId} untuk Destinasi {destinasi.Id} ({destinasi.NamaDestinasi})");
+
+                                bookmarkWrappers.Add(new BookmarkWrapper
+                                {
+                                    BookmarkId = bookmarkId,
+                                    Destinasi = destinasi
+                                });
+                            }
+                            else
+                            {
+                                DebugLog($"  - GAGAL: BookmarkID tidak ditemukan untuk Destinasi {destinasi.Id}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading bookmark IDs: {ex.Message}\n\n{ex.StackTrace}");
+                DebugLog($"ERROR LoadBookmarkDetailsWithIds: {ex.Message}");
+            }
+        }
+
         private void RenderBookmarkCards()
         {
             flowBookmarks.SuspendLayout();
             flowBookmarks.Controls.Clear();
 
-            foreach (var d in bookmarkDestinasi)
+            DebugLog($"RenderBookmarkCards: Rendering {bookmarkWrappers.Count} cards");
+
+            foreach (var wrapper in bookmarkWrappers)
             {
-                var card = new DestinasiCard(d)
+                var card = new DestinasiCard(wrapper.Destinasi)
                 {
                     Width = 270,
                     Height = 160,
-                    Margin = new Padding(6)
+                    Margin = new Padding(6),
+                    Tag = wrapper.BookmarkId
                 };
-                card.CardClicked += (s, e) => OnCardClicked(card, d.Id);
+                card.CardClicked += (s, e) => OnCardClicked(card, wrapper.BookmarkId);
                 flowBookmarks.Controls.Add(card);
             }
 
             flowBookmarks.ResumeLayout();
+            DebugLog($"RenderBookmarkCards: Selesai - Total {flowBookmarks.Controls.Count} card ditampilkan");
         }
 
-        private void OnCardClicked(DestinasiCard card, int destinasiId)
+        private void OnCardClicked(DestinasiCard card, int bookmarkId)
         {
-            selectedDestinasiId = destinasiId;
+            selectedBookmarkId = bookmarkId;
+            DebugLog($"OnCardClicked: Selected BookmarkID = {bookmarkId}");
             HighlightSelectedCard(card);
         }
 
@@ -163,7 +224,6 @@ namespace SEARENA2025
                 }
             }
 
-            // Try to find internal shadow panel if exists
             selected.BackColor = Color.LightYellow;
         }
 
@@ -176,48 +236,110 @@ namespace SEARENA2025
 
         private async void btnUnbookmark_Click(object sender, EventArgs e)
         {
-            if (selectedDestinasiId <= 0)
+            DebugLog("=== btnUnbookmark_Click START ===");
+            DebugLog($"selectedBookmarkId = {selectedBookmarkId}");
+
+            if (selectedBookmarkId <= 0)
             {
+                DebugLog("ABORT: selectedBookmarkId <= 0");
                 MessageBox.Show("Silakan pilih destinasi terlebih dahulu", "Peringatan",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var selected = bookmarkDestinasi.FirstOrDefault(x => x.Id == selectedDestinasiId);
-            if (selected == null) return;
+            var selected = bookmarkWrappers.FirstOrDefault(x => x.BookmarkId == selectedBookmarkId);
 
-            DialogResult result = MessageBox.Show($"Hapus bookmark untuk {selected.NamaDestinasi}?",
+            DebugLog($"Looking for BookmarkID {selectedBookmarkId} in {bookmarkWrappers.Count} wrappers");
+
+            if (selected == null)
+            {
+                DebugLog("ABORT: selected wrapper is NULL");
+                MessageBox.Show("Bookmark tidak ditemukan", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DebugLog($"Found: {selected.Destinasi.NamaDestinasi}");
+
+            DialogResult result = MessageBox.Show($"Hapus bookmark untuk {selected.Destinasi.NamaDestinasi}?",
                 "Konfirmasi Unbookmark", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            DebugLog($"User pilih: {result}");
 
             if (result == DialogResult.Yes)
             {
-                await UnbookmarkSelectedAsync(UserSession.UserId, selectedDestinasiId);
+                DebugLog($"Calling UnbookmarkSelectedAsync dengan BookmarkID: {selectedBookmarkId}");
+                await UnbookmarkSelectedAsync(selectedBookmarkId);
                 LoadBookmarks();
+                DebugLog("=== btnUnbookmark_Click END (berhasil) ===");
+            }
+            else
+            {
+                DebugLog("=== btnUnbookmark_Click END (dibatalkan user) ===");
             }
         }
 
-        private async Task UnbookmarkSelectedAsync(int userId, int destinasiId)
+        private async Task UnbookmarkSelectedAsync(int bookmarkId)
         {
+            DebugLog("=== UnbookmarkSelectedAsync START ===");
+            DebugLog($"BookmarkID to delete: {bookmarkId}");
+
             try
             {
-                using (var conn = DatabaseHelper.GetConnection())
+                using (var conn = new NpgsqlConnection(connectionString))
                 {
-                    if (conn == null) return;
+                    DebugLog("Opening connection...");
+                    await conn.OpenAsync();
+                    DebugLog("Connection opened successfully");
 
-                    using (var cmd = new NpgsqlCommand("DELETE FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
+                    // Query untuk cek apakah bookmark ada
+                    using (var checkCmd = new NpgsqlCommand("SELECT COUNT(*) FROM bookmarks WHERE bookmark_id = @bid", conn))
                     {
-                        cmd.Parameters.AddWithValue("@uid", userId);
-                        cmd.Parameters.AddWithValue("@did", destinasiId);
-                        await cmd.ExecuteNonQueryAsync();
+                        checkCmd.Parameters.AddWithValue("@bid", bookmarkId);
+                        long count = (long)await checkCmd.ExecuteScalarAsync();
+                        DebugLog($"CHECK: Found {count} record(s) dengan bookmark_id = {bookmarkId}");
+                    }
+
+                    // DELETE
+                    using (var cmd = new NpgsqlCommand("DELETE FROM bookmarks WHERE bookmark_id = @bid", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@bid", bookmarkId);
+                        DebugLog("Executing DELETE query...");
+
+                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                        DebugLog($"DELETE result: {rowsAffected} row(s) affected");
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("✓ Bookmark berhasil dihapus!", "Sukses",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            DebugLog("SUCCESS: Bookmark deleted");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bookmark tidak ditemukan atau sudah terhapus sebelumnya",
+                                "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            DebugLog("INFO: No rows affected");
+                        }
                     }
                 }
-
-                MessageBox.Show("Bookmark berhasil dihapus", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DebugLog($"EXCEPTION: {ex.GetType().Name}");
+                DebugLog($"Message: {ex.Message}");
+                DebugLog($"StackTrace: {ex.StackTrace}");
+                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            DebugLog("=== UnbookmarkSelectedAsync END ===");
+        }
+
+        private void DebugLog(string message)
+        {
+            System.Diagnostics.Debug.WriteLine($"[Form3] {DateTime.Now:HH:mm:ss.fff} - {message}");
         }
 
         public void AttachNavbarEvents()
@@ -326,7 +448,6 @@ namespace SEARENA2025
             this.Close();
         }
 
-        // Stub methods untuk Designer
         private void Navbar_Paint(object sender, PaintEventArgs e) { }
         private void lblProfile_Click_1(object sender, EventArgs e) { }
         private void Profile_Click_1(object sender, EventArgs e) { }
