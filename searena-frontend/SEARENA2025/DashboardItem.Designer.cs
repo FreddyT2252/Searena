@@ -38,16 +38,22 @@ namespace SEARENA2025
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.ScrBarDashboard = new Guna.UI2.WinForms.Guna2HScrollBar();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.flpDashboard = new System.Windows.Forms.FlowLayoutPanel();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2PictureBox4 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.guna2PictureBox5 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.Navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.flpDashboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // Navbar
@@ -64,20 +70,22 @@ namespace SEARENA2025
             // 
             // btnSignIn
             // 
-            this.btnSignIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnSignIn.AutoRoundedCorners = true;
+            this.btnSignIn.BackColor = System.Drawing.Color.Transparent;
             this.btnSignIn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSignIn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSignIn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnSignIn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnSignIn.FillColor = System.Drawing.Color.Coral;
-            this.btnSignIn.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignIn.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSignIn.ForeColor = System.Drawing.Color.Black;
-            this.btnSignIn.Location = new System.Drawing.Point(984, 9);
+            this.btnSignIn.Location = new System.Drawing.Point(1000, 14);
             this.btnSignIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSignIn.Name = "btnSignIn";
-            this.btnSignIn.Size = new System.Drawing.Size(183, 49);
+            this.btnSignIn.Size = new System.Drawing.Size(160, 40);
             this.btnSignIn.TabIndex = 6;
-            this.btnSignIn.Text = "Sign In";
+            this.btnSignIn.Text = "Masuk";
+            this.btnSignIn.UseTransparentBackground = true;
             this.btnSignIn.Click += new System.EventHandler(this.btnSignIn_Click);
             // 
             // Logo
@@ -98,17 +106,17 @@ namespace SEARENA2025
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2Panel1.Controls.Add(this.guna2CirclePictureBox1);
-            this.guna2Panel1.Location = new System.Drawing.Point(5, 77);
+            this.guna2Panel1.Location = new System.Drawing.Point(122, 74);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(909, 56);
+            this.guna2Panel1.Size = new System.Drawing.Size(909, 66);
             this.guna2Panel1.TabIndex = 3;
             // 
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(56, 12);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(56, 20);
             this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(836, 27);
@@ -121,7 +129,7 @@ namespace SEARENA2025
             // 
             this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(12, 2);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(12, 12);
             this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -133,16 +141,35 @@ namespace SEARENA2025
             // ScrBarDashboard
             // 
             this.ScrBarDashboard.BackColor = System.Drawing.Color.FloralWhite;
+            this.ScrBarDashboard.BindingContainer = this.flpDashboard;
             this.ScrBarDashboard.FillColor = System.Drawing.Color.FloralWhite;
             this.ScrBarDashboard.InUpdate = false;
             this.ScrBarDashboard.LargeChange = 10;
-            this.ScrBarDashboard.Location = new System.Drawing.Point(392, 655);
+            this.ScrBarDashboard.Location = new System.Drawing.Point(4, 634);
             this.ScrBarDashboard.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ScrBarDashboard.Name = "ScrBarDashboard";
-            this.ScrBarDashboard.ScrollbarSize = 28;
-            this.ScrBarDashboard.Size = new System.Drawing.Size(450, 28);
+            this.ScrBarDashboard.ScrollbarSize = 26;
+            this.ScrBarDashboard.Size = new System.Drawing.Size(1171, 26);
             this.ScrBarDashboard.TabIndex = 5;
             this.ScrBarDashboard.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.ScrBarDashboard.ThumbStyle = Guna.UI2.WinForms.Enums.ThumbStyle.Inset;
+            // 
+            // flpDashboard
+            // 
+            this.flpDashboard.AutoScroll = true;
+            this.flpDashboard.AutoScrollMargin = new System.Drawing.Size(20, 0);
+            this.flpDashboard.BackColor = System.Drawing.Color.PapayaWhip;
+            this.flpDashboard.Controls.Add(this.guna2PictureBox1);
+            this.flpDashboard.Controls.Add(this.guna2PictureBox2);
+            this.flpDashboard.Controls.Add(this.guna2PictureBox3);
+            this.flpDashboard.Controls.Add(this.guna2PictureBox4);
+            this.flpDashboard.Controls.Add(this.guna2PictureBox5);
+            this.flpDashboard.Location = new System.Drawing.Point(4, 148);
+            this.flpDashboard.Name = "flpDashboard";
+            this.flpDashboard.Size = new System.Drawing.Size(1197, 512);
+            this.flpDashboard.TabIndex = 9;
+            this.flpDashboard.WrapContents = false;
+            this.flpDashboard.Paint += new System.Windows.Forms.PaintEventHandler(this.flpDashboard_Paint);
             // 
             // guna2PictureBox1
             // 
@@ -157,36 +184,62 @@ namespace SEARENA2025
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.Click += new System.EventHandler(this.guna2PictureBox1_Click);
             // 
-            // flpDashboard
+            // guna2PictureBox2
             // 
-            this.flpDashboard.AutoScroll = true;
-            this.flpDashboard.Controls.Add(this.guna2PictureBox1);
-            this.flpDashboard.Controls.Add(this.guna2PictureBox4);
-            this.flpDashboard.Location = new System.Drawing.Point(1, 147);
-            this.flpDashboard.Name = "flpDashboard";
-            this.flpDashboard.Size = new System.Drawing.Size(1615, 498);
-            this.flpDashboard.TabIndex = 9;
+            this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
+            this.guna2PictureBox2.ImageRotate = 0F;
+            this.guna2PictureBox2.Location = new System.Drawing.Point(808, 5);
+            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox2.Name = "guna2PictureBox2";
+            this.guna2PictureBox2.Size = new System.Drawing.Size(796, 485);
+            this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox2.TabIndex = 8;
+            this.guna2PictureBox2.TabStop = false;
+            // 
+            // guna2PictureBox3
+            // 
+            this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
+            this.guna2PictureBox3.ImageRotate = 0F;
+            this.guna2PictureBox3.Location = new System.Drawing.Point(1612, 5);
+            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox3.Name = "guna2PictureBox3";
+            this.guna2PictureBox3.Size = new System.Drawing.Size(796, 485);
+            this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox3.TabIndex = 9;
+            this.guna2PictureBox3.TabStop = false;
             // 
             // guna2PictureBox4
             // 
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(808, 5);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(2416, 5);
             this.guna2PictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
             this.guna2PictureBox4.Size = new System.Drawing.Size(796, 485);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox4.TabIndex = 7;
+            this.guna2PictureBox4.TabIndex = 10;
             this.guna2PictureBox4.TabStop = false;
+            // 
+            // guna2PictureBox5
+            // 
+            this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
+            this.guna2PictureBox5.ImageRotate = 0F;
+            this.guna2PictureBox5.Location = new System.Drawing.Point(3220, 5);
+            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2PictureBox5.Name = "guna2PictureBox5";
+            this.guna2PictureBox5.Size = new System.Drawing.Size(796, 485);
+            this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox5.TabIndex = 11;
+            this.guna2PictureBox5.TabStop = false;
             // 
             // DashboardItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PapayaWhip;
-            this.ClientSize = new System.Drawing.Size(1200, 701);
-            this.Controls.Add(this.flpDashboard);
+            this.ClientSize = new System.Drawing.Size(1198, 706);
             this.Controls.Add(this.ScrBarDashboard);
+            this.Controls.Add(this.flpDashboard);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.Navbar);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -198,9 +251,12 @@ namespace SEARENA2025
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.flpDashboard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -217,6 +273,9 @@ namespace SEARENA2025
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private FlowLayoutPanel sliderPanel;
         private FlowLayoutPanel flpDashboard;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox4;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox5;
     }
 }

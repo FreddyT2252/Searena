@@ -118,3 +118,5 @@ C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2.3B3FDCF7.Up2D
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.exe
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.pdb
 C:\Searena\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.PageAdmin.resources
+D:\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.PageAdmin.resources
+D:\Searena\searena-frontend\SEARENA2025\obj\Debug\SEARENA2025.DestinasiCard.resources

@@ -54,7 +54,6 @@ namespace SEARENA2025
                         harga_min DECIMAL(10,2),
                         harga_max DECIMAL(10,2),
                         waktu_terbaik VARCHAR(100),
-                        gambar_url TEXT,
                         rating_avg DECIMAL(3,2) DEFAULT 0,
                         total_review INT DEFAULT 0
                     );
@@ -85,7 +84,7 @@ namespace SEARENA2025
                         UNIQUE(user_id, destinasi_id)
                     );
 
-                    -- Insert sample data
+                    -- Insert sample data (tanpa gambar_url)
                     INSERT INTO destinasi (nama_destinasi, lokasi, pulau, deskripsi, harga_min, harga_max, waktu_terbaik, rating_avg)
                     VALUES 
                     ('Raja Ampat Marine Park', 'Waisai, Raja Ampat, Papua Barat', 'Papua', 
@@ -665,7 +664,10 @@ namespace SEARENA2025
                 {
                     if (conn == null) return bookmarks;
 
-                    string query = @"SELECT d.* FROM destinasi d
+                    string query = @"SELECT d.destinasi_id, d.nama_destinasi, d.lokasi, d.pulau, 
+                                           d.deskripsi, d.harga_min, d.harga_max, d.waktu_terbaik, 
+                                           d.rating_avg, d.total_review
+                                    FROM destinasi d
                                     JOIN bookmarks b ON d.destinasi_id = b.destinasi_id
                                     WHERE b.user_id = @user_id
                                     ORDER BY b.tanggal_bookmark DESC";
@@ -684,12 +686,11 @@ namespace SEARENA2025
                                     Lokasi = reader.GetString(2),
                                     Pulau = reader.GetString(3),
                                     Deskripsi = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                    HargaMin = reader.IsDBNull(5) ? 0 : reader.GetDecimal(5),
-                                    HargaMax = reader.IsDBNull(6) ? 0 : reader.GetDecimal(6),
+                                    HargaMin = reader.IsDBNull(5) ? 0 : Convert.ToDecimal(reader.GetValue(5)),
+                                    HargaMax = reader.IsDBNull(6) ? 0 : Convert.ToDecimal(reader.GetValue(6)),
                                     WaktuTerbaik = reader.IsDBNull(7) ? "" : reader.GetString(7),
-                                    GambarUrl = reader.IsDBNull(8) ? "" : reader.GetString(8),
-                                    RatingAvg = reader.IsDBNull(9) ? 0 : reader.GetDouble(9),
-                                    TotalReview = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
+                                    RatingAvg = reader.IsDBNull(8) ? 0 : Convert.ToDouble(reader.GetValue(8)),
+                                    TotalReview = reader.IsDBNull(9) ? 0 : reader.GetInt32(9)
                                 });
                             }
                         }
@@ -715,9 +716,53 @@ namespace SEARENA2025
         public decimal HargaMin { get; set; }
         public decimal HargaMax { get; set; }
         public string WaktuTerbaik { get; set; }
-        public string GambarUrl { get; set; }
         public double RatingAvg { get; set; }
         public int TotalReview { get; set; }
+
+        public static List<Destinasi> GetAll()
+        {
+            var destinasiList = new List<Destinasi>();
+            try
+            {
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    if (conn == null) return destinasiList;
+
+                    string query = @"SELECT 
+                        destinasi_id, nama_destinasi, lokasi, pulau, deskripsi, 
+                        harga_min, harga_max, waktu_terbaik, rating_avg, total_review 
+                        FROM destinasi ORDER BY rating_avg DESC NULLS LAST";
+                    
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                destinasiList.Add(new Destinasi
+                                {
+                                    Id = reader.GetInt32(0),
+                                    NamaDestinasi = reader.GetString(1),
+                                    Lokasi = reader.GetString(2),
+                                    Pulau = reader.GetString(3),
+                                    Deskripsi = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                    HargaMin = reader.IsDBNull(5) ? 0 : Convert.ToDecimal(reader.GetValue(5)),
+                                    HargaMax = reader.IsDBNull(6) ? 0 : Convert.ToDecimal(reader.GetValue(6)),
+                                    WaktuTerbaik = reader.IsDBNull(7) ? "" : reader.GetString(7),
+                                    RatingAvg = reader.IsDBNull(8) ? 0 : Convert.ToDouble(reader.GetValue(8)),
+                                    TotalReview = reader.IsDBNull(9) ? 0 : reader.GetInt32(9)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error mengambil destinasi: {ex.Message}\n\nStack: {ex.StackTrace}", "Error");
+            }
+            return destinasiList;
+        }
 
         public static Destinasi GetById(int id)
         {
@@ -727,7 +772,11 @@ namespace SEARENA2025
                 {
                     if (conn == null) return null;
 
-                    string query = "SELECT * FROM destinasi WHERE destinasi_id = @id";
+                    string query = @"SELECT 
+                        destinasi_id, nama_destinasi, lokasi, pulau, deskripsi, 
+                        harga_min, harga_max, waktu_terbaik, rating_avg, total_review 
+                        FROM destinasi WHERE destinasi_id = @id";
+                    
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
@@ -742,12 +791,11 @@ namespace SEARENA2025
                                     Lokasi = reader.GetString(2),
                                     Pulau = reader.GetString(3),
                                     Deskripsi = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                    HargaMin = reader.IsDBNull(5) ? 0 : reader.GetDecimal(5),
-                                    HargaMax = reader.IsDBNull(6) ? 0 : reader.GetDecimal(6),
+                                    HargaMin = reader.IsDBNull(5) ? 0 : Convert.ToDecimal(reader.GetValue(5)),
+                                    HargaMax = reader.IsDBNull(6) ? 0 : Convert.ToDecimal(reader.GetValue(6)),
                                     WaktuTerbaik = reader.IsDBNull(7) ? "" : reader.GetString(7),
-                                    GambarUrl = reader.IsDBNull(8) ? "" : reader.GetString(8),
-                                    RatingAvg = reader.IsDBNull(9) ? 0 : reader.GetDouble(9),
-                                    TotalReview = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
+                                    RatingAvg = reader.IsDBNull(8) ? 0 : Convert.ToDouble(reader.GetValue(8)),
+                                    TotalReview = reader.IsDBNull(9) ? 0 : reader.GetInt32(9)
                                 };
                             }
                         }
@@ -756,7 +804,7 @@ namespace SEARENA2025
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error mengambil destinasi: {ex.Message}", "Error");
+                MessageBox.Show($"Error mengambil destinasi: {ex.Message}\n\nStack: {ex.StackTrace}", "Error");
             }
             return null;
         }

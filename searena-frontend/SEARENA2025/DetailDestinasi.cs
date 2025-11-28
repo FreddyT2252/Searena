@@ -62,9 +62,17 @@ namespace SEARENA2025
 
         private void DetailDestinasi_Load(object sender, EventArgs e)
         {
-            // tampilkan nama & lokasi (kalau ctor param dipakai, nilainya terisi)
-            if (!string.IsNullOrWhiteSpace(_destName)) lblDestinasi1.Text = _destName;
-            if (!string.IsNullOrWhiteSpace(_destLocation)) lblLokasi1.Text = _destLocation;
+            // Load data destinasi dari database jika _destId valid
+            if (_destId > 0)
+            {
+                LoadDestinasiDetail();
+            }
+            else
+            {
+                // tampilkan nama & lokasi dari parameter (kalau ctor param dipakai, nilainya terisi)
+                if (!string.IsNullOrWhiteSpace(_destName)) lblDestinasi1.Text = _destName;
+                if (!string.IsNullOrWhiteSpace(_destLocation)) lblLokasi1.Text = _destLocation;
+            }
 
             // default rating bintang
             if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
@@ -72,6 +80,72 @@ namespace SEARENA2025
             FixLabelWrap(guna2HtmlLabel37);
             FixLabelWrap(guna2HtmlLabel38);
             FixLabelWrap(guna2HtmlLabel39);
+        }
+
+        private void LoadDestinasiDetail()
+        {
+            try
+            {
+                var destData = SEARENA2025.Destinasi.GetById(_destId);
+                if (destData != null)
+                {
+                    // Update UI dengan data dari database
+                    if (lblDestinasi1 != null)
+                        lblDestinasi1.Text = destData.NamaDestinasi;
+                    
+                    if (lblLokasi1 != null)
+                        lblLokasi1.Text = destData.Lokasi;
+
+                    // Update deskripsi - cari label deskripsi
+                    // Sesuaikan dengan nama control di form Anda
+                    var lblDeskripsi = this.Controls.Find("lblDeskripsi", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
+                    if (lblDeskripsi == null)
+                    {
+                        lblDeskripsi = this.Controls.Find("guna2HtmlLabel1", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
+                    }
+                    
+                    if (lblDeskripsi != null && !string.IsNullOrEmpty(destData.Deskripsi))
+                    {
+                        lblDeskripsi.Text = destData.Deskripsi;
+                        lblDeskripsi.AutoSize = false;
+                        lblDeskripsi.AutoSizeHeightOnly = true;
+                        lblDeskripsi.MaximumSize = new Size(600, 0);
+                    }
+
+                    // Update waktu terbaik jika ada label untuk itu
+                    var lblWaktuTerbaik = this.Controls.Find("lblWaktuTerbaik", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
+                    if (lblWaktuTerbaik != null && !string.IsNullOrEmpty(destData.WaktuTerbaik))
+                    {
+                        lblWaktuTerbaik.Text = "Waktu Terbaik: " + destData.WaktuTerbaik;
+                    }
+
+                    // Update rating average jika ada label untuk itu
+                    var lblRatingAvg = this.Controls.Find("lblRatingAvg", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
+                    if (lblRatingAvg != null)
+                    {
+                        lblRatingAvg.Text = $"★ {destData.RatingAvg:F1}";
+                    }
+
+                    // Update harga jika ada label untuk itu
+                    var lblHarga = this.Controls.Find("lblHarga", true).FirstOrDefault() as Guna.UI2.WinForms.Guna2HtmlLabel;
+                    if (lblHarga != null && destData.HargaMin > 0)
+                    {
+                        if (destData.HargaMax > destData.HargaMin)
+                        {
+                            lblHarga.Text = $"Rp {destData.HargaMin:N0} - Rp {destData.HargaMax:N0}";
+                        }
+                        else
+                        {
+                            lblHarga.Text = $"Mulai dari Rp {destData.HargaMin:N0}";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading detail destinasi: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void BtnKirim_Click(object sender, EventArgs e)
@@ -151,6 +225,11 @@ namespace SEARENA2025
         }
 
         private void guna2HtmlLabel38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2HtmlLabel36_Click(object sender, EventArgs e)
         {
 
         }

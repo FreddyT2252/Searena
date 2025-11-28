@@ -87,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DestinasiCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DestinasiCard.Designer.cs">
+      <DependentUpon>DestinasiCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardUtama.resx">
       <DependentUpon>DashboardUtama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DestinasiCard.resx">
+      <DependentUpon>DestinasiCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetailDestinasi.resx">
       <DependentUpon>DetailDestinasi.cs</DependentUpon>

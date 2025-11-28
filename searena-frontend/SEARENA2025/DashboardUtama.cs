@@ -8,11 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using Npgsql;
 
 namespace SEARENA2025
 {
     public partial class DashboardUtama : Form
     {
+        // Add this field to the DashboardUtama class to fix CS0103
+        private Guna2ShadowPanel panelDestinasi1;
+        private FlowLayoutPanel flpDestinasi; // FlowLayoutPanel untuk menampung kartu destinasi
+        private List<Destinasi> allDestinasi = new List<Destinasi>(); // Menyimpan semua destinasi
+
         internal sealed class DestInfo
         {
             public int Id { get; set; }
@@ -30,13 +36,231 @@ namespace SEARENA2025
         public DashboardUtama()
         {
             InitializeComponent();
+            
+            // Sembunyikan panel destinasi manual dulu
+            HideManualDestinationPanels();
+            
             SetupEventHandlers();
             SetupScrollBars();
             SetupRatingComboBox();
-            SetupDestinationPanels();
+            
+            // Inisialisasi panel destinasi dari database
+            InitializeDestinasiPanel();
 
             // Handle ketika form ditutup
             //this.FormClosed += (s, e) => Application.Exit();
+        }
+
+        private void HideManualDestinationPanels()
+        {
+            // Sembunyikan semua panel destinasi manual yang ada di designer
+            foreach (Control control in this.Controls)
+            {
+                if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
+                {
+                    panel.Visible = false;
+                }
+            }
+
+            // Cek juga di dalam container
+            foreach (Control container in this.Controls)
+            {
+                if (container is Guna2Panel || container is Panel)
+                {
+                    foreach (Control control in container.Controls)
+                    {
+                        if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
+                        {
+                            panel.Visible = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void InitializeDestinasiPanel()
+        {
+            // Cari FlowLayoutPanel yang sudah ada di designer
+            flpDestinasi = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault(f => f.Name == "flpDestinasi");
+            
+            if (flpDestinasi == null)
+            {
+                // Cari di dalam container panels
+                foreach (Control container in this.Controls)
+                {
+                    if (container is Guna2Panel || container is Panel)
+                    {
+                        flpDestinasi = container.Controls.OfType<FlowLayoutPanel>()
+                            .FirstOrDefault(f => f.Name == "flpDestinasi");
+                        if (flpDestinasi != null) break;
+                    }
+                }
+            }
+            
+            if (flpDestinasi == null)
+            {
+                // Cari footer panel untuk menghitung tinggi yang tersedia
+                var footerPanel = this.Controls.OfType<Control>()
+                    .FirstOrDefault(c => c.Name.ToLower().Contains("footer") || c.Name.ToLower().Contains("kontak") || c.Name.ToLower().Contains("tentang"));
+                
+                // Cari posisi referensi dari control yang ada (navbar, filter panel, dll)
+                int xPosition = 280;  // Default X position
+                int yPosition = 150;  // Lebih ke atas lagi (dari 180 ke 150)
+                
+                // Hitung tinggi yang tersedia (jangan sampai memotong footer)
+                int availableHeight = this.Height - yPosition - 150; // Reserve 150px untuk footer
+                
+                if (footerPanel != null)
+                {
+                    // Jika ada footer, pastikan tidak memotong
+                    availableHeight = footerPanel.Top - yPosition - 20; // 20px margin
+                }
+                
+                // Coba cari panel filter atau navbar untuk posisi relatif
+                var filterPanel = this.Controls.OfType<Control>()
+                    .FirstOrDefault(c => c.Name.Contains("Filter") || c.Name.Contains("Pulau"));
+                
+                if (filterPanel != null)
+                {
+                    // Posisi di sebelah kanan filter panel
+                    xPosition = filterPanel.Right + 20;
+                    yPosition = Math.Max(150, filterPanel.Top); // Minimal Y = 150
+                }
+                
+                // Jika belum ada, buat baru dengan posisi yang lebih baik
+                flpDestinasi = new FlowLayoutPanel
+                {
+                    Name = "flpDestinasi",
+                    AutoScroll = true,
+                    WrapContents = true,
+                    FlowDirection = FlowDirection.LeftToRight,
+                    Padding = new Padding(20),
+                    BackColor = Color.Transparent,
+                    // Posisi yang lebih tinggi dan ukuran yang tidak memotong footer
+                    Location = new Point(xPosition, yPosition),
+                    Size = new Size(this.Width - xPosition - 40, availableHeight),
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                    
+                    // DEBUG: Uncomment untuk melihat border FlowLayoutPanel
+                    // BorderStyle = BorderStyle.FixedSingle,
+                    // BackColor = Color.FromArgb(240, 240, 240)
+                };
+                this.Controls.Add(flpDestinasi);
+                flpDestinasi.BringToFront(); // Pastikan di depan
+                
+                // Debug message untuk mengetahui posisi
+                MessageBox.Show($"FlowLayoutPanel created at:\nX: {xPosition}, Y: {yPosition}\nSize: {flpDestinasi.Width} x {flpDestinasi.Height}\n\nFooter Top: {footerPanel?.Top ?? 0}", 
+                    "Debug Position");
+            }
+            else
+            {
+                // FlowLayoutPanel sudah ada, pastikan visible dan di depan
+                flpDestinasi.Visible = true;
+                flpDestinasi.BringToFront();
+            }
+
+            // Load destinasi dari database
+            LoadDestinasiFromDatabase();
+        }
+
+        private async void LoadDestinasiFromDatabase()
+        {
+            try
+            {
+                // Tampilkan loading indicator jika ada
+                Cursor = Cursors.WaitCursor;
+
+                // Debug: Tampilkan message box saat mulai load
+                // MessageBox.Show("Mulai loading destinasi dari database...", "Debug");
+
+                // Ambil semua destinasi dari database (async)
+                await Task.Run(() =>
+                {
+                    allDestinasi = Destinasi.GetAll();
+                });
+
+                // Debug: Tampilkan jumlah destinasi yang ditemukan
+                MessageBox.Show($"Ditemukan {allDestinasi.Count} destinasi di database", "Info Loading", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Clear existing cards
+                if (flpDestinasi != null)
+                {
+                    flpDestinasi.Controls.Clear();
+                }
+
+                if (allDestinasi.Count == 0)
+                {
+                    // Tampilkan pesan jika tidak ada destinasi
+                    var lblNoData = new Label
+                    {
+                        Text = "Belum ada destinasi tersedia.\nTambahkan destinasi melalui halaman Admin.",
+                        Font = new Font("Segoe UI", 12, FontStyle.Italic),
+                        ForeColor = Color.Gray,
+                        AutoSize = true,
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                    flpDestinasi.Controls.Add(lblNoData);
+                }
+                else
+                {
+                    // Buat card untuk setiap destinasi
+                    int cardCount = 0;
+                    foreach (var destinasi in allDestinasi)
+                    {
+                        try
+                        {
+                            var card = new DestinasiCard(destinasi);
+                            card.Margin = new Padding(10);
+                            card.CardClicked += (s, e) => OpenDetailDestinasi(destinasi);
+                            flpDestinasi.Controls.Add(card);
+                            cardCount++;
+                        }
+                        catch (Exception cardEx)
+                        {
+                            MessageBox.Show($"Error membuat card untuk '{destinasi.NamaDestinasi}': {cardEx.Message}", 
+                                "Error Card", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    
+                    // Debug: Tampilkan jumlah card yang berhasil dibuat
+                    MessageBox.Show($"{cardCount} kartu destinasi berhasil ditampilkan!", "Success", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading destinasi:\n{ex.Message}\n\nStack Trace:\n{ex.StackTrace}", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void OpenDetailDestinasi(Destinasi destinasi)
+        {
+            try
+            {
+                // Debug info
+                MessageBox.Show($"Membuka detail destinasi:\nID: {destinasi.Id}\nNama: {destinasi.NamaDestinasi}\nLokasi: {destinasi.Lokasi}", 
+                    "Debug Detail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var detailForm = new DetailDestinasi(
+                    destinasi.Id, 
+                    destinasi.NamaDestinasi, 
+                    destinasi.Lokasi
+                );
+                detailForm.FormClosed += (s, args) => this.Show();
+                detailForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error membuka detail destinasi:\n{ex.Message}\n\nStack Trace:\n{ex.StackTrace}", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetupEventHandlers()
@@ -231,11 +455,47 @@ namespace SEARENA2025
 
             if (searchText == "cari destinasi ..." || string.IsNullOrWhiteSpace(searchText))
             {
-                ShowAllDestinations();
+                ShowAllDestinasiCards();
                 return;
             }
 
-            FilterDestinationsBySearch(searchText);
+            FilterDestinasiCardsBySearch(searchText);
+        }
+
+        private void ShowAllDestinasiCards()
+        {
+            if (flpDestinasi == null) return;
+
+            foreach (Control control in flpDestinasi.Controls)
+            {
+                control.Visible = true;
+            }
+        }
+
+        private void FilterDestinasiCardsBySearch(string searchText)
+        {
+            if (flpDestinasi == null) return;
+
+            int foundCount = 0;
+
+            foreach (Control control in flpDestinasi.Controls)
+            {
+                if (control is DestinasiCard card)
+                {
+                    bool found = card.NamaDestinasi.ToLower().Contains(searchText) ||
+                                card.Lokasi.ToLower().Contains(searchText) ||
+                                card.Pulau.ToLower().Contains(searchText);
+                    
+                    card.Visible = found;
+                    if (found) foundCount++;
+                }
+            }
+
+            if (foundCount == 0)
+            {
+                MessageBox.Show($"Tidak ditemukan destinasi dengan kata kunci: '{searchText}'",
+                              "Pencarian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private string GetSearchTextFromPnlSearch()
@@ -257,14 +517,89 @@ namespace SEARENA2025
         {
             List<string> selectedPulau = GetSelectedPulau();
             List<string> selectedAktivitas = GetSelectedAktivitas();
-            ApplyDestinationFiltering(selectedPulau, selectedAktivitas);
+            ApplyDestinasiCardFiltering(selectedPulau, selectedAktivitas);
+        }
+
+        private void ApplyDestinasiCardFiltering(List<string> selectedPulau, List<string> selectedAktivitas)
+        {
+            if (flpDestinasi == null) return;
+
+            bool hasPulauFilter = selectedPulau.Count > 0;
+            bool hasAktivitasFilter = selectedAktivitas.Count > 0;
+
+            if (!hasPulauFilter && !hasAktivitasFilter)
+            {
+                ShowAllDestinasiCards();
+                return;
+            }
+
+            foreach (Control control in flpDestinasi.Controls)
+            {
+                if (control is DestinasiCard card)
+                {
+                    bool showDestination = true;
+
+                    if (hasPulauFilter)
+                    {
+                        showDestination = showDestination && selectedPulau.Contains(card.Pulau);
+                    }
+
+                    // Untuk filter aktivitas, perlu query database atau menambahkan property aktivitas di card
+                    // Sementara kita skip filter aktivitas untuk DestinasiCard
+
+                    card.Visible = showDestination;
+                }
+            }
         }
 
         private void ApplySorting()
         {
-            if (CmbRating == null) return;
+            if (CmbRating == null || flpDestinasi == null) return;
+            
             string sortBy = CmbRating.SelectedItem?.ToString() ?? "Populer";
-            SortDestinations(sortBy);
+            
+            var sortedDestinasi = new List<Destinasi>(allDestinasi);
+
+            switch (sortBy)
+            {
+                case "Rating Tertinggi":
+                    sortedDestinasi = sortedDestinasi.OrderByDescending(d => d.RatingAvg).ToList();
+                    break;
+                case "Rating Terendah":
+                    sortedDestinasi = sortedDestinasi.OrderBy(d => d.RatingAvg).ToList();
+                    break;
+                case "Rekomendasi":
+                    sortedDestinasi = sortedDestinasi
+                        .OrderByDescending(d => d.RatingAvg)
+                        .ThenByDescending(d => d.TotalReview)
+                        .ToList();
+                    break;
+                case "Populer":
+                default:
+                    sortedDestinasi = sortedDestinasi.OrderByDescending(d => d.TotalReview).ToList();
+                    break;
+            }
+
+            // Rebuild the FlowLayoutPanel dengan urutan baru
+            RebuildDestinasiCards(sortedDestinasi);
+        }
+
+        private void RebuildDestinasiCards(List<Destinasi> sortedDestinasi)
+        {
+            if (flpDestinasi == null) return;
+
+            flpDestinasi.SuspendLayout();
+            flpDestinasi.Controls.Clear();
+
+            foreach (var destinasi in sortedDestinasi)
+            {
+                var card = new DestinasiCard(destinasi);
+                card.Margin = new Padding(10);
+                card.CardClicked += (s, e) => OpenDetailDestinasi(destinasi);
+                flpDestinasi.Controls.Add(card);
+            }
+
+            flpDestinasi.ResumeLayout();
         }
 
         // ===== FILTER LOGIC METHODS =====
@@ -484,7 +819,7 @@ namespace SEARENA2025
                 txtCariDestinasi.ForeColor = Color.Gray;
             }
 
-            ShowAllDestinations();
+            ShowAllDestinasiCards();
         }
 
         // ===== EXISTING EVENT HANDLERS =====
@@ -535,94 +870,6 @@ namespace SEARENA2025
         private void panelDestinasi1_MouseWheel(object sender, MouseEventArgs e)
         {
             
-        }
-
-        // Panggil ini dari ctor setelah InitializeComponent(): SetupDestinationPanels();
-        private void SetupDestinationPanels()
-        {
-            // Contoh: kamu punya panel bernama panelDestinasi1, panelDestinasi2, ... (Guna2ShadowPanel)
-            // Di sini kita cari semua Guna2ShadowPanel yang namanya diawali "panelDestinasi"
-            var allContainers = new List<Control>();
-            allContainers.Add(this);
-            allContainers.AddRange(this.Controls.OfType<Control>().Where(c => c is Guna2Panel || c is Panel));
-
-            foreach (var container in allContainers)
-            {
-                foreach (Control c in container.Controls)
-                {
-                    if (c is Guna2ShadowPanel sp && c.Name.StartsWith("panelDestinasi"))
-                    {
-                        // TODO: mapping sesuai datamu (bisa dari label di dalam panel)
-                        // Misal ambil nama & lokasi dari label di dalam panel:
-                        string nama = FindTextIn(sp, "lblNamaDestinasi") ?? "Nama Destinasi";
-                        string lokasi = FindTextIn(sp, "lblLokasiDestinasi") ?? "Lokasi";
-
-                        // Id bisa kamu generate sementara atau ambil dari Tag panel (kalau sudah di-set di Designer)
-                        int id = sp.Tag is int ? (int)sp.Tag : ExtractIdFromName(sp.Name); // contoh: panelDestinasi3 -> 3
-
-                        sp.Tag = new DestInfo { Id = id, Nama = nama, Lokasi = lokasi };
-                        sp.Cursor = Cursors.Hand;
-
-                        // Klik di panel
-                        sp.Click -= DestinationPanel_Click;
-                        sp.Click += DestinationPanel_Click;
-
-                        // Biar klik di child ikut membuka detail, wire-kan semua child
-                        WireChildClicksTo(sp, DestinationPanel_Click);
-                    }
-                }
-            }
-        }
-
-        // Helper: cari teks dari control bernama tertentu di dalam panel
-        private string FindTextIn(Control root, string controlName)
-        {
-            foreach (Control c in root.Controls)
-            {
-                if (c.Name == controlName)
-                {
-                    if (c is Label l) return l.Text;
-                    if (c is Guna2HtmlLabel hl) return hl.Text;
-                }
-                var nested = FindTextIn(c, controlName);
-                if (!string.IsNullOrEmpty(nested)) return nested;
-            }
-            return null;
-        }
-
-        // Helper: forward click child ke event yang sama
-        private void WireChildClicksTo(Control root, EventHandler onClick)
-        {
-            foreach (Control c in root.Controls)
-            {
-                c.Click -= onClick;
-                c.Click += onClick;
-                if (c.HasChildren) WireChildClicksTo(c, onClick);
-            }
-        }
-
-        // Contoh ambil angka dari nama panel (panelDestinasi12 -> 12)
-        private int ExtractIdFromName(string name)
-        {
-            var digits = new string(name.Where(char.IsDigit).ToArray());
-            return int.TryParse(digits, out var id) ? id : 0;
-        }
-
-        private void DestinationPanel_Click(object sender, EventArgs e)
-        {
-            // Kalau yang di-klik child, naik ke panel induk
-            Control src = sender as Control;
-            while (src != null && !(src is Guna2ShadowPanel && src.Name.StartsWith("panelDestinasi")))
-                src = src.Parent;
-
-            if (src is Guna2ShadowPanel panel && panel.Tag is DestInfo info)
-            {
-                // BUKA DetailDestinasi dengan ctor berparameter
-                var detail = new DetailDestinasi(info.Id, info.Nama, info.Lokasi);
-                detail.FormClosed += (s, args) => this.Show();
-                detail.Show();
-                this.Hide();
-            }
         }
 
         private void Navbar_Paint(object sender, PaintEventArgs e)
