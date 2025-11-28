@@ -14,8 +14,15 @@ namespace SEARENA2025
         [STAThread]
         static void Main()
         {
+            // Enable DPI awareness untuk .NET Framework 4.7+
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                SetProcessDPIAware();
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
             try
             {
                 DatabaseHelper.InitializeDatabase();
@@ -29,5 +36,9 @@ namespace SEARENA2025
 
             Application.Run(new DashboardItem());
         }
+
+        // Import DPI awareness function
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }

@@ -481,15 +481,17 @@ namespace SEARENA2025
                         {
                             if (reader.Read())
                             {
-                                string userId = reader["user_id"]?.ToString() ?? "0";
+                                int userId = Convert.ToInt32(reader["user_id"]);
                                 string namaLengkap = reader["nama_lengkap"]?.ToString() ?? "User";
                                 string email = reader["email"]?.ToString() ?? "";
 
                                 // Set user session dengan role yang dipilih
-                                UserSession.SetUser(int.Parse(userId), namaLengkap, email, _selectedRole);
+                                UserSession.SetUser(userId, namaLengkap, email, _selectedRole);
 
+                                // HAPUS DEBUG MESSAGE BOX - langsung ke dashboard
                                 MessageBox.Show($"Selamat datang, {namaLengkap}!", "Login Berhasil",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                
                                 PindahKeDashboard();
                             }
                             else

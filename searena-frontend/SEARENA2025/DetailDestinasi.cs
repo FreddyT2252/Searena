@@ -18,7 +18,8 @@ namespace SEARENA2025
         private readonly string _destName;
         private readonly string _destLocation;
 
-        private const string ConnString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
+        // PERBAIKI: Gunakan connection string Supabase yang sama dengan Form1.cs
+        private const string ConnString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public DetailDestinasi(int destId, string destName, string destLocation)
         {
@@ -75,6 +76,7 @@ namespace SEARENA2025
 
         private async void DetailDestinasi_Load(object sender, EventArgs e)
         {
+            // HAPUS DEBUG MESSAGE BOX - tidak perlu lagi
             // Load data destinasi dari database jika _destId valid
             if (_destId > 0)
             {
@@ -94,9 +96,19 @@ namespace SEARENA2025
             FixLabelWrap(guna2HtmlLabel38);
             FixLabelWrap(guna2HtmlLabel39);
 
-            // Check if already bookmarked dan ubah icon/warna button
-            await EnsureBookmarkTableAsync();
-            CheckBookmarkStatus();
+            // HANYA cek bookmark status jika user sudah login
+            if (UserSession.IsLoggedIn)
+            {
+                await EnsureBookmarkTableAsync();
+                CheckBookmarkStatus();
+            }
+            else
+            {
+                // Jika belum login, tampilkan tombol bookmark tapi disabled atau dengan text berbeda
+                btnBookmark.Text = "Login untuk Bookmark";
+                btnBookmark.FillColor = Color.Gray;
+                btnBookmark.Enabled = false;
+            }
 
             // Muat review secara real-time
             await EnsureReviewsTableAsync();

@@ -139,18 +139,10 @@ namespace SEARENA2025
                     // Posisi yang lebih tinggi dan ukuran yang tidak memotong footer
                     Location = new Point(xPosition, yPosition),
                     Size = new Size(this.Width - xPosition - 40, availableHeight),
-                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
-                    
-                    // DEBUG: Uncomment untuk melihat border FlowLayoutPanel
-                    // BorderStyle = BorderStyle.FixedSingle,
-                    // BackColor = Color.FromArgb(240, 240, 240)
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
                 this.Controls.Add(flpDestinasi);
                 flpDestinasi.BringToFront(); // Pastikan di depan
-                
-                // Debug message untuk mengetahui posisi
-                MessageBox.Show($"FlowLayoutPanel created at:\nX: {xPosition}, Y: {yPosition}\nSize: {flpDestinasi.Width} x {flpDestinasi.Height}\n\nFooter Top: {footerPanel?.Top ?? 0}", 
-                    "Debug Position");
             }
             else
             {
@@ -163,25 +155,15 @@ namespace SEARENA2025
             LoadDestinasiFromDatabase();
         }
 
-        private async void LoadDestinasiFromDatabase()
+        private void LoadDestinasiFromDatabase()
         {
             try
             {
                 // Tampilkan loading indicator jika ada
                 Cursor = Cursors.WaitCursor;
 
-                // Debug: Tampilkan message box saat mulai load
-                // MessageBox.Show("Mulai loading destinasi dari database...", "Debug");
-
-                // Ambil semua destinasi dari database (async)
-                await Task.Run(() =>
-                {
-                    allDestinasi = Destinasi.GetAll();
-                });
-
-                // Debug: Tampilkan jumlah destinasi yang ditemukan
-                MessageBox.Show($"Ditemukan {allDestinasi.Count} destinasi di database", "Info Loading", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Ambil semua destinasi dari database
+                allDestinasi = Destinasi.GetAll();
 
                 // Clear existing cards
                 if (flpDestinasi != null)
@@ -205,16 +187,21 @@ namespace SEARENA2025
                 else
                 {
                     // Buat card untuk setiap destinasi
-                    int cardCount = 0;
                     foreach (var destinasi in allDestinasi)
                     {
                         try
                         {
                             var card = new DestinasiCard(destinasi);
                             card.Margin = new Padding(10);
-                            card.CardClicked += (s, e) => OpenDetailDestinasi(destinasi);
+                            
+                            // PENTING: Hapus semua event handler lama sebelum menambah yang baru
+                            card.CardClicked -= Card_OnCardClicked;
+                            card.CardClicked += Card_OnCardClicked;
+                            
+                            // Store destinasi info in Tag untuk diambil nanti
+                            card.Tag = destinasi;
+                            
                             flpDestinasi.Controls.Add(card);
-                            cardCount++;
                         }
                         catch (Exception cardEx)
                         {
@@ -222,10 +209,6 @@ namespace SEARENA2025
                                 "Error Card", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
-                    
-                    // Debug: Tampilkan jumlah card yang berhasil dibuat
-                    MessageBox.Show($"{cardCount} kartu destinasi berhasil ditampilkan!", "Success", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -239,19 +222,44 @@ namespace SEARENA2025
             }
         }
 
+        // Event handler terpisah untuk mencegah multiple subscription
+        private void Card_OnCardClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sender is DestinasiCard card && card.Tag is Destinasi destinasi)
+                {
+                    OpenDetailDestinasi(destinasi);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error handling card click: {ex.Message}", "Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void OpenDetailDestinasi(Destinasi destinasi)
         {
             try
             {
-                // Debug info
-                MessageBox.Show($"Membuka detail destinasi:\nID: {destinasi.Id}\nNama: {destinasi.NamaDestinasi}\nLokasi: {destinasi.Lokasi}", 
-                    "Debug Detail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Pastikan destinasi valid
+                if (destinasi == null || destinasi.Id <= 0)
+                {
+                    MessageBox.Show("Data destinasi tidak valid", "Error", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // HAPUS VALIDASI LOGIN DI SINI - Biarkan user buka detail destinasi tanpa login
+                // Validasi login hanya dilakukan saat bookmark atau kirim review
 
                 var detailForm = new DetailDestinasi(
                     destinasi.Id, 
                     destinasi.NamaDestinasi, 
                     destinasi.Lokasi
                 );
+                
                 detailForm.FormClosed += (s, args) => this.Show();
                 detailForm.Show();
                 this.Hide();

@@ -47,10 +47,6 @@
             this.Navbar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblProfile = new System.Windows.Forms.Label();
             this.Profile = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.TentangKami = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Kontak = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Destinasi = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Beranda = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.Logo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnKembali = new Guna.UI2.WinForms.Guna2Button();
             this.PnlDetailDestinasi = new Guna.UI2.WinForms.Guna2ShadowPanel();
@@ -300,7 +296,7 @@
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(34, 31);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(34, 28);
             this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(214, 25);
@@ -324,7 +320,7 @@
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(38, 6);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(38, 3);
             this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(123, 27);
@@ -350,10 +346,6 @@
             this.Navbar.BackColor = System.Drawing.Color.FloralWhite;
             this.Navbar.Controls.Add(this.lblProfile);
             this.Navbar.Controls.Add(this.Profile);
-            this.Navbar.Controls.Add(this.TentangKami);
-            this.Navbar.Controls.Add(this.Kontak);
-            this.Navbar.Controls.Add(this.Destinasi);
-            this.Navbar.Controls.Add(this.Beranda);
             this.Navbar.Controls.Add(this.Logo);
             this.Navbar.Location = new System.Drawing.Point(-2, 0);
             this.Navbar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -388,64 +380,16 @@
             this.Profile.TabStop = false;
             this.Profile.UseWaitCursor = true;
             // 
-            // TentangKami
-            // 
-            this.TentangKami.BackColor = System.Drawing.Color.Transparent;
-            this.TentangKami.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TentangKami.Location = new System.Drawing.Point(576, 18);
-            this.TentangKami.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TentangKami.Name = "TentangKami";
-            this.TentangKami.Size = new System.Drawing.Size(152, 34);
-            this.TentangKami.TabIndex = 5;
-            this.TentangKami.Text = "Tentang Kami";
-            this.TentangKami.UseWaitCursor = true;
-            // 
-            // Kontak
-            // 
-            this.Kontak.BackColor = System.Drawing.Color.Transparent;
-            this.Kontak.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Kontak.Location = new System.Drawing.Point(470, 18);
-            this.Kontak.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Kontak.Name = "Kontak";
-            this.Kontak.Size = new System.Drawing.Size(77, 34);
-            this.Kontak.TabIndex = 4;
-            this.Kontak.Text = "Kontak";
-            this.Kontak.UseWaitCursor = true;
-            // 
-            // Destinasi
-            // 
-            this.Destinasi.BackColor = System.Drawing.Color.Transparent;
-            this.Destinasi.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Destinasi.Location = new System.Drawing.Point(340, 18);
-            this.Destinasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Destinasi.Name = "Destinasi";
-            this.Destinasi.Size = new System.Drawing.Size(99, 34);
-            this.Destinasi.TabIndex = 3;
-            this.Destinasi.Text = "Destinasi";
-            this.Destinasi.UseWaitCursor = true;
-            // 
-            // Beranda
-            // 
-            this.Beranda.BackColor = System.Drawing.Color.Transparent;
-            this.Beranda.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Beranda.Location = new System.Drawing.Point(222, 18);
-            this.Beranda.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Beranda.Name = "Beranda";
-            this.Beranda.Size = new System.Drawing.Size(90, 34);
-            this.Beranda.TabIndex = 2;
-            this.Beranda.Text = "Beranda";
-            this.Beranda.UseWaitCursor = true;
-            // 
             // Logo
             // 
             this.Logo.BackColor = System.Drawing.Color.FloralWhite;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.ImageRotate = 0F;
-            this.Logo.Location = new System.Drawing.Point(3, 5);
+            this.Logo.Location = new System.Drawing.Point(10, 5);
             this.Logo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(189, 58);
-            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 1;
             this.Logo.TabStop = false;
             this.Logo.UseWaitCursor = true;
@@ -1409,10 +1353,6 @@
         private Guna.UI2.WinForms.Guna2Panel Navbar;
         private System.Windows.Forms.Label lblProfile;
         private Guna.UI2.WinForms.Guna2CirclePictureBox Profile;
-        private Guna.UI2.WinForms.Guna2HtmlLabel TentangKami;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Kontak;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Destinasi;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Beranda;
         private Guna.UI2.WinForms.Guna2PictureBox Logo;
         private Guna.UI2.WinForms.Guna2Button btnKembali;
         private Guna.UI2.WinForms.Guna2ShadowPanel PnlDetailDestinasi;
