@@ -17,7 +17,7 @@ namespace SEARENA2025
     {
         private readonly int _destId;
         private readonly string _destName;
-        private readonly string _destLocation;
+        
 
         // Pakai koneksi Supabase (punya kamu yang pertama)
         private const string ConnString =
@@ -37,7 +37,7 @@ namespace SEARENA2025
             InitializeComponent();
             _destId = destId;
             _destName = destName;
-            _destLocation = destLocation;
+            
 
             this.Load += DetailDestinasi_Load;
 
@@ -73,7 +73,7 @@ namespace SEARENA2025
         {
             // Tampilkan nama & lokasi dari ctor, kalau ada
             if (!string.IsNullOrWhiteSpace(_destName)) lblDestinasi1.Text = _destName;
-            if (!string.IsNullOrWhiteSpace(_destLocation)) lblLokasi1.Text = _destLocation;
+            
 
             // Default rating
             if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
@@ -143,7 +143,7 @@ namespace SEARENA2025
                 await conn.OpenAsync();
 
                 string sql = @"
-                    SELECT deskripsi, harga_min, harga_max, waktu_terbaik, activity
+                    SELECT deskripsi, harga_min, harga_max, waktu_terbaik, activity, lokasi, pulau
                     FROM destinasi
                     WHERE destinasi_id = @id;
                 ";
@@ -161,6 +161,10 @@ namespace SEARENA2025
                             decimal hargaMax   = reader.IsDBNull(2) ? 0 : reader.GetDecimal(2);
                             string waktuTerbaik = reader.IsDBNull(3) ? "" : reader.GetString(3);
                             string aktivitasStr = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                            string lokasi = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                            string pulau = reader.IsDBNull(6) ? "" : reader.GetString(6);
+
+                            lblLokasi1.Text = $"{lokasi}, {pulau}".Trim().Trim(',');
 
                             // Deskripsi
                             lblDeskripsi.Text = deskripsi;
@@ -513,7 +517,7 @@ namespace SEARENA2025
                         cmd.Parameters.AddWithValue("@uname", UserSession.Username);
                         cmd.Parameters.AddWithValue("@destinasi_id", _destId);
                         cmd.Parameters.AddWithValue("@dname", string.IsNullOrWhiteSpace(_destName) ? lblDestinasi1.Text : _destName);
-                        cmd.Parameters.AddWithValue("@dloc", string.IsNullOrWhiteSpace(_destLocation) ? lblLokasi1.Text : _destLocation);
+                        cmd.Parameters.AddWithValue("@dloc", lblLokasi1.Text);
                         cmd.Parameters.AddWithValue("@txt", ulasan);
                         cmd.Parameters.AddWithValue("@rate", rating);
 
@@ -704,9 +708,8 @@ namespace SEARENA2025
 
         private async Task LoadWeatherAsync()
         {
-            string lokasiFull = !string.IsNullOrWhiteSpace(_destLocation)
-                ? _destLocation
-                : lblLokasi1.Text;
+            string lokasiFull = lblLokasi1.Text;
+
 
             if (string.IsNullOrWhiteSpace(lokasiFull))
                 return;

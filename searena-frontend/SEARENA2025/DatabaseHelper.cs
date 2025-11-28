@@ -84,13 +84,7 @@ namespace SEARENA2025
                         UNIQUE(user_id, destinasi_id)
                     );
 
-                    -- Insert sample data (tanpa gambar_url)
-                    INSERT INTO destinasi (nama_destinasi, lokasi, pulau, deskripsi, harga_min, harga_max, waktu_terbaik, rating_avg)
-                    VALUES 
-                    ('Raja Ampat Marine Park', 'Waisai, Raja Ampat, Papua Barat', 'Papua', 
-                     'Surga bawah laut yang memiliki keindahan alam bawah laut terbaik di dunia', 
-                     500000, 1000000, 'Oktober, November, Desember', 4.8)
-                    ON CONFLICT DO NOTHING;
+                  
                 ";
 
                 using (var cmd = new NpgsqlCommand(createTables, conn))
@@ -718,6 +712,8 @@ namespace SEARENA2025
         public string WaktuTerbaik { get; set; }
         public double RatingAvg { get; set; }
         public int TotalReview { get; set; }
+        public string Activity { get; set; }
+
 
         public static List<Destinasi> GetAll()
         {
@@ -730,7 +726,7 @@ namespace SEARENA2025
 
                     string query = @"SELECT 
                         destinasi_id, nama_destinasi, lokasi, pulau, deskripsi, 
-                        harga_min, harga_max, waktu_terbaik, rating_avg, total_review 
+                        harga_min, harga_max, waktu_terbaik, rating_avg, total_review, activity 
                         FROM destinasi ORDER BY rating_avg DESC NULLS LAST";
                     
                     using (var cmd = new NpgsqlCommand(query, conn))
@@ -750,7 +746,8 @@ namespace SEARENA2025
                                     HargaMax = reader.IsDBNull(6) ? 0 : Convert.ToDecimal(reader.GetValue(6)),
                                     WaktuTerbaik = reader.IsDBNull(7) ? "" : reader.GetString(7),
                                     RatingAvg = reader.IsDBNull(8) ? 0 : Convert.ToDouble(reader.GetValue(8)),
-                                    TotalReview = reader.IsDBNull(9) ? 0 : reader.GetInt32(9)
+                                    TotalReview = reader.IsDBNull(9) ? 0 : reader.GetInt32(9),
+                                    Activity = reader.IsDBNull(10) ? "" : reader.GetString(10)
                                 });
                             }
                         }

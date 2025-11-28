@@ -31,6 +31,7 @@ namespace SEARENA2025
             public string Nama { get; set; }
             public string Lokasi { get; set; }
 
+
             public override string ToString()
             {
                 return $"{Nama} - {Lokasi}";
@@ -173,12 +174,10 @@ namespace SEARENA2025
             {
                 Cursor = Cursors.WaitCursor;
 
-                await Task.Run(() =>
-                {
-                    allDestinasi = Destinasi.GetAll();
-                });
+                // 1) Ambil data dari DB (di thread pool)
+                allDestinasi = await Task.Run(() => Destinasi.GetAll());
 
-                // Build list untuk fitur sugesti (ListBox)
+                // 2) Siapkan list untuk sugesti pencarian
                 _allDestinasi = allDestinasi
                     .Select(d => new DestInfo
                     {
@@ -188,56 +187,34 @@ namespace SEARENA2025
                     })
                     .ToList();
 
-                MessageBox.Show($"Ditemukan {allDestinasi.Count} destinasi di database", "Info Loading",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 3) Pastikan panel ada dan bersih
+                if (flpDestinasi == null) return;
+                flpDestinasi.SuspendLayout();
+                flpDestinasi.Controls.Clear();
 
-                if (flpDestinasi != null)
-                {
-                    flpDestinasi.Controls.Clear();
-                }
-
+                // 4) Render
                 if (allDestinasi.Count == 0)
                 {
-                    var lblNoData = new Label
+                    flpDestinasi.Controls.Add(new Label
                     {
                         Text = "Belum ada destinasi tersedia.\nTambahkan destinasi melalui halaman Admin.",
                         Font = new Font("Segoe UI", 12, FontStyle.Italic),
                         ForeColor = Color.Gray,
                         AutoSize = true,
                         TextAlign = ContentAlignment.MiddleCenter
-                    };
-                    flpDestinasi.Controls.Add(lblNoData);
+                    });
                 }
                 else
                 {
-                    int cardCount = 0;
-                    foreach (var destinasi in allDestinasi)
-                    {
-                        try
-                        {
-                            var card = new DestinasiCard(destinasi);
-                            card.Margin = new Padding(10);
+                    // Pilih salah satu:
+                    // a) Terapkan filter/urutan saat ini:
+                    ApplyFilters();
 
-                            // PENTING: Hapus semua event handler lama sebelum menambah yang baru
-                            card.CardClicked -= Card_OnCardClicked;
-                            card.CardClicked += Card_OnCardClicked;
-
-                            // Store destinasi info in Tag untuk diambil nanti
-                            card.Tag = destinasi;
-
-                            flpDestinasi.Controls.Add(card);
-                            cardCount++;
-                        }
-                        catch (Exception cardEx)
-                        {
-                            MessageBox.Show($"Error membuat card untuk '{destinasi.NamaDestinasi}': {cardEx.Message}",
-                                "Error Card", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-
-                    MessageBox.Show($"{cardCount} kartu destinasi berhasil ditampilkan!", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // b) ATAU kalau ingin render semua dulu:
+                    // RebuildDestinasiCards(allDestinasi);
                 }
+
+                flpDestinasi.ResumeLayout();
             }
             catch (Exception ex)
             {
@@ -345,7 +322,7 @@ namespace SEARENA2025
             // Combo rating
             if (CmbRating != null)
             {
-                CmbRating.SelectedIndexChanged += (s, e) => ApplySorting();
+                CmbRating.SelectedIndexChanged += (s, e) => ApplyFilters();
             }
 
             // Checkbox filter pulau
@@ -407,20 +384,7 @@ namespace SEARENA2025
 
         private void SetupScrollBars()
         {
-            // Setup scrollbar untuk filter pulau (ScrollPulau)
-            if (ScrollPulau != null && PnlPulau != null)
-            {
-                ScrollPulau.Minimum = 0;
-                ScrollPulau.Maximum = Math.Max(0, PnlPulau.Height - 150);
-                ScrollPulau.LargeChange = 50;
-                ScrollPulau.SmallChange = 10;
-                ScrollPulau.Visible = PnlPulau.Height > 150;
-
-                ScrollPulau.Scroll += (s, e) =>
-                {
-                    PnlPulau.Top = -ScrollPulau.Value;
-                };
-            }
+           
         }
 
         private void SetupRatingComboBox()
@@ -564,9 +528,65 @@ namespace SEARENA2025
 
         private void ApplyFilters()
         {
-            List<string> selectedPulau = GetSelectedPulau();
-            List<string> selectedAktivitas = GetSelectedAktivitas();
-            ApplyDestinasiCardFiltering(selectedPulau, selectedAktivitas);
+            if (flpDestinasi == null) return;
+
+            // 1. Ambil filter dari checkbox
+            var selectedPulau = GetSelectedPulau();        // sudah ada fungsinya
+            var selectedAktivitas = GetSelectedAktivitas(); // juga sudah ada
+
+            // 2. Ambil pilihan urutan
+            string sortBy = CmbRating?.SelectedItem?.ToString() ?? "Populer";
+
+            // 3. Mulai dari semua destinasi (data dari DB)
+            IEnumerable<Destinasi> query = allDestinasi;
+
+            // --- FILTER PULAU (Bali, Jawa, dll) ---
+            if (selectedPulau.Any())
+            {
+                // pastikan teks di checkbox sama dengan nilai di kolom pulau (Bali, Jawa, dst)
+                query = query.Where(d => selectedPulau.Contains(d.Pulau));
+            }
+
+            // --- FILTER AKTIVITAS (Sunset, Snorkeling, Diving, Camping) ---
+            if (selectedAktivitas.Any())
+            {
+                query = query.Where(d =>
+                    !string.IsNullOrWhiteSpace(d.Activity) &&          // nama properti sesuaikan dengan model Destinasi kamu
+                    selectedAktivitas.Any(a =>
+                        d.Activity
+                            .Split(',')                                // "Snorkeling,Sunset" → ["Snorkeling","Sunset"]
+                            .Select(x => x.Trim())
+                            .Contains(a)
+                    )
+                );
+            }
+
+            // 4. SORTING
+            switch (sortBy)
+            {
+                case "Rating Tertinggi":
+                    query = query.OrderByDescending(d => d.RatingAvg);
+                    break;
+                case "Rating Terendah":
+                    query = query.OrderBy(d => d.RatingAvg);
+                    break;
+                case "Rekomendasi":
+                    // contoh: rating tinggi + review banyak
+                    query = query
+                        .OrderByDescending(d => d.RatingAvg)
+                        .ThenByDescending(d => d.TotalReview);
+                    break;
+                case "Populer":
+                default:
+                    // paling banyak review dianggap paling populer
+                    query = query.OrderByDescending(d => d.TotalReview);
+                    break;
+            }
+
+            var result = query.ToList();
+
+            // 5. Bangun ulang kartu di FlowLayoutPanel
+            RebuildDestinasiCards(result);
         }
 
         private void ApplyDestinasiCardFiltering(List<string> selectedPulau, List<string> selectedAktivitas)
@@ -599,36 +619,10 @@ namespace SEARENA2025
             }
         }
 
-        private void ApplySorting()
-        {
-            if (CmbRating == null || flpDestinasi == null) return;
+        
 
-            string sortBy = CmbRating.SelectedItem?.ToString() ?? "Populer";
+        
 
-            var sortedDestinasi = new List<Destinasi>(allDestinasi);
-
-            switch (sortBy)
-            {
-                case "Rating Tertinggi":
-                    sortedDestinasi = sortedDestinasi.OrderByDescending(d => d.RatingAvg).ToList();
-                    break;
-                case "Rating Terendah":
-                    sortedDestinasi = sortedDestinasi.OrderBy(d => d.RatingAvg).ToList();
-                    break;
-                case "Rekomendasi":
-                    sortedDestinasi = sortedDestinasi
-                        .OrderByDescending(d => d.RatingAvg)
-                        .ThenByDescending(d => d.TotalReview)
-                        .ToList();
-                    break;
-                case "Populer":
-                default:
-                    sortedDestinasi = sortedDestinasi.OrderByDescending(d => d.TotalReview).ToList();
-                    break;
-            }
-
-            RebuildDestinasiCards(sortedDestinasi);
-        }
 
         private void RebuildDestinasiCards(List<Destinasi> sortedDestinasi)
         {
@@ -1003,13 +997,7 @@ namespace SEARENA2025
 
         private void PnlPulau_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (ScrollPulau != null && ScrollPulau.Visible)
-            {
-                int newValue = ScrollPulau.Value - (e.Delta / 2);
-                newValue = Math.Max(ScrollPulau.Minimum, Math.Min(ScrollPulau.Maximum, newValue));
-                ScrollPulau.Value = newValue;
-                if (PnlPulau != null) PnlPulau.Top = -newValue;
-            }
+           
         }
 
         private void panelDestinasi1_MouseWheel(object sender, MouseEventArgs e)
@@ -1022,6 +1010,21 @@ namespace SEARENA2025
 
         private void lblProfile_Click(object sender, EventArgs e)
         {
+        }
+
+        private void guna2CheckBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckBoxSunset_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckBoxSulawesi_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

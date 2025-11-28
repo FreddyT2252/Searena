@@ -70,12 +70,12 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"SELECT r.id, d.nama_destinasi, d.lokasi, 
-                                           r.rating, r.review_text
-                                     FROM reviews r
-                                     JOIN destinasi d ON r.destinasi_id = d.destinasi_id
-                                     WHERE r.response IS NULL OR r.response = '' 
-                                     ORDER BY r.tanggal_review DESC";
+                    // Query diperbaiki sesuai struktur DB yang benar
+                    string query = @"SELECT review_id, username, dest_name, dest_location, 
+                                   rating, review_text, tanggal_review
+                            FROM reviews
+                            WHERE response IS NULL OR response = ''
+                            ORDER BY tanggal_review DESC";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
@@ -85,19 +85,20 @@ namespace SEARENA2025
 
                             while (reader.Read())
                             {
-                                int id = reader.GetInt32(0);
-                                string destinasi = reader.IsDBNull(1) ? "-" : reader.GetString(1);
-                                string lokasi = reader.IsDBNull(2) ? "-" : reader.GetString(2);
-                                int rating = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
-                                string review = reader.IsDBNull(4) ? "-" : reader.GetString(4);
+                                int reviewId = reader.GetInt32(0);
+                                string username = reader.IsDBNull(1) ? "-" : reader.GetString(1);
+                                string destinasi = reader.IsDBNull(2) ? "-" : reader.GetString(2);
+                                string lokasi = reader.IsDBNull(3) ? "-" : reader.GetString(3);
+                                int rating = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
+                                string review = reader.IsDBNull(5) ? "-" : reader.GetString(5);
 
                                 // Buat string bintang
                                 string ratingStars = new string('★', Math.Max(0, Math.Min(5, rating)))
                                                    + new string('☆', Math.Max(0, 5 - Math.Max(0, Math.Min(5, rating))));
 
-                                // Tambahkan row
-                                int rowIdx = dgvRiwayat.Rows.Add(destinasi, lokasi, ratingStars, review);
-                                dgvRiwayat.Rows[rowIdx].Tag = id;
+                                // Tambahkan row: Username | Destinasi | Lokasi | Rating | Review
+                                int rowIdx = dgvRiwayat.Rows.Add(username, destinasi, lokasi, ratingStars, review);
+                                dgvRiwayat.Rows[rowIdx].Tag = reviewId;
                             }
 
                             // Font untuk mendukung bintang
@@ -217,34 +218,39 @@ namespace SEARENA2025
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            if (selectedDestinasiId == -1)
-            {
-                MessageBox.Show("Pilih destinasi yang ingin diupdate!");
-                return;
-            }
-
-            // Validasi input wajib
+            // Validasi semua field harus diisi
             if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
                 MessageBox.Show("Nama destinasi harus diisi!");
+                txtNamaDestinasi.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtDeskripsi.Text))
             {
                 MessageBox.Show("Deskripsi harus diisi!");
+                txtDeskripsi.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtAlamatDestinasi.Text))
             {
-                MessageBox.Show("Lokasi harus diisi!");
+                MessageBox.Show("Alamat destinasi harus diisi!");
+                txtAlamatDestinasi.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtPulau.Text))
             {
                 MessageBox.Show("Pulau harus diisi!");
+                txtPulau.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtRekomendasiCuaca.Text))
+            {
+                MessageBox.Show("Rekomendasi cuaca harus diisi!");
+                txtRekomendasiCuaca.Focus();
                 return;
             }
 
@@ -253,6 +259,7 @@ namespace SEARENA2025
             if (!int.TryParse(hargaMinText, out int hargaMin))
             {
                 MessageBox.Show("Harga minimum harus berupa angka yang valid!");
+                txtTiketMin.Focus();
                 return;
             }
 
@@ -261,14 +268,23 @@ namespace SEARENA2025
             if (!int.TryParse(hargaMaxText, out int hargaMax))
             {
                 MessageBox.Show("Harga maksimum harus berupa angka yang valid!");
+                txtTiketMax.Focus();
+                return;
+            }
+
+            // Validasi harga min < harga max
+            if (hargaMin > hargaMax)
+            {
+                MessageBox.Show("Harga minimum tidak boleh lebih besar dari harga maksimum!");
                 return;
             }
 
             // Validasi rating
             string ratingText = txtRating.Text.Trim();
-            if (!float.TryParse(ratingText, out float rating))
+            if (!float.TryParse(ratingText, out float rating) || rating < 0 || rating > 5)
             {
-                MessageBox.Show("Rating harus berupa angka yang valid!");
+                MessageBox.Show("Rating harus berupa angka antara 0-5!");
+                txtRating.Focus();
                 return;
             }
 
@@ -277,6 +293,7 @@ namespace SEARENA2025
             if (!int.TryParse(totalReviewText, out int totalReview))
             {
                 MessageBox.Show("Total review harus berupa angka yang valid!");
+                txtTotalReview.Focus();
                 return;
             }
 
@@ -292,28 +309,45 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = @"UPDATE destinasi SET nama_destinasi=@nama, deskripsi=@deskripsi, 
+
+                    // Cek apakah destinasi dengan nama ini ada di database
+                    string checkQuery = "SELECT destinasi_id FROM destinasi WHERE nama_destinasi = @nama";
+                    using (var checkCmd = new NpgsqlCommand(checkQuery, connection))
+                    {
+                        checkCmd.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
+                        var result = checkCmd.ExecuteScalar();
+
+                        if (result == null)
+                        {
+                            MessageBox.Show("Destinasi dengan nama '" + txtNamaDestinasi.Text.Trim() + "' tidak ditemukan!");
+                            return;
+                        }
+
+                        int destinasiId = Convert.ToInt32(result);
+
+                        // Update destinasi
+                        string updateQuery = @"UPDATE destinasi SET deskripsi=@deskripsi, 
                                      lokasi=@lokasi, pulau=@pulau, harga_min=@harga_min, harga_max=@harga_max, 
                                      rating_avg=@rating, total_review=@total_review, waktu_terbaik=@waktu 
                                      WHERE destinasi_id=@id";
 
-                    using (var cmd = new NpgsqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@id", selectedDestinasiId);
-                        cmd.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@lokasi", txtAlamatDestinasi.Text.Trim());
-                        cmd.Parameters.AddWithValue("@pulau", txtPulau.Text.Trim());
-                        cmd.Parameters.AddWithValue("@harga_min", hargaMin);
-                        cmd.Parameters.AddWithValue("@harga_max", hargaMax);
-                        cmd.Parameters.AddWithValue("@rating", rating);
-                        cmd.Parameters.AddWithValue("@total_review", totalReview);
-                        cmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
+                        using (var updateCmd = new NpgsqlCommand(updateQuery, connection))
+                        {
+                            updateCmd.Parameters.AddWithValue("@id", destinasiId);
+                            updateCmd.Parameters.AddWithValue("@deskripsi", txtDeskripsi.Text.Trim());
+                            updateCmd.Parameters.AddWithValue("@lokasi", txtAlamatDestinasi.Text.Trim());
+                            updateCmd.Parameters.AddWithValue("@pulau", txtPulau.Text.Trim());
+                            updateCmd.Parameters.AddWithValue("@harga_min", hargaMin);
+                            updateCmd.Parameters.AddWithValue("@harga_max", hargaMax);
+                            updateCmd.Parameters.AddWithValue("@rating", rating);
+                            updateCmd.Parameters.AddWithValue("@total_review", totalReview);
+                            updateCmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
 
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Destinasi berhasil diupdate!");
-                        ClearForm();
-                        LoadDestinasi();
+                            updateCmd.ExecuteNonQuery();
+                            MessageBox.Show("Destinasi berhasil diupdate!");
+                            ClearForm();
+                            LoadDestinasi();
+                        }
                     }
                 }
             }
@@ -325,29 +359,50 @@ namespace SEARENA2025
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedDestinasiId == -1)
+            // Validasi nama destinasi harus diisi (field paling penting untuk identifikasi)
+            if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
-                MessageBox.Show("Pilih destinasi yang ingin dihapus!");
+                MessageBox.Show("Nama destinasi harus diisi untuk menghapus!");
+                txtNamaDestinasi.Focus();
                 return;
             }
-
-            if (MessageBox.Show("Yakin ingin menghapus destinasi ini?", "Konfirmasi", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
 
             try
             {
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = "DELETE FROM destinasi WHERE destinasi_id=@id";
 
-                    using (var cmd = new NpgsqlCommand(query, connection))
+                    // Cek apakah destinasi dengan nama ini ada di database
+                    string checkQuery = "SELECT destinasi_id FROM destinasi WHERE nama_destinasi = @nama";
+                    using (var checkCmd = new NpgsqlCommand(checkQuery, connection))
                     {
-                        cmd.Parameters.AddWithValue("@id", selectedDestinasiId);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Destinasi berhasil dihapus!");
-                        ClearForm();
-                        LoadDestinasi();
+                        checkCmd.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
+                        var result = checkCmd.ExecuteScalar();
+
+                        if (result == null)
+                        {
+                            MessageBox.Show("Destinasi dengan nama '" + txtNamaDestinasi.Text.Trim() + "' tidak ditemukan!");
+                            return;
+                        }
+
+                        int destinasiId = Convert.ToInt32(result);
+
+                        // Konfirmasi delete
+                        if (MessageBox.Show("Yakin ingin menghapus destinasi '" + txtNamaDestinasi.Text.Trim() + "'?",
+                            "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                            return;
+
+                        // Delete destinasi
+                        string deleteQuery = "DELETE FROM destinasi WHERE destinasi_id=@id";
+                        using (var deleteCmd = new NpgsqlCommand(deleteQuery, connection))
+                        {
+                            deleteCmd.Parameters.AddWithValue("@id", destinasiId);
+                            deleteCmd.ExecuteNonQuery();
+                            MessageBox.Show("Destinasi berhasil dihapus!");
+                            ClearForm();
+                            LoadDestinasi();
+                        }
                     }
                 }
             }
@@ -376,7 +431,8 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    string query = "UPDATE reviews SET response=@response WHERE id=@id";
+                    // Sesuaikan nama column dengan struktur DB mu
+                    string query = "UPDATE reviews SET response=@response WHERE review_id=@id";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
@@ -387,7 +443,7 @@ namespace SEARENA2025
                         MessageBox.Show("Balasan berhasil dikirim!");
                         txtBalasReview.Clear();
                         selectedReviewId = -1;
-                        LoadReview();
+                        LoadReview(); // Refresh tabel review
                     }
                 }
             }
@@ -402,6 +458,12 @@ namespace SEARENA2025
             if (e.RowIndex >= 0 && dgvRiwayat.Rows[e.RowIndex].Tag != null)
             {
                 selectedReviewId = Convert.ToInt32(dgvRiwayat.Rows[e.RowIndex].Tag);
+                // Optional: tampilkan review yang dipilih di textbox
+                if (e.ColumnIndex >= 0 && dgvRiwayat.Rows[e.RowIndex].Cells.Count > 4)
+                {
+                    var reviewText = dgvRiwayat.Rows[e.RowIndex].Cells[4].Value?.ToString();
+                    // txtBalasReview.Hint = $"Balas review: {reviewText}"; // kalau mau tampilkan preview
+                }
             }
         }
 
