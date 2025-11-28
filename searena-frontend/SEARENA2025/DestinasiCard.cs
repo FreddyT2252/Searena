@@ -79,18 +79,11 @@ namespace SEARENA2025
                     lblNama.Cursor = Cursors.Hand;
                 }
 
-                // Update label lokasi dengan icon
+                // Update label lokasi
                 if (lblLokasi != null)
                 {
                     lblLokasi.Text = Lokasi;
                     lblLokasi.Cursor = Cursors.Hand;
-                }
-
-                // Update icon lokasi (gunakan unicode character atau image)
-                if (iconLokasi != null)
-                {
-                    iconLokasi.Cursor = Cursors.Hand;
-                    // Bisa set image untuk icon lokasi jika ada
                 }
 
                 // Update deskripsi
@@ -143,13 +136,6 @@ namespace SEARENA2025
                     lblWaktuTerbaik.Cursor = Cursors.Hand;
                 }
 
-                // Update icon waktu
-                if (iconWaktu != null)
-                {
-                    iconWaktu.Cursor = Cursors.Hand;
-                    // Bisa set image untuk icon waktu jika ada
-                }
-
                 // Set shadow panel cursor
                 if (shadowPanel != null)
                 {
@@ -187,6 +173,11 @@ namespace SEARENA2025
         private void RaiseCardClicked()
         {
             CardClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void shadowPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

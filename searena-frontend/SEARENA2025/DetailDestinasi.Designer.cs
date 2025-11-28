@@ -630,6 +630,7 @@
             this.PnlRatingReview.Size = new System.Drawing.Size(300, 252);
             this.PnlRatingReview.TabIndex = 9;
             this.PnlRatingReview.UseWaitCursor = true;
+            this.PnlRatingReview.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlRatingReview_Paint);
             // 
             // guna2HtmlLabel25
             // 
@@ -1091,6 +1092,7 @@
             this.PnlDeskripsi.Size = new System.Drawing.Size(477, 154);
             this.PnlDeskripsi.TabIndex = 12;
             this.PnlDeskripsi.UseWaitCursor = true;
+            this.PnlDeskripsi.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlDeskripsi_Paint);
             // 
             // guna2HtmlLabel39
             // 
@@ -1317,6 +1319,7 @@
             this.btnBookmark.Text = "Bookmark";
             this.btnBookmark.UseTransparentBackground = true;
             this.btnBookmark.UseWaitCursor = true;
+            this.btnBookmark.Click += new System.EventHandler(this.btnBookmark_Click_1);
             // 
             // DetailDestinasi
             // 

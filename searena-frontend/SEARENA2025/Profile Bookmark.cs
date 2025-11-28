@@ -18,15 +18,18 @@ namespace SEARENA2025
         private string connectionString = "Host=localhost;Port=5432;Database=searena_db;Username=postgres;Password=Putriananev2412";
         private List<BookmarkData> bookmarkList = new List<BookmarkData>();
         private int selectedBookmarkId = -1; // Menyimpan bookmark yang dipilih
+        private FlowLayoutPanel flowBookmarks;
+        private List<Destinasi> bookmarkDestinasi = new List<Destinasi>();
+        private int selectedDestinasiId = -1;
 
         public Form3(Form2 parent)
         {
             InitializeComponent();
             parentForm = parent;
+            EnsureFlowBookmarks();
             LoadUserProfile();
-            LoadBookmarkData();
+            LoadBookmarks();
             AttachNavbarEvents();
-            AttachCardClickEvents();
         }
 
         // Class untuk menyimpan data bookmark
@@ -46,13 +49,32 @@ namespace SEARENA2025
             public string Activity { get; set; }
         }
 
+        private void EnsureFlowBookmarks()
+        {
+            // Create a FlowLayoutPanel to host dynamic cards if not already present
+            flowBookmarks = new FlowLayoutPanel
+            {
+                Name = "flowBookmarks",
+                AutoScroll = true,
+                WrapContents = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                BackColor = Color.FloralWhite,
+                Location = new Point(512, 200),
+                Size = new Size(566, 430),
+                Padding = new Padding(4),
+                Margin = new Padding(0)
+            };
+            this.Controls.Add(flowBookmarks);
+            flowBookmarks.BringToFront();
+        }
+
         private async void LoadUserProfile()
         {
             try
             {
-                using (var conn = new NpgsqlConnection(connectionString))
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    await conn.OpenAsync();
+                    if (conn == null) return;
 
                     using (var cmd = new NpgsqlCommand("SELECT nama_lengkap, email, no_telepon, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
                     {
@@ -66,7 +88,11 @@ namespace SEARENA2025
                                 lblEmail.Text = reader["email"]?.ToString() ?? "-";
                                 guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblPengguna.Text = "Pengguna";
-                                lblBergabung.Text = "Bergabung sejak " + ((DateTime)reader["tanggal_bergabung"]).ToString("d MMMM yyyy");
+                                var bergabung = reader.IsDBNull(reader.GetOrdinal("tanggal_bergabung")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("tanggal_bergabung"));
+                                if (bergabung.HasValue)
+                                    lblBergabung.Text = "Bergabung sejak " + bergabung.Value.ToString("d MMMM yyyy");
+                                else
+                                    lblBergabung.Text = "Bergabung sejak -";
                             }
                             else
                             {
@@ -82,150 +108,122 @@ namespace SEARENA2025
             }
         }
 
-        private async void LoadBookmarkData()
+        private void LoadBookmarks()
         {
             try
             {
-                bookmarkList.Clear();
-
-                using (var conn = new NpgsqlConnection(connectionString))
-                {
-                    await conn.OpenAsync();
-
-                    using (var cmd = new NpgsqlCommand(@"
-                        SELECT b.bookmark_id, b.destinasi_id, d.nama_destinasi, d.lokasi, d.pulau, d.deskripsi, 
-                               d.harga_min, d.harga_max, d.waktu_terbaik, d.rating_avg, d.total_review, d.activity
-                        FROM bookmark b
-                        INNER JOIN destinasi d ON b.destinasi_id = d.destinasi_id
-                        WHERE b.user_id = @uid
-                        ORDER BY b.tanggal_bookamark DESC", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
-
-                        using (var reader = await cmd.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                bookmarkList.Add(new BookmarkData
-                                {
-                                    BookmarkId = (int)reader["bookmark_id"],
-                                    DestinasiId = (int)reader["destinasi_id"],
-                                    NamaDestinasi = reader["nama_destinasi"]?.ToString() ?? "-",
-                                    Lokasi = reader["lokasi"]?.ToString() ?? "-",
-                                    Pulau = reader["pulau"]?.ToString() ?? "-",
-                                    Deskripsi = reader["deskripsi"]?.ToString() ?? "-",
-                                    HargaMin = reader["harga_min"] != DBNull.Value ? (decimal)reader["harga_min"] : 0,
-                                    HargaMax = reader["harga_max"] != DBNull.Value ? (decimal)reader["harga_max"] : 0,
-                                    WaktuTerbaik = reader["waktu_terbaik"]?.ToString() ?? "-",
-                                    RatingAvg = reader["rating_avg"] != DBNull.Value ? (decimal)reader["rating_avg"] : 0,
-                                    TotalReview = reader["total_review"] != DBNull.Value ? (int)reader["total_review"] : 0,
-                                    Activity = reader["activity"]?.ToString() ?? "-"
-                                });
-                            }
-                        }
-                    }
-                }
-
-                DisplayBookmarks();
+                selectedDestinasiId = -1;
+                bookmarkDestinasi = Bookmark.GetBookmarksByUserId(UserSession.UserId) ?? new List<Destinasi>();
+                guna2HtmlLabel2.Text = $"Riwayat Bookmark ({bookmarkDestinasi.Count})";
+                RenderBookmarkCards();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading bookmark data: {ex.Message}");
+                MessageBox.Show($"Error loading bookmarks: {ex.Message}");
             }
         }
 
-        private void DisplayBookmarks()
+        private void RenderBookmarkCards()
         {
-            panelDestinasi1.Visible = false;
-            panelDestinasi2.Visible = false;
+            flowBookmarks.SuspendLayout();
+            flowBookmarks.Controls.Clear();
 
-            if (bookmarkList.Count >= 1)
+            foreach (var d in bookmarkDestinasi)
             {
-                panelDestinasi1.Visible = true;
-                SetBookmarkUI(bookmarkList[0], 1);
+                var card = new DestinasiCard(d)
+                {
+                    Width = 270,
+                    Height = 160,
+                    Margin = new Padding(6)
+                };
+                card.CardClicked += (s, e) => OnCardClicked(card, d.Id);
+                flowBookmarks.Controls.Add(card);
             }
 
-            if (bookmarkList.Count >= 2)
+            flowBookmarks.ResumeLayout();
+        }
+
+        private void OnCardClicked(DestinasiCard card, int destinasiId)
+        {
+            selectedDestinasiId = destinasiId;
+            HighlightSelectedCard(card);
+        }
+
+        private void HighlightSelectedCard(DestinasiCard selected)
+        {
+            foreach (Control ctrl in flowBookmarks.Controls)
             {
-                panelDestinasi2.Visible = true;
-                SetBookmarkUI(bookmarkList[1], 2);
+                if (ctrl is Guna2ShadowPanel sp)
+                {
+                    sp.BackColor = Color.White;
+                }
+                else
+                {
+                    ctrl.BackColor = Color.White;
+                }
             }
 
-            selectedBookmarkId = -1; // Reset selection
-            ResetCardHighlight();
+            // Try to find internal shadow panel if exists
+            selected.BackColor = Color.LightYellow;
         }
 
-        private void SetBookmarkUI(BookmarkData bookmark, int position)
+        private void btnBookmark_Click(object sender, EventArgs e)
         {
-            if (position == 1)
+            btnBookmark.FillColor = Color.LightGreen;
+            btnRatingReview.FillColor = Color.FloralWhite;
+            LoadBookmarks();
+        }
+
+        private async void btnUnbookmark_Click(object sender, EventArgs e)
+        {
+            if (selectedDestinasiId <= 0)
             {
-                lblDestinasi1.Text = bookmark.NamaDestinasi;
-                lblLokasi1.Text = $"{bookmark.Pulau}, {bookmark.Lokasi}";
-                lblDeskripsi1.Text = bookmark.Deskripsi;
-                lblFasilitas1.Text = bookmark.Activity;
-                lblWaktu1.Text = "Terbaik: " + bookmark.WaktuTerbaik;
-                panelDestinasi1.Tag = bookmark.BookmarkId;
+                MessageBox.Show("Silakan pilih destinasi terlebih dahulu", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (position == 2)
+
+            var selected = bookmarkDestinasi.FirstOrDefault(x => x.Id == selectedDestinasiId);
+            if (selected == null) return;
+
+            DialogResult result = MessageBox.Show($"Hapus bookmark untuk {selected.NamaDestinasi}?",
+                "Konfirmasi Unbookmark", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
             {
-                lblDestinasi2.Text = bookmark.NamaDestinasi;
-                lblLokasi2.Text = $"{bookmark.Pulau}, {bookmark.Lokasi}";
-                lblDeskripsi2.Text = bookmark.Deskripsi;
-                lblFasilitas2.Text = bookmark.Activity;
-                lblWaktu2.Text = "Terbaik: " + bookmark.WaktuTerbaik;
-                panelDestinasi2.Tag = bookmark.BookmarkId;
-            }
-        }
-
-        // Attach click events ke card untuk selection
-        private void AttachCardClickEvents()
-        {
-            panelDestinasi1.Click += (s, e) => SelectCard(panelDestinasi1, 1);
-            panelDestinasi2.Click += (s, e) => SelectCard(panelDestinasi2, 2);
-
-            // Juga attach ke semua child controls untuk propagate event
-            AttachClickToChildren(panelDestinasi1, (s, e) => SelectCard(panelDestinasi1, 1));
-            AttachClickToChildren(panelDestinasi2, (s, e) => SelectCard(panelDestinasi2, 2));
-        }
-
-        private void AttachClickToChildren(Control parent, EventHandler handler)
-        {
-            foreach (Control child in parent.Controls)
-            {
-                child.Click += handler;
-                AttachClickToChildren(child, handler);
-            }
-        }
-
-        private void SelectCard(Control card, int position)
-        {
-            if (card.Tag == null) return;
-
-            int bookmarkId = (int)card.Tag;
-            selectedBookmarkId = bookmarkId;
-
-            ResetCardHighlight();
-            HighlightCard(card);
-        }
-
-        private void HighlightCard(Control card)
-        {
-            if (card is Guna2ShadowPanel shadowPanel)
-            {
-                shadowPanel.BackColor = Color.LightYellow; // Highlight dengan warna kuning
+                await UnbookmarkSelectedAsync(UserSession.UserId, selectedDestinasiId);
+                LoadBookmarks();
             }
         }
 
-        private void ResetCardHighlight()
+        private async Task UnbookmarkSelectedAsync(int userId, int destinasiId)
         {
-            if (panelDestinasi1 is Guna2ShadowPanel panel1)
+            try
             {
-                panel1.BackColor = Color.White;
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    if (conn == null) return;
+
+                    using (var cmd = new NpgsqlCommand("DELETE FROM bookmarks WHERE user_id = @uid AND destinasi_id = @did", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", userId);
+                        cmd.Parameters.AddWithValue("@did", destinasiId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+
+                MessageBox.Show("Bookmark berhasil dihapus", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (panelDestinasi2 is Guna2ShadowPanel panel2)
+            catch (Exception ex)
             {
-                panel2.BackColor = Color.White;
+                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void AttachNavbarEvents()
+        {
+            if (lblProfile != null) lblProfile.Click += lblProfile_Click;
+            if (guna2PictureBox1 != null) guna2PictureBox1.Click += Logo_Click;
         }
 
         private void Logo_Click(object sender, EventArgs e)
@@ -256,13 +254,6 @@ namespace SEARENA2025
             }
         }
 
-        private void btnBookmark_Click(object sender, EventArgs e)
-        {
-            btnBookmark.FillColor = Color.LightGreen;
-            btnRatingReview.FillColor = Color.FloralWhite;
-            LoadBookmarkData();
-        }
-
         private void Beranda_Click(object sender, EventArgs e)
         {
             DashboardUtama dashboard = new DashboardUtama();
@@ -290,58 +281,6 @@ namespace SEARENA2025
         private void lblProfile_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Anda sudah berada di halaman profile", "Profile");
-        }
-
-        // Button unbookmark - dihapus ketika card sudah dipilih
-        private async void btnUnbookmark_Click(object sender, EventArgs e)
-        {
-            if (selectedBookmarkId == -1)
-            {
-                MessageBox.Show("Silakan pilih destinasi terlebih dahulu", "Peringatan",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            BookmarkData selected = bookmarkList.FirstOrDefault(b => b.BookmarkId == selectedBookmarkId);
-            if (selected == null) return;
-
-            DialogResult result = MessageBox.Show($"Hapus bookmark untuk {selected.NamaDestinasi}?",
-                "Konfirmasi Unbookmark", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                await DeleteBookmarkFromDatabase(selectedBookmarkId);
-                LoadBookmarkData();
-            }
-        }
-
-        private async Task DeleteBookmarkFromDatabase(int bookmarkId)
-        {
-            try
-            {
-                using (var conn = new NpgsqlConnection(connectionString))
-                {
-                    await conn.OpenAsync();
-
-                    using (var cmd = new NpgsqlCommand("DELETE FROM bookmark WHERE bookmark_id = @bid", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@bid", bookmarkId);
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                }
-
-                MessageBox.Show("Bookmark berhasil dihapus", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Gagal menghapus bookmark: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void AttachNavbarEvents()
-        {
-            if (lblProfile != null) lblProfile.Click += lblProfile_Click;
-            if (guna2PictureBox1 != null) guna2PictureBox1.Click += Logo_Click;
         }
 
         private void Form3_Load(object sender, EventArgs e)

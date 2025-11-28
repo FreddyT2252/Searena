@@ -30,76 +30,61 @@ namespace SEARENA2025
         {
             this.shadowPanel = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.lblWaktuTerbaik = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.iconWaktu = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblRating = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblDeskripsi = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.iconLokasi = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblLokasi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNama = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.shadowPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconWaktu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconLokasi)).BeginInit();
             this.SuspendLayout();
             // 
             // shadowPanel
             // 
             this.shadowPanel.BackColor = System.Drawing.Color.Transparent;
             this.shadowPanel.Controls.Add(this.lblWaktuTerbaik);
-            this.shadowPanel.Controls.Add(this.iconWaktu);
             this.shadowPanel.Controls.Add(this.lblRating);
             this.shadowPanel.Controls.Add(this.lblDeskripsi);
-            this.shadowPanel.Controls.Add(this.iconLokasi);
             this.shadowPanel.Controls.Add(this.lblLokasi);
             this.shadowPanel.Controls.Add(this.lblNama);
             this.shadowPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.shadowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shadowPanel.FillColor = System.Drawing.Color.White;
             this.shadowPanel.Location = new System.Drawing.Point(0, 0);
+            this.shadowPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.shadowPanel.Name = "shadowPanel";
             this.shadowPanel.Radius = 8;
             this.shadowPanel.ShadowColor = System.Drawing.Color.Black;
             this.shadowPanel.ShadowDepth = 60;
-            this.shadowPanel.Size = new System.Drawing.Size(300, 180);
+            this.shadowPanel.Size = new System.Drawing.Size(450, 277);
             this.shadowPanel.TabIndex = 0;
             this.shadowPanel.Click += new System.EventHandler(this.Control_Click);
+            this.shadowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.shadowPanel_Paint);
             // 
             // lblWaktuTerbaik
             // 
             this.lblWaktuTerbaik.BackColor = System.Drawing.Color.Transparent;
             this.lblWaktuTerbaik.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblWaktuTerbaik.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblWaktuTerbaik.Location = new System.Drawing.Point(40, 145);
+            this.lblWaktuTerbaik.Location = new System.Drawing.Point(26, 210);
+            this.lblWaktuTerbaik.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblWaktuTerbaik.Name = "lblWaktuTerbaik";
-            this.lblWaktuTerbaik.Size = new System.Drawing.Size(135, 15);
+            this.lblWaktuTerbaik.Size = new System.Drawing.Size(199, 23);
             this.lblWaktuTerbaik.TabIndex = 6;
             this.lblWaktuTerbaik.Text = "Terbaik: Oktober, November";
             this.lblWaktuTerbaik.Click += new System.EventHandler(this.Control_Click);
             // 
-            // iconWaktu
-            // 
-            this.iconWaktu.BackColor = System.Drawing.Color.Transparent;
-            this.iconWaktu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconWaktu.FillColor = System.Drawing.Color.Transparent;
-            this.iconWaktu.ImageRotate = 0F;
-            this.iconWaktu.Location = new System.Drawing.Point(15, 143);
-            this.iconWaktu.Name = "iconWaktu";
-            this.iconWaktu.Size = new System.Drawing.Size(20, 20);
-            this.iconWaktu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.iconWaktu.TabIndex = 5;
-            this.iconWaktu.TabStop = false;
-            this.iconWaktu.Click += new System.EventHandler(this.Control_Click);
-            // 
             // lblRating
             // 
-            this.lblRating.BackColor = System.Drawing.Color.FromArgb(144, 238, 144);
+            this.lblRating.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(238)))), ((int)(((byte)(144)))));
             this.lblRating.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.lblRating.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
-            this.lblRating.Location = new System.Drawing.Point(15, 110);
+            this.lblRating.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.lblRating.Location = new System.Drawing.Point(26, 163);
+            this.lblRating.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblRating.Name = "lblRating";
-            this.lblRating.Padding = new System.Windows.Forms.Padding(8, 3, 8, 3);
-            this.lblRating.Size = new System.Drawing.Size(85, 21);
+            this.lblRating.Padding = new System.Windows.Forms.Padding(12, 5, 12, 5);
+            this.lblRating.Size = new System.Drawing.Size(117, 33);
             this.lblRating.TabIndex = 4;
             this.lblRating.Text = "Sangat Baik";
+            this.lblRating.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblRating.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblDeskripsi
@@ -107,36 +92,24 @@ namespace SEARENA2025
             this.lblDeskripsi.BackColor = System.Drawing.Color.Transparent;
             this.lblDeskripsi.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblDeskripsi.ForeColor = System.Drawing.Color.Gray;
-            this.lblDeskripsi.Location = new System.Drawing.Point(15, 55);
-            this.lblDeskripsi.MaximumSize = new System.Drawing.Size(270, 50);
+            this.lblDeskripsi.Location = new System.Drawing.Point(22, 82);
+            this.lblDeskripsi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblDeskripsi.MaximumSize = new System.Drawing.Size(405, 77);
             this.lblDeskripsi.Name = "lblDeskripsi";
-            this.lblDeskripsi.Size = new System.Drawing.Size(270, 45);
+            this.lblDeskripsi.Size = new System.Drawing.Size(405, 44);
             this.lblDeskripsi.TabIndex = 3;
             this.lblDeskripsi.Text = "Surga bawah laut yang memiliki keindahan alam bawah laut terbaik di dunia";
             this.lblDeskripsi.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // iconLokasi
-            // 
-            this.iconLokasi.BackColor = System.Drawing.Color.Transparent;
-            this.iconLokasi.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconLokasi.FillColor = System.Drawing.Color.Transparent;
-            this.iconLokasi.ImageRotate = 0F;
-            this.iconLokasi.Location = new System.Drawing.Point(15, 33);
-            this.iconLokasi.Name = "iconLokasi";
-            this.iconLokasi.Size = new System.Drawing.Size(16, 16);
-            this.iconLokasi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.iconLokasi.TabIndex = 2;
-            this.iconLokasi.TabStop = false;
-            this.iconLokasi.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblLokasi
             // 
             this.lblLokasi.BackColor = System.Drawing.Color.Transparent;
             this.lblLokasi.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblLokasi.ForeColor = System.Drawing.Color.Gray;
-            this.lblLokasi.Location = new System.Drawing.Point(35, 33);
+            this.lblLokasi.Location = new System.Drawing.Point(24, 52);
+            this.lblLokasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblLokasi.Name = "lblLokasi";
-            this.lblLokasi.Size = new System.Drawing.Size(158, 15);
+            this.lblLokasi.Size = new System.Drawing.Size(226, 23);
             this.lblLokasi.TabIndex = 1;
             this.lblLokasi.Text = "Waisai, Raja Ampat, Papua Barat";
             this.lblLokasi.Click += new System.EventHandler(this.Control_Click);
@@ -145,28 +118,28 @@ namespace SEARENA2025
             // 
             this.lblNama.BackColor = System.Drawing.Color.Transparent;
             this.lblNama.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblNama.ForeColor = System.Drawing.Color.FromArgb(41, 50, 65);
-            this.lblNama.Location = new System.Drawing.Point(15, 10);
+            this.lblNama.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
+            this.lblNama.Location = new System.Drawing.Point(22, 15);
+            this.lblNama.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblNama.Name = "lblNama";
-            this.lblNama.Size = new System.Drawing.Size(184, 23);
+            this.lblNama.Size = new System.Drawing.Size(281, 34);
             this.lblNama.TabIndex = 0;
             this.lblNama.Text = "Raja Ampat Marine Park";
             this.lblNama.Click += new System.EventHandler(this.Control_Click);
             // 
             // DestinasiCard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.shadowPanel);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DestinasiCard";
-            this.Size = new System.Drawing.Size(300, 180);
+            this.Size = new System.Drawing.Size(450, 277);
             this.Click += new System.EventHandler(this.Control_Click);
             this.shadowPanel.ResumeLayout(false);
             this.shadowPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconWaktu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconLokasi)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -176,10 +149,8 @@ namespace SEARENA2025
         private Guna.UI2.WinForms.Guna2ShadowPanel shadowPanel;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNama;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLokasi;
-        private Guna.UI2.WinForms.Guna2PictureBox iconLokasi;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDeskripsi;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblRating;
-        private Guna.UI2.WinForms.Guna2PictureBox iconWaktu;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblWaktuTerbaik;
     }
 }
