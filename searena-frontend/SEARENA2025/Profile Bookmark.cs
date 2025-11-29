@@ -55,20 +55,75 @@ namespace SEARENA2025
 
         private void EnsureFlowBookmarks()
         {
-            flowBookmarks = new FlowLayoutPanel
+            // Cari FlowLayoutPanel yang sudah ada di designer
+            flowBookmarks = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault(f => f.Name == "flowBookmarks");
+
+            if (flowBookmarks == null)
             {
-                Name = "flowBookmarks",
-                AutoScroll = true,
-                WrapContents = true,
-                FlowDirection = FlowDirection.LeftToRight,
-                BackColor = Color.FloralWhite,
-                Location = new Point(512, 200),
-                Size = new Size(566, 430),
-                Padding = new Padding(4),
-                Margin = new Padding(0)
-            };
-            this.Controls.Add(flowBookmarks);
-            flowBookmarks.BringToFront();
+                // Cari di dalam container panels
+                foreach (Control container in this.Controls)
+                {
+                    if (container is Guna.UI2.WinForms.Guna2Panel || container is Panel)
+                    {
+                        flowBookmarks = container.Controls.OfType<FlowLayoutPanel>()
+                            .FirstOrDefault(f => f.Name == "flowBookmarks");
+                        if (flowBookmarks != null) break;
+                    }
+                }
+            }
+
+            if (flowBookmarks == null)
+            {
+                // Buat FlowLayoutPanel baru (seperti di DashboardUtama)
+                // Cari footer panel untuk menghitung tinggi yang tersedia
+                var footerPanel = this.Controls.OfType<Control>()
+                    .FirstOrDefault(c => c.Name == "PnlInformasi" || c.Name.Contains("Footer"));
+
+                int xPosition = 512;
+                int yPosition = 200;
+
+                // Hitung tinggi yang tersedia (jangan sampai memotong footer)
+                int availableHeight;
+                const int safeMarginToFooter = 60; // margin aman ke footer
+
+                if (footerPanel != null)
+                {
+                    // Tinggi panel = posisi atas footer - posisi Y panel - margin aman
+                    availableHeight = Math.Max(300, footerPanel.Top - yPosition - safeMarginToFooter);
+                }
+                else
+                {
+                    // Fallback jika footer tidak ditemukan
+                    availableHeight = this.Height - yPosition - 100; // Gunakan tinggi form dikurangi margin
+                }
+
+                flowBookmarks = new FlowLayoutPanel
+                {
+                    Name = "flowBookmarks",
+                    AutoScroll = true,
+                    WrapContents = true,
+                    FlowDirection = FlowDirection.LeftToRight,
+                    BackColor = Color.FloralWhite,
+                    Location = new Point(xPosition, yPosition),
+                    Size = new Size(this.Width - xPosition - 40, availableHeight),
+                    Padding = new Padding(10, 5, 10, 10),
+                    Margin = new Padding(0),
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom
+                };
+                this.Controls.Add(flowBookmarks);
+                flowBookmarks.BringToFront();
+
+                DebugLog($"Created FlowLayoutPanel: Location=({xPosition},{yPosition}), Size=({flowBookmarks.Width}x{availableHeight})");
+            }
+            else
+            {
+                // Panel sudah ada, pastikan visible dan scroll aktif
+                flowBookmarks.Visible = true;
+                flowBookmarks.AutoScroll = true;
+                flowBookmarks.Padding = new Padding(10, 5, 10, 10);
+                flowBookmarks.BringToFront();
+                DebugLog($"Using existing FlowLayoutPanel: Size=({flowBookmarks.Width}x{flowBookmarks.Height})");
+            }
         }
 
         private async void LoadUserProfile()
@@ -181,22 +236,40 @@ namespace SEARENA2025
 
         private void RenderBookmarkCards()
         {
+            if (flowBookmarks == null) return;
+
             flowBookmarks.SuspendLayout();
             flowBookmarks.Controls.Clear();
 
             DebugLog($"RenderBookmarkCards: Rendering {bookmarkWrappers.Count} cards");
 
-            foreach (var wrapper in bookmarkWrappers)
+            if (bookmarkWrappers.Count == 0)
             {
-                var card = new DestinasiCard(wrapper.Destinasi)
+                flowBookmarks.Controls.Add(new Label
                 {
-                    Width = 270,
-                    Height = 160,
-                    Margin = new Padding(6),
-                    Tag = wrapper.BookmarkId
-                };
-                card.CardClicked += (s, e) => OnCardClicked(card, wrapper.BookmarkId);
-                flowBookmarks.Controls.Add(card);
+                    Text = "Belum ada bookmark.\nTambahkan bookmark melalui halaman destinasi.",
+                    Font = new Font("Segoe UI", 11, FontStyle.Italic),
+                    ForeColor = Color.Gray,
+                    AutoSize = true,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Padding = new Padding(20)
+                });
+            }
+            else
+            {
+                foreach (var wrapper in bookmarkWrappers)
+                {
+                    var card = new DestinasiCard(wrapper.Destinasi)
+                    {
+                        Width = 270,
+                        Height = 160,
+                        Margin = new Padding(10), // Sesuaikan dengan DashboardUtama
+                        Tag = wrapper.BookmarkId
+                    };
+
+                    card.CardClicked += (s, e) => OnCardClicked(card, wrapper.BookmarkId);
+                    flowBookmarks.Controls.Add(card);
+                }
             }
 
             flowBookmarks.ResumeLayout();
@@ -214,7 +287,12 @@ namespace SEARENA2025
         {
             foreach (Control ctrl in flowBookmarks.Controls)
             {
-                if (ctrl is Guna2ShadowPanel sp)
+                // Hanya ubah warna background
+                if (ctrl is DestinasiCard card)
+                {
+                    card.BackColor = Color.White;
+                }
+                else if (ctrl is Guna.UI2.WinForms.Guna2ShadowPanel sp)
                 {
                     sp.BackColor = Color.White;
                 }
@@ -224,6 +302,7 @@ namespace SEARENA2025
                 }
             }
 
+            // Highlight kartu yang dipilih
             selected.BackColor = Color.LightYellow;
         }
 
