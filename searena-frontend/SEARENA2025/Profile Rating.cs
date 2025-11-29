@@ -45,7 +45,20 @@ namespace SEARENA2025
                                 lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
                                 guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblPengguna.Text = "Pengguna"; // bisa dari role
-                                lblBergabung.Text = "Bergabung sejak " + ((DateTime)reader["tanggal_bergabung"]).ToString("d MMMM yyyy");
+                                
+                                // PERBAIKI: Ambil tanggal bergabung dari database
+                                if (!reader.IsDBNull(reader.GetOrdinal("tanggal_bergabung")))
+                                {
+                                    DateTime tanggalBergabung = reader.GetDateTime(reader.GetOrdinal("tanggal_bergabung"));
+                                    
+                                    // Format Indonesia: "Bergabung sejak 15 Januari 2024"
+                                    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("id-ID");
+                                    lblBergabung.Text = "Bergabung sejak " + tanggalBergabung.ToString("d MMMM yyyy", culture);
+                                }
+                                else
+                                {
+                                    lblBergabung.Text = "Bergabung sejak -";
+                                }
                             }
                             else
                             {
@@ -91,7 +104,7 @@ namespace SEARENA2025
                 {
                     await conn.OpenAsync();
                     using (var cmd = new NpgsqlCommand(@"
-                SELECT r.tanggal_review AS ""Tanggal"",
+                SELECT r.review_id AS ""ReviewId"", r.tanggal_review AS ""Tanggal"",
                        COALESCE(d.nama_destinasi, 'ID '||r.destinasi_id::text) AS ""Destinasi"",
                        r.rating AS ""Rating"",
                        r.review_text AS ""Ulasan""
@@ -106,7 +119,7 @@ namespace SEARENA2025
                             var dt = new DataTable();
                             da.Fill(dt);
 
-                            // Tambahkan kolom teks bintang
+                            // Tambah kolom bintang visual jika belum ada
                             if (!dt.Columns.Contains("⭐ Rating"))
                                 dt.Columns.Add("⭐ Rating", typeof(string));
 
@@ -121,9 +134,12 @@ namespace SEARENA2025
                                                 + new string('☆', Math.Max(0, 5 - Math.Max(0, Math.Min(5, r))));
                             }
 
-                            // Tampilkan ke DGV: hanya kolom yang diinginkan & star column
                             dgvRiwayat.AutoGenerateColumns = false;
                             dgvRiwayat.Columns.Clear();
+
+                            // Kolom ReviewId (disembunyikan untuk operasi hapus)
+                            AddTextCol(dgvRiwayat, "ReviewId", "ReviewId");
+                            dgvRiwayat.Columns["ReviewId"].Visible = false;
 
                             AddTextCol(dgvRiwayat, "Tanggal", "Tanggal");
                             AddTextCol(dgvRiwayat, "Destinasi", "Destinasi");
@@ -225,10 +241,19 @@ namespace SEARENA2025
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
-            // Kembali ke DashboardUtama
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
-            this.Close();
+            // PERBAIKI: Kembali ke parent dashboard jika ada
+            if (dashboardParent != null)
+            {
+                dashboardParent.Show();
+                this.Close();
+            }
+            else
+            {
+                // Jika tidak ada parent, buka dashboard baru
+                DashboardUtama dashboard = new DashboardUtama();
+                dashboard.Show();
+                this.Close();
+            }
         }
 
         private void lblProfile_Click(object sender, EventArgs e)
@@ -252,18 +277,36 @@ namespace SEARENA2025
 
         private void Beranda_Click(object sender, EventArgs e)
         {
-            // Kembali ke DashboardUtama
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
-            this.Close();
+            // PERBAIKI: Kembali ke parent dashboard jika ada
+            if (dashboardParent != null)
+            {
+                dashboardParent.Show();
+                this.Close();
+            }
+            else
+            {
+                // Jika tidak ada parent, buka dashboard baru
+                DashboardUtama dashboard = new DashboardUtama();
+                dashboard.Show();
+                this.Close();
+            }
         }
 
         private void Destinasi_Click(object sender, EventArgs e)
         {
-            // Kembali ke DashboardUtama
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
-            this.Close();
+            // PERBAIKI: Kembali ke parent dashboard jika ada
+            if (dashboardParent != null)
+            {
+                dashboardParent.Show();
+                this.Close();
+            }
+            else
+            {
+                // Jika tidak ada parent, buka dashboard baru
+                DashboardUtama dashboard = new DashboardUtama();
+                dashboard.Show();
+                this.Close();
+            }
         }
 
         private void Kontak_Click(object sender, EventArgs e)
@@ -287,8 +330,17 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
+            // PERBAIKI: Close form ini dan show parent form
             if (dashboardParent != null)
-                dashboardParent.Show();  // Tampilkan dashboard lagi
+            {
+                dashboardParent.Show();
+            }
+            else
+            {
+                // Jika tidak ada parent, buka dashboard baru
+                DashboardUtama dashboard = new DashboardUtama();
+                dashboard.Show();
+            }
             this.Close();
         }
 

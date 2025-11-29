@@ -29,8 +29,10 @@ namespace SEARENA2025
         private void InitializeComponent()
         {
             this.shadowPanel = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.lblAktivitas = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblWaktuTerbaik = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblRating = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblRatingReview = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblCuaca = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblDeskripsi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblLokasi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNama = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -40,8 +42,10 @@ namespace SEARENA2025
             // shadowPanel
             // 
             this.shadowPanel.BackColor = System.Drawing.Color.Transparent;
+            this.shadowPanel.Controls.Add(this.lblAktivitas);
             this.shadowPanel.Controls.Add(this.lblWaktuTerbaik);
-            this.shadowPanel.Controls.Add(this.lblRating);
+            this.shadowPanel.Controls.Add(this.lblRatingReview);
+            this.shadowPanel.Controls.Add(this.lblCuaca);
             this.shadowPanel.Controls.Add(this.lblDeskripsi);
             this.shadowPanel.Controls.Add(this.lblLokasi);
             this.shadowPanel.Controls.Add(this.lblNama);
@@ -59,6 +63,19 @@ namespace SEARENA2025
             this.shadowPanel.Click += new System.EventHandler(this.Control_Click);
             this.shadowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.shadowPanel_Paint);
             // 
+            // lblAktivitas
+            // 
+            this.lblAktivitas.BackColor = System.Drawing.Color.Transparent;
+            this.lblAktivitas.Font = new System.Drawing.Font("Segoe UI", 7.5F);
+            this.lblAktivitas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lblAktivitas.Location = new System.Drawing.Point(26, 238);
+            this.lblAktivitas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblAktivitas.Name = "lblAktivitas";
+            this.lblAktivitas.Size = new System.Drawing.Size(123, 22);
+            this.lblAktivitas.TabIndex = 7;
+            this.lblAktivitas.Text = "Snorkeling, Diving";
+            this.lblAktivitas.Click += new System.EventHandler(this.Control_Click);
+            // 
             // lblWaktuTerbaik
             // 
             this.lblWaktuTerbaik.BackColor = System.Drawing.Color.Transparent;
@@ -72,20 +89,33 @@ namespace SEARENA2025
             this.lblWaktuTerbaik.Text = "Terbaik: Oktober, November";
             this.lblWaktuTerbaik.Click += new System.EventHandler(this.Control_Click);
             // 
-            // lblRating
+            // lblRatingReview
             // 
-            this.lblRating.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(238)))), ((int)(((byte)(144)))));
-            this.lblRating.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.lblRating.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
-            this.lblRating.Location = new System.Drawing.Point(26, 163);
-            this.lblRating.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblRating.Name = "lblRating";
-            this.lblRating.Padding = new System.Windows.Forms.Padding(12, 5, 12, 5);
-            this.lblRating.Size = new System.Drawing.Size(117, 33);
-            this.lblRating.TabIndex = 4;
-            this.lblRating.Text = "Sangat Baik";
-            this.lblRating.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblRating.Click += new System.EventHandler(this.Control_Click);
+            this.lblRatingReview.BackColor = System.Drawing.Color.Transparent;
+            this.lblRatingReview.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblRatingReview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lblRatingReview.Location = new System.Drawing.Point(26, 135);
+            this.lblRatingReview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblRatingReview.Name = "lblRatingReview";
+            this.lblRatingReview.Size = new System.Drawing.Size(164, 23);
+            this.lblRatingReview.TabIndex = 5;
+            this.lblRatingReview.Text = "Rating: 4.5 | 123 ulasan";
+            this.lblRatingReview.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // lblCuaca
+            // 
+            this.lblCuaca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(238)))), ((int)(((byte)(144)))));
+            this.lblCuaca.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.lblCuaca.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.lblCuaca.Location = new System.Drawing.Point(26, 163);
+            this.lblCuaca.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblCuaca.Name = "lblCuaca";
+            this.lblCuaca.Padding = new System.Windows.Forms.Padding(12, 5, 12, 5);
+            this.lblCuaca.Size = new System.Drawing.Size(117, 33);
+            this.lblCuaca.TabIndex = 4;
+            this.lblCuaca.Text = "Sangat Baik";
+            this.lblCuaca.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
+            this.lblCuaca.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblDeskripsi
             // 
@@ -150,7 +180,9 @@ namespace SEARENA2025
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNama;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLokasi;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDeskripsi;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblRating;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblRatingReview;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblCuaca;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblWaktuTerbaik;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAktivitas;
     }
 }

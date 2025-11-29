@@ -186,10 +186,24 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
+
+                    // Cek duplikasi nama destinasi (case-insensitive)
+                    using (var check = new NpgsqlCommand("SELECT COUNT(*) FROM destinasi WHERE LOWER(nama_destinasi)=LOWER(@nama)", connection))
+                    {
+                        check.Parameters.AddWithValue("@nama", txtNamaDestinasi.Text.Trim());
+                        var exists = Convert.ToInt64(check.ExecuteScalar());
+                        if (exists > 0)
+                        {
+                            MessageBox.Show("Destinasi dengan nama tersebut sudah ada (duplikasi ditolak).", "Duplikasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
                     string query = @"INSERT INTO destinasi (nama_destinasi, deskripsi, lokasi, pulau, 
                                                            harga_min, harga_max, rating_avg, total_review, waktu_terbaik) 
                                      VALUES (@nama, @deskripsi, @lokasi, @pulau, @harga_min, @harga_max, 
-                                             @rating, @total_review, @waktu)";
+                                             @rating, @total_review, @waktu)
+                                     ON CONFLICT (nama_destinasi) DO NOTHING";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {

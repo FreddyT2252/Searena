@@ -49,21 +49,54 @@ namespace SEARENA2025
                 btnBookmark.Click -= btnBookmark_Click_1;
                 btnBookmark.Click += btnBookmark_Click_1;
             }
+
+            // PERBAIKI: Setup event handler untuk button kembali
+            if (btnKembali != null)
+            {
+                btnKembali.Click -= btnKembali_Click;
+                btnKembali.Click += btnKembali_Click;
+                btnKembali.Cursor = Cursors.Hand;
+                btnKembali.Enabled = true;
+            }
+
+            // PERBAIKI: Setup event handler untuk profile picture - CARI SEMUA KEMUNGKINAN NAMA
+            SetupProfileClickHandler();
         }
 
-        public DetailDestinasi()
+        // Method terpisah untuk setup profile click handler
+        private void SetupProfileClickHandler()
         {
-            InitializeComponent();
+            // Coba berbagai kemungkinan nama control profile
+            string[] possibleNames = new[] { 
+                "PctProfile", "Profile", "guna2CirclePictureBox1", 
+                "ProfilePicture", "pictureBoxProfile", "CircleProfile" 
+            };
 
-            this.Load += DetailDestinasi_Load;
-
-            btnKirim.Click -= BtnKirim_Click;
-            btnKirim.Click += BtnKirim_Click;
-
-            if (btnBookmark != null)
+            foreach (var name in possibleNames)
             {
-                btnBookmark.Click -= btnBookmark_Click_1;
-                btnBookmark.Click += btnBookmark_Click_1;
+                var profilePic = this.Controls.Find(name, true).FirstOrDefault();
+                
+                if (profilePic != null)
+                {
+                    if (profilePic is Guna.UI2.WinForms.Guna2CirclePictureBox gunaPic)
+                    {
+                        gunaPic.Click -= ProfilePic_Click;
+                        gunaPic.Click += ProfilePic_Click;
+                        gunaPic.Cursor = Cursors.Hand;
+                        gunaPic.Enabled = true;
+                        System.Diagnostics.Debug.WriteLine($"Profile picture found: {name}");
+                        break;
+                    }
+                    else if (profilePic is PictureBox pic)
+                    {
+                        pic.Click -= ProfilePic_Click;
+                        pic.Click += ProfilePic_Click;
+                        pic.Cursor = Cursors.Hand;
+                        pic.Enabled = true;
+                        System.Diagnostics.Debug.WriteLine($"Profile picture found: {name}");
+                        break;
+                    }
+                }
             }
         }
 
@@ -83,6 +116,9 @@ namespace SEARENA2025
 
             try
             {
+                // Set cursor loading hanya sekali di awal
+                Cursor = Cursors.WaitCursor;
+
                 // Load info destinasi dari tabel destinasi
                 if (_destId > 0)
                 {
@@ -94,14 +130,10 @@ namespace SEARENA2025
                 await EnsureReviewsTableAsync();
 
                 // Update status bookmark button
-                CheckBookmarkStatus();
+                await CheckBookmarkStatusAsync(); // Ubah jadi async
 
                 // Load review ke panel dinamis
                 await LoadReviewsAsync();
-
-                // (Opsional) kalau mau juga pakai versi label tetap:
-                // var reviews = await GetReviewsAsync();
-                // TampilkanReviewsKeUI(reviews);
 
                 // Load cuaca
                 await LoadWeatherAsync();
@@ -110,6 +142,11 @@ namespace SEARENA2025
             {
                 MessageBox.Show("Gagal memuat detail destinasi: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // PERBAIKI: Kembalikan cursor normal di finally
+                Cursor = Cursors.Default;
             }
         }
 
@@ -127,11 +164,15 @@ namespace SEARENA2025
             {
                 try
                 {
-                    maxWidth = Math.Max(100, lbl.Parent.Width - 24); // padding kiri/kanan
+                    // Hitung lebar maksimal berdasarkan parent width
+                    maxWidth = Math.Max(100, lbl.Parent.Width - 50); // Tambah margin kiri/kanan
                 }
                 catch { }
             }
             lbl.MaximumSize = new Size(maxWidth, 0);
+            
+            // PERBAIKI: Tambahkan word wrap agar text tidak overflow
+            lbl.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
         }
 
         // =================== LOAD DESTINASI INFO (DESKRIPSI / HARGA / WAKTU / AKTIVITAS) ===================
@@ -199,7 +240,10 @@ namespace SEARENA2025
                             // Aktivitas
                             if (!string.IsNullOrWhiteSpace(aktivitasStr))
                             {
-                                var activities = aktivitasStr.Split(',');
+                                var activities = aktivitasStr.Split(',')
+                                    .Select(a => a.Trim())
+                                    .Where(a => !string.IsNullOrWhiteSpace(a))
+                                    .ToArray();
 
                                 var lbls = new[]
                                 {
@@ -221,12 +265,21 @@ namespace SEARENA2025
 
                                 for (int i = 0; i < lbls.Length; i++)
                                 {
-                                    if (i < activities.Length)
+                                    if (i < activities.Length && lbls[i] != null && panels[i] != null)
                                     {
-                                        lbls[i].Text = activities[i].Trim();
+                                        // Batasi panjang text aktivitas
+                                        string activityText = activities[i];
+                                        if (activityText.Length > 15)
+                                        {
+                                            activityText = activityText.Substring(0, 12) + "...";
+                                        }
+                                        
+                                        lbls[i].Text = activityText;
+                                        lbls[i].AutoSize = false;
+                                        lbls[i].Size = new Size(Math.Min(120, panels[i].Width - 10), 20);
                                         panels[i].Visible = true;
                                     }
-                                    else
+                                    else if (panels[i] != null)
                                     {
                                         panels[i].Visible = false;
                                     }
@@ -252,7 +305,7 @@ namespace SEARENA2025
         {
             // Kosongkan dulu
             lblNama1.Text = "";
-            lblTanggal1.Text = "";
+            lblTanggal1.Text =("");
             lblReview1.Text = "";
             ratingStar1.Text = "";
 
@@ -571,7 +624,7 @@ namespace SEARENA2025
             }
         }
 
-        private async void CheckBookmarkStatus()
+        private async Task CheckBookmarkStatusAsync() // Ubah jadi async Task
         {
             try
             {
@@ -613,10 +666,10 @@ namespace SEARENA2025
         private async void btnBookmark_Click_1(object sender, EventArgs e)
         {
             await EnsureBookmarkTableAsync();
-            BtnBookmark_Toggle();
+            await BtnBookmark_Toggle(); // Ubah jadi async
         }
 
-        private async void BtnBookmark_Toggle()
+        private async Task BtnBookmark_Toggle() // Ubah jadi async Task
         {
             try
             {
@@ -633,7 +686,7 @@ namespace SEARENA2025
                     await AddBookmark();
                 }
 
-                CheckBookmarkStatus();
+                await CheckBookmarkStatusAsync(); // Panggil yang async
             }
             catch (Exception ex)
             {
@@ -769,14 +822,34 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
+            // PERBAIKI: Proper form closure
             this.Close();
         }
 
         private void btnKembali_Click_1(object sender, EventArgs e)
         {
+            // PERBAIKI: Proper form closure
             this.Close();
         }
 
         private void lblDeskripsi_Click(object sender, EventArgs e) { }
+
+        // PERBAIKI: Tambahkan handler untuk profile picture
+        private void ProfilePic_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Buka halaman profil
+                Form2 profileForm = new Form2(this);
+                profileForm.FormClosed += (s, args) => this.Show();
+                profileForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error membuka profil: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

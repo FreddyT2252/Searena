@@ -30,23 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardUtama));
             this.PnlFilter = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.CheckBoxDiving = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxSnorkeling = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxSunset = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.guna2HtmlLabel26 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.CheckBoxJawa = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxSulawesi = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.guna2HtmlLabel25 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.CmbRating = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.CheckBoxBali = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2HtmlLabel24 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.LblHapusFilter = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel22 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.PnlPulau = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2HtmlLabel25 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.CheckBoxJawa = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxLombok = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxBali = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxSulawesi = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxPapua = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxSumatera = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxMaluku = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxKalimantan = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxRiau = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxPapuaBarat = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxNusaTenggara = new Guna.UI2.WinForms.Guna2CheckBox();
             this.PnlAktivitas = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel11 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2HtmlLabel21 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.CheckBoxCamping = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.guna2HtmlLabel26 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.CheckBoxDiving = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxSunset = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.CheckBoxSnorkeling = new Guna.UI2.WinForms.Guna2CheckBox();
             this.PnlInformasi = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -71,20 +77,10 @@
             this.PctProfile = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.Logo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lstSugesti = new System.Windows.Forms.ListBox();
-            this.CheckBoxNusaTenggara = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxPapuaBarat = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxRiau = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxKalimantan = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxMaluku = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxSumatera = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxPapua = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxLombok = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.CheckBoxCamping = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.btnReload = new System.Windows.Forms.Button();
             this.PnlFilter.SuspendLayout();
             this.PnlPulau.SuspendLayout();
             this.PnlAktivitas.SuspendLayout();
-            this.guna2Panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.PnlInformasi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox4)).BeginInit();
@@ -107,167 +103,13 @@
             this.PnlFilter.Controls.Add(this.PnlPulau);
             this.PnlFilter.Controls.Add(this.PnlAktivitas);
             this.PnlFilter.FillColor = System.Drawing.Color.White;
-            this.PnlFilter.Location = new System.Drawing.Point(30, 189);
+            this.PnlFilter.Location = new System.Drawing.Point(30, 201);
             this.PnlFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PnlFilter.Name = "PnlFilter";
             this.PnlFilter.ShadowColor = System.Drawing.Color.Black;
-<<<<<<< HEAD
             this.PnlFilter.Size = new System.Drawing.Size(441, 329);
-=======
-            this.PnlFilter.Size = new System.Drawing.Size(294, 233);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.PnlFilter.TabIndex = 17;
             this.PnlFilter.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2ShadowPanel2_Paint);
-            // 
-            // CheckBoxDiving
-            // 
-            this.CheckBoxDiving.AutoSize = true;
-            this.CheckBoxDiving.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxDiving.CheckedState.BorderRadius = 0;
-            this.CheckBoxDiving.CheckedState.BorderThickness = 0;
-            this.CheckBoxDiving.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-<<<<<<< HEAD
-            this.CheckBoxDiving.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckBoxDiving.Location = new System.Drawing.Point(252, 277);
-            this.CheckBoxDiving.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxDiving.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxDiving.Location = new System.Drawing.Point(140, 26);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxDiving.Name = "CheckBoxDiving";
-            this.CheckBoxDiving.Size = new System.Drawing.Size(84, 27);
-            this.CheckBoxDiving.TabIndex = 12;
-            this.CheckBoxDiving.Text = "Diving";
-            this.CheckBoxDiving.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxDiving.UncheckedState.BorderRadius = 0;
-            this.CheckBoxDiving.UncheckedState.BorderThickness = 0;
-            this.CheckBoxDiving.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxSnorkeling
-            // 
-            this.CheckBoxSnorkeling.AutoSize = true;
-            this.CheckBoxSnorkeling.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSnorkeling.CheckedState.BorderRadius = 0;
-            this.CheckBoxSnorkeling.CheckedState.BorderThickness = 0;
-            this.CheckBoxSnorkeling.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSnorkeling.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.CheckBoxSnorkeling.Location = new System.Drawing.Point(123, 278);
-            this.CheckBoxSnorkeling.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxSnorkeling.Location = new System.Drawing.Point(61, 26);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxSnorkeling.Name = "CheckBoxSnorkeling";
-            this.CheckBoxSnorkeling.Size = new System.Drawing.Size(117, 27);
-            this.CheckBoxSnorkeling.TabIndex = 11;
-            this.CheckBoxSnorkeling.Text = "Snorkeling";
-            this.CheckBoxSnorkeling.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSnorkeling.UncheckedState.BorderRadius = 0;
-            this.CheckBoxSnorkeling.UncheckedState.BorderThickness = 0;
-            this.CheckBoxSnorkeling.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxSunset
-            // 
-            this.CheckBoxSunset.AutoSize = true;
-            this.CheckBoxSunset.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSunset.CheckedState.BorderRadius = 0;
-            this.CheckBoxSunset.CheckedState.BorderThickness = 0;
-            this.CheckBoxSunset.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSunset.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.CheckBoxSunset.Location = new System.Drawing.Point(26, 278);
-            this.CheckBoxSunset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxSunset.Location = new System.Drawing.Point(2, 26);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxSunset.Name = "CheckBoxSunset";
-            this.CheckBoxSunset.Size = new System.Drawing.Size(87, 27);
-            this.CheckBoxSunset.TabIndex = 10;
-            this.CheckBoxSunset.Text = "Sunset";
-            this.CheckBoxSunset.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSunset.UncheckedState.BorderRadius = 0;
-            this.CheckBoxSunset.UncheckedState.BorderThickness = 0;
-            this.CheckBoxSunset.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSunset.CheckedChanged += new System.EventHandler(this.CheckBoxSunset_CheckedChanged);
-            // 
-            // guna2HtmlLabel26
-            // 
-            this.guna2HtmlLabel26.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel26.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.guna2HtmlLabel26.Location = new System.Drawing.Point(24, 249);
-            this.guna2HtmlLabel26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.guna2HtmlLabel26.Location = new System.Drawing.Point(2, 3);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.guna2HtmlLabel26.Name = "guna2HtmlLabel26";
-            this.guna2HtmlLabel26.Size = new System.Drawing.Size(74, 25);
-            this.guna2HtmlLabel26.TabIndex = 9;
-            this.guna2HtmlLabel26.Text = "Aktivitas";
-            this.guna2HtmlLabel26.Click += new System.EventHandler(this.guna2HtmlLabel26_Click);
-            // 
-            // CheckBoxJawa
-            // 
-            this.CheckBoxJawa.AutoSize = true;
-            this.CheckBoxJawa.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxJawa.CheckedState.BorderRadius = 0;
-            this.CheckBoxJawa.CheckedState.BorderThickness = 0;
-            this.CheckBoxJawa.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxJawa.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.CheckBoxJawa.Location = new System.Drawing.Point(27, 175);
-            this.CheckBoxJawa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxJawa.Location = new System.Drawing.Point(3, 36);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxJawa.Name = "CheckBoxJawa";
-            this.CheckBoxJawa.Size = new System.Drawing.Size(73, 27);
-            this.CheckBoxJawa.TabIndex = 7;
-            this.CheckBoxJawa.Text = "Jawa";
-            this.CheckBoxJawa.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxJawa.UncheckedState.BorderRadius = 0;
-            this.CheckBoxJawa.UncheckedState.BorderThickness = 0;
-            this.CheckBoxJawa.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxSulawesi
-            // 
-            this.CheckBoxSulawesi.AutoSize = true;
-            this.CheckBoxSulawesi.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSulawesi.CheckedState.BorderRadius = 0;
-            this.CheckBoxSulawesi.CheckedState.BorderThickness = 0;
-            this.CheckBoxSulawesi.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSulawesi.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.CheckBoxSulawesi.Location = new System.Drawing.Point(27, 205);
-            this.CheckBoxSulawesi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxSulawesi.Location = new System.Drawing.Point(3, 55);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxSulawesi.Name = "CheckBoxSulawesi";
-            this.CheckBoxSulawesi.Size = new System.Drawing.Size(101, 27);
-            this.CheckBoxSulawesi.TabIndex = 6;
-            this.CheckBoxSulawesi.Text = "Sulawesi";
-            this.CheckBoxSulawesi.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSulawesi.UncheckedState.BorderRadius = 0;
-            this.CheckBoxSulawesi.UncheckedState.BorderThickness = 0;
-            this.CheckBoxSulawesi.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSulawesi.CheckedChanged += new System.EventHandler(this.CheckBoxSulawesi_CheckedChanged);
-            // 
-            // guna2HtmlLabel25
-            // 
-            this.guna2HtmlLabel25.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel25.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.guna2HtmlLabel25.Location = new System.Drawing.Point(26, 123);
-            this.guna2HtmlLabel25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.guna2HtmlLabel25.Location = new System.Drawing.Point(2, 2);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.guna2HtmlLabel25.Name = "guna2HtmlLabel25";
-            this.guna2HtmlLabel25.Size = new System.Drawing.Size(47, 25);
-            this.guna2HtmlLabel25.TabIndex = 5;
-            this.guna2HtmlLabel25.Text = "Pulau";
-            this.guna2HtmlLabel25.Click += new System.EventHandler(this.guna2HtmlLabel25_Click);
             // 
             // CmbRating
             // 
@@ -283,35 +125,11 @@
             this.CmbRating.ItemHeight = 30;
             this.CmbRating.Items.AddRange(new object[] {
             "12"});
-            this.CmbRating.Location = new System.Drawing.Point(24, 58);
+            this.CmbRating.Location = new System.Drawing.Point(23, 58);
             this.CmbRating.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CmbRating.Name = "CmbRating";
             this.CmbRating.Size = new System.Drawing.Size(211, 36);
             this.CmbRating.TabIndex = 4;
-            // 
-            // CheckBoxBali
-            // 
-            this.CheckBoxBali.AutoSize = true;
-            this.CheckBoxBali.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxBali.CheckedState.BorderRadius = 0;
-            this.CheckBoxBali.CheckedState.BorderThickness = 0;
-            this.CheckBoxBali.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxBali.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-<<<<<<< HEAD
-            this.CheckBoxBali.Location = new System.Drawing.Point(27, 146);
-            this.CheckBoxBali.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.CheckBoxBali.Location = new System.Drawing.Point(3, 17);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
-            this.CheckBoxBali.Name = "CheckBoxBali";
-            this.CheckBoxBali.Size = new System.Drawing.Size(63, 27);
-            this.CheckBoxBali.TabIndex = 0;
-            this.CheckBoxBali.Text = "Bali";
-            this.CheckBoxBali.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxBali.UncheckedState.BorderRadius = 0;
-            this.CheckBoxBali.UncheckedState.BorderThickness = 0;
-            this.CheckBoxBali.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxBali.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
             // 
             // guna2HtmlLabel24
             // 
@@ -349,34 +167,6 @@
             // 
             // PnlPulau
             // 
-<<<<<<< HEAD
-            this.PnlPulau.Controls.Add(this.ScrollPulau);
-            this.PnlPulau.Location = new System.Drawing.Point(24, 120);
-            this.PnlPulau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PnlPulau.Name = "PnlPulau";
-            this.PnlPulau.Size = new System.Drawing.Size(393, 125);
-            this.PnlPulau.TabIndex = 8;
-            // 
-            // ScrollPulau
-            // 
-            this.ScrollPulau.FillColor = System.Drawing.Color.PapayaWhip;
-            this.ScrollPulau.InUpdate = false;
-            this.ScrollPulau.LargeChange = 10;
-            this.ScrollPulau.Location = new System.Drawing.Point(363, 11);
-            this.ScrollPulau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ScrollPulau.Name = "ScrollPulau";
-            this.ScrollPulau.ScrollbarSize = 20;
-            this.ScrollPulau.Size = new System.Drawing.Size(20, 88);
-            this.ScrollPulau.TabIndex = 0;
-            this.ScrollPulau.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            // 
-            // PnlAktivitas
-            // 
-            this.PnlAktivitas.Location = new System.Drawing.Point(20, 246);
-            this.PnlAktivitas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PnlAktivitas.Name = "PnlAktivitas";
-            this.PnlAktivitas.Size = new System.Drawing.Size(393, 71);
-=======
             this.PnlPulau.Controls.Add(this.guna2HtmlLabel25);
             this.PnlPulau.Controls.Add(this.CheckBoxJawa);
             this.PnlPulau.Controls.Add(this.CheckBoxLombok);
@@ -389,10 +179,234 @@
             this.PnlPulau.Controls.Add(this.CheckBoxRiau);
             this.PnlPulau.Controls.Add(this.CheckBoxPapuaBarat);
             this.PnlPulau.Controls.Add(this.CheckBoxNusaTenggara);
-            this.PnlPulau.Location = new System.Drawing.Point(8, 78);
+            this.PnlPulau.Location = new System.Drawing.Point(8, 104);
+            this.PnlPulau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PnlPulau.Name = "PnlPulau";
-            this.PnlPulau.Size = new System.Drawing.Size(276, 95);
+            this.PnlPulau.Size = new System.Drawing.Size(420, 141);
             this.PnlPulau.TabIndex = 8;
+            // 
+            // guna2HtmlLabel25
+            // 
+            this.guna2HtmlLabel25.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel25.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel25.Location = new System.Drawing.Point(10, 2);
+            this.guna2HtmlLabel25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel25.Name = "guna2HtmlLabel25";
+            this.guna2HtmlLabel25.Size = new System.Drawing.Size(47, 25);
+            this.guna2HtmlLabel25.TabIndex = 5;
+            this.guna2HtmlLabel25.Text = "Pulau";
+            this.guna2HtmlLabel25.Click += new System.EventHandler(this.guna2HtmlLabel25_Click);
+            // 
+            // CheckBoxJawa
+            // 
+            this.CheckBoxJawa.AutoSize = true;
+            this.CheckBoxJawa.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxJawa.CheckedState.BorderRadius = 0;
+            this.CheckBoxJawa.CheckedState.BorderThickness = 0;
+            this.CheckBoxJawa.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxJawa.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxJawa.Location = new System.Drawing.Point(14, 68);
+            this.CheckBoxJawa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxJawa.Name = "CheckBoxJawa";
+            this.CheckBoxJawa.Size = new System.Drawing.Size(73, 27);
+            this.CheckBoxJawa.TabIndex = 7;
+            this.CheckBoxJawa.Text = "Jawa";
+            this.CheckBoxJawa.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxJawa.UncheckedState.BorderRadius = 0;
+            this.CheckBoxJawa.UncheckedState.BorderThickness = 0;
+            this.CheckBoxJawa.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxLombok
+            // 
+            this.CheckBoxLombok.AutoSize = true;
+            this.CheckBoxLombok.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxLombok.CheckedState.BorderRadius = 0;
+            this.CheckBoxLombok.CheckedState.BorderThickness = 0;
+            this.CheckBoxLombok.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxLombok.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxLombok.Location = new System.Drawing.Point(288, 73);
+            this.CheckBoxLombok.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxLombok.Name = "CheckBoxLombok";
+            this.CheckBoxLombok.Size = new System.Drawing.Size(98, 27);
+            this.CheckBoxLombok.TabIndex = 19;
+            this.CheckBoxLombok.Text = "Lombok";
+            this.CheckBoxLombok.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxLombok.UncheckedState.BorderRadius = 0;
+            this.CheckBoxLombok.UncheckedState.BorderThickness = 0;
+            this.CheckBoxLombok.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxBali
+            // 
+            this.CheckBoxBali.AutoSize = true;
+            this.CheckBoxBali.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxBali.CheckedState.BorderRadius = 0;
+            this.CheckBoxBali.CheckedState.BorderThickness = 0;
+            this.CheckBoxBali.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxBali.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxBali.Location = new System.Drawing.Point(14, 34);
+            this.CheckBoxBali.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxBali.Name = "CheckBoxBali";
+            this.CheckBoxBali.Size = new System.Drawing.Size(63, 27);
+            this.CheckBoxBali.TabIndex = 0;
+            this.CheckBoxBali.Text = "Bali";
+            this.CheckBoxBali.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxBali.UncheckedState.BorderRadius = 0;
+            this.CheckBoxBali.UncheckedState.BorderThickness = 0;
+            this.CheckBoxBali.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxBali.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
+            // 
+            // CheckBoxSulawesi
+            // 
+            this.CheckBoxSulawesi.AutoSize = true;
+            this.CheckBoxSulawesi.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSulawesi.CheckedState.BorderRadius = 0;
+            this.CheckBoxSulawesi.CheckedState.BorderThickness = 0;
+            this.CheckBoxSulawesi.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSulawesi.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxSulawesi.Location = new System.Drawing.Point(14, 100);
+            this.CheckBoxSulawesi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxSulawesi.Name = "CheckBoxSulawesi";
+            this.CheckBoxSulawesi.Size = new System.Drawing.Size(101, 27);
+            this.CheckBoxSulawesi.TabIndex = 6;
+            this.CheckBoxSulawesi.Text = "Sulawesi";
+            this.CheckBoxSulawesi.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSulawesi.UncheckedState.BorderRadius = 0;
+            this.CheckBoxSulawesi.UncheckedState.BorderThickness = 0;
+            this.CheckBoxSulawesi.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSulawesi.CheckedChanged += new System.EventHandler(this.CheckBoxSulawesi_CheckedChanged);
+            // 
+            // CheckBoxPapua
+            // 
+            this.CheckBoxPapua.AutoSize = true;
+            this.CheckBoxPapua.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxPapua.CheckedState.BorderRadius = 0;
+            this.CheckBoxPapua.CheckedState.BorderThickness = 0;
+            this.CheckBoxPapua.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxPapua.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxPapua.Location = new System.Drawing.Point(288, 39);
+            this.CheckBoxPapua.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxPapua.Name = "CheckBoxPapua";
+            this.CheckBoxPapua.Size = new System.Drawing.Size(84, 27);
+            this.CheckBoxPapua.TabIndex = 18;
+            this.CheckBoxPapua.Text = "Papua";
+            this.CheckBoxPapua.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxPapua.UncheckedState.BorderRadius = 0;
+            this.CheckBoxPapua.UncheckedState.BorderThickness = 0;
+            this.CheckBoxPapua.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxSumatera
+            // 
+            this.CheckBoxSumatera.AutoSize = true;
+            this.CheckBoxSumatera.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSumatera.CheckedState.BorderRadius = 0;
+            this.CheckBoxSumatera.CheckedState.BorderThickness = 0;
+            this.CheckBoxSumatera.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSumatera.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxSumatera.Location = new System.Drawing.Point(288, 8);
+            this.CheckBoxSumatera.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxSumatera.Name = "CheckBoxSumatera";
+            this.CheckBoxSumatera.Size = new System.Drawing.Size(109, 27);
+            this.CheckBoxSumatera.TabIndex = 17;
+            this.CheckBoxSumatera.Text = "Sumatera";
+            this.CheckBoxSumatera.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSumatera.UncheckedState.BorderRadius = 0;
+            this.CheckBoxSumatera.UncheckedState.BorderThickness = 0;
+            this.CheckBoxSumatera.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxMaluku
+            // 
+            this.CheckBoxMaluku.AutoSize = true;
+            this.CheckBoxMaluku.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxMaluku.CheckedState.BorderRadius = 0;
+            this.CheckBoxMaluku.CheckedState.BorderThickness = 0;
+            this.CheckBoxMaluku.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxMaluku.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxMaluku.Location = new System.Drawing.Point(132, 103);
+            this.CheckBoxMaluku.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxMaluku.Name = "CheckBoxMaluku";
+            this.CheckBoxMaluku.Size = new System.Drawing.Size(94, 27);
+            this.CheckBoxMaluku.TabIndex = 16;
+            this.CheckBoxMaluku.Text = "Maluku";
+            this.CheckBoxMaluku.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxMaluku.UncheckedState.BorderRadius = 0;
+            this.CheckBoxMaluku.UncheckedState.BorderThickness = 0;
+            this.CheckBoxMaluku.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxKalimantan
+            // 
+            this.CheckBoxKalimantan.AutoSize = true;
+            this.CheckBoxKalimantan.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxKalimantan.CheckedState.BorderRadius = 0;
+            this.CheckBoxKalimantan.CheckedState.BorderThickness = 0;
+            this.CheckBoxKalimantan.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxKalimantan.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxKalimantan.Location = new System.Drawing.Point(132, 70);
+            this.CheckBoxKalimantan.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxKalimantan.Name = "CheckBoxKalimantan";
+            this.CheckBoxKalimantan.Size = new System.Drawing.Size(122, 27);
+            this.CheckBoxKalimantan.TabIndex = 15;
+            this.CheckBoxKalimantan.Text = "Kalimantan";
+            this.CheckBoxKalimantan.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxKalimantan.UncheckedState.BorderRadius = 0;
+            this.CheckBoxKalimantan.UncheckedState.BorderThickness = 0;
+            this.CheckBoxKalimantan.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxRiau
+            // 
+            this.CheckBoxRiau.AutoSize = true;
+            this.CheckBoxRiau.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxRiau.CheckedState.BorderRadius = 0;
+            this.CheckBoxRiau.CheckedState.BorderThickness = 0;
+            this.CheckBoxRiau.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxRiau.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxRiau.Location = new System.Drawing.Point(288, 104);
+            this.CheckBoxRiau.Name = "CheckBoxRiau";
+            this.CheckBoxRiau.Size = new System.Drawing.Size(69, 27);
+            this.CheckBoxRiau.TabIndex = 14;
+            this.CheckBoxRiau.Text = "Riau";
+            this.CheckBoxRiau.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxRiau.UncheckedState.BorderRadius = 0;
+            this.CheckBoxRiau.UncheckedState.BorderThickness = 0;
+            this.CheckBoxRiau.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxPapuaBarat
+            // 
+            this.CheckBoxPapuaBarat.AutoSize = true;
+            this.CheckBoxPapuaBarat.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxPapuaBarat.CheckedState.BorderRadius = 0;
+            this.CheckBoxPapuaBarat.CheckedState.BorderThickness = 0;
+            this.CheckBoxPapuaBarat.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxPapuaBarat.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxPapuaBarat.Location = new System.Drawing.Point(131, 37);
+            this.CheckBoxPapuaBarat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxPapuaBarat.Name = "CheckBoxPapuaBarat";
+            this.CheckBoxPapuaBarat.Size = new System.Drawing.Size(130, 27);
+            this.CheckBoxPapuaBarat.TabIndex = 14;
+            this.CheckBoxPapuaBarat.Text = "Papua Barat";
+            this.CheckBoxPapuaBarat.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxPapuaBarat.UncheckedState.BorderRadius = 0;
+            this.CheckBoxPapuaBarat.UncheckedState.BorderThickness = 0;
+            this.CheckBoxPapuaBarat.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxNusaTenggara
+            // 
+            this.CheckBoxNusaTenggara.AutoSize = true;
+            this.CheckBoxNusaTenggara.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxNusaTenggara.CheckedState.BorderRadius = 0;
+            this.CheckBoxNusaTenggara.CheckedState.BorderThickness = 0;
+            this.CheckBoxNusaTenggara.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxNusaTenggara.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxNusaTenggara.Location = new System.Drawing.Point(132, 8);
+            this.CheckBoxNusaTenggara.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxNusaTenggara.Name = "CheckBoxNusaTenggara";
+            this.CheckBoxNusaTenggara.Size = new System.Drawing.Size(153, 27);
+            this.CheckBoxNusaTenggara.TabIndex = 14;
+            this.CheckBoxNusaTenggara.Text = "Nusa Tenggara";
+            this.CheckBoxNusaTenggara.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxNusaTenggara.UncheckedState.BorderRadius = 0;
+            this.CheckBoxNusaTenggara.UncheckedState.BorderThickness = 0;
+            this.CheckBoxNusaTenggara.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxNusaTenggara.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged_1);
             // 
             // PnlAktivitas
             // 
@@ -401,46 +415,100 @@
             this.PnlAktivitas.Controls.Add(this.CheckBoxDiving);
             this.PnlAktivitas.Controls.Add(this.CheckBoxSunset);
             this.PnlAktivitas.Controls.Add(this.CheckBoxSnorkeling);
-            this.PnlAktivitas.Location = new System.Drawing.Point(8, 179);
+            this.PnlAktivitas.Location = new System.Drawing.Point(8, 252);
+            this.PnlAktivitas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PnlAktivitas.Name = "PnlAktivitas";
-            this.PnlAktivitas.Size = new System.Drawing.Size(276, 44);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
+            this.PnlAktivitas.Size = new System.Drawing.Size(420, 66);
             this.PnlAktivitas.TabIndex = 13;
             // 
-            // guna2Panel11
+            // CheckBoxCamping
             // 
-            this.guna2Panel11.BackColor = System.Drawing.Color.Azure;
-            this.guna2Panel11.Controls.Add(this.guna2CirclePictureBox1);
-            this.guna2Panel11.Controls.Add(this.guna2HtmlLabel21);
-            this.guna2Panel11.Location = new System.Drawing.Point(36, 135);
-            this.guna2Panel11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.guna2Panel11.Name = "guna2Panel11";
-            this.guna2Panel11.Size = new System.Drawing.Size(435, 45);
-            this.guna2Panel11.TabIndex = 16;
+            this.CheckBoxCamping.AutoSize = true;
+            this.CheckBoxCamping.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxCamping.CheckedState.BorderRadius = 0;
+            this.CheckBoxCamping.CheckedState.BorderThickness = 0;
+            this.CheckBoxCamping.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxCamping.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
+            this.CheckBoxCamping.Location = new System.Drawing.Point(311, 26);
+            this.CheckBoxCamping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxCamping.Name = "CheckBoxCamping";
+            this.CheckBoxCamping.Size = new System.Drawing.Size(105, 27);
+            this.CheckBoxCamping.TabIndex = 13;
+            this.CheckBoxCamping.Text = "Camping";
+            this.CheckBoxCamping.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxCamping.UncheckedState.BorderRadius = 0;
+            this.CheckBoxCamping.UncheckedState.BorderThickness = 0;
+            this.CheckBoxCamping.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
-            // guna2CirclePictureBox1
+            // guna2HtmlLabel26
             // 
-            this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(34, 29);
-            this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2CirclePictureBox1.TabIndex = 1;
-            this.guna2CirclePictureBox1.TabStop = false;
+            this.guna2HtmlLabel26.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel26.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel26.Location = new System.Drawing.Point(9, 2);
+            this.guna2HtmlLabel26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2HtmlLabel26.Name = "guna2HtmlLabel26";
+            this.guna2HtmlLabel26.Size = new System.Drawing.Size(74, 25);
+            this.guna2HtmlLabel26.TabIndex = 9;
+            this.guna2HtmlLabel26.Text = "Aktivitas";
+            this.guna2HtmlLabel26.Click += new System.EventHandler(this.guna2HtmlLabel26_Click);
             // 
-            // guna2HtmlLabel21
+            // CheckBoxDiving
             // 
-            this.guna2HtmlLabel21.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel21.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel21.Location = new System.Drawing.Point(45, 11);
-            this.guna2HtmlLabel21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.guna2HtmlLabel21.Name = "guna2HtmlLabel21";
-            this.guna2HtmlLabel21.Size = new System.Drawing.Size(384, 25);
-            this.guna2HtmlLabel21.TabIndex = 0;
-            this.guna2HtmlLabel21.Text = "Cuaca hari ini sangat baik untuk pergi berwisata!";
+            this.CheckBoxDiving.AutoSize = true;
+            this.CheckBoxDiving.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxDiving.CheckedState.BorderRadius = 0;
+            this.CheckBoxDiving.CheckedState.BorderThickness = 0;
+            this.CheckBoxDiving.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxDiving.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxDiving.Location = new System.Drawing.Point(221, 26);
+            this.CheckBoxDiving.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxDiving.Name = "CheckBoxDiving";
+            this.CheckBoxDiving.Size = new System.Drawing.Size(84, 27);
+            this.CheckBoxDiving.TabIndex = 12;
+            this.CheckBoxDiving.Text = "Diving";
+            this.CheckBoxDiving.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxDiving.UncheckedState.BorderRadius = 0;
+            this.CheckBoxDiving.UncheckedState.BorderThickness = 0;
+            this.CheckBoxDiving.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            // 
+            // CheckBoxSunset
+            // 
+            this.CheckBoxSunset.AutoSize = true;
+            this.CheckBoxSunset.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSunset.CheckedState.BorderRadius = 0;
+            this.CheckBoxSunset.CheckedState.BorderThickness = 0;
+            this.CheckBoxSunset.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSunset.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxSunset.Location = new System.Drawing.Point(12, 26);
+            this.CheckBoxSunset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxSunset.Name = "CheckBoxSunset";
+            this.CheckBoxSunset.Size = new System.Drawing.Size(87, 27);
+            this.CheckBoxSunset.TabIndex = 10;
+            this.CheckBoxSunset.Text = "Sunset";
+            this.CheckBoxSunset.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSunset.UncheckedState.BorderRadius = 0;
+            this.CheckBoxSunset.UncheckedState.BorderThickness = 0;
+            this.CheckBoxSunset.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSunset.CheckedChanged += new System.EventHandler(this.CheckBoxSunset_CheckedChanged);
+            // 
+            // CheckBoxSnorkeling
+            // 
+            this.CheckBoxSnorkeling.AutoSize = true;
+            this.CheckBoxSnorkeling.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSnorkeling.CheckedState.BorderRadius = 0;
+            this.CheckBoxSnorkeling.CheckedState.BorderThickness = 0;
+            this.CheckBoxSnorkeling.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.CheckBoxSnorkeling.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBoxSnorkeling.Location = new System.Drawing.Point(103, 26);
+            this.CheckBoxSnorkeling.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxSnorkeling.Name = "CheckBoxSnorkeling";
+            this.CheckBoxSnorkeling.Size = new System.Drawing.Size(117, 27);
+            this.CheckBoxSnorkeling.TabIndex = 11;
+            this.CheckBoxSnorkeling.Text = "Snorkeling";
+            this.CheckBoxSnorkeling.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.CheckBoxSnorkeling.UncheckedState.BorderRadius = 0;
+            this.CheckBoxSnorkeling.UncheckedState.BorderThickness = 0;
+            this.CheckBoxSnorkeling.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
             // PnlInformasi
             // 
@@ -631,10 +699,10 @@
             this.PnlSearch.Controls.Add(this.tbSearchDestinasi);
             this.PnlSearch.Controls.Add(this.txtCariDestinasi);
             this.PnlSearch.Controls.Add(this.guna2PictureBox1);
-            this.PnlSearch.Location = new System.Drawing.Point(248, 77);
+            this.PnlSearch.Location = new System.Drawing.Point(278, 77);
             this.PnlSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PnlSearch.Name = "PnlSearch";
-            this.PnlSearch.Size = new System.Drawing.Size(710, 49);
+            this.PnlSearch.Size = new System.Drawing.Size(690, 49);
             this.PnlSearch.TabIndex = 3;
             // 
             // tbSearchDestinasi
@@ -651,35 +719,23 @@
             this.tbSearchDestinasi.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearchDestinasi.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSearchDestinasi.Location = new System.Drawing.Point(0, 0);
-<<<<<<< HEAD
             this.tbSearchDestinasi.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tbSearchDestinasi.Name = "tbSearchDestinasi";
             this.tbSearchDestinasi.PlaceholderText = "Cari Destinasi...";
             this.tbSearchDestinasi.SelectedText = "";
-            this.tbSearchDestinasi.Size = new System.Drawing.Size(710, 49);
-=======
-            this.tbSearchDestinasi.Name = "tbSearchDestinasi";
-            this.tbSearchDestinasi.PlaceholderText = "Cari Destinasi...";
-            this.tbSearchDestinasi.SelectedText = "";
-            this.tbSearchDestinasi.Size = new System.Drawing.Size(473, 32);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
+            this.tbSearchDestinasi.Size = new System.Drawing.Size(690, 49);
             this.tbSearchDestinasi.TabIndex = 24;
+            this.tbSearchDestinasi.TextChanged += new System.EventHandler(this.tbSearchDestinasi_TextChanged_1);
             // 
             // txtCariDestinasi
             // 
             this.txtCariDestinasi.BackColor = System.Drawing.Color.Transparent;
             this.txtCariDestinasi.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCariDestinasi.ForeColor = System.Drawing.Color.Gray;
-<<<<<<< HEAD
             this.txtCariDestinasi.Location = new System.Drawing.Point(72, 6);
             this.txtCariDestinasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCariDestinasi.Name = "txtCariDestinasi";
             this.txtCariDestinasi.Size = new System.Drawing.Size(152, 30);
-=======
-            this.txtCariDestinasi.Location = new System.Drawing.Point(48, 4);
-            this.txtCariDestinasi.Name = "txtCariDestinasi";
-            this.txtCariDestinasi.Size = new System.Drawing.Size(101, 19);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.txtCariDestinasi.TabIndex = 1;
             this.txtCariDestinasi.Text = "Cari destinasi ...";
             // 
@@ -687,16 +743,10 @@
             // 
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-<<<<<<< HEAD
             this.guna2PictureBox1.Location = new System.Drawing.Point(12, 2);
             this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(44, 40);
-=======
-            this.guna2PictureBox1.Location = new System.Drawing.Point(8, 1);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(29, 26);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
@@ -707,16 +757,10 @@
             this.Navbar.Controls.Add(this.lblProfile);
             this.Navbar.Controls.Add(this.PctProfile);
             this.Navbar.Controls.Add(this.Logo);
-<<<<<<< HEAD
             this.Navbar.Location = new System.Drawing.Point(-2, 0);
             this.Navbar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Navbar.Name = "Navbar";
             this.Navbar.Size = new System.Drawing.Size(1203, 68);
-=======
-            this.Navbar.Location = new System.Drawing.Point(-1, 0);
-            this.Navbar.Name = "Navbar";
-            this.Navbar.Size = new System.Drawing.Size(802, 44);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.Navbar.TabIndex = 2;
             this.Navbar.Paint += new System.Windows.Forms.PaintEventHandler(this.Navbar_Paint);
             // 
@@ -724,16 +768,10 @@
             // 
             this.lblProfile.AutoSize = true;
             this.lblProfile.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
             this.lblProfile.Location = new System.Drawing.Point(1118, 22);
             this.lblProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProfile.Name = "lblProfile";
             this.lblProfile.Size = new System.Drawing.Size(66, 28);
-=======
-            this.lblProfile.Location = new System.Drawing.Point(745, 14);
-            this.lblProfile.Name = "lblProfile";
-            this.lblProfile.Size = new System.Drawing.Size(44, 17);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.lblProfile.TabIndex = 7;
             this.lblProfile.Text = "Profile";
             this.lblProfile.Click += new System.EventHandler(this.lblProfile_Click);
@@ -742,18 +780,11 @@
             // 
             this.PctProfile.Image = ((System.Drawing.Image)(resources.GetObject("PctProfile.Image")));
             this.PctProfile.ImageRotate = 0F;
-<<<<<<< HEAD
             this.PctProfile.Location = new System.Drawing.Point(1052, 9);
             this.PctProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PctProfile.Name = "PctProfile";
             this.PctProfile.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.PctProfile.Size = new System.Drawing.Size(57, 54);
-=======
-            this.PctProfile.Location = new System.Drawing.Point(701, 6);
-            this.PctProfile.Name = "PctProfile";
-            this.PctProfile.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.PctProfile.Size = new System.Drawing.Size(38, 35);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.PctProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PctProfile.TabIndex = 6;
             this.PctProfile.TabStop = false;
@@ -763,16 +794,10 @@
             this.Logo.BackColor = System.Drawing.Color.FloralWhite;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.ImageRotate = 0F;
-<<<<<<< HEAD
             this.Logo.Location = new System.Drawing.Point(21, 5);
             this.Logo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(207, 58);
-=======
-            this.Logo.Location = new System.Drawing.Point(14, 3);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(138, 38);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 1;
             this.Logo.TabStop = false;
@@ -781,180 +806,26 @@
             // 
             this.lstSugesti.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lstSugesti.FormattingEnabled = true;
-<<<<<<< HEAD
             this.lstSugesti.ItemHeight = 20;
-            this.lstSugesti.Location = new System.Drawing.Point(248, 128);
+            this.lstSugesti.Location = new System.Drawing.Point(278, 123);
             this.lstSugesti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
-            this.lstSugesti.Location = new System.Drawing.Point(462, 54);
->>>>>>> e9ef402e4b0d6cfc8941e1d87e87742f86e5d4ee
             this.lstSugesti.Name = "lstSugesti";
-            this.lstSugesti.Size = new System.Drawing.Size(710, 62);
+            this.lstSugesti.Size = new System.Drawing.Size(690, 82);
             this.lstSugesti.TabIndex = 25;
             this.lstSugesti.Visible = false;
+            this.lstSugesti.SelectedIndexChanged += new System.EventHandler(this.lstSugesti_SelectedIndexChanged);
             // 
-            // CheckBoxNusaTenggara
+            // btnReload
             // 
-            this.CheckBoxNusaTenggara.AutoSize = true;
-            this.CheckBoxNusaTenggara.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxNusaTenggara.CheckedState.BorderRadius = 0;
-            this.CheckBoxNusaTenggara.CheckedState.BorderThickness = 0;
-            this.CheckBoxNusaTenggara.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxNusaTenggara.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxNusaTenggara.Location = new System.Drawing.Point(73, 17);
-            this.CheckBoxNusaTenggara.Name = "CheckBoxNusaTenggara";
-            this.CheckBoxNusaTenggara.Size = new System.Drawing.Size(103, 17);
-            this.CheckBoxNusaTenggara.TabIndex = 14;
-            this.CheckBoxNusaTenggara.Text = "Nusa Tenggara";
-            this.CheckBoxNusaTenggara.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxNusaTenggara.UncheckedState.BorderRadius = 0;
-            this.CheckBoxNusaTenggara.UncheckedState.BorderThickness = 0;
-            this.CheckBoxNusaTenggara.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxNusaTenggara.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged_1);
-            // 
-            // CheckBoxPapuaBarat
-            // 
-            this.CheckBoxPapuaBarat.AutoSize = true;
-            this.CheckBoxPapuaBarat.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxPapuaBarat.CheckedState.BorderRadius = 0;
-            this.CheckBoxPapuaBarat.CheckedState.BorderThickness = 0;
-            this.CheckBoxPapuaBarat.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxPapuaBarat.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxPapuaBarat.Location = new System.Drawing.Point(73, 36);
-            this.CheckBoxPapuaBarat.Name = "CheckBoxPapuaBarat";
-            this.CheckBoxPapuaBarat.Size = new System.Drawing.Size(87, 17);
-            this.CheckBoxPapuaBarat.TabIndex = 14;
-            this.CheckBoxPapuaBarat.Text = "Papua Barat";
-            this.CheckBoxPapuaBarat.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxPapuaBarat.UncheckedState.BorderRadius = 0;
-            this.CheckBoxPapuaBarat.UncheckedState.BorderThickness = 0;
-            this.CheckBoxPapuaBarat.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxRiau
-            // 
-            this.CheckBoxRiau.AutoSize = true;
-            this.CheckBoxRiau.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxRiau.CheckedState.BorderRadius = 0;
-            this.CheckBoxRiau.CheckedState.BorderThickness = 0;
-            this.CheckBoxRiau.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxRiau.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckBoxRiau.Location = new System.Drawing.Point(3, 75);
-            this.CheckBoxRiau.Name = "CheckBoxRiau";
-            this.CheckBoxRiau.Size = new System.Drawing.Size(48, 17);
-            this.CheckBoxRiau.TabIndex = 14;
-            this.CheckBoxRiau.Text = "Riau";
-            this.CheckBoxRiau.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxRiau.UncheckedState.BorderRadius = 0;
-            this.CheckBoxRiau.UncheckedState.BorderThickness = 0;
-            this.CheckBoxRiau.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxKalimantan
-            // 
-            this.CheckBoxKalimantan.AutoSize = true;
-            this.CheckBoxKalimantan.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxKalimantan.CheckedState.BorderRadius = 0;
-            this.CheckBoxKalimantan.CheckedState.BorderThickness = 0;
-            this.CheckBoxKalimantan.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxKalimantan.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxKalimantan.Location = new System.Drawing.Point(73, 55);
-            this.CheckBoxKalimantan.Name = "CheckBoxKalimantan";
-            this.CheckBoxKalimantan.Size = new System.Drawing.Size(82, 17);
-            this.CheckBoxKalimantan.TabIndex = 15;
-            this.CheckBoxKalimantan.Text = "Kalimantan";
-            this.CheckBoxKalimantan.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxKalimantan.UncheckedState.BorderRadius = 0;
-            this.CheckBoxKalimantan.UncheckedState.BorderThickness = 0;
-            this.CheckBoxKalimantan.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxMaluku
-            // 
-            this.CheckBoxMaluku.AutoSize = true;
-            this.CheckBoxMaluku.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxMaluku.CheckedState.BorderRadius = 0;
-            this.CheckBoxMaluku.CheckedState.BorderThickness = 0;
-            this.CheckBoxMaluku.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxMaluku.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxMaluku.Location = new System.Drawing.Point(73, 75);
-            this.CheckBoxMaluku.Name = "CheckBoxMaluku";
-            this.CheckBoxMaluku.Size = new System.Drawing.Size(63, 17);
-            this.CheckBoxMaluku.TabIndex = 16;
-            this.CheckBoxMaluku.Text = "Maluku";
-            this.CheckBoxMaluku.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxMaluku.UncheckedState.BorderRadius = 0;
-            this.CheckBoxMaluku.UncheckedState.BorderThickness = 0;
-            this.CheckBoxMaluku.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxSumatera
-            // 
-            this.CheckBoxSumatera.AutoSize = true;
-            this.CheckBoxSumatera.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSumatera.CheckedState.BorderRadius = 0;
-            this.CheckBoxSumatera.CheckedState.BorderThickness = 0;
-            this.CheckBoxSumatera.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxSumatera.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxSumatera.Location = new System.Drawing.Point(172, 17);
-            this.CheckBoxSumatera.Name = "CheckBoxSumatera";
-            this.CheckBoxSumatera.Size = new System.Drawing.Size(74, 17);
-            this.CheckBoxSumatera.TabIndex = 17;
-            this.CheckBoxSumatera.Text = "Sumatera";
-            this.CheckBoxSumatera.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxSumatera.UncheckedState.BorderRadius = 0;
-            this.CheckBoxSumatera.UncheckedState.BorderThickness = 0;
-            this.CheckBoxSumatera.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxPapua
-            // 
-            this.CheckBoxPapua.AutoSize = true;
-            this.CheckBoxPapua.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxPapua.CheckedState.BorderRadius = 0;
-            this.CheckBoxPapua.CheckedState.BorderThickness = 0;
-            this.CheckBoxPapua.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxPapua.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxPapua.Location = new System.Drawing.Point(172, 36);
-            this.CheckBoxPapua.Name = "CheckBoxPapua";
-            this.CheckBoxPapua.Size = new System.Drawing.Size(57, 17);
-            this.CheckBoxPapua.TabIndex = 18;
-            this.CheckBoxPapua.Text = "Papua";
-            this.CheckBoxPapua.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxPapua.UncheckedState.BorderRadius = 0;
-            this.CheckBoxPapua.UncheckedState.BorderThickness = 0;
-            this.CheckBoxPapua.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxLombok
-            // 
-            this.CheckBoxLombok.AutoSize = true;
-            this.CheckBoxLombok.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxLombok.CheckedState.BorderRadius = 0;
-            this.CheckBoxLombok.CheckedState.BorderThickness = 0;
-            this.CheckBoxLombok.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxLombok.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxLombok.Location = new System.Drawing.Point(172, 55);
-            this.CheckBoxLombok.Name = "CheckBoxLombok";
-            this.CheckBoxLombok.Size = new System.Drawing.Size(68, 17);
-            this.CheckBoxLombok.TabIndex = 19;
-            this.CheckBoxLombok.Text = "Lombok";
-            this.CheckBoxLombok.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxLombok.UncheckedState.BorderRadius = 0;
-            this.CheckBoxLombok.UncheckedState.BorderThickness = 0;
-            this.CheckBoxLombok.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            // 
-            // CheckBoxCamping
-            // 
-            this.CheckBoxCamping.AutoSize = true;
-            this.CheckBoxCamping.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxCamping.CheckedState.BorderRadius = 0;
-            this.CheckBoxCamping.CheckedState.BorderThickness = 0;
-            this.CheckBoxCamping.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.CheckBoxCamping.Font = new System.Drawing.Font("Malgun Gothic", 8.25F);
-            this.CheckBoxCamping.Location = new System.Drawing.Point(201, 26);
-            this.CheckBoxCamping.Name = "CheckBoxCamping";
-            this.CheckBoxCamping.Size = new System.Drawing.Size(72, 17);
-            this.CheckBoxCamping.TabIndex = 13;
-            this.CheckBoxCamping.Text = "Camping";
-            this.CheckBoxCamping.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.CheckBoxCamping.UncheckedState.BorderRadius = 0;
-            this.CheckBoxCamping.UncheckedState.BorderThickness = 0;
-            this.CheckBoxCamping.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.btnReload.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnReload.Font = new System.Drawing.Font("Malgun Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.Location = new System.Drawing.Point(1016, 161);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(116, 31);
+            this.btnReload.TabIndex = 26;
+            this.btnReload.Text = "Refresh";
+            this.btnReload.UseVisualStyleBackColor = false;
+            this.btnReload.Click += new System.EventHandler(this.button1_Click);
             // 
             // DashboardUtama
             // 
@@ -962,9 +833,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PapayaWhip;
             this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.lstSugesti);
             this.Controls.Add(this.PnlFilter);
-            this.Controls.Add(this.guna2Panel11);
             this.Controls.Add(this.PnlInformasi);
             this.Controls.Add(this.PnlSearch);
             this.Controls.Add(this.Navbar);
@@ -978,9 +849,6 @@
             this.PnlPulau.PerformLayout();
             this.PnlAktivitas.ResumeLayout(false);
             this.PnlAktivitas.PerformLayout();
-            this.guna2Panel11.ResumeLayout(false);
-            this.guna2Panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             this.PnlInformasi.ResumeLayout(false);
             this.PnlInformasi.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox5)).EndInit();
@@ -1022,9 +890,6 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox5;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox4;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel11;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel21;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Guna.UI2.WinForms.Guna2ShadowPanel PnlFilter;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel22;
         private Guna.UI2.WinForms.Guna2CheckBox CheckBoxBali;
@@ -1051,5 +916,6 @@
         private Guna.UI2.WinForms.Guna2CheckBox CheckBoxLombok;
         private Guna.UI2.WinForms.Guna2CheckBox CheckBoxPapua;
         private Guna.UI2.WinForms.Guna2CheckBox CheckBoxCamping;
+        private System.Windows.Forms.Button btnReload;
     }
 }

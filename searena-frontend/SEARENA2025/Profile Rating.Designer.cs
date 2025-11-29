@@ -87,9 +87,10 @@
             this.Navbar.Controls.Add(this.lblProfile);
             this.Navbar.Controls.Add(this.Profile);
             this.Navbar.Controls.Add(this.Logo);
-            this.Navbar.Location = new System.Drawing.Point(-1, 0);
+            this.Navbar.Location = new System.Drawing.Point(-2, 0);
+            this.Navbar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Navbar.Name = "Navbar";
-            this.Navbar.Size = new System.Drawing.Size(802, 44);
+            this.Navbar.Size = new System.Drawing.Size(1203, 68);
             this.Navbar.TabIndex = 0;
             this.Navbar.Paint += new System.Windows.Forms.PaintEventHandler(this.Navbar_Paint);
             // 
@@ -97,9 +98,10 @@
             // 
             this.lblProfile.AutoSize = true;
             this.lblProfile.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProfile.Location = new System.Drawing.Point(745, 13);
+            this.lblProfile.Location = new System.Drawing.Point(1118, 20);
+            this.lblProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProfile.Name = "lblProfile";
-            this.lblProfile.Size = new System.Drawing.Size(44, 17);
+            this.lblProfile.Size = new System.Drawing.Size(66, 28);
             this.lblProfile.TabIndex = 7;
             this.lblProfile.Text = "Profile";
             this.lblProfile.Click += new System.EventHandler(this.lblProfile_Click);
@@ -108,10 +110,11 @@
             // 
             this.Profile.Image = ((System.Drawing.Image)(resources.GetObject("Profile.Image")));
             this.Profile.ImageRotate = 0F;
-            this.Profile.Location = new System.Drawing.Point(701, 6);
+            this.Profile.Location = new System.Drawing.Point(1052, 9);
+            this.Profile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Profile.Name = "Profile";
             this.Profile.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.Profile.Size = new System.Drawing.Size(38, 35);
+            this.Profile.Size = new System.Drawing.Size(57, 54);
             this.Profile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Profile.TabIndex = 6;
             this.Profile.TabStop = false;
@@ -122,9 +125,10 @@
             this.Logo.BackColor = System.Drawing.Color.FloralWhite;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
             this.Logo.ImageRotate = 0F;
-            this.Logo.Location = new System.Drawing.Point(2, 3);
+            this.Logo.Location = new System.Drawing.Point(3, 5);
+            this.Logo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(126, 38);
+            this.Logo.Size = new System.Drawing.Size(189, 58);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Logo.TabIndex = 1;
             this.Logo.TabStop = false;
@@ -138,18 +142,20 @@
             this.PnlProfile.Controls.Add(this.lblPengguna);
             this.PnlProfile.Controls.Add(this.guna2HtmlLabel1);
             this.PnlProfile.Controls.Add(this.ProfilePage);
-            this.PnlProfile.Location = new System.Drawing.Point(38, 107);
+            this.PnlProfile.Location = new System.Drawing.Point(57, 165);
+            this.PnlProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PnlProfile.Name = "PnlProfile";
-            this.PnlProfile.Size = new System.Drawing.Size(238, 102);
+            this.PnlProfile.Size = new System.Drawing.Size(357, 157);
             this.PnlProfile.TabIndex = 1;
             // 
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(104, 65);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(140, 96);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(18, 20);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(27, 31);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 2;
             this.guna2PictureBox1.TabStop = false;
@@ -159,9 +165,10 @@
             this.lblBergabung.AutoSize = false;
             this.lblBergabung.BackColor = System.Drawing.Color.Transparent;
             this.lblBergabung.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBergabung.Location = new System.Drawing.Point(128, 65);
+            this.lblBergabung.Location = new System.Drawing.Point(176, 96);
+            this.lblBergabung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblBergabung.Name = "lblBergabung";
-            this.lblBergabung.Size = new System.Drawing.Size(107, 34);
+            this.lblBergabung.Size = new System.Drawing.Size(146, 52);
             this.lblBergabung.TabIndex = 2;
             this.lblBergabung.Text = "Bergabung sejak 2021";
             this.lblBergabung.Click += new System.EventHandler(this.guna2HtmlLabel3_Click);
@@ -170,9 +177,10 @@
             // 
             this.lblPengguna.BackColor = System.Drawing.Color.Transparent;
             this.lblPengguna.Font = new System.Drawing.Font("Malgun Gothic Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPengguna.Location = new System.Drawing.Point(104, 40);
+            this.lblPengguna.Location = new System.Drawing.Point(140, 58);
+            this.lblPengguna.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblPengguna.Name = "lblPengguna";
-            this.lblPengguna.Size = new System.Drawing.Size(61, 19);
+            this.lblPengguna.Size = new System.Drawing.Size(91, 30);
             this.lblPengguna.TabIndex = 2;
             this.lblPengguna.Text = "Pengguna";
             // 
@@ -180,9 +188,10 @@
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(104, 15);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(140, 19);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(85, 19);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(129, 30);
             this.guna2HtmlLabel1.TabIndex = 2;
             this.guna2HtmlLabel1.Text = "Tasya Aurora";
             this.guna2HtmlLabel1.Click += new System.EventHandler(this.guna2HtmlLabel1_Click);
@@ -191,11 +200,12 @@
             // 
             this.ProfilePage.Image = ((System.Drawing.Image)(resources.GetObject("ProfilePage.Image")));
             this.ProfilePage.ImageRotate = 0F;
-            this.ProfilePage.Location = new System.Drawing.Point(4, 15);
+            this.ProfilePage.Location = new System.Drawing.Point(6, 23);
+            this.ProfilePage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ProfilePage.Name = "ProfilePage";
             this.ProfilePage.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.ProfilePage.Size = new System.Drawing.Size(83, 70);
-            this.ProfilePage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ProfilePage.Size = new System.Drawing.Size(124, 108);
+            this.ProfilePage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ProfilePage.TabIndex = 2;
             this.ProfilePage.TabStop = false;
             this.ProfilePage.Click += new System.EventHandler(this.ProfilePage_Click);
@@ -213,18 +223,20 @@
             this.PanelProfile2.Controls.Add(this.guna2HtmlLabel5);
             this.PanelProfile2.Controls.Add(this.guna2CirclePictureBox2);
             this.PanelProfile2.Controls.Add(this.guna2PictureBox3);
-            this.PanelProfile2.Location = new System.Drawing.Point(38, 236);
+            this.PanelProfile2.Location = new System.Drawing.Point(57, 363);
+            this.PanelProfile2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PanelProfile2.Name = "PanelProfile2";
-            this.PanelProfile2.Size = new System.Drawing.Size(238, 147);
+            this.PanelProfile2.Size = new System.Drawing.Size(357, 226);
             this.PanelProfile2.TabIndex = 2;
             // 
             // guna2HtmlLabel7
             // 
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(11, 82);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(16, 126);
+            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(36, 15);
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(54, 25);
             this.guna2HtmlLabel7.TabIndex = 3;
             this.guna2HtmlLabel7.Text = "E-mail";
             // 
@@ -232,9 +244,10 @@
             // 
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(10, 75);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(15, 115);
+            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
-            this.guna2PictureBox2.Size = new System.Drawing.Size(176, 10);
+            this.guna2PictureBox2.Size = new System.Drawing.Size(264, 15);
             this.guna2PictureBox2.TabIndex = 3;
             this.guna2PictureBox2.TabStop = false;
             // 
@@ -242,7 +255,8 @@
             // 
             this.lblTelepon.BackColor = System.Drawing.Color.Transparent;
             this.lblTelepon.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTelepon.Location = new System.Drawing.Point(11, 118);
+            this.lblTelepon.Location = new System.Drawing.Point(16, 182);
+            this.lblTelepon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblTelepon.Name = "lblTelepon";
             this.lblTelepon.Size = new System.Drawing.Size(3, 2);
             this.lblTelepon.TabIndex = 5;
@@ -252,9 +266,10 @@
             // 
             this.lblEmail.BackColor = System.Drawing.Color.Transparent;
             this.lblEmail.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(12, 102);
+            this.lblEmail.Location = new System.Drawing.Point(18, 157);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(119, 15);
+            this.lblEmail.Size = new System.Drawing.Size(187, 25);
             this.lblEmail.TabIndex = 4;
             this.lblEmail.Text = "tasyaaurora@gmail.com";
             // 
@@ -262,9 +277,10 @@
             // 
             this.lblNama.BackColor = System.Drawing.Color.Transparent;
             this.lblNama.Font = new System.Drawing.Font("Malgun Gothic Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNama.Location = new System.Drawing.Point(10, 54);
+            this.lblNama.Location = new System.Drawing.Point(15, 83);
+            this.lblNama.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblNama.Name = "lblNama";
-            this.lblNama.Size = new System.Drawing.Size(67, 15);
+            this.lblNama.Size = new System.Drawing.Size(102, 25);
             this.lblNama.TabIndex = 3;
             this.lblNama.Text = "Tasya Aurora ";
             // 
@@ -272,7 +288,8 @@
             // 
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(11, 104);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(16, 160);
+            this.guna2HtmlLabel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             this.guna2HtmlLabel8.Size = new System.Drawing.Size(3, 2);
             this.guna2HtmlLabel8.TabIndex = 3;
@@ -282,9 +299,10 @@
             // 
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(9, 36);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(14, 55);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            this.guna2HtmlLabel6.Size = new System.Drawing.Size(83, 15);
+            this.guna2HtmlLabel6.Size = new System.Drawing.Size(125, 25);
             this.guna2HtmlLabel6.TabIndex = 3;
             this.guna2HtmlLabel6.Text = "Nama Lengkap";
             // 
@@ -292,9 +310,10 @@
             // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(36, 7);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(54, 11);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(129, 19);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(194, 30);
             this.guna2HtmlLabel5.TabIndex = 3;
             this.guna2HtmlLabel5.Text = "Informasi Pengguna";
             // 
@@ -302,10 +321,11 @@
             // 
             this.guna2CirclePictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox2.Image")));
             this.guna2CirclePictureBox2.ImageRotate = 0F;
-            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(8, 6);
+            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(12, 9);
+            this.guna2CirclePictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
             this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(26, 27);
+            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(39, 42);
             this.guna2CirclePictureBox2.TabIndex = 3;
             this.guna2CirclePictureBox2.TabStop = false;
             // 
@@ -313,9 +333,10 @@
             // 
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(12, 123);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(18, 189);
+            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
-            this.guna2PictureBox3.Size = new System.Drawing.Size(176, 10);
+            this.guna2PictureBox3.Size = new System.Drawing.Size(264, 15);
             this.guna2PictureBox3.TabIndex = 6;
             this.guna2PictureBox3.TabStop = false;
             // 
@@ -324,9 +345,10 @@
             this.btnLogOut.BackColor = System.Drawing.Color.Red;
             this.btnLogOut.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.ForeColor = System.Drawing.Color.Black;
-            this.btnLogOut.Location = new System.Drawing.Point(104, 395);
+            this.btnLogOut.Location = new System.Drawing.Point(156, 608);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(82, 38);
+            this.btnLogOut.Size = new System.Drawing.Size(123, 58);
             this.btnLogOut.TabIndex = 3;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = false;
@@ -338,10 +360,11 @@
             this.guna2ShadowPanel1.Controls.Add(this.dgvRiwayat);
             this.guna2ShadowPanel1.Controls.Add(this.guna2HtmlLabel12);
             this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel1.Location = new System.Drawing.Point(312, 107);
+            this.guna2ShadowPanel1.Location = new System.Drawing.Point(468, 165);
+            this.guna2ShadowPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
             this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black;
-            this.guna2ShadowPanel1.Size = new System.Drawing.Size(426, 273);
+            this.guna2ShadowPanel1.Size = new System.Drawing.Size(639, 420);
             this.guna2ShadowPanel1.TabIndex = 4;
             // 
             // dgvRiwayat
@@ -373,13 +396,12 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvRiwayat.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRiwayat.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(199)))), ((int)(((byte)(206)))));
-            this.dgvRiwayat.Location = new System.Drawing.Point(15, 42);
-            this.dgvRiwayat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvRiwayat.Location = new System.Drawing.Point(22, 65);
             this.dgvRiwayat.Name = "dgvRiwayat";
             this.dgvRiwayat.RowHeadersVisible = false;
             this.dgvRiwayat.RowHeadersWidth = 62;
             this.dgvRiwayat.RowTemplate.Height = 28;
-            this.dgvRiwayat.Size = new System.Drawing.Size(393, 207);
+            this.dgvRiwayat.Size = new System.Drawing.Size(590, 318);
             this.dgvRiwayat.TabIndex = 14;
             this.dgvRiwayat.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.WetAsphalt;
             this.dgvRiwayat.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(200)))), ((int)(((byte)(207)))));
@@ -441,9 +463,10 @@
             // 
             this.guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel12.Font = new System.Drawing.Font("Malgun Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel12.Location = new System.Drawing.Point(17, 15);
+            this.guna2HtmlLabel12.Location = new System.Drawing.Point(26, 23);
+            this.guna2HtmlLabel12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
-            this.guna2HtmlLabel12.Size = new System.Drawing.Size(240, 23);
+            this.guna2HtmlLabel12.Size = new System.Drawing.Size(356, 34);
             this.guna2HtmlLabel12.TabIndex = 0;
             this.guna2HtmlLabel12.Text = "Riwayat Rating dan Review (4)";
             // 
@@ -459,9 +482,10 @@
             this.btnKembali.ForeColor = System.Drawing.Color.Black;
             this.btnKembali.Image = ((System.Drawing.Image)(resources.GetObject("btnKembali.Image")));
             this.btnKembali.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnKembali.Location = new System.Drawing.Point(38, 66);
+            this.btnKembali.Location = new System.Drawing.Point(57, 102);
+            this.btnKembali.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(77, 18);
+            this.btnKembali.Size = new System.Drawing.Size(116, 28);
             this.btnKembali.TabIndex = 5;
             this.btnKembali.Text = "Kembali";
             this.btnKembali.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -473,9 +497,10 @@
             this.guna2Panel3.Controls.Add(this.btnBookmark);
             this.guna2Panel3.Controls.Add(this.btnRatingReview);
             this.guna2Panel3.FillColor = System.Drawing.Color.FloralWhite;
-            this.guna2Panel3.Location = new System.Drawing.Point(341, 61);
+            this.guna2Panel3.Location = new System.Drawing.Point(512, 94);
+            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(377, 31);
+            this.guna2Panel3.Size = new System.Drawing.Size(566, 48);
             this.guna2Panel3.TabIndex = 6;
             // 
             // btnBookmark
@@ -487,9 +512,10 @@
             this.btnBookmark.FillColor = System.Drawing.Color.FloralWhite;
             this.btnBookmark.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBookmark.ForeColor = System.Drawing.Color.Black;
-            this.btnBookmark.Location = new System.Drawing.Point(194, 3);
+            this.btnBookmark.Location = new System.Drawing.Point(291, 5);
+            this.btnBookmark.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnBookmark.Name = "btnBookmark";
-            this.btnBookmark.Size = new System.Drawing.Size(180, 25);
+            this.btnBookmark.Size = new System.Drawing.Size(270, 38);
             this.btnBookmark.TabIndex = 1;
             this.btnBookmark.Text = "Bookmark";
             this.btnBookmark.Click += new System.EventHandler(this.btnBookmark_Click);
@@ -503,9 +529,10 @@
             this.btnRatingReview.FillColor = System.Drawing.Color.LightGreen;
             this.btnRatingReview.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRatingReview.ForeColor = System.Drawing.Color.Black;
-            this.btnRatingReview.Location = new System.Drawing.Point(3, 3);
+            this.btnRatingReview.Location = new System.Drawing.Point(4, 5);
+            this.btnRatingReview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRatingReview.Name = "btnRatingReview";
-            this.btnRatingReview.Size = new System.Drawing.Size(180, 25);
+            this.btnRatingReview.Size = new System.Drawing.Size(270, 38);
             this.btnRatingReview.TabIndex = 0;
             this.btnRatingReview.Text = "Rating dan Review";
             this.btnRatingReview.Click += new System.EventHandler(this.btnRatingReview_Click);
@@ -519,20 +546,19 @@
             this.btnHapus.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnHapus.Font = new System.Drawing.Font("Malgun Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHapus.ForeColor = System.Drawing.Color.White;
-            this.btnHapus.Location = new System.Drawing.Point(479, 394);
-            this.btnHapus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHapus.Location = new System.Drawing.Point(718, 606);
             this.btnHapus.Name = "btnHapus";
-            this.btnHapus.Size = new System.Drawing.Size(76, 27);
+            this.btnHapus.Size = new System.Drawing.Size(114, 42);
             this.btnHapus.TabIndex = 9;
             this.btnHapus.Text = "Hapus";
             this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PapayaWhip;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1200, 692);
             this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.btnKembali);
@@ -541,6 +567,7 @@
             this.Controls.Add(this.PanelProfile2);
             this.Controls.Add(this.PnlProfile);
             this.Controls.Add(this.Navbar);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);

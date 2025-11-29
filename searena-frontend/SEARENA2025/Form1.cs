@@ -2,516 +2,201 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
 
 namespace SEARENA2025
 {
     public partial class Form1 : Form
     {
-        // Kontrol Utama
-        private Guna2BorderlessForm _gunaBorderlessForm;
-        private Guna2Panel _mainPanel;
-        private Label _lblTitle;
-        private Guna2Button _btnTabMasuk, _btnTabDaftar;
-        private Guna2Button _btnKembali; // Tombol kembali di-field-kan agar bisa diakses
-
-        // Role Selection Controls
-        private Guna2Panel _roleSelectionPanel;
-        private Guna2Button _btnRoleAdmin, _btnRolePengguna;
-        private Label _lblRoleTitle;
-        private Label _lblRoleSubtitle;
-
-        // Login Form Controls
-        private Guna2TextBox _txtEmail, _txtPassword;
-        private Guna2Button _btnMasuk;
-
-        // Register Form Controls
-        private Guna2TextBox _txtRegNama, _txtRegEmail, _txtRegPassword;
-        private Guna2Button _btnDaftar;
-
-        // Role yang dipilih
         private string _selectedRole = "";
-
-        // PERBAIKI: Ukuran yang lebih besar untuk DPI awareness
-        private const int PANEL_WIDTH = 420;
-        private const int CONTENT_WIDTH = 350;
-        private const int FORM_WIDTH = 950;
-        private const int FORM_HEIGHT = 650;
-        private const int PANEL_HEIGHT_LOGIN = 360; // Tambah tinggi dari 310 ke 360
-        private const int PANEL_HEIGHT_REGISTER = 440; // Tambah tinggi dari 380 ke 440
-        private const int PANEL_HEIGHT_ROLE = 330; // Tambah tinggi dari 300 ke 330
-        private const int BORDER_RADIUS = 25;
-
-        private static readonly Color COLOR_PRIMARY = Color.FromArgb(109, 175, 207);
-        private static readonly Color COLOR_SECONDARY = Color.FromArgb(244, 185, 128);
-        private static readonly Color COLOR_PANEL_BG = Color.FromArgb(200, 255, 255, 255);
-        private static readonly Color COLOR_TAB_CONTAINER = Color.FromArgb(220, 255, 255, 255);
-        private static readonly Color COLOR_ACCENT_CYAN = Color.FromArgb(94, 226, 220);
-        private static readonly Color COLOR_ACCENT_CYAN_DARK = Color.FromArgb(70, 200, 195);
-        private static readonly Color COLOR_ACCENT_ORANGE = Color.FromArgb(255, 159, 111);
-        private static readonly Color COLOR_TEXT_DARK = Color.FromArgb(80, 80, 80);
-        private static readonly Color COLOR_TEXT_LIGHT = Color.FromArgb(130, 130, 130);
-        private static readonly Color COLOR_LINK = Color.FromArgb(31, 95, 127);
-
-        // Database connection string
-        private const string CONNECTION_STRING = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
+        private const string CONNECTION_STRING =
+             "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public Form1()
         {
             InitializeComponent();
-            
-            // PERBAIKI: DPI Awareness
-            this.AutoScaleMode = AutoScaleMode.Dpi;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ConfigureForm();
-            InitializeGunaBorderlessForm();
-            CreateRoleSelectionPanel();
-            CreateMainPanel();
-            CreateTitleLabel();
-            CreateTabButtons();
-            CreateLoginForm();
-            CreateRegisterForm();
-            ShowRoleSelection();
+            // Set icons untuk textbox
+            SetIcons();
+
+            // Show role selection panel
+            pnlRole.Visible = true;
+            pnlLogin.Visible = false;
+            pnlRegister.Visible = false;
+            lblTitle.Visible = false;
+            lblTitleReg.Visible = false;
         }
 
-        private void ConfigureForm()
+        private void SetIcons()
         {
-            this.Size = new Size(FORM_WIDTH, FORM_HEIGHT);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Paint += Form1_Paint;
+            // Icons untuk login
+            if (File.Exists("Icons/gridicons_mail.png"))
+            {
+                txtEmail.IconLeft = Image.FromFile("Icons/gridicons_mail.png");
+                txtEmail.IconLeftOffset = new Point(10, 0);
+                txtEmail.TextOffset = new Point(38, 0);
+            }
+
+            if (File.Exists("Icons/Group 25.png"))
+            {
+                txtPassword.IconLeft = Image.FromFile("Icons/Group 25.png");
+                txtPassword.IconLeftOffset = new Point(10, 0);
+                txtPassword.TextOffset = new Point(38, 0);
+            }
+
+            if (File.Exists("Icons/mdi_eye.png"))
+            {
+                txtPassword.IconRight = Image.FromFile("Icons/mdi_eye.png");
+                txtPassword.IconRightCursor = Cursors.Hand;
+                txtPassword.IconRightClick += TxtPassword_IconRightClick;
+            }
+
+            // Icons untuk register
+            if (File.Exists("Icons/Vector.png"))
+            {
+                txtRegNama.IconLeft = Image.FromFile("Icons/Vector.png");
+                txtRegNama.IconLeftOffset = new Point(10, 0);
+                txtRegNama.TextOffset = new Point(38, 0);
+            }
+
+            if (File.Exists("Icons/gridicons_mail.png"))
+            {
+                txtRegEmail.IconLeft = Image.FromFile("Icons/gridicons_mail.png");
+                txtRegEmail.IconLeftOffset = new Point(10, 0);
+                txtRegEmail.TextOffset = new Point(38, 0);
+            }
+
+            if (File.Exists("Icons/Group 25.png"))
+            {
+                txtRegPassword.IconLeft = Image.FromFile("Icons/Group 25.png");
+                txtRegPassword.IconLeftOffset = new Point(10, 0);
+                txtRegPassword.TextOffset = new Point(38, 0);
+            }
+
+            if (File.Exists("Icons/mdi_eye.png"))
+            {
+                txtRegPassword.IconRight = Image.FromFile("Icons/mdi_eye.png");
+                txtRegPassword.IconRightCursor = Cursors.Hand;
+                txtRegPassword.IconRightClick += TxtRegPassword_IconRightClick;
+            }
         }
 
-        private void InitializeGunaBorderlessForm()
+        private void TxtPassword_IconRightClick(object sender, EventArgs e)
         {
-            _gunaBorderlessForm = new Guna2BorderlessForm { ContainerControl = this, TransparentWhileDrag = true };
+            txtPassword.PasswordChar = (txtPassword.PasswordChar == '●') ? '\0' : '●';
         }
 
-        private void CreateRoleSelectionPanel()
+        private void TxtRegPassword_IconRightClick(object sender, EventArgs e)
         {
-            _roleSelectionPanel = new Guna2Panel
-            {
-                Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_ROLE),
-                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_ROLE) / 2 + 20),
-                BackColor = Color.Transparent,
-                BorderRadius = BORDER_RADIUS,
-                FillColor = COLOR_PANEL_BG
-            };
-            this.Controls.Add(_roleSelectionPanel);
-
-            _lblRoleTitle = new Label
-            {
-                Text = "Pilih Peran Anda",
-                Font = new Font("Segoe UI", 22F, FontStyle.Bold), // Kurangi dari 24F ke 22F
-                ForeColor = COLOR_TEXT_DARK,
-                BackColor = Color.Transparent,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Width = PANEL_WIDTH,
-                Height = 60, // Tambah dari 50 ke 60
-                Location = new Point(0, 25),
-                AutoSize = false // PERBAIKI: Matikan autosize
-            };
-            _roleSelectionPanel.Controls.Add(_lblRoleTitle);
-
-            _lblRoleSubtitle = new Label
-            {
-                Text = "Masuk sebagai admin atau pengguna biasa",
-                Font = new Font("Segoe UI", 9.5F), // Tambah sedikit dari 9F
-                ForeColor = COLOR_TEXT_LIGHT,
-                BackColor = Color.Transparent,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Width = PANEL_WIDTH,
-                Height = 30, // Tambah dari 25 ke 30
-                Location = new Point(0, 80),
-                AutoSize = false // PERBAIKI: Matikan autosize
-            };
-            _roleSelectionPanel.Controls.Add(_lblRoleSubtitle);
-
-            int contentStartX = (PANEL_WIDTH - 310) / 2; // Sesuaikan dengan lebar tombol baru
-
-            _btnRoleAdmin = new Guna2Button
-            {
-                Size = new Size(145, 110), // Tambah ukuran dari 140x100
-                Location = new Point(contentStartX, 130),
-                Text = "Admin",
-                Font = new Font("Segoe UI", 13F, FontStyle.Bold), // Tambah dari 12F
-                FillColor = COLOR_ACCENT_CYAN,
-                ForeColor = Color.Black,
-                BorderRadius = 15,
-                Cursor = Cursors.Hand,
-                AutoSize = false // PERBAIKI: Matikan autosize
-            };
-            _btnRoleAdmin.Click += (s, e) => SelectRole("admin");
-            _roleSelectionPanel.Controls.Add(_btnRoleAdmin);
-
-            _btnRolePengguna = new Guna2Button
-            {
-                Size = new Size(145, 110), // Tambah ukuran dari 140x100
-                Location = new Point(contentStartX + 165, 130), // Adjust spacing
-                Text = "Pengguna",
-                Font = new Font("Segoe UI", 13F, FontStyle.Bold), // Tambah dari 12F
-                FillColor = COLOR_ACCENT_ORANGE,
-                ForeColor = Color.White,
-                BorderRadius = 15,
-                Cursor = Cursors.Hand,
-                AutoSize = false // PERBAIKI: Matikan autosize
-            };
-            _btnRolePengguna.Click += (s, e) => SelectRole("pengguna");
-            _roleSelectionPanel.Controls.Add(_btnRolePengguna);
+            txtRegPassword.PasswordChar = (txtRegPassword.PasswordChar == '●') ? '\0' : '●';
         }
 
-        private void SelectRole(string role)
+        // ===== ROLE SELECTION =====
+        private void btnRoleAdmin_Click(object sender, EventArgs e)
         {
-            _selectedRole = role;
-            _roleSelectionPanel.Visible = false;
-            ShowLoginForm();
+            _selectedRole = "admin";
+            ShowLoginPanel();
         }
 
-        private void CreateMainPanel()
+        private void btnRoleUser_Click(object sender, EventArgs e)
         {
-            _mainPanel = new Guna2Panel
-            {
-                Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_LOGIN),
-                Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 20),
-                BackColor = Color.Transparent,
-                BorderRadius = BORDER_RADIUS,
-                FillColor = COLOR_PANEL_BG,
-                Visible = false
-            };
-            this.Controls.Add(_mainPanel);
-
-            // PERBAIKI: Tombol kembali di pojok kanan atas (lebih rapi)
-            _btnKembali = new Guna2Button
-            {
-                Size = new Size(35, 35),
-                Location = new Point(PANEL_WIDTH - 45, 10), // Pojok kanan atas
-                Text = "✕", // Gunakan simbol X
-                Font = new Font("Segoe UI", 14F, FontStyle.Bold),
-                FillColor = Color.Transparent,
-                ForeColor = COLOR_TEXT_DARK,
-                BorderRadius = 17,
-                Cursor = Cursors.Hand,
-                TextAlign = HorizontalAlignment.Center,
-                AutoSize = false
-            };
-            _btnKembali.Click += (s, e) => KembaliKeRoleSelection();
-            _mainPanel.Controls.Add(_btnKembali);
+            _selectedRole = "pengguna";
+            ShowLoginPanel();
         }
 
-        private void KembaliKeRoleSelection()
+        // ===== PANEL SWITCHING =====
+        private void ShowLoginPanel()
+        {
+            pnlRole.Visible = false;
+            pnlLogin.Visible = true;
+            pnlRegister.Visible = false;
+            lblTitle.Visible = true;
+            lblTitleReg.Visible = false;
+            lblTitle.Text = "Hai, Sea-Mates!";
+        }
+
+        private void ShowRegisterPanel()
+        {
+            pnlRole.Visible = false;
+            pnlLogin.Visible = false;
+            pnlRegister.Visible = true;
+            lblTitle.Visible = false;
+            lblTitleReg.Visible = true;
+        }
+
+        private void ShowRolePanel()
         {
             _selectedRole = "";
-            _mainPanel.Visible = false;
-            _roleSelectionPanel.Visible = true;
-            _txtEmail.Text = "";
-            _txtPassword.Text = "";
-            _txtRegNama.Text = "";
-            _txtRegEmail.Text = "";
-            _txtRegPassword.Text = "";
+            pnlRole.Visible = true;
+            pnlLogin.Visible = false;
+            pnlRegister.Visible = false;
+            lblTitle.Visible = false;
+            lblTitleReg.Visible = false;
+
+            // Clear inputs
+            txtEmail.Text = "";
+            txtPassword.Text = "";
+            txtRegNama.Text = "";
+            txtRegEmail.Text = "";
+            txtRegPassword.Text = "";
         }
 
-        private void CreateTitleLabel()
+        // ===== TAB SWITCHING =====
+        private void btnTabMasuk_Click(object sender, EventArgs e)
         {
-            _lblTitle = new Label
-            {
-                Text = "Hai, Sea-Mates!",
-                Font = new Font("Segoe UI", 24F, FontStyle.Bold), // Kurangi dari 26F
-                ForeColor = Color.White,
-                BackColor = Color.Transparent,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Width = PANEL_WIDTH,
-                Height = 50,
-                Visible = false,
-                AutoSize = false // PERBAIKI: Matikan autosize
-            };
-            _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
-            this.Controls.Add(_lblTitle);
+            ShowLoginPanel();
         }
 
-        private void CreateTabButtons()
+        private void btnTabDaftar_Click(object sender, EventArgs e)
         {
-            Guna2Panel tabContainer = new Guna2Panel
-            {
-                Size = new Size(320, 48), // Tambah ukuran dari 300x45
-                Location = new Point((PANEL_WIDTH - 320) / 2, 55), // Turunkan dari 25 ke 55 (beri ruang untuk tombol X)
-                FillColor = COLOR_TAB_CONTAINER,
-                BorderRadius = 24
-            };
-            _mainPanel.Controls.Add(tabContainer);
-
-            _btnTabMasuk = new Guna2Button
-            {
-                Text = "Masuk",
-                Size = new Size(155, 42), // Tambah ukuran dari 145x38
-                Location = new Point(3, 3),
-                Font = new Font("Segoe UI", 11.5F, FontStyle.Bold), // Tambah dari 11F
-                FillColor = COLOR_ACCENT_CYAN,
-                ForeColor = Color.Black,
-                BorderRadius = 21,
-                Cursor = Cursors.Hand,
-                AutoSize = false
-            };
-            _btnTabMasuk.Click += (s, e) => ShowLoginForm();
-            tabContainer.Controls.Add(_btnTabMasuk);
-
-            _btnTabDaftar = new Guna2Button
-            {
-                Text = "Daftar",
-                Size = new Size(155, 42), // Tambah ukuran dari 145x38
-                Location = new Point(162, 3),
-                Font = new Font("Segoe UI", 11.5F), // Tambah dari 11F
-                FillColor = Color.Transparent,
-                ForeColor = COLOR_TEXT_LIGHT,
-                BorderRadius = 21,
-                Cursor = Cursors.Hand,
-                AutoSize = false
-            };
-            _btnTabDaftar.Click += (s, e) => ShowRegisterForm();
-            tabContainer.Controls.Add(_btnTabDaftar);
+            ShowRegisterPanel();
         }
 
-        private void CreateLoginForm()
+        private void btnKembali_Click(object sender, EventArgs e)
         {
-            int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 120; // Turunkan dari 85 ke 120 (beri ruang untuk tab buttons)
-
-            _txtEmail = new Guna2TextBox
-            {
-                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
-                Location = new Point(contentStartX, currentY),
-                BorderRadius = 10,
-                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
-                IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
-                IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
-                PlaceholderText = "Alamat E-mail",
-                BorderColor = Color.FromArgb(220, 220, 220),
-                FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White,
-                AutoSize = false
-            };
-            _txtEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5)); // Label di atas
-            _mainPanel.Controls.Add(_txtEmail);
-
-            currentY += _txtEmail.Height + 18; // Tambah spacing dari 15
-
-            _txtPassword = new Guna2TextBox
-            {
-                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
-                Location = new Point(contentStartX, currentY),
-                BorderRadius = 10,
-                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
-                PasswordChar = '●',
-                IconLeft = Image.FromFile("Icons/Group 25.png"),
-                IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
-                IconRight = Image.FromFile("Icons/mdi_eye.png"),
-                IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",
-                BorderColor = Color.FromArgb(220, 220, 220),
-                FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White,
-                AutoSize = false
-            };
-            _txtPassword.IconRightClick += (s, e) => TogglePasswordVisibility(_txtPassword);
-            _txtPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5)); // Label di atas
-            _mainPanel.Controls.Add(_txtPassword);
-
-            currentY += _txtPassword.Height + 25; // Tambah spacing dari 30
-
-            _btnMasuk = new Guna2Button
-            {
-                Size = new Size(CONTENT_WIDTH, 50), // Tambah tinggi dari 48
-                Location = new Point(contentStartX, currentY),
-                Text = "Masuk",
-                Font = new Font("Segoe UI", 12F, FontStyle.Bold), // Tambah dari 11F
-                FillColor = COLOR_ACCENT_ORANGE,
-                ForeColor = Color.White,
-                BorderRadius = 25,
-                Cursor = Cursors.Hand,
-                AutoSize = false
-            };
-            _btnMasuk.Click += (s, e) => Login();
-            _mainPanel.Controls.Add(_btnMasuk);
+            ShowRolePanel();
         }
 
-        private void CreateRegisterForm()
+        // ===== LOGIN =====
+        private void btnMasuk_Click(object sender, EventArgs e)
         {
-            int contentStartX = (PANEL_WIDTH - CONTENT_WIDTH) / 2;
-            int currentY = 120; // Turunkan dari 85 ke 120
-
-            _txtRegNama = new Guna2TextBox
+            if (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
-                Location = new Point(contentStartX, currentY),
-                BorderRadius = 10,
-                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
-                IconLeft = Image.FromFile("Icons/Vector.png"),
-                IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
-                PlaceholderText = "Nama Lengkap",
-                BorderColor = Color.FromArgb(220, 220, 220),
-                FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White,
-                Visible = false,
-                AutoSize = false
-            };
-            _txtRegNama.Controls.Add(CreateInnerLabel("Nama Lengkap", 45, 5)); // Label di atas
-            _mainPanel.Controls.Add(_txtRegNama);
-
-            currentY += _txtRegNama.Height + 18; // Tambah spacing dari 15
-
-            _txtRegEmail = new Guna2TextBox
-            {
-                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
-                Location = new Point(contentStartX, currentY),
-                BorderRadius = 10,
-                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
-                IconLeft = Image.FromFile("Icons/gridicons_mail.png"),
-                IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
-                PlaceholderText = "Alamat E-mail",
-                BorderColor = Color.FromArgb(220, 220, 220),
-                FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White,
-                Visible = false,
-                AutoSize = false
-            };
-            _txtRegEmail.Controls.Add(CreateInnerLabel("Alamat E-mail", 45, 5)); // Label di atas
-            _mainPanel.Controls.Add(_txtRegEmail);
-
-            currentY += _txtRegEmail.Height + 18; // Tambah spacing dari 15
-
-            _txtRegPassword = new Guna2TextBox
-            {
-                Size = new Size(CONTENT_WIDTH, 58), // Tambah tinggi dari 55
-                Location = new Point(contentStartX, currentY),
-                BorderRadius = 10,
-                Font = new Font("Segoe UI", 10.5F), // Tambah dari 10F
-                PasswordChar = '●',
-                IconLeft = Image.FromFile("Icons/Group 25.png"),
-                IconLeftOffset = new Point(12, 0),
-                TextOffset = new Point(5, 18), // PERBAIKI: Naikkan dari 12 ke 18 agar tidak overlap dengan label
-                IconRight = Image.FromFile("Icons/mdi_eye.png"),
-                IconRightCursor = Cursors.Hand,
-                PlaceholderText = "Kata Sandi",
-                BorderColor = Color.FromArgb(220, 220, 220),
-                FocusedState = { BorderColor = COLOR_ACCENT_CYAN_DARK },
-                FillColor = Color.White,
-                Visible = false,
-                AutoSize = false
-            };
-            _txtRegPassword.IconRightClick += (s, e) => TogglePasswordVisibility(_txtRegPassword);
-            _txtRegPassword.Controls.Add(CreateInnerLabel("Kata Sandi", 45, 5)); // Label di atas
-            _mainPanel.Controls.Add(_txtRegPassword);
-
-            currentY += _txtRegPassword.Height + 25; // Tambah spacing dari 30
-
-            _btnDaftar = new Guna2Button
-            {
-                Size = new Size(CONTENT_WIDTH, 50), // Tambah tinggi dari 48
-                Location = new Point(contentStartX, currentY),
-                Text = "Daftar",
-                Font = new Font("Segoe UI", 12F, FontStyle.Bold), // Tambah dari 11F
-                FillColor = COLOR_ACCENT_ORANGE,
-                ForeColor = Color.White,
-                BorderRadius = 25,
-                Cursor = Cursors.Hand,
-                Visible = false,
-                AutoSize = false
-            };
-            _btnDaftar.Click += (s, e) => Register();
-            _mainPanel.Controls.Add(_btnDaftar);
-        }
-
-        private void ShowRoleSelection()
-        {
-            _roleSelectionPanel.Visible = true;
-            _mainPanel.Visible = false;
-            _lblTitle.Visible = false;
-        }
-
-        private void ShowLoginForm()
-        {
-            _mainPanel.Visible = true;
-            _roleSelectionPanel.Visible = false;
-            _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_LOGIN);
-            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_LOGIN) / 2 + 20);
-            _lblTitle.Visible = true;
-            _lblTitle.Text = "Hai, Sea-Mates!";
-            _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
-
-            _btnTabMasuk.FillColor = COLOR_ACCENT_CYAN;
-            _btnTabMasuk.ForeColor = Color.Black;
-            _btnTabMasuk.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            _btnTabDaftar.FillColor = Color.Transparent;
-            _btnTabDaftar.ForeColor = COLOR_TEXT_LIGHT;
-            _btnTabDaftar.Font = new Font("Segoe UI", 11F);
-
-            SetControlsVisibility(true, _txtEmail, _txtPassword, _btnMasuk);
-            SetControlsVisibility(false, _txtRegNama, _txtRegEmail, _txtRegPassword, _btnDaftar);
-        }
-
-        private void ShowRegisterForm()
-        {
-            _mainPanel.Visible = true;
-            _roleSelectionPanel.Visible = false;
-            _mainPanel.Size = new Size(PANEL_WIDTH, PANEL_HEIGHT_REGISTER);
-            _mainPanel.Location = new Point((this.Width - PANEL_WIDTH) / 2, (this.Height - PANEL_HEIGHT_REGISTER) / 2 + 20);
-            _lblTitle.Visible = true;
-            _lblTitle.Text = "Searena";
-            _lblTitle.Location = new Point(_mainPanel.Left, _mainPanel.Top - 65);
-
-            _btnTabDaftar.FillColor = COLOR_ACCENT_CYAN;
-            _btnTabDaftar.ForeColor = Color.Black;
-            _btnTabDaftar.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            _btnTabMasuk.FillColor = Color.Transparent;
-            _btnTabMasuk.ForeColor = COLOR_TEXT_LIGHT;
-            _btnTabMasuk.Font = new Font("Segoe UI", 11F);
-
-            SetControlsVisibility(false, _txtEmail, _txtPassword, _btnMasuk);
-            SetControlsVisibility(true, _txtRegNama, _txtRegEmail, _txtRegPassword, _btnDaftar);
-        }
-
-        private void Login()
-        {
-            if (string.IsNullOrWhiteSpace(_txtEmail.Text) || string.IsNullOrWhiteSpace(_txtPassword.Text))
-            {
-                MessageBox.Show("Email dan password wajib diisi");
+                MessageBox.Show("Email dan password wajib diisi", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                using (var connection = new NpgsqlConnection(CONNECTION_STRING))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
-                    connection.Open();
+                    conn.Open();
+
                     string query = "SELECT user_id, nama_lengkap, email FROM users WHERE email = @email AND password = @password";
 
-                    using (var cmd = new NpgsqlCommand(query, connection))
+                    using (var cmd = new NpgsqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@email", _txtEmail.Text.Trim());
-                        cmd.Parameters.AddWithValue("@password", _txtPassword.Text);
+                        cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
                         using (var reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
                                 int userId = Convert.ToInt32(reader["user_id"]);
-                                string namaLengkap = reader["nama_lengkap"]?.ToString() ?? "User";
+                                string nama = reader["nama_lengkap"]?.ToString() ?? "User";
                                 string email = reader["email"]?.ToString() ?? "";
 
-                                // Set user session dengan role yang dipilih
-                                UserSession.SetUser(userId, namaLengkap, email, _selectedRole);
+                                UserSession.SetUser(userId, nama, email, _selectedRole);
 
-                                // HAPUS DEBUG MESSAGE BOX - langsung ke dashboard
-                                MessageBox.Show($"Selamat datang, {namaLengkap}!", "Login Berhasil",
+                                MessageBox.Show($"Selamat datang, {nama}!", "Login Berhasil",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                
+
                                 PindahKeDashboard();
                             }
                             else
@@ -525,146 +210,127 @@ namespace SEARENA2025
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}\n\nDetail: {ex.ToString()}", "Error Login",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void Register()
+        // ===== REGISTER =====
+        private void btnDaftar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_txtRegNama.Text))
+            if (string.IsNullOrWhiteSpace(txtRegNama.Text))
             {
-                MessageBox.Show("Nama lengkap harus diisi", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtRegNama.Focus();
+                MessageBox.Show("Nama lengkap harus diisi", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRegNama.Focus();
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_txtRegEmail.Text))
+            if (string.IsNullOrWhiteSpace(txtRegEmail.Text))
             {
-                MessageBox.Show("Email harus diisi", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtRegEmail.Focus();
+                MessageBox.Show("Email harus diisi", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRegEmail.Focus();
                 return;
             }
 
-            if (!_txtRegEmail.Text.Contains("@"))
+            if (!txtRegEmail.Text.Contains("@"))
             {
-                MessageBox.Show("Format email tidak valid", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtRegEmail.Focus();
+                MessageBox.Show("Format email tidak valid", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRegEmail.Focus();
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_txtRegPassword.Text) || _txtRegPassword.Text.Length < 6)
+            if (string.IsNullOrWhiteSpace(txtRegPassword.Text) || txtRegPassword.Text.Length < 6)
             {
-                MessageBox.Show("Password minimal 6 karakter", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _txtRegPassword.Focus();
+                MessageBox.Show("Password minimal 6 karakter", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRegPassword.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(_selectedRole))
             {
-                MessageBox.Show("Pilih peran terlebih dahulu (Admin atau Pengguna)", "Validasi",
+                MessageBox.Show("Pilih peran terlebih dahulu", "Validasi",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                using (var connection = new NpgsqlConnection(CONNECTION_STRING))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
-                    connection.Open();
+                    conn.Open();
 
-                    // Cek email sudah ada atau belum
-                    string checkQuery = "SELECT COUNT(*) FROM users WHERE email = @email";
-                    using (var cmd = new NpgsqlCommand(checkQuery, connection))
+                    // Cek email duplikat
+                    using (var cek = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE email = @email", conn))
                     {
-                        cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
-                        long count = Convert.ToInt64(cmd.ExecuteScalar() ?? 0);
+                        cek.Parameters.AddWithValue("@email", txtRegEmail.Text.Trim());
+                        long count = Convert.ToInt64(cek.ExecuteScalar() ?? 0);
                         if (count > 0)
                         {
-                            MessageBox.Show("Email sudah terdaftar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Email sudah terdaftar", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
 
                     // Insert user baru
-                    string insertQuery = "INSERT INTO users (user_id, nama_lengkap, email, password) VALUES (@user_id, @nama, @email, @password)";
-
-                    using (var cmd = new NpgsqlCommand(insertQuery, connection))
+                    string insert = "INSERT INTO users (user_id, nama_lengkap, email, password) VALUES (@id, @nama, @email, @password)";
+                    using (var cmd = new NpgsqlCommand(insert, conn))
                     {
-                        // Generate user_id unik (integer)
-                        int newUserId = (int)(DateTime.Now.Ticks / 10000000);
-
-                        cmd.Parameters.AddWithValue("@user_id", newUserId);
-                        cmd.Parameters.AddWithValue("@nama", _txtRegNama.Text.Trim());
-                        cmd.Parameters.AddWithValue("@email", _txtRegEmail.Text.Trim());
-                        cmd.Parameters.AddWithValue("@password", _txtRegPassword.Text);
-
+                        int newId = (int)(DateTime.Now.Ticks / 10000000);
+                        cmd.Parameters.AddWithValue("@id", newId);
+                        cmd.Parameters.AddWithValue("@nama", txtRegNama.Text.Trim());
+                        cmd.Parameters.AddWithValue("@email", txtRegEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", txtRegPassword.Text);
                         cmd.ExecuteNonQuery();
-
-                        MessageBox.Show("Registrasi berhasil! Silakan login dengan akun Anda.", "Sukses",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        ShowLoginForm();
-                        _txtEmail.Text = _txtRegEmail.Text.Trim();
-                        _txtPassword.Focus();
                     }
                 }
+
+                MessageBox.Show("Registrasi berhasil! Silakan login.", "Sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Pindah ke login dan isi email
+                ShowLoginPanel();
+                txtEmail.Text = txtRegEmail.Text.Trim();
+                txtPassword.Focus();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error Registrasi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}\n\nDetail: {ex.ToString()}", "Error Registrasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // ===== NAVIGATION =====
         private void PindahKeDashboard()
         {
             if (UserSession.IsAdmin())
             {
-                PageAdmin pageAdmin = new PageAdmin();
-                pageAdmin.FormClosed += (s, args) => Application.Exit();
-                pageAdmin.Show();
+                var admin = new PageAdmin();
+                admin.FormClosed += (s, args) => Application.Exit();
+                admin.Show();
                 this.Hide();
             }
             else
             {
-                DashboardUtama dashboard = new DashboardUtama();
-                dashboard.FormClosed += (s, args) => Application.Exit();
-                dashboard.Show();
+                var dash = new DashboardUtama();
+                dash.FormClosed += (s, args) => Application.Exit();
+                dash.Show();
                 this.Hide();
             }
         }
 
-        private Label CreateInnerLabel(string text, int x, int y)
-        {
-            return new Label
-            {
-                Text = text,
-                Font = new Font("Segoe UI", 8F), // Naikkan dari 7.5F ke 8F
-                ForeColor = COLOR_TEXT_LIGHT,
-                BackColor = Color.White,
-                AutoSize = false, // PERBAIKI: Matikan AutoSize
-                Size = new Size(150, 16), // Set ukuran tetap
-                Location = new Point(x, y)
-            };
-        }
-
-        private void TogglePasswordVisibility(Guna2TextBox textBox)
-        {
-            textBox.PasswordChar = (textBox.PasswordChar == '●') ? '\0' : '●';
-        }
-
-        private void SetControlsVisibility(bool isVisible, params Control[] controls)
-        {
-            foreach (var control in controls)
-            {
-                if (control != null)
-                    control.Visible = isVisible;
-            }
-        }
-
+        // ===== BACKGROUND GRADIENT =====
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            using (LinearGradientBrush brush = new LinearGradientBrush(
-                this.ClientRectangle, COLOR_PRIMARY, COLOR_SECONDARY, LinearGradientMode.Vertical))
+            using (var brush = new LinearGradientBrush(
+                this.ClientRectangle,
+                Color.FromArgb(109, 175, 207),
+                Color.FromArgb(244, 185, 128),
+                LinearGradientMode.Vertical))
             {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);

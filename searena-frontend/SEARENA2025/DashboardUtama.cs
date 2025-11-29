@@ -56,11 +56,8 @@ namespace SEARENA2025
             SetupScrollBars();
             SetupRatingComboBox();
 
-            // Inisialisasi panel destinasi dari database (pakai FlowLayoutPanel + DestinasiCard)
             InitializeDestinasiPanel();
 
-            // Handle ketika form ditutup
-            //this.FormClosed += (s, e) => Application.Exit();
         }
 
         // ================== INIT & LAYOUT ==================
@@ -113,42 +110,53 @@ namespace SEARENA2025
 
             if (flpDestinasi == null)
             {
-                // Cari footer panel untuk menghitung tinggi yang tersedia
+                // Cari footer panel untuk menghitung tinggi yang tersedia (gunakan nama pasti PnlInformasi)
                 var footerPanel = this.Controls.OfType<Control>()
-                    .FirstOrDefault(c => c.Name.ToLower().Contains("footer") || c.Name.ToLower().Contains("kontak") || c.Name.ToLower().Contains("tentang"));
+                    .FirstOrDefault(c => c.Name == "PnlInformasi");
 
                 // Cari posisi referensi dari control yang ada (navbar, filter panel, dll)
-                int xPosition = 280;  // Default X position
-                int yPosition = 150;  // Lebih ke atas lagi (dari 180 ke 150)
+                int xPosition = 280;
+                int yPosition = 100; // Posisi awal supaya kartu agak ke atas
 
                 // Hitung tinggi yang tersedia (jangan sampai memotong footer)
-                int availableHeight = this.Height - yPosition - 150; // Reserve 150px untuk footer
+                int availableHeight;
+                const int safeMarginToFooter = 60; // margin aman supaya tidak menempel dengan footer
 
                 if (footerPanel != null)
                 {
-                    // Jika ada footer, pastikan tidak memotong
-                    availableHeight = footerPanel.Top - yPosition - 20; // 20px margin
+                    // Tinggi panel destinasi = posisi atas footer - posisi Y panel destinasi - margin aman
+                    availableHeight = Math.Max(200, footerPanel.Top - yPosition - safeMarginToFooter);
+                }
+                else
+                {
+                    // Fallback jika footer tidak ditemukan: gunakan nilai aman
+                    availableHeight = 380; // dipendekkan supaya tidak memotong footer
                 }
 
-                // Coba cari panel filter atau navbar untuk posisi relatif
+                // Coba cari panel filter untuk posisi relatif
                 var filterPanel = this.Controls.OfType<Control>()
-                    .FirstOrDefault(c => c.Name.Contains("Filter") || c.Name.Contains("Pulau"));
+                    .FirstOrDefault(c => c.Name == "PnlFilter");
 
                 if (filterPanel != null)
                 {
-                    // Posisi di sebelah kanan filter panel
                     xPosition = filterPanel.Right + 20;
-                    yPosition = Math.Max(150, filterPanel.Top); // Minimal Y = 150
+                    // Pastikan panel destinasi tidak lebih rendah dari filter, tapi tetap minimal 100
+                    yPosition = Math.Max(100, filterPanel.Top);
+
+                    // Hitung ulang tinggi jika yPosition berubah
+                    if (footerPanel != null)
+                    {
+                        availableHeight = Math.Max(200, footerPanel.Top - yPosition - safeMarginToFooter);
+                    }
                 }
 
-                // Jika belum ada, buat baru dengan posisi yang lebih baik
                 flpDestinasi = new FlowLayoutPanel
                 {
                     Name = "flpDestinasi",
                     AutoScroll = true,
                     WrapContents = true,
                     FlowDirection = FlowDirection.LeftToRight,
-                    Padding = new Padding(20),
+                    Padding = new Padding(10, 5, 10, 10), // kecilkan padding atas
                     BackColor = Color.Transparent,
                     Location = new Point(xPosition, yPosition),
                     Size = new Size(this.Width - xPosition - 40, availableHeight),
@@ -161,6 +169,8 @@ namespace SEARENA2025
             {
                 // FlowLayoutPanel sudah ada, pastikan visible dan di depan
                 flpDestinasi.Visible = true;
+                flpDestinasi.AutoScroll = true; // pastikan scroll aktif
+                flpDestinasi.Padding = new Padding(10, 5, 10, 10);
                 flpDestinasi.BringToFront();
             }
 
@@ -254,9 +264,10 @@ namespace SEARENA2025
                     destinasi.Lokasi
                 );
                 
+                // PERBAIKI: Close form saat ini sebelum show form baru
                 detailForm.FormClosed += (s, args) => this.Show();
                 detailForm.Show();
-                this.Hide();
+                this.Hide(); // Hide bukan Close agar bisa di-show lagi
             }
             catch (Exception ex)
             {
@@ -307,7 +318,9 @@ namespace SEARENA2025
             // TextBox search baru + suggestion (tbSearchDestinasi + lstSugesti)
             if (tbSearchDestinasi != null)
             {
+                tbSearchDestinasi.TextChanged -= TbSearchDestinasi_TextChanged; // Hindari duplikasi
                 tbSearchDestinasi.TextChanged += TbSearchDestinasi_TextChanged;
+                tbSearchDestinasi.KeyDown -= TbSearchDestinasi_KeyDown;
                 tbSearchDestinasi.KeyDown += TbSearchDestinasi_KeyDown;
                 tbSearchDestinasi.PlaceholderText = "Cari destinasi ...";
             }
@@ -315,8 +328,19 @@ namespace SEARENA2025
             if (lstSugesti != null)
             {
                 lstSugesti.Visible = false;
-                lstSugesti.DoubleClick += (s, e) => OpenSelectedSuggestion();
+                lstSugesti.DoubleClick -= OpenSelectedSuggestion_Handler; // Hindari duplikasi
+                lstSugesti.DoubleClick += OpenSelectedSuggestion_Handler;
+                lstSugesti.KeyDown -= LstSugesti_KeyDown;
                 lstSugesti.KeyDown += LstSugesti_KeyDown;
+                lstSugesti.Font = new Font("Segoe UI", 9f);
+                
+                // PENTING: Pastikan lstSugesti berada di parent yang sama dengan tbSearchDestinasi
+                if (tbSearchDestinasi != null && lstSugesti.Parent != this)
+                {
+                    lstSugesti.Parent?.Controls.Remove(lstSugesti);
+                    this.Controls.Add(lstSugesti);
+                    lstSugesti.BringToFront();
+                }
             }
 
             // Combo rating
@@ -435,10 +459,10 @@ namespace SEARENA2025
         {
             try
             {
-                Form2 profileForm = new Form2();
+                Form2 profileForm = new Form2(this); // PERBAIKI: Kirim reference parent form
                 profileForm.FormClosed += (s, args) => this.Show();
                 profileForm.Show();
-                this.Hide();
+                this.Hide(); // Hide saja, jangan Close
             }
             catch (Exception ex)
             {
@@ -589,41 +613,6 @@ namespace SEARENA2025
             RebuildDestinasiCards(result);
         }
 
-        private void ApplyDestinasiCardFiltering(List<string> selectedPulau, List<string> selectedAktivitas)
-        {
-            if (flpDestinasi == null) return;
-
-            bool hasPulauFilter = selectedPulau.Count > 0;
-            bool hasAktivitasFilter = selectedAktivitas.Count > 0;
-
-            if (!hasPulauFilter && !hasAktivitasFilter)
-            {
-                ShowAllDestinasiCards();
-                return;
-            }
-
-            foreach (Control control in flpDestinasi.Controls)
-            {
-                if (control is DestinasiCard card)
-                {
-                    bool showDestination = true;
-
-                    if (hasPulauFilter)
-                    {
-                        showDestination = showDestination && selectedPulau.Contains(card.Pulau);
-                    }
-
-                    // Filter aktivitas belum di-implement di DestinasiCard, jadi skip dulu
-                    card.Visible = showDestination;
-                }
-            }
-        }
-
-        
-
-        
-
-
         private void RebuildDestinasiCards(List<Destinasi> sortedDestinasi)
         {
             if (flpDestinasi == null) return;
@@ -673,163 +662,7 @@ namespace SEARENA2025
             return selectedAktivitas;
         }
 
-        // ================== PANEL MANUAL (KALAU MASIH DIPAKAI) ==================
-        // Fungsi-fungsi di bawah masih pakai Guna2ShadowPanel lama,
-        // dibiarkan hidup kalau nanti mau dipakai lagi.
-
-        private void ShowAllDestinations()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
-                    panel.Visible = true;
-            }
-
-            foreach (Control container in this.Controls)
-            {
-                if (container is Guna2Panel)
-                {
-                    foreach (Control control in container.Controls)
-                    {
-                        if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
-                            panel.Visible = true;
-                    }
-                }
-            }
-        }
-
-        private void FilterDestinationsBySearch(string searchText)
-        {
-            int foundCount = 0;
-
-            foreach (Control control in this.Controls)
-            {
-                if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
-                {
-                    bool found = SearchInDestinationPanel(panel, searchText);
-                    panel.Visible = found;
-                    if (found) foundCount++;
-                }
-            }
-
-            foreach (Control container in this.Controls)
-            {
-                if (container is Guna2Panel)
-                {
-                    foreach (Control control in container.Controls)
-                    {
-                        if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
-                        {
-                            bool found = SearchInDestinationPanel(panel, searchText);
-                            panel.Visible = found;
-                            if (found) foundCount++;
-                        }
-                    }
-                }
-            }
-
-            if (foundCount == 0)
-            {
-                MessageBox.Show($"Tidak ditemukan destinasi dengan kata kunci: '{searchText}'",
-                              "Pencarian", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private bool SearchInDestinationPanel(Guna2ShadowPanel panel, string searchText)
-        {
-            foreach (Control innerControl in panel.Controls)
-            {
-                if (innerControl is Label label && label.Text.ToLower().Contains(searchText))
-                    return true;
-                if (innerControl is Guna2HtmlLabel htmlLabel && htmlLabel.Text.ToLower().Contains(searchText))
-                    return true;
-                if (innerControl is Guna2Panel innerPanel)
-                {
-                    foreach (Control childControl in innerPanel.Controls)
-                    {
-                        if (childControl is Label childLabel && childLabel.Text.ToLower().Contains(searchText))
-                            return true;
-                        if (childControl is Guna2HtmlLabel childHtmlLabel && childHtmlLabel.Text.ToLower().Contains(searchText))
-                            return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private void ApplyDestinationFiltering(List<string> selectedPulau, List<string> selectedAktivitas)
-        {
-            bool hasPulauFilter = selectedPulau.Count > 0;
-            bool hasAktivitasFilter = selectedAktivitas.Count > 0;
-
-            if (!hasPulauFilter && !hasAktivitasFilter)
-            {
-                ShowAllDestinations();
-                return;
-            }
-
-            foreach (Control control in this.Controls)
-            {
-                if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
-                {
-                    bool showDestination = true;
-
-                    if (hasPulauFilter)
-                    {
-                        string destinationPulau = GetDestinationPulau(panel);
-                        showDestination = showDestination && selectedPulau.Contains(destinationPulau);
-                    }
-
-                    if (hasAktivitasFilter && showDestination)
-                    {
-                        List<string> destinationAktivitas = GetDestinationAktivitas(panel);
-                        showDestination = showDestination && selectedAktivitas.Any(a => destinationAktivitas.Contains(a));
-                    }
-
-                    panel.Visible = showDestination;
-                }
-            }
-        }
-
-        private string GetDestinationPulau(Guna2ShadowPanel destinationPanel)
-        {
-            foreach (Control control in destinationPanel.Controls)
-            {
-                if (control is Guna2HtmlLabel label)
-                {
-                    if (label.Text.Contains("Papua")) return "Papua";
-                    if (label.Text.Contains("Bali")) return "Bali";
-                    if (label.Text.Contains("Jawa")) return "Jawa";
-                    if (label.Text.Contains("Sulawesi")) return "Sulawesi";
-                }
-            }
-            return "Unknown";
-        }
-
-        private List<string> GetDestinationAktivitas(Guna2ShadowPanel destinationPanel)
-        {
-            List<string> aktivitas = new List<string>();
-
-            foreach (Control control in destinationPanel.Controls)
-            {
-                if (control is Guna2HtmlLabel label)
-                {
-                    if (label.Text.Contains("Sunset")) aktivitas.Add("Sunset");
-                    if (label.Text.Contains("Diving")) aktivitas.Add("Diving");
-                    if (label.Text.Contains("Snorkeling")) aktivitas.Add("Snorkeling");
-                }
-            }
-
-            return aktivitas;
-        }
-
-        private void SortDestinations(string sortBy)
-        {
-            // kalau mau sorting panel manual, bisa diisi
-        }
-
-        // ================== SEARCH SUGGESTION (tbSearchDestinasi + lstSugesti) ==================
-
+        // ================== SEARCH SUGGESTION SUPPORT ==================
         private void TbSearchDestinasi_TextChanged(object sender, EventArgs e)
         {
             if (tbSearchDestinasi == null || lstSugesti == null) return;
@@ -839,13 +672,16 @@ namespace SEARENA2025
             if (string.IsNullOrEmpty(text))
             {
                 lstSugesti.Visible = false;
+                lstSugesti.Items.Clear();
             }
             else
             {
+                // Cari destinasi yang cocok dengan input
                 var matches = _allDestinasi
                     .Where(d =>
                         d.Nama.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                         d.Lokasi.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .Take(5) // Batasi 5 suggestion
                     .ToList();
 
                 lstSugesti.BeginUpdate();
@@ -856,9 +692,26 @@ namespace SEARENA2025
 
                 lstSugesti.EndUpdate();
                 lstSugesti.Visible = matches.Count > 0;
+
+                // PERBAIKI: Atur posisi lstSugesti tepat di bawah tbSearchDestinasi
+                if (lstSugesti.Visible && tbSearchDestinasi != null)
+                {
+                    // Konversi koordinat tbSearchDestinasi ke koordinat form
+                    Point searchBoxLocation = tbSearchDestinasi.PointToScreen(Point.Empty);
+                    Point formLocation = this.PointToScreen(Point.Empty);
+                    
+                    // Hitung posisi relatif terhadap form
+                    int relativeX = searchBoxLocation.X - formLocation.X;
+                    int relativeY = searchBoxLocation.Y - formLocation.Y + tbSearchDestinasi.Height + 2;
+                    
+                    lstSugesti.Location = new Point(relativeX, relativeY);
+                    lstSugesti.Width = tbSearchDestinasi.Width;
+                    lstSugesti.Height = 120; // Tinggi tetap untuk 5 suggestion
+                    lstSugesti.BringToFront();
+                }
             }
 
-            // sekalian filter kartu
+            // Tetap jalankan search untuk filter cards
             SearchDestinations();
         }
 
@@ -899,130 +752,78 @@ namespace SEARENA2025
         {
             if (lstSugesti?.SelectedItem is DestInfo info)
             {
-                // Cari Destinasi asli berdasarkan Id, supaya pake kartu & data lengkap
+                // Cari Destinasi asli berdasarkan Id
                 var dest = allDestinasi.FirstOrDefault(d => d.Id == info.Id);
                 if (dest != null)
                 {
                     OpenDetailDestinasi(dest);
                 }
-                else
-                {
-                    // fallback kalau tidak ketemu: buka DetailDestinasi pakai info minimal
-                    var detail = new DetailDestinasi(info.Id, info.Nama, info.Lokasi);
-                    detail.FormClosed += (s, args) => this.Show();
-                    detail.Show();
-                    this.Hide();
-                }
 
+                // Sembunyikan suggestion list
                 lstSugesti.Visible = false;
+                if (tbSearchDestinasi != null)
+                    tbSearchDestinasi.Text = info.Nama;
             }
         }
 
-        // ================== MISC / EVENT DEFAULT ==================
+        // Handler untuk DoubleClick event
+        private void OpenSelectedSuggestion_Handler(object sender, EventArgs e)
+        {
+            OpenSelectedSuggestion();
+        }
 
+        // ================== CLEAR FILTERS SUPPORT ==================
         private void ClearFilters()
         {
             if (CmbRating != null)
                 CmbRating.SelectedIndex = 0;
-
             if (PnlPulau != null)
             {
                 foreach (Control control in PnlPulau.Controls)
                 {
-                    if (control is Guna2CheckBox checkBox)
-                        checkBox.Checked = false;
+                    if (control is Guna2CheckBox cb) cb.Checked = false;
                 }
             }
-
             if (PnlAktivitas != null)
             {
                 foreach (Control control in PnlAktivitas.Controls)
                 {
-                    if (control is Guna2CheckBox checkBox)
-                        checkBox.Checked = false;
+                    if (control is Guna2CheckBox cb) cb.Checked = false;
                 }
             }
-
-            // Reset search lama
-            if (txtCariDestinasi != null)
-            {
-                txtCariDestinasi.Text = "Cari destinasi ...";
-                txtCariDestinasi.ForeColor = Color.Gray;
-            }
-
-            // Reset search baru + sugesti
-            if (tbSearchDestinasi != null)
-                tbSearchDestinasi.Text = "";
-
-            if (lstSugesti != null)
-            {
-                lstSugesti.Visible = false;
-                lstSugesti.Items.Clear();
-            }
-
+            if (tbSearchDestinasi != null) tbSearchDestinasi.Text = string.Empty;
+            if (lstSugesti != null) { lstSugesti.Visible = false; lstSugesti.Items.Clear(); }
             ShowAllDestinasiCards();
         }
 
-        private void guna2HtmlLabel3_Click(object sender, EventArgs e) { }
-        private void guna2HtmlLabel7_Click(object sender, EventArgs e) { }
-        private void panelDestinasi1_Paint(object sender, PaintEventArgs e) { }
+        // ====== EVENT HANDLERS REQUIRED BY DESIGNER (STUBS) ======
         private void guna2ShadowPanel2_Paint(object sender, PaintEventArgs e) { }
         private void guna2HtmlLabel25_Click(object sender, EventArgs e) { }
         private void guna2CheckBox1_CheckedChanged(object sender, EventArgs e) { }
+        private void CheckBoxSulawesi_CheckedChanged(object sender, EventArgs e) { }
         private void guna2HtmlLabel26_Click(object sender, EventArgs e) { }
-
+        private void CheckBoxSunset_CheckedChanged(object sender, EventArgs e) { }
+        private void guna2HtmlLabel7_Click(object sender, EventArgs e) { }
+        private void guna2HtmlLabel3_Click(object sender, EventArgs e) { }
+        private void tbSearchDestinasi_TextChanged_1(object sender, EventArgs e) { }
+        private void Navbar_Paint(object sender, PaintEventArgs e) { }
+        private void lblProfile_Click(object sender, EventArgs e) { }
         private void DashboardUtama_Load(object sender, EventArgs e)
         {
             if (txtCariDestinasi != null)
                 txtCariDestinasi.ForeColor = Color.Gray;
-
             if (lstSugesti != null)
                 lstSugesti.Visible = false;
         }
 
-        private void PnlPulau_MouseEnter(object sender, EventArgs e)
-        {
-            if (PnlPulau != null) PnlPulau.Focus();
-        }
+        private void guna2CheckBox1_CheckedChanged_1(object sender, EventArgs e) { }
 
-        private void PnlAktivitas_MouseEnter(object sender, EventArgs e)
-        {
-            if (PnlAktivitas != null) PnlAktivitas.Focus();
-        }
-
-        private void panelDestinasi1_MouseEnter(object sender, EventArgs e)
-        {
-            if (panelDestinasi1 != null) panelDestinasi1.Focus();
-        }
-
-        private void PnlPulau_MouseWheel(object sender, MouseEventArgs e)
-        {
-           
-        }
-
-        private void panelDestinasi1_MouseWheel(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void Navbar_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void lblProfile_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void guna2CheckBox1_CheckedChanged_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void CheckBoxSunset_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckBoxSulawesi_CheckedChanged(object sender, EventArgs e)
+        private void lstSugesti_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

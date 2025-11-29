@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using Guna.UI2.WinForms;
 
 namespace SEARENA2025
@@ -12,8 +14,10 @@ namespace SEARENA2025
         public string Lokasi { get; set; }
         public string Pulau { get; set; }
         public double Rating { get; set; }
+        public int TotalReview { get; set; }
         public string Deskripsi { get; set; }
         public string WaktuTerbaik { get; set; }
+        public string Activity { get; set; }
 
         public event EventHandler CardClicked;
 
@@ -62,10 +66,13 @@ namespace SEARENA2025
             Lokasi = destinasi.Lokasi ?? "";
             Pulau = destinasi.Pulau ?? "";
             Rating = destinasi.RatingAvg;
+            TotalReview = destinasi.TotalReview;
             Deskripsi = destinasi.Deskripsi ?? "";
             WaktuTerbaik = destinasi.WaktuTerbaik ?? "";
+            Activity = destinasi.Activity ?? "";
 
             UpdateUI();
+            LoadWeatherAsync(); // Load cuaca secara async
         }
 
         private void UpdateUI()
@@ -77,13 +84,18 @@ namespace SEARENA2025
                 {
                     lblNama.Text = NamaDestinasi;
                     lblNama.Cursor = Cursors.Hand;
+                    lblNama.AutoSize = false;
+                    lblNama.MaximumSize = new Size(400, 0);
+                    lblNama.AutoSizeHeightOnly = true;
                 }
 
-                // Update label lokasi
+                // Update label lokasi dengan pulau
                 if (lblLokasi != null)
                 {
-                    lblLokasi.Text = Lokasi;
+                    lblLokasi.Text = $"{Lokasi}, {Pulau}";
                     lblLokasi.Cursor = Cursors.Hand;
+                    lblLokasi.AutoSize = false;
+                    lblLokasi.MaximumSize = new Size(400, 0);
                 }
 
                 // Update deskripsi
@@ -97,43 +109,75 @@ namespace SEARENA2025
                     }
                     lblDeskripsi.Text = shortDesc;
                     lblDeskripsi.Cursor = Cursors.Hand;
+                    lblDeskripsi.AutoSize = false;
+                    lblDeskripsi.MaximumSize = new Size(400, 60); // Tambah batas tinggi
                 }
 
-                // Update rating badge
-                if (lblRating != null)
+                // Update rating dan review count (DI ATAS lblCuaca)
+                if (lblRatingReview != null)
                 {
-                    string ratingText = GetRatingText(Rating);
-                    lblRating.Text = ratingText;
-                    lblRating.Cursor = Cursors.Hand;
-                    
-                    // Set warna background berdasarkan rating
-                    if (Rating >= 4.5)
-                    {
-                        lblRating.BackColor = Color.FromArgb(144, 238, 144); // Light green
-                        lblRating.ForeColor = Color.FromArgb(0, 100, 0); // Dark green
-                    }
-                    else if (Rating >= 4.0)
-                    {
-                        lblRating.BackColor = Color.FromArgb(173, 216, 230); // Light blue
-                        lblRating.ForeColor = Color.FromArgb(0, 0, 139); // Dark blue
-                    }
-                    else if (Rating >= 3.5)
-                    {
-                        lblRating.BackColor = Color.FromArgb(255, 255, 224); // Light yellow
-                        lblRating.ForeColor = Color.FromArgb(184, 134, 11); // Dark goldenrod
-                    }
-                    else
-                    {
-                        lblRating.BackColor = Color.FromArgb(255, 218, 185); // Peach
-                        lblRating.ForeColor = Color.FromArgb(139, 69, 19); // Saddle brown
-                    }
+                    // Format: Rating: 4.5 | 123 ulasan
+                    lblRatingReview.Text = $"Rating: {Rating:F1} | {TotalReview} ulasan";
+                    lblRatingReview.Cursor = Cursors.Hand;
+                    lblRatingReview.BackColor = Color.Transparent;
+                    lblRatingReview.ForeColor = Color.FromArgb(80, 80, 80); // Dark gray
+                    lblRatingReview.AutoSize = false;
+                    lblRatingReview.Size = new Size(300, 20);
                 }
+
+                // lblCuaca akan diupdate oleh LoadWeatherAsync()
 
                 // Update waktu terbaik
                 if (lblWaktuTerbaik != null)
                 {
-                    lblWaktuTerbaik.Text = "Terbaik: " + WaktuTerbaik;
+                    // PERBAIKI: Batasi panjang waktu terbaik
+                    string waktuText = "Terbaik: " + WaktuTerbaik;
+                    if (waktuText.Length > 35)
+                    {
+                        waktuText = waktuText.Substring(0, 32) + "...";
+                    }
+                    lblWaktuTerbaik.Text = waktuText;
                     lblWaktuTerbaik.Cursor = Cursors.Hand;
+                    lblWaktuTerbaik.AutoSize = false;
+                    lblWaktuTerbaik.Size = new Size(400, 20);
+                }
+
+                // Update aktivitas (DI BAWAH lblWaktuTerbaik)
+                if (lblAktivitas != null && !string.IsNullOrWhiteSpace(Activity))
+                {
+                    // Ambil 2 aktivitas pertama
+                    var activities = Activity.Split(',')
+                        .Select(a => a.Trim())
+                        .Where(a => !string.IsNullOrEmpty(a))
+                        .Take(2)
+                        .ToArray();
+                    
+                    if (activities.Length > 0)
+                    {
+                        string activityText = string.Join(", ", activities);
+                        if (Activity.Split(',').Length > 2)
+                            activityText += "...";
+                        
+                        // PERBAIKI: Batasi panjang aktivitas
+                        if (activityText.Length > 30)
+                        {
+                            activityText = activityText.Substring(0, 27) + "...";
+                        }
+                        
+                        lblAktivitas.Text = activityText;
+                        lblAktivitas.Visible = true;
+                        lblAktivitas.AutoSize = false;
+                        lblAktivitas.Size = new Size(400, 20);
+                    }
+                    else
+                    {
+                        lblAktivitas.Visible = false;
+                    }
+                    lblAktivitas.Cursor = Cursors.Hand;
+                }
+                else if (lblAktivitas != null)
+                {
+                    lblAktivitas.Visible = false;
                 }
 
                 // Set shadow panel cursor
@@ -148,20 +192,58 @@ namespace SEARENA2025
             }
         }
 
-        // Ini masih salah, harusnya get api weather buat dapetin (sangat baik, potensi, dan buruk), tapi masih diisi rating
-        private string GetRatingText(double rating)
+        // Load cuaca dari WeatherService
+        private async void LoadWeatherAsync()
         {
-            if (rating >= 4.5) return "Sangat Baik";
-            if (rating >= 4.0) return "Baik";
-            if (rating >= 3.5) return "Cukup Baik";
-            if (rating >= 3.0) return "Lumayan";
-            return "Biasa";
-        }
+            if (lblCuaca == null) return;
 
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-            RaiseCardClicked();
+            try
+            {
+                // Default sementara cuaca loading
+                lblCuaca.Text = "Loading...";
+                lblCuaca.BackColor = Color.LightGray;
+                lblCuaca.ForeColor = Color.Black;
+
+                // Ambil data cuaca
+                var weather = await WeatherService.GetCurrentAsync(Lokasi);
+
+                // Tentukan status cuaca berdasarkan kondisi
+                string status;
+                Color bgColor;
+                Color fgColor;
+
+                if (weather.Description.ToLower().Contains("rain") ||
+                    weather.Description.ToLower().Contains("shower") ||
+                    weather.Description.ToLower().Contains("storm"))
+                {
+                    status = "Kurang Baik";
+                    bgColor = Color.FromArgb(255, 102, 102); // Red
+                    fgColor = Color.White;
+                }
+                else if (weather.WindSpeedKmh > 25 || weather.Humidity > 85)
+                {
+                    status = "Cukup Baik";
+                    bgColor = Color.FromArgb(255, 204, 102); // Orange
+                    fgColor = Color.Black;
+                }
+                else
+                {
+                    status = "Sangat Baik";
+                    bgColor = Color.FromArgb(144, 238, 144); // Light green
+                    fgColor = Color.FromArgb(0, 100, 0); // Dark green
+                }
+
+                lblCuaca.Text = status;
+                lblCuaca.BackColor = bgColor;
+                lblCuaca.ForeColor = fgColor;
+            }
+            catch
+            {
+                // Jika gagal ambil cuaca, tampilkan default
+                lblCuaca.Text = "Tidak Ada Data";
+                lblCuaca.BackColor = Color.LightGray;
+                lblCuaca.ForeColor = Color.Black;
+            }
         }
 
         // Forward click dari child controls
