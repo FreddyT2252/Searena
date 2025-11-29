@@ -50,6 +50,11 @@ namespace SEARENA2025
 
             DestinasiId = destinasi.Id;
             NamaDestinasi = destinasi.NamaDestinasi ?? "";
+            if (string.IsNullOrWhiteSpace(destinasi.Lokasi))
+                Lokasi = destinasi.Pulau ?? "";
+            else
+                Lokasi = $"{destinasi.Lokasi}, {destinasi.Pulau}";
+
             Lokasi = destinasi.Lokasi ?? "";
             Pulau = destinasi.Pulau ?? "";
             Rating = destinasi.RatingAvg;
@@ -76,14 +81,19 @@ namespace SEARENA2025
                     lblNama.AutoSizeHeightOnly = true;
                 }
 
-                // Update label lokasi dengan pulau
+              
                 if (lblLokasi != null)
                 {
-                    lblLokasi.Text = $"{Lokasi}, {Pulau}";
-                    lblLokasi.Cursor = Cursors.Hand;
-                    lblLokasi.AutoSize = false;
-                    lblLokasi.MaximumSize = new Size(400, 0);
+                    string lokasiText;
+                   
+                    lokasiText = $"{Lokasi}, {Pulau}";
+                    
+                   
+                    lblLokasi.Text = lokasiText;
+ 
+
                 }
+
 
                 // Update deskripsi
                 if (lblDeskripsi != null)

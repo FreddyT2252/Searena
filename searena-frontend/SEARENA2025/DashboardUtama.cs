@@ -258,10 +258,16 @@ namespace SEARENA2025
         {
             try
             {
+                string fullLocation;
+                if (string.IsNullOrWhiteSpace(destinasi.Lokasi))
+                    fullLocation = destinasi.Pulau;                     
+                else
+                    fullLocation = $"{destinasi.Lokasi}, {destinasi.Pulau}";
+
                 var detailForm = new DetailDestinasi(
                     destinasi.Id,
                     destinasi.NamaDestinasi,
-                    destinasi.Lokasi
+                    fullLocation
                 );
                 
                 // PERBAIKI: Close form saat ini sebelum show form baru
@@ -920,10 +926,7 @@ namespace SEARENA2025
         // ====== EVENT HANDLERS REQUIRED BY DESIGNER (STUBS) ======
         private void guna2ShadowPanel2_Paint(object sender, PaintEventArgs e) { }
         private void guna2HtmlLabel25_Click(object sender, EventArgs e) { }
-        private void guna2CheckBox1_CheckedChanged(object sender, EventArgs e) { }
-        private void CheckBoxSulawesi_CheckedChanged(object sender, EventArgs e) { }
         private void guna2HtmlLabel26_Click(object sender, EventArgs e) { }
-        private void CheckBoxSunset_CheckedChanged(object sender, EventArgs e) { }
         private void guna2HtmlLabel7_Click(object sender, EventArgs e) { }
         private void guna2HtmlLabel3_Click(object sender, EventArgs e) { }
         private void tbSearchDestinasi_TextChanged_1(object sender, EventArgs e) { }
@@ -936,8 +939,6 @@ namespace SEARENA2025
             if (lstSugesti != null)
                 lstSugesti.Visible = false;
         }
-
-        private void guna2CheckBox1_CheckedChanged_1(object sender, EventArgs e) { }
 
         private void button1_Click(object sender, EventArgs e)
         {
