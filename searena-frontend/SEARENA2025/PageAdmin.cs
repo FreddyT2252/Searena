@@ -31,6 +31,7 @@ namespace SEARENA2025
             guna2Button3.Click += BtnDelete_Click;
             btnKirim.Click += BtnKirim_Click;
             dgvRiwayat.CellClick += DgvReview_CellClick;
+            btnLogout.Click += btnLogout_Click;
         }
 
         private void LoadDestinasi()
@@ -467,6 +468,22 @@ namespace SEARENA2025
             }
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi logout
+            if (MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi Logout",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                // Clear session
+                UserSession.Clear();
+
+                // Kembali ke DashboardItem 
+                DashboardItem dashboardItem = new DashboardItem();
+                dashboardItem.Show();
+                this.Close();
+            }
+        }
+
         private string GetSelectedWaktu()
         {
             List<string> waktu = new List<string>();
@@ -529,6 +546,16 @@ namespace SEARENA2025
             {
                 cb.Checked = false;
             }
+        }
+
+        private void Navbar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

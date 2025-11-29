@@ -135,8 +135,8 @@ namespace SEARENA2025
             // 
             this.lblLokasi.BackColor = System.Drawing.Color.Transparent;
             this.lblLokasi.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblLokasi.ForeColor = System.Drawing.Color.Gray;
-            this.lblLokasi.Location = new System.Drawing.Point(24, 52);
+            this.lblLokasi.ForeColor = System.Drawing.Color.Black;
+            this.lblLokasi.Location = new System.Drawing.Point(24, 57);
             this.lblLokasi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblLokasi.Name = "lblLokasi";
             this.lblLokasi.Size = new System.Drawing.Size(226, 23);

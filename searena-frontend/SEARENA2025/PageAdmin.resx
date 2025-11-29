@@ -118,27 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PctProfile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAA4NJREFUaEPdmr9O3EAQxnkEHoGaijIlVZ6AnihPcHkB8gIQaNIkkS5SKBLRBSmR
-        aE5ESUEFSho6KxVdTEKOA9vrib6928OZtbn9Mz6jG+knnca+836e3dnZ3VtaEjTKsjXKsh4p1aeyPCWl
-        ElKKGAmV5YCU2tX3Ztka/51OjfJ8XTdOqbSm8a5AeL9TcVrI+E3zxsWByBbFE/681qw1ITYJjUYr/Pli
-        RkTLRISuxR/cLngm0TJvT5QR0UrDAJ8XctHSmStuwEuRRicNItqs+eFuIdrk7XSySWTsH3wI+EZqMmYe
-        QjdrInUeUzqbdZsAXEmcsl8nqTkUol3e/v9s0tXsLwZSDlO6PftAo+Ntujl5RXnyzbonmjxf5zqmJtXV
-        IGR4+IwuX6zS8GNPC7o+ek5/3jym3y8fUXHxw/pOMGU54Dq0oX6ybg4AYtBoCMBnfh0Rg1DRaNVFiZRC
-        uW/f7Mn10ZaOCvdXgRiIrhMcBI+S5JyDt69+/bT8nKv9DT2uuD+YapT0WoTfEECefKWrdxuWvw50vVmR
-        9CLP96qCRJJBdv6J/h48tfx1+Ih3JBXvbsheyGTcX4ePeGdQEk32AOyLAZTXKV3urDoNdqT127P3lj+K
-        LOthBbpnXYgAgx3zDvdXQdJAlnNJHp70l6SX0+h2iNJ9jUV0ME9xfzRleSqWEKrcnLyujQC6IuYp13EW
-        QAJB3CkC0jJEYeCb0gdzVFMFIUVrggAanp1/nhanPGJt0KqgLlhIQeJJAaC7FRffp+shA7og/Px+IXRS
-        EKmyDbqk2d/QCQDZzKyHDEgSZl00POzJjquiGGAd9Na6EIARgvoMUZmVySDEZEIxYShQJUqf0Zdt3bDQ
-        RdvoeEd/H92RX/NClz6RxSnEoAvFvmFUGBAVVd+Z/brQPTjMLZIrTyMq8OUkd+uhgAK1rQITZRPGIvc7
-        0K8Kwikcv+Fe8GDRFWeFoPHIt4d9q27x7agK49pvy/I3giqbm0+UzEKO+6XwWflqmo4wXaMEQYhQdcKU
-        BOslj/2Gu2TAzSdKSAa8IVJ4VeazTiFCMl5nVLeummzhjlNgC3XgZSy2JGoVPue4mtSJhChNKdrVFupY
-        39hC/fHCmM5+XaR0PNM1m4XY3KJVFIPak7m2bJIwRPcjNPMWwk0njfG+REzUUt21uhRSZ1oc9ijQOLzp
-        epHwIbL4B6P4XzT/AWQkQbTA/FumAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="Logo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAOgAAAAyCAYAAABWDJcxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

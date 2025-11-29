@@ -44,8 +44,6 @@ namespace SEARENA2025
            
         }
 
-        
-
         public void LoadData(Destinasi destinasi)
         {
             if (destinasi == null) return;
@@ -61,7 +59,7 @@ namespace SEARENA2025
             Activity = destinasi.Activity ?? "";
 
             UpdateUI();
-            LoadWeatherAsync(); // Load cuaca secara async
+            LoadWeatherAsync(); 
         }
 
         private void UpdateUI()
@@ -90,7 +88,6 @@ namespace SEARENA2025
                 // Update deskripsi
                 if (lblDeskripsi != null)
                 {
-                    // Batasi panjang deskripsi
                     string shortDesc = Deskripsi;
                     if (shortDesc.Length > 70)
                     {
@@ -99,22 +96,28 @@ namespace SEARENA2025
                     lblDeskripsi.Text = shortDesc;
                     lblDeskripsi.Cursor = Cursors.Hand;
                     lblDeskripsi.AutoSize = false;
-                    lblDeskripsi.MaximumSize = new Size(400, 60); // Tambah batas tinggi
+                    lblDeskripsi.MaximumSize = new Size(400, 60); 
                 }
 
-                // Update rating dan review count (DI ATAS lblCuaca)
+                // Update rating dan review count 
                 if (lblRatingReview != null)
                 {
-                    // Format: Rating: 4.5 | 123 ulasan
-                    lblRatingReview.Text = $"Rating: {Rating:F1} | {TotalReview} ulasan";
+                    // Jika belum ada review
+                    if (TotalReview == 0)
+                    {
+                        lblRatingReview.Text = "Belum ada rating dan review";
+                    }
+                    else
+                    {
+                        // Format: Rating: 4.5 | 123 ulasan
+                        lblRatingReview.Text = $"Rating: {Rating:F1} | {TotalReview} ulasan";
+                    }
                     lblRatingReview.Cursor = Cursors.Hand;
                     lblRatingReview.BackColor = Color.Transparent;
-                    lblRatingReview.ForeColor = Color.FromArgb(80, 80, 80); // Dark gray
+                    lblRatingReview.ForeColor = Color.FromArgb(80, 80, 80); 
                     lblRatingReview.AutoSize = false;
                     lblRatingReview.Size = new Size(300, 20);
                 }
-
-                // lblCuaca akan diupdate oleh LoadWeatherAsync()
 
                 // Update waktu terbaik
                 if (lblWaktuTerbaik != null)
@@ -131,7 +134,7 @@ namespace SEARENA2025
                     lblWaktuTerbaik.Size = new Size(400, 20);
                 }
 
-                // Update aktivitas (DI BAWAH lblWaktuTerbaik)
+                // Update aktivitas
                 if (lblAktivitas != null && !string.IsNullOrWhiteSpace(Activity))
                 {
                     // Ambil 2 aktivitas pertama
@@ -184,6 +187,12 @@ namespace SEARENA2025
         // Load cuaca dari WeatherService
         private async void LoadWeatherAsync()
         {
+            await LoadWeatherInternalAsync();
+        }
+
+        // Method internal untuk load weather yang bisa dipanggil secara async
+        private async Task LoadWeatherInternalAsync()
+        {
             if (lblCuaca == null) return;
 
             try
@@ -233,6 +242,12 @@ namespace SEARENA2025
                 lblCuaca.BackColor = Color.LightGray;
                 lblCuaca.ForeColor = Color.Black;
             }
+        }
+
+        // Public method untuk reload cuaca (dapat dipanggil dari DashboardUtama)
+        public async Task ReloadWeatherAsync()
+        {
+            await LoadWeatherInternalAsync();
         }
 
         // Forward click dari child controls

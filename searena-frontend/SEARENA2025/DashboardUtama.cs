@@ -288,6 +288,22 @@ namespace SEARENA2025
             if (LblHapusFilter != null)
                 LblHapusFilter.Click += (s, e) => ClearFilters();
 
+            // PERBAIKI: Tambahkan event handler untuk button reload
+            var btnReload = this.Controls.Find("btnReload", true).FirstOrDefault();
+            if (btnReload != null)
+            {
+                if (btnReload is Guna.UI2.WinForms.Guna2Button gunaBtn)
+                {
+                    gunaBtn.Click -= BtnReload_Click;
+                    gunaBtn.Click += BtnReload_Click;
+                }
+                else if (btnReload is Button btn)
+                {
+                    btn.Click -= BtnReload_Click;
+                    btn.Click += BtnReload_Click;
+                }
+            }
+
             // Textbox search lama (txtCariDestinasi) -> filter kartu
             if (txtCariDestinasi != null)
             {
@@ -796,6 +812,111 @@ namespace SEARENA2025
             ShowAllDestinasiCards();
         }
 
+        // ================== RELOAD DESTINASI & CUACA ==================
+        private async void BtnReload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Set cursor loading
+                Cursor = Cursors.WaitCursor;
+
+                // Disable button sementara untuk mencegah multiple click
+                if (sender is Guna.UI2.WinForms.Guna2Button gunaBtn)
+                {
+                    gunaBtn.Enabled = false;
+                    gunaBtn.Text = "Memuat...";
+                }
+                else if (sender is Button btn)
+                {
+                    btn.Enabled = false;
+                    btn.Text = "Memuat...";
+                }
+
+                // Reload destinasi dari database
+                await ReloadDestinasiAsync();
+
+                MessageBox.Show("Destinasi dan cuaca berhasil diperbarui!", "Reload Berhasil",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saat reload:\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Kembalikan cursor dan enable button
+                Cursor = Cursors.Default;
+                
+                if (sender is Guna.UI2.WinForms.Guna2Button gunaBtn)
+                {
+                    gunaBtn.Enabled = true;
+                    gunaBtn.Text = "Reload";
+                }
+                else if (sender is Button btn)
+                {
+                    btn.Enabled = true;
+                    btn.Text = "Reload";
+                }
+            }
+        }
+
+        private async Task ReloadDestinasiAsync()
+        {
+            // 1) Ambil data terbaru dari DB
+            allDestinasi = await Task.Run(() => Destinasi.GetAll());
+
+            // 2) Update list untuk sugesti pencarian
+            _allDestinasi = allDestinasi
+                .Select(d => new DestInfo
+                {
+                    Id = d.Id,
+                    Nama = d.NamaDestinasi,
+                    Lokasi = d.Lokasi
+                })
+                .ToList();
+
+            // 3) Pastikan panel ada dan bersih
+            if (flpDestinasi == null) return;
+            flpDestinasi.SuspendLayout();
+            flpDestinasi.Controls.Clear();
+
+            // 4) Render ulang dengan filter yang sudah diterapkan
+            if (allDestinasi.Count == 0)
+            {
+                flpDestinasi.Controls.Add(new Label
+                {
+                    Text = "Belum ada destinasi tersedia.\nTambahkan destinasi melalui halaman Admin.",
+                    Font = new Font("Segoe UI", 12, FontStyle.Italic),
+                    ForeColor = Color.Gray,
+                    AutoSize = true,
+                    TextAlign = ContentAlignment.MiddleCenter
+                });
+            }
+            else
+            {
+                // Terapkan filter/urutan saat ini
+                ApplyFilters();
+
+                // 5) Reload cuaca untuk semua kartu yang ditampilkan
+                await ReloadAllWeatherAsync();
+            }
+
+            flpDestinasi.ResumeLayout();
+        }
+
+        // Method untuk reload cuaca di semua kartu destinasi yang tampil
+        private async Task ReloadAllWeatherAsync()
+        {
+            if (flpDestinasi == null) return;
+
+            // Kumpulkan semua DestinasiCard
+            var cards = flpDestinasi.Controls.OfType<DestinasiCard>().ToList();
+
+            // Reload cuaca untuk setiap card secara parallel (lebih cepat)
+            var tasks = cards.Select(card => card.ReloadWeatherAsync());
+            await Task.WhenAll(tasks);
+        }
         // ====== EVENT HANDLERS REQUIRED BY DESIGNER (STUBS) ======
         private void guna2ShadowPanel2_Paint(object sender, PaintEventArgs e) { }
         private void guna2HtmlLabel25_Click(object sender, EventArgs e) { }
