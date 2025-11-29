@@ -38,24 +38,13 @@ namespace SEARENA2025
         {
             // Set cursor untuk seluruh control
             this.Cursor = Cursors.Hand;
+            this.Click += Control_Click;
+
             
-            // Tambahkan event click ke semua child controls
-            foreach (Control control in this.Controls)
-            {
-                AttachClickEventRecursive(control);
-            }
+           
         }
 
-        private void AttachClickEventRecursive(Control control)
-        {
-            control.Cursor = Cursors.Hand;
-            control.Click += Control_Click;
-            
-            foreach (Control child in control.Controls)
-            {
-                AttachClickEventRecursive(child);
-            }
-        }
+        
 
         public void LoadData(Destinasi destinasi)
         {
@@ -205,7 +194,7 @@ namespace SEARENA2025
                 lblCuaca.ForeColor = Color.Black;
 
                 // Ambil data cuaca
-                var weather = await WeatherService.GetCurrentAsync(Lokasi);
+                var weather = await WeatherService.GetCurrentAsync(NamaDestinasi);
 
                 // Tentukan status cuaca berdasarkan kondisi
                 string status;

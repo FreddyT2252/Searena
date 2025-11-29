@@ -827,5 +827,10 @@ namespace SEARENA2025
         {
 
         }
+
+        private void guna2CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
