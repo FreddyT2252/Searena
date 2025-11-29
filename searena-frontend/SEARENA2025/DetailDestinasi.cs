@@ -428,7 +428,7 @@ namespace SEARENA2025
                 {
                     await conn.OpenAsync();
                     var sql = @"
-                        SELECT username, rating, review_text, tanggal_review
+                        SELECT username, rating, review_text, tanggal_review, response
                         FROM public.reviews
                         WHERE destinasi_id = @did
                         ORDER BY tanggal_review DESC
@@ -449,6 +449,7 @@ namespace SEARENA2025
                                 int rate      = reader.GetInt32(1);
                                 string text   = reader.GetString(2);
                                 DateTime dt   = reader.GetDateTime(3);
+                                string resp = reader.IsDBNull(4) ? "" : reader.GetString(4);
 
                                 var lblUser = new Guna.UI2.WinForms.Guna2HtmlLabel
                                 {
@@ -498,6 +499,38 @@ namespace SEARENA2025
                                 PnlRatingReview.Controls.Add(lblText);
 
                                 y = lblText.Bottom + 12;
+                                int nextY = lblText.Bottom + 12;
+
+                                if (!string.IsNullOrWhiteSpace(resp))
+                                {
+                                    var lblRespTitle = new Guna.UI2.WinForms.Guna2HtmlLabel
+                                    {
+                                        Text = "Admin Response:",
+                                        Location = new Point(67, lblText.Bottom + 1),
+                                        Font = new Font("Malgun Gothic", 8.0f, FontStyle.Bold),
+                                        ForeColor = Color.DimGray,
+                                        BackColor = Color.Transparent
+                                    };
+
+                                    var lblRespText = new Guna.UI2.WinForms.Guna2HtmlLabel
+                                    {
+                                        Text = resp,
+                                        Location = new Point(68, lblRespTitle.Bottom + 1),
+                                        Font = new Font("Malgun Gothic Semilight", 8.0f, FontStyle.Regular),
+                                        BackColor = Color.Transparent,
+                                        AutoSize = false,
+                                        AutoSizeHeightOnly = true,
+                                        MaximumSize = new Size(Math.Max(120, PnlRatingReview.Width - 80), 0)
+                                    };
+
+                                    PnlRatingReview.Controls.Add(lblRespTitle);
+                                    PnlRatingReview.Controls.Add(lblRespText);
+
+                                    nextY = lblRespText.Bottom + 12;
+                                }
+
+                                // update posisi Y untuk review berikutnya
+                                y = nextY;
                             }
 
                             if (!any)
