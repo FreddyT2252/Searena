@@ -132,7 +132,6 @@ namespace SEARENA2025
                 // Update waktu terbaik
                 if (lblWaktuTerbaik != null)
                 {
-                    // PERBAIKI: Batasi panjang waktu terbaik
                     string waktuText = "Terbaik: " + WaktuTerbaik;
                     if (waktuText.Length > 35)
                     {
@@ -160,7 +159,6 @@ namespace SEARENA2025
                         if (Activity.Split(',').Length > 2)
                             activityText += "...";
                         
-                        // PERBAIKI: Batasi panjang aktivitas
                         if (activityText.Length > 30)
                         {
                             activityText = activityText.Substring(0, 27) + "...";
@@ -200,7 +198,6 @@ namespace SEARENA2025
             await LoadWeatherInternalAsync();
         }
 
-        // Method internal untuk load weather yang bisa dipanggil secara async
         private async Task LoadWeatherInternalAsync()
         {
             if (lblCuaca == null) return;
@@ -225,20 +222,20 @@ namespace SEARENA2025
                     weather.Description.ToLower().Contains("storm"))
                 {
                     status = "Kurang Baik";
-                    bgColor = Color.FromArgb(255, 102, 102); // Red
+                    bgColor = Color.FromArgb(255, 102, 102); 
                     fgColor = Color.White;
                 }
                 else if (weather.WindSpeedKmh > 25 || weather.Humidity > 85)
                 {
                     status = "Cukup Baik";
-                    bgColor = Color.FromArgb(255, 204, 102); // Orange
+                    bgColor = Color.FromArgb(255, 204, 102); 
                     fgColor = Color.Black;
                 }
                 else
                 {
                     status = "Sangat Baik";
-                    bgColor = Color.FromArgb(144, 238, 144); // Light green
-                    fgColor = Color.FromArgb(0, 100, 0); // Dark green
+                    bgColor = Color.FromArgb(144, 238, 144); 
+                    fgColor = Color.FromArgb(0, 100, 0); 
                 }
 
                 lblCuaca.Text = status;
@@ -254,7 +251,7 @@ namespace SEARENA2025
             }
         }
 
-        // Public method untuk reload cuaca (dapat dipanggil dari DashboardUtama)
+        // Public method untuk reload cuaca 
         public async Task ReloadWeatherAsync()
         {
             await LoadWeatherInternalAsync();

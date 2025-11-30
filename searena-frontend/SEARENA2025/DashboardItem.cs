@@ -15,44 +15,33 @@ namespace SEARENA2025
         public DashboardItem()
         {
             InitializeComponent();
-            
-            // Subscribe to scroll event
             ScrBarDashboard.Scroll += ScrBarDashboard_Scroll;
-            
-            // Enable mouse wheel scrolling on FlowLayoutPanel
             flpDashboard.MouseWheel += FlpDashboard_MouseWheel;
-            
-            // Update scrollbar when panel scrolls
             flpDashboard.Scroll += FlpDashboard_Scroll;
         }
 
         private void ScrBarDashboard_Scroll(object sender, ScrollEventArgs e)
         {
-            // Update FlowLayoutPanel horizontal scroll position
             flpDashboard.HorizontalScroll.Value = Math.Min(e.NewValue, flpDashboard.HorizontalScroll.Maximum);
         }
 
         private void FlpDashboard_MouseWheel(object sender, MouseEventArgs e)
         {
-            // Enable horizontal scrolling with mouse wheel (Shift + Wheel or just Wheel)
             if (flpDashboard.HorizontalScroll.Enabled)
             {
                 int currentValue = flpDashboard.HorizontalScroll.Value;
-                int delta = e.Delta > 0 ? -50 : 50; // Scroll amount
+                int delta = e.Delta > 0 ? -50 : 50; 
                 int newValue = Math.Max(flpDashboard.HorizontalScroll.Minimum, 
                                Math.Min(currentValue + delta, flpDashboard.HorizontalScroll.Maximum));
                 
                 flpDashboard.HorizontalScroll.Value = newValue;
                 flpDashboard.PerformLayout();
-                
-                // Update the custom scrollbar
                 ScrBarDashboard.Value = Math.Min(newValue, ScrBarDashboard.Maximum);
             }
         }
 
         private void FlpDashboard_Scroll(object sender, ScrollEventArgs e)
         {
-            // Sync custom scrollbar with FlowLayoutPanel scroll
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
             {
                 ScrBarDashboard.Value = Math.Min(e.NewValue, ScrBarDashboard.Maximum);
@@ -65,20 +54,17 @@ namespace SEARENA2025
 
         private void DashboardItem_Load(object sender, EventArgs e)
         {
-            // Update scrollbar maximum based on content
             UpdateScrollBar();
         }
 
         private void UpdateScrollBar()
         {
-            // Calculate total width of content
             int totalWidth = 0;
             foreach (Control ctrl in flpDashboard.Controls)
             {
                 totalWidth += ctrl.Width + ctrl.Margin.Left + ctrl.Margin.Right;
             }
 
-            // Set scrollbar maximum
             int visibleWidth = flpDashboard.Width;
             ScrBarDashboard.Maximum = Math.Max(0, totalWidth - visibleWidth + flpDashboard.Padding.Right);
             ScrBarDashboard.LargeChange = visibleWidth;

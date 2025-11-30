@@ -48,7 +48,6 @@ namespace SEARENA2025
                 btnBookmark.Click += btnBookmark_Click_1;
             }
 
-            // PERBAIKI: Setup event handler untuk button kembali
             if (btnKembali != null)
             {
                 btnKembali.Click -= btnKembali_Click;
@@ -57,14 +56,12 @@ namespace SEARENA2025
                 btnKembali.Enabled = true;
             }
 
-            // PERBAIKI: Setup event handler untuk profile picture - CARI SEMUA KEMUNGKINAN NAMA
             SetupProfileClickHandler();
         }
 
         // Method terpisah untuk setup profile click handler
         private void SetupProfileClickHandler()
         {
-            // Coba berbagai kemungkinan nama control profile
             string[] possibleNames = new[] { 
                 "PctProfile", "Profile", "guna2CirclePictureBox1", 
                 "ProfilePicture", "pictureBoxProfile", "CircleProfile" 
@@ -98,7 +95,7 @@ namespace SEARENA2025
             }
         }
 
-        // =================== LOAD FORM ===================
+        // Load Form
 
         private async void DetailDestinasi_Load(object sender, EventArgs e)
         {
@@ -108,13 +105,10 @@ namespace SEARENA2025
 
             // Default rating
             if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
-
-            // Perbaiki wrapping label deskripsi (kalau ada)
             FixLabelWrap(lblDeskripsi);
 
             try
             {
-                // Set cursor loading hanya sekali di awal
                 Cursor = Cursors.WaitCursor;
 
                 // Load info destinasi dari tabel destinasi
@@ -123,17 +117,10 @@ namespace SEARENA2025
                     await LoadDestinasiInfoAsync();
                 }
 
-                // Pastikan tabel bookmark & review ada
                 await EnsureBookmarkTableAsync();
                 await EnsureReviewsTableAsync();
-
-                // Update status bookmark button
-                await CheckBookmarkStatusAsync(); // Ubah jadi async
-
-                // Load review ke panel dinamis
+                await CheckBookmarkStatusAsync(); 
                 await LoadReviewsAsync();
-
-                // Load cuaca
                 await LoadWeatherAsync();
             }
             catch (Exception ex)
@@ -143,12 +130,10 @@ namespace SEARENA2025
             }
             finally
             {
-                // PERBAIKI: Kembalikan cursor normal di finally
                 Cursor = Cursors.Default;
             }
         }
 
-        // =================== HELPER WRAP LABEL ===================
 
         private void FixLabelWrap(Guna.UI2.WinForms.Guna2HtmlLabel lbl)
         {
@@ -162,18 +147,14 @@ namespace SEARENA2025
             {
                 try
                 {
-                    // Hitung lebar maksimal berdasarkan parent width
-                    maxWidth = Math.Max(100, lbl.Parent.Width - 50); // Tambah margin kiri/kanan
+                    maxWidth = Math.Max(100, lbl.Parent.Width - 50); 
                 }
                 catch { }
             }
             lbl.MaximumSize = new Size(maxWidth, 0);
             
-            // PERBAIKI: Tambahkan word wrap agar text tidak overflow
             lbl.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
         }
-
-        // =================== LOAD DESTINASI INFO (DESKRIPSI / HARGA / WAKTU / AKTIVITAS) ===================
 
         private async Task LoadDestinasiInfoAsync()
         {
@@ -297,11 +278,10 @@ namespace SEARENA2025
             }
         }
 
-        // =================== REVIEW: VERSI LABEL TETAP (OPSIONAL) ===================
+        // Review
 
         private async void TampilkanReviewsKeUI(List<ReviewItem> reviews)
         {
-            // Kosongkan dulu
             lblNama1.Text = "";
             lblTanggal1.Text =("");
             lblReview1.Text = "";
@@ -330,7 +310,6 @@ namespace SEARENA2025
                 ratingStar2.Text = reviews[1].Rating.ToString();
             }
 
-            // Kalau mau, bisa panggil lagi cuaca di sini
             await LoadWeatherAsync();
         }
 
@@ -373,7 +352,7 @@ namespace SEARENA2025
             return list;
         }
 
-        // =================== REVIEW: TABEL & PANEL DINAMIS ===================
+        // Review versi panel dinamis
 
         private async Task EnsureReviewsTableAsync()
         {
@@ -472,7 +451,6 @@ namespace SEARENA2025
                                 };
                                 var star = new PictureBox
                                 {
-                                    // TODO: ganti icon bintang yang bener
                                     Image = SystemIcons.Information.ToBitmap(),
                                     SizeMode = PictureBoxSizeMode.StretchImage,
                                     Size = new Size(18, 18),
@@ -527,7 +505,6 @@ namespace SEARENA2025
                                     nextY = lblRespText.Bottom + 12;
                                 }
 
-                                // update posisi Y untuk review berikutnya
                                 y = nextY;
                             }
 
@@ -552,7 +529,7 @@ namespace SEARENA2025
             }
         }
 
-        // =================== KIRIM REVIEW ===================
+        // Kirim review
 
         private async void BtnKirim_Click(object sender, EventArgs e)
         {
@@ -573,7 +550,6 @@ namespace SEARENA2025
                 {
                     await conn.OpenAsync();
 
-                    // pastikan tabel reviews ada
                     string createSql = @"
                         CREATE TABLE IF NOT EXISTS public.reviews (
                             review_id      SERIAL PRIMARY KEY,
@@ -615,11 +591,7 @@ namespace SEARENA2025
                 if (tbUlasan != null) tbUlasan.Text = "";
                 if (guna2RatingStar1 != null) guna2RatingStar1.Value = 5;
 
-                // refresh UI review
                 await LoadReviewsAsync();
-                // atau kalau mau versi label:
-                // var reviews = await GetReviewsAsync();
-                // TampilkanReviewsKeUI(reviews);
             }
             catch (Exception ex)
             {
@@ -628,7 +600,7 @@ namespace SEARENA2025
             }
         }
 
-        // =================== BOOKMARK ===================
+        // Bookmark
 
         private async Task EnsureBookmarkTableAsync()
         {
@@ -655,7 +627,7 @@ namespace SEARENA2025
             }
         }
 
-        private async Task CheckBookmarkStatusAsync() // Ubah jadi async Task
+        private async Task CheckBookmarkStatusAsync() 
         {
             try
             {
@@ -697,10 +669,10 @@ namespace SEARENA2025
         private async void btnBookmark_Click_1(object sender, EventArgs e)
         {
             await EnsureBookmarkTableAsync();
-            await BtnBookmark_Toggle(); // Ubah jadi async
+            await BtnBookmark_Toggle(); 
         }
 
-        private async Task BtnBookmark_Toggle() // Ubah jadi async Task
+        private async Task BtnBookmark_Toggle() 
         {
             try
             {
@@ -717,7 +689,7 @@ namespace SEARENA2025
                     await AddBookmark();
                 }
 
-                await CheckBookmarkStatusAsync(); // Panggil yang async
+                await CheckBookmarkStatusAsync(); 
             }
             catch (Exception ex)
             {
@@ -788,7 +760,7 @@ namespace SEARENA2025
             }
         }
 
-        // =================== CUACA ===================
+        // Cuaca
 
         private async Task LoadWeatherAsync()
         {
@@ -836,7 +808,7 @@ namespace SEARENA2025
             }
         }
 
-        // =================== EVENT-EVENT KECIL ===================
+        // Event handlers
 
         private void guna2PictureBox2_Click(object sender, EventArgs e) { }
         private void guna2HtmlLabel33_Click(object sender, EventArgs e) { }
@@ -853,24 +825,20 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // PERBAIKI: Proper form closure
             this.Close();
         }
 
         private void btnKembali_Click_1(object sender, EventArgs e)
         {
-            // PERBAIKI: Proper form closure
             this.Close();
         }
 
         private void lblDeskripsi_Click(object sender, EventArgs e) { }
 
-        // PERBAIKI: Tambahkan handler untuk profile picture
         private void ProfilePic_Click(object sender, EventArgs e)
         {
             try
             {
-                // Buka halaman profil
                 Form2 profileForm = new Form2(this);
                 profileForm.FormClosed += (s, args) => this.Show();
                 profileForm.Show();
@@ -881,6 +849,11 @@ namespace SEARENA2025
                 MessageBox.Show($"Error membuka profil: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Navbar_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

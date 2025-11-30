@@ -94,8 +94,6 @@ namespace SEARENA2025
                                 string lokasi = reader.IsDBNull(3) ? "-" : reader.GetString(3);
                                 int rating = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
                                 string review = reader.IsDBNull(5) ? "-" : reader.GetString(5);
-
-                                // Buat string bintang
                                 string ratingStars = new string('★', Math.Max(0, Math.Min(5, rating)))
                                                    + new string('☆', Math.Max(0, 5 - Math.Max(0, Math.Min(5, rating))));
 
@@ -104,7 +102,6 @@ namespace SEARENA2025
                                 dgvRiwayat.Rows[rowIdx].Tag = reviewId;
                             }
 
-                            // Font untuk mendukung bintang
                             dgvRiwayat.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Symbol", 9f);
                             dgvRiwayat.ReadOnly = true;
                             dgvRiwayat.AllowUserToAddRows = false;
@@ -120,7 +117,6 @@ namespace SEARENA2025
 
         private void BtnInsert_Click(object sender, EventArgs e)
         {
-            // Validasi input wajib
             if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
                 MessageBox.Show("Nama destinasi harus diisi!");
@@ -362,7 +358,7 @@ namespace SEARENA2025
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            // Validasi nama destinasi harus diisi (field paling penting untuk identifikasi)
+            // Validasi nama destinasi harus diisi 
             if (string.IsNullOrWhiteSpace(txtNamaDestinasi.Text))
             {
                 MessageBox.Show("Nama destinasi harus diisi untuk menghapus!");
@@ -434,7 +430,7 @@ namespace SEARENA2025
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     connection.Open();
-                    // Sesuaikan nama column dengan struktur DB mu
+                    // Sesuaikan nama column dengan struktur DB 
                     string query = "UPDATE reviews SET response=@response WHERE review_id=@id";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
@@ -446,8 +442,8 @@ namespace SEARENA2025
                         MessageBox.Show("Balasan berhasil dikirim!");
                         txtBalasReview.Clear();
                         selectedReviewId = -1;
-                        LoadReview(); // Refresh tabel review
-                        LoadDestinasi(); // Refresh destinasi untuk update rating/review terbaru
+                        LoadReview(); 
+                        LoadDestinasi(); 
                     }
                 }
             }
@@ -462,11 +458,9 @@ namespace SEARENA2025
             if (e.RowIndex >= 0 && dgvRiwayat.Rows[e.RowIndex].Tag != null)
             {
                 selectedReviewId = Convert.ToInt32(dgvRiwayat.Rows[e.RowIndex].Tag);
-                // Optional: tampilkan review yang dipilih di textbox
                 if (e.ColumnIndex >= 0 && dgvRiwayat.Rows[e.RowIndex].Cells.Count > 4)
                 {
                     var reviewText = dgvRiwayat.Rows[e.RowIndex].Cells[4].Value?.ToString();
-                    // txtBalasReview.Hint = $"Balas review: {reviewText}"; // kalau mau tampilkan preview
                 }
             }
         }
@@ -527,7 +521,6 @@ namespace SEARENA2025
             txtTiketMax.Clear();
             txtRekomendasiCuaca.Clear();
 
-            // Uncheck semua checkbox bulan
             UncheckControl("cbJan");
             UncheckControl("cbFeb");
             UncheckControl("cbMar");
@@ -541,7 +534,6 @@ namespace SEARENA2025
             UncheckControl("cbNov");
             UncheckControl("cbDec");
 
-            // Uncheck semua checkbox aktivitas (opsional)
             UncheckControl("cbSnorkling");
             UncheckControl("cbDiving");
             UncheckControl("cbSunset");

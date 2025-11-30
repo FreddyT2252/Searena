@@ -44,14 +44,11 @@ namespace SEARENA2025
                                 lblEmail.Text = reader["email"]?.ToString() ?? "-";
                                 lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
                                 guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
-                                lblPengguna.Text = "Pengguna"; // bisa dari role
+                                lblPengguna.Text = "Pengguna"; 
                                 
-                                // PERBAIKI: Ambil tanggal bergabung dari database
                                 if (!reader.IsDBNull(reader.GetOrdinal("tanggal_bergabung")))
                                 {
                                     DateTime tanggalBergabung = reader.GetDateTime(reader.GetOrdinal("tanggal_bergabung"));
-                                    
-                                    // Format Indonesia: "Bergabung sejak 15 Januari 2024"
                                     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("id-ID");
                                     lblBergabung.Text = "Bergabung sejak " + tanggalBergabung.ToString("d MMMM yyyy", culture);
                                 }
@@ -119,7 +116,6 @@ namespace SEARENA2025
                             var dt = new DataTable();
                             da.Fill(dt);
 
-                            // Tambah kolom bintang visual jika belum ada
                             if (!dt.Columns.Contains("⭐ Rating"))
                                 dt.Columns.Add("⭐ Rating", typeof(string));
 
@@ -129,7 +125,6 @@ namespace SEARENA2025
                                 if (row["Rating"] != DBNull.Value)
                                     r = Convert.ToInt32(row["Rating"]);
 
-                                // ★ = filled, ☆ = empty
                                 row["⭐ Rating"] = new string('★', Math.Max(0, Math.Min(5, r)))
                                                 + new string('☆', Math.Max(0, 5 - Math.Max(0, Math.Min(5, r))));
                             }
@@ -137,7 +132,6 @@ namespace SEARENA2025
                             dgvRiwayat.AutoGenerateColumns = false;
                             dgvRiwayat.Columns.Clear();
 
-                            // Kolom ReviewId (disembunyikan untuk operasi hapus)
                             AddTextCol(dgvRiwayat, "ReviewId", "ReviewId");
                             dgvRiwayat.Columns["ReviewId"].Visible = false;
 
@@ -151,7 +145,6 @@ namespace SEARENA2025
                             dgvRiwayat.ReadOnly = true;
                             dgvRiwayat.AllowUserToAddRows = false;
 
-                            // Pakai font yang mendukung simbol ★ ☆
                             dgvRiwayat.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Symbol", 9f);
                         }
                     }
@@ -183,11 +176,10 @@ namespace SEARENA2025
             catch { }
         }
 
-        // ===== EVENT HANDLERS UNTUK DESIGNER =====
+        // Event handlers untuk interaksi UI
 
         private void guna2CirclePictureBox1_Click(object sender, EventArgs e)
         {
-            // Klik pada foto profil di navbar - untuk mengubah foto
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -198,9 +190,6 @@ namespace SEARENA2025
 
         private void btnBookmark_Click(object sender, EventArgs e)
         {
-           
-
-            // Buka Form3 dan tutup Form2
             Form3 form3 = new Form3(this);
             form3.Show();
             this.Hide();
@@ -223,25 +212,21 @@ namespace SEARENA2025
 
         private void guna2HtmlLabel18_Click(object sender, EventArgs e)
         {
-            // Klik pada review - tampilkan detail
             MessageBox.Show("Review Pantai Wedi Ombo: Salah satu pantai di Yogyakarta yang akan saya kunjungi berulang kali", "Detail Review");
         }
 
         private void guna2HtmlLabel1_Click(object sender, EventArgs e)
         {
-            // Klik pada nama - mungkin untuk edit profil
             MessageBox.Show("Fitur edit profil akan segera tersedia", "Edit Profil");
         }
 
         private void guna2HtmlLabel4_Click(object sender, EventArgs e)
         {
-            // Navigasi ke halaman Tentang Kami
             MessageBox.Show("Navigasi ke halaman Tentang Kami", "Tentang Kami");
         }
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
-            // PERBAIKI: Kembali ke parent dashboard jika ada
             if (dashboardParent != null)
             {
                 dashboardParent.Show();
@@ -249,7 +234,6 @@ namespace SEARENA2025
             }
             else
             {
-                // Jika tidak ada parent, buka dashboard baru
                 DashboardUtama dashboard = new DashboardUtama();
                 dashboard.Show();
                 this.Close();
@@ -258,13 +242,11 @@ namespace SEARENA2025
 
         private void lblProfile_Click(object sender, EventArgs e)
         {
-            // Sudah di halaman profile, tidak perlu navigasi
             MessageBox.Show("Anda sudah berada di halaman profile", "Profile");
         }
 
         private void ProfilePage_Click(object sender, EventArgs e)
         {
-            // Klik pada foto profil utama - untuk mengubah foto
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -273,11 +255,10 @@ namespace SEARENA2025
             }
         }
 
-        // ===== EVENT HANDLERS NAVIGASI =====
+        // Event handlers untuk navigasi navbar
 
         private void Beranda_Click(object sender, EventArgs e)
         {
-            // PERBAIKI: Kembali ke parent dashboard jika ada
             if (dashboardParent != null)
             {
                 dashboardParent.Show();
@@ -285,7 +266,6 @@ namespace SEARENA2025
             }
             else
             {
-                // Jika tidak ada parent, buka dashboard baru
                 DashboardUtama dashboard = new DashboardUtama();
                 dashboard.Show();
                 this.Close();
@@ -294,7 +274,6 @@ namespace SEARENA2025
 
         private void Destinasi_Click(object sender, EventArgs e)
         {
-            // PERBAIKI: Kembali ke parent dashboard jika ada
             if (dashboardParent != null)
             {
                 dashboardParent.Show();
@@ -302,7 +281,6 @@ namespace SEARENA2025
             }
             else
             {
-                // Jika tidak ada parent, buka dashboard baru
                 DashboardUtama dashboard = new DashboardUtama();
                 dashboard.Show();
                 this.Close();
@@ -311,11 +289,10 @@ namespace SEARENA2025
 
         private void Kontak_Click(object sender, EventArgs e)
         {
-            // Tetap di Form2 tapi scroll ke bagian kontak jika ada
             MessageBox.Show("Navigasi ke Kontak", "Kontak");
         }
 
-        // ===== EVENT HANDLERS UTAMA =====
+        // Event handler untuk log out
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -373,17 +350,17 @@ namespace SEARENA2025
 
         private void guna2HtmlLabel7_Click(object sender, EventArgs e)
         {
-            // Event handler untuk label email
+            
         }
 
         private void guna2HtmlLabel25_Click(object sender, EventArgs e)
         {
-            // Event handler tambahan
+           
         }
 
         private void guna2HtmlLabel26_Click(object sender, EventArgs e)
         {
-            // Event handler tambahan
+            
         }
 
         private void Navbar_Paint(object sender, PaintEventArgs e)

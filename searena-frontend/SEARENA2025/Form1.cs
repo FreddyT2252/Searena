@@ -21,7 +21,6 @@ namespace SEARENA2025
         private void Form1_Load(object sender, EventArgs e)
         {
             SetIcons();
-            // Langsung ke login panel, skip role selection
             pnlRole.Visible = false;
             pnlLogin.Visible = true;
             pnlRegister.Visible = false;
@@ -92,7 +91,7 @@ namespace SEARENA2025
             txtRegPassword.PasswordChar = (txtRegPassword.PasswordChar == '●') ? '\0' : '●';
         }
 
-        // ===== VALIDATION METHODS =====
+        // Validasi format email dengan regex
         private bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -110,7 +109,7 @@ namespace SEARENA2025
             }
         }
 
-        // ===== PANEL SWITCHING =====
+        // Panel switching
         private void ShowLoginPanel()
         {
             pnlLogin.Visible = true;
@@ -131,7 +130,7 @@ namespace SEARENA2025
             lblTitleReg.Visible = true;
         }
 
-        // ===== TAB SWITCHING =====
+        // Tab switching
         private void btnTabMasuk_Click(object sender, EventArgs e)
         {
             ShowLoginPanel();
@@ -147,22 +146,18 @@ namespace SEARENA2025
             ShowLoginPanel();
         }
 
-        // ===== ROLE SELECTION (UNTUK COMPATIBILITY DENGAN DESIGNER) =====
+       
         private void btnRoleAdmin_Click(object sender, EventArgs e)
         {
-            // Fitur role selection sudah dinonaktifkan
-            // Role ditentukan dari database saat login
             ShowLoginPanel();
         }
 
         private void btnRoleUser_Click(object sender, EventArgs e)
         {
-            // Fitur role selection sudah dinonaktifkan
-            // Role ditentukan dari database saat login
             ShowLoginPanel();
         }
 
-        // ===== LOGIN (PLAIN PASSWORD) =====
+        // Login
         private void btnMasuk_Click(object sender, EventArgs e)
         {
             // Validasi input
@@ -237,7 +232,7 @@ namespace SEARENA2025
             }
         }
 
-        // ===== REGISTER (PLAIN PASSWORD) =====
+        // Register
         private void btnDaftar_Click(object sender, EventArgs e)
         {
             // Validasi nama
@@ -310,7 +305,7 @@ namespace SEARENA2025
                         cmd.Parameters.AddWithValue("@nama", txtRegNama.Text.Trim());
                         cmd.Parameters.AddWithValue("@email", txtRegEmail.Text.Trim());
                         cmd.Parameters.AddWithValue("@password", txtRegPassword.Text);
-                        cmd.Parameters.AddWithValue("@role", "pengguna"); // Default: pengguna biasa
+                        cmd.Parameters.AddWithValue("@role", "pengguna"); 
 
                         cmd.ExecuteNonQuery();
                     }
@@ -335,7 +330,7 @@ namespace SEARENA2025
             }
         }
 
-        // ===== NAVIGATION =====
+        // Navigasi
         private void PindahKeDashboard()
         {
             if (UserSession.IsAdmin())
@@ -352,7 +347,7 @@ namespace SEARENA2025
             }
         }
 
-        // ===== HELPER METHODS =====
+        // Helper methods
         private void ClearInputs()
         {
             txtEmail.Text = "";
@@ -362,7 +357,7 @@ namespace SEARENA2025
             txtRegPassword.Text = "";
         }
 
-        // ===== BACKGROUND GRADIENT =====
+        // Warna background gradient
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             using (var brush = new LinearGradientBrush(

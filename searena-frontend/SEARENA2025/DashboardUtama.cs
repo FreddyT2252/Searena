@@ -14,15 +14,11 @@ namespace SEARENA2025
 {
     public partial class DashboardUtama : Form
     {
-        // === FIELD & MODEL ===
-        // Panel destinasi lama (kalau ada di designer)
         private Guna2ShadowPanel panelDestinasi1;
 
-        // Panel baru untuk kartu destinasi
-        private FlowLayoutPanel flpDestinasi; // FlowLayoutPanel untuk menampung kartu destinasi
-        private List<Destinasi> allDestinasi = new List<Destinasi>(); // Menyimpan semua destinasi
+        private FlowLayoutPanel flpDestinasi; 
+        private List<Destinasi> allDestinasi = new List<Destinasi>(); 
 
-        // Untuk fitur sugesti search (listbox)
         private List<DestInfo> _allDestinasi = new List<DestInfo>();
 
         internal sealed class DestInfo
@@ -40,7 +36,6 @@ namespace SEARENA2025
 
         public static class AppDb
         {
-            // Satu tempat untuk connection string
             public static readonly string ConnString =
                 DotNetEnv.Env.GetString("DB_CONNECTION");
         }
@@ -49,7 +44,6 @@ namespace SEARENA2025
         {
             InitializeComponent();
 
-            // Sembunyikan panel destinasi manual dulu (yang hardcoded di designer)
             HideManualDestinationPanels();
 
             SetupEventHandlers();
@@ -60,11 +54,10 @@ namespace SEARENA2025
 
         }
 
-        // ================== INIT & LAYOUT ==================
+        // Layout dan inisialisasi panel destinasi
 
         private void HideManualDestinationPanels()
         {
-            // Sembunyikan semua panel destinasi manual yang ada di designer
             foreach (Control control in this.Controls)
             {
                 if (control is Guna2ShadowPanel panel && control.Name.StartsWith("panelDestinasi"))
@@ -73,7 +66,6 @@ namespace SEARENA2025
                 }
             }
 
-            // Cek juga di dalam container
             foreach (Control container in this.Controls)
             {
                 if (container is Guna2Panel || container is Panel)
@@ -91,7 +83,6 @@ namespace SEARENA2025
 
         private void InitializeDestinasiPanel()
         {
-            // Cari FlowLayoutPanel yang sudah ada di designer
             flpDestinasi = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault(f => f.Name == "flpDestinasi");
 
             if (flpDestinasi == null)
@@ -110,40 +101,32 @@ namespace SEARENA2025
 
             if (flpDestinasi == null)
             {
-                // Cari footer panel untuk menghitung tinggi yang tersedia (gunakan nama pasti PnlInformasi)
                 var footerPanel = this.Controls.OfType<Control>()
                     .FirstOrDefault(c => c.Name == "PnlInformasi");
 
-                // Cari posisi referensi dari control yang ada (navbar, filter panel, dll)
                 int xPosition = 280;
-                int yPosition = 100; // Posisi awal supaya kartu agak ke atas
+                int yPosition = 100;
 
-                // Hitung tinggi yang tersedia (jangan sampai memotong footer)
                 int availableHeight;
-                const int safeMarginToFooter = 60; // margin aman supaya tidak menempel dengan footer
+                const int safeMarginToFooter = 60; 
 
                 if (footerPanel != null)
                 {
-                    // Tinggi panel destinasi = posisi atas footer - posisi Y panel destinasi - margin aman
                     availableHeight = Math.Max(200, footerPanel.Top - yPosition - safeMarginToFooter);
                 }
                 else
                 {
-                    // Fallback jika footer tidak ditemukan: gunakan nilai aman
-                    availableHeight = 380; // dipendekkan supaya tidak memotong footer
+                    availableHeight = 380; 
                 }
 
-                // Coba cari panel filter untuk posisi relatif
                 var filterPanel = this.Controls.OfType<Control>()
                     .FirstOrDefault(c => c.Name == "PnlFilter");
 
                 if (filterPanel != null)
                 {
                     xPosition = filterPanel.Right + 20;
-                    // Pastikan panel destinasi tidak lebih rendah dari filter, tapi tetap minimal 100
                     yPosition = Math.Max(100, filterPanel.Top);
 
-                    // Hitung ulang tinggi jika yPosition berubah
                     if (footerPanel != null)
                     {
                         availableHeight = Math.Max(200, footerPanel.Top - yPosition - safeMarginToFooter);
@@ -156,7 +139,7 @@ namespace SEARENA2025
                     AutoScroll = true,
                     WrapContents = true,
                     FlowDirection = FlowDirection.LeftToRight,
-                    Padding = new Padding(10, 5, 10, 10), // kecilkan padding atas
+                    Padding = new Padding(10, 5, 10, 10), 
                     BackColor = Color.Transparent,
                     Location = new Point(xPosition, yPosition),
                     Size = new Size(this.Width - xPosition - 40, availableHeight),
@@ -167,14 +150,12 @@ namespace SEARENA2025
             }
             else
             {
-                // FlowLayoutPanel sudah ada, pastikan visible dan di depan
                 flpDestinasi.Visible = true;
-                flpDestinasi.AutoScroll = true; // pastikan scroll aktif
+                flpDestinasi.AutoScroll = true; 
                 flpDestinasi.Padding = new Padding(10, 5, 10, 10);
                 flpDestinasi.BringToFront();
             }
 
-            // Load destinasi dari database
             LoadDestinasiFromDatabase();
         }
 
@@ -183,11 +164,8 @@ namespace SEARENA2025
             try
             {
                 Cursor = Cursors.WaitCursor;
-
-                // 1) Ambil data dari DB (di thread pool)
                 allDestinasi = await Task.Run(() => Destinasi.GetAll());
 
-                // 2) Siapkan list untuk sugesti pencarian
                 _allDestinasi = allDestinasi
                     .Select(d => new DestInfo
                     {
@@ -197,12 +175,10 @@ namespace SEARENA2025
                     })
                     .ToList();
 
-                // 3) Pastikan panel ada dan bersih
                 if (flpDestinasi == null) return;
                 flpDestinasi.SuspendLayout();
                 flpDestinasi.Controls.Clear();
 
-                // 4) Render
                 if (allDestinasi.Count == 0)
                 {
                     flpDestinasi.Controls.Add(new Label
@@ -216,12 +192,7 @@ namespace SEARENA2025
                 }
                 else
                 {
-                    // Pilih salah satu:
-                    // a) Terapkan filter/urutan saat ini:
                     ApplyFilters();
-
-                    // b) ATAU kalau ingin render semua dulu:
-                    // RebuildDestinasiCards(allDestinasi);
                 }
 
                 flpDestinasi.ResumeLayout();
@@ -269,11 +240,10 @@ namespace SEARENA2025
                     destinasi.NamaDestinasi,
                     fullLocation
                 );
-                
-                // PERBAIKI: Close form saat ini sebelum show form baru
+
                 detailForm.FormClosed += (s, args) => this.Show();
                 detailForm.Show();
-                this.Hide(); // Hide bukan Close agar bisa di-show lagi
+                this.Hide(); 
             }
             catch (Exception ex)
             {
@@ -282,7 +252,7 @@ namespace SEARENA2025
             }
         }
 
-        // ================== EVENT HANDLERS SETUP ==================
+        // Setup event handlers untuk controls
 
         private void SetupEventHandlers()
         {
@@ -294,7 +264,6 @@ namespace SEARENA2025
             if (LblHapusFilter != null)
                 LblHapusFilter.Click += (s, e) => ClearFilters();
 
-            // PERBAIKI: Tambahkan event handler untuk button reload
             var btnReload = this.Controls.Find("btnReload", true).FirstOrDefault();
             if (btnReload != null)
             {
@@ -310,7 +279,6 @@ namespace SEARENA2025
                 }
             }
 
-            // Textbox search lama (txtCariDestinasi) -> filter kartu
             if (txtCariDestinasi != null)
             {
                 txtCariDestinasi.TextChanged += (s, e) => SearchDestinations();
@@ -333,14 +301,13 @@ namespace SEARENA2025
             }
             else
             {
-                // Kalau textbox di dalam panel search
                 FindAndSetupSearchTextBox();
             }
 
             // TextBox search baru + suggestion (tbSearchDestinasi + lstSugesti)
             if (tbSearchDestinasi != null)
             {
-                tbSearchDestinasi.TextChanged -= TbSearchDestinasi_TextChanged; // Hindari duplikasi
+                tbSearchDestinasi.TextChanged -= TbSearchDestinasi_TextChanged; 
                 tbSearchDestinasi.TextChanged += TbSearchDestinasi_TextChanged;
                 tbSearchDestinasi.KeyDown -= TbSearchDestinasi_KeyDown;
                 tbSearchDestinasi.KeyDown += TbSearchDestinasi_KeyDown;
@@ -350,13 +317,12 @@ namespace SEARENA2025
             if (lstSugesti != null)
             {
                 lstSugesti.Visible = false;
-                lstSugesti.DoubleClick -= OpenSelectedSuggestion_Handler; // Hindari duplikasi
+                lstSugesti.DoubleClick -= OpenSelectedSuggestion_Handler; 
                 lstSugesti.DoubleClick += OpenSelectedSuggestion_Handler;
                 lstSugesti.KeyDown -= LstSugesti_KeyDown;
                 lstSugesti.KeyDown += LstSugesti_KeyDown;
                 lstSugesti.Font = new Font("Segoe UI", 9f);
                 
-                // PENTING: Pastikan lstSugesti berada di parent yang sama dengan tbSearchDestinasi
                 if (tbSearchDestinasi != null && lstSugesti.Parent != this)
                 {
                     lstSugesti.Parent?.Controls.Remove(lstSugesti);
@@ -446,7 +412,7 @@ namespace SEARENA2025
             }
         }
 
-        // ================== NAVIGASI SIMPLE ==================
+        // Navigasi antar section
 
         private void ScrollToTop()
         {
@@ -481,10 +447,10 @@ namespace SEARENA2025
         {
             try
             {
-                Form2 profileForm = new Form2(this); // PERBAIKI: Kirim reference parent form
+                Form2 profileForm = new Form2(this); 
                 
                 profileForm.Show();
-                this.Hide(); // Hide saja, jangan Close
+                this.Hide();
             }
             catch (Exception ex)
             {
@@ -493,7 +459,7 @@ namespace SEARENA2025
             }
         }
 
-        // ================== SEARCH & FILTER (KARTU) ==================
+        // Search dan filter logic
 
         private void SearchDestinations()
         {
@@ -576,38 +542,36 @@ namespace SEARENA2025
         {
             if (flpDestinasi == null) return;
 
-            // 1. Ambil filter dari checkbox
-            var selectedPulau = GetSelectedPulau();        // sudah ada fungsinya
-            var selectedAktivitas = GetSelectedAktivitas(); // juga sudah ada
+            // Ambil filter dari checkbox
+            var selectedPulau = GetSelectedPulau();       
+            var selectedAktivitas = GetSelectedAktivitas(); 
 
-            // 2. Ambil pilihan urutan
+            // Ambil pilihan urutan
             string sortBy = CmbRating?.SelectedItem?.ToString() ?? "Populer";
-
-            // 3. Mulai dari semua destinasi (data dari DB)
+            
             IEnumerable<Destinasi> query = allDestinasi;
 
-            // --- FILTER PULAU (Bali, Jawa, dll) ---
+            // Filter pulau
             if (selectedPulau.Any())
             {
-                // pastikan teks di checkbox sama dengan nilai di kolom pulau (Bali, Jawa, dst)
                 query = query.Where(d => selectedPulau.Contains(d.Pulau));
             }
 
-            // --- FILTER AKTIVITAS (Sunset, Snorkeling, Diving, Camping) ---
+            // Filter aktivitas (snorkeling, sunset, dll)
             if (selectedAktivitas.Any())
             {
                 query = query.Where(d =>
-                    !string.IsNullOrWhiteSpace(d.Activity) &&          // nama properti sesuaikan dengan model Destinasi kamu
+                    !string.IsNullOrWhiteSpace(d.Activity) &&          
                     selectedAktivitas.Any(a =>
                         d.Activity
-                            .Split(',')                                // "Snorkeling,Sunset" → ["Snorkeling","Sunset"]
+                            .Split(',')                               
                             .Select(x => x.Trim())
                             .Contains(a)
                     )
                 );
             }
 
-            // 4. SORTING
+            // Urutkan berdasarkan pilihan
             switch (sortBy)
             {
                 case "Rating Tertinggi":
@@ -617,7 +581,7 @@ namespace SEARENA2025
                     query = query.OrderBy(d => d.RatingAvg);
                     break;
                 case "Rekomendasi":
-                    // contoh: rating tinggi + review banyak
+                    // yang rating tinggi dan review banyak
                     query = query
                         .OrderByDescending(d => d.RatingAvg)
                         .ThenByDescending(d => d.TotalReview);
@@ -630,8 +594,7 @@ namespace SEARENA2025
             }
 
             var result = query.ToList();
-
-            // 5. Bangun ulang kartu di FlowLayoutPanel
+            
             RebuildDestinasiCards(result);
         }
 
@@ -653,7 +616,7 @@ namespace SEARENA2025
             flpDestinasi.ResumeLayout();
         }
 
-        // FILTER LOGIC
+        // Logic untuk mendapatkan filter dari checkbox
         private List<string> GetSelectedPulau()
         {
             List<string> selectedPulau = new List<string>();
@@ -684,7 +647,7 @@ namespace SEARENA2025
             return selectedAktivitas;
         }
 
-        // ================== SEARCH SUGGESTION SUPPORT ==================
+        // Cari dengan suggestion support
         private void TbSearchDestinasi_TextChanged(object sender, EventArgs e)
         {
             if (tbSearchDestinasi == null || lstSugesti == null) return;
@@ -703,7 +666,7 @@ namespace SEARENA2025
                     .Where(d =>
                         d.Nama.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                         d.Lokasi.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0)
-                    .Take(5) // Batasi 5 suggestion
+                    .Take(5) 
                     .ToList();
 
                 lstSugesti.BeginUpdate();
@@ -715,25 +678,21 @@ namespace SEARENA2025
                 lstSugesti.EndUpdate();
                 lstSugesti.Visible = matches.Count > 0;
 
-                // PERBAIKI: Atur posisi lstSugesti tepat di bawah tbSearchDestinasi
                 if (lstSugesti.Visible && tbSearchDestinasi != null)
                 {
-                    // Konversi koordinat tbSearchDestinasi ke koordinat form
                     Point searchBoxLocation = tbSearchDestinasi.PointToScreen(Point.Empty);
                     Point formLocation = this.PointToScreen(Point.Empty);
-                    
-                    // Hitung posisi relatif terhadap form
+
                     int relativeX = searchBoxLocation.X - formLocation.X;
                     int relativeY = searchBoxLocation.Y - formLocation.Y + tbSearchDestinasi.Height + 2;
                     
                     lstSugesti.Location = new Point(relativeX, relativeY);
                     lstSugesti.Width = tbSearchDestinasi.Width;
-                    lstSugesti.Height = 120; // Tinggi tetap untuk 5 suggestion
+                    lstSugesti.Height = 120; 
                     lstSugesti.BringToFront();
                 }
             }
 
-            // Tetap jalankan search untuk filter cards
             SearchDestinations();
         }
 
@@ -774,14 +733,12 @@ namespace SEARENA2025
         {
             if (lstSugesti?.SelectedItem is DestInfo info)
             {
-                // Cari Destinasi asli berdasarkan Id
                 var dest = allDestinasi.FirstOrDefault(d => d.Id == info.Id);
                 if (dest != null)
                 {
                     OpenDetailDestinasi(dest);
                 }
 
-                // Sembunyikan suggestion list
                 lstSugesti.Visible = false;
                 if (tbSearchDestinasi != null)
                     tbSearchDestinasi.Text = info.Nama;
@@ -794,7 +751,7 @@ namespace SEARENA2025
             OpenSelectedSuggestion();
         }
 
-        // ================== CLEAR FILTERS SUPPORT ==================
+        // Clear filters
         private void ClearFilters()
         {
             if (CmbRating != null)
@@ -818,15 +775,13 @@ namespace SEARENA2025
             ShowAllDestinasiCards();
         }
 
-        // ================== RELOAD DESTINASI & CUACA ==================
+        //Reload destinasi dan status cuaca
         private async void BtnReload_Click(object sender, EventArgs e)
         {
             try
             {
-                // Set cursor loading
                 Cursor = Cursors.WaitCursor;
 
-                // Disable button sementara untuk mencegah multiple click
                 if (sender is Guna.UI2.WinForms.Guna2Button gunaBtn)
                 {
                     gunaBtn.Enabled = false;
@@ -838,7 +793,6 @@ namespace SEARENA2025
                     btn.Text = "Memuat...";
                 }
 
-                // Reload destinasi dari database
                 await ReloadDestinasiAsync();
 
                 MessageBox.Show("Destinasi dan cuaca berhasil diperbarui!", "Reload Berhasil",
@@ -851,7 +805,6 @@ namespace SEARENA2025
             }
             finally
             {
-                // Kembalikan cursor dan enable button
                 Cursor = Cursors.Default;
                 
                 if (sender is Guna.UI2.WinForms.Guna2Button gunaBtn)
@@ -869,10 +822,10 @@ namespace SEARENA2025
 
         private async Task ReloadDestinasiAsync()
         {
-            // 1) Ambil data terbaru dari DB
+            // Ambil data destinasi terbaru dari database
             allDestinasi = await Task.Run(() => Destinasi.GetAll());
 
-            // 2) Update list untuk sugesti pencarian
+            // Update list untuk sugesti pencarian
             _allDestinasi = allDestinasi
                 .Select(d => new DestInfo
                 {
@@ -882,12 +835,10 @@ namespace SEARENA2025
                 })
                 .ToList();
 
-            // 3) Pastikan panel ada dan bersih
             if (flpDestinasi == null) return;
             flpDestinasi.SuspendLayout();
             flpDestinasi.Controls.Clear();
-
-            // 4) Render ulang dengan filter yang sudah diterapkan
+            
             if (allDestinasi.Count == 0)
             {
                 flpDestinasi.Controls.Add(new Label
@@ -903,27 +854,21 @@ namespace SEARENA2025
             {
                 // Terapkan filter/urutan saat ini
                 ApplyFilters();
-
-                // 5) Reload cuaca untuk semua kartu yang ditampilkan
                 await ReloadAllWeatherAsync();
             }
 
             flpDestinasi.ResumeLayout();
         }
 
-        // Method untuk reload cuaca di semua kartu destinasi yang tampil
+        // Method untuk reload cuaca 
         private async Task ReloadAllWeatherAsync()
         {
             if (flpDestinasi == null) return;
-
-            // Kumpulkan semua DestinasiCard
             var cards = flpDestinasi.Controls.OfType<DestinasiCard>().ToList();
-
-            // Reload cuaca untuk setiap card secara parallel (lebih cepat)
             var tasks = cards.Select(card => card.ReloadWeatherAsync());
             await Task.WhenAll(tasks);
         }
-        // ====== EVENT HANDLERS REQUIRED BY DESIGNER (STUBS) ======
+        // event handlers kosong untuk mencegah error designer
         private void guna2ShadowPanel2_Paint(object sender, PaintEventArgs e) { }
         private void guna2HtmlLabel25_Click(object sender, EventArgs e) { }
         private void guna2HtmlLabel26_Click(object sender, EventArgs e) { }

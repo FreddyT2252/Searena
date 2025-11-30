@@ -55,12 +55,10 @@ namespace SEARENA2025
 
         private void EnsureFlowBookmarks()
         {
-            // Cari FlowLayoutPanel yang sudah ada di designer
             flowBookmarks = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault(f => f.Name == "flowBookmarks");
 
             if (flowBookmarks == null)
             {
-                // Cari di dalam container panels
                 foreach (Control container in this.Controls)
                 {
                     if (container is Guna.UI2.WinForms.Guna2Panel || container is Panel)
@@ -74,27 +72,22 @@ namespace SEARENA2025
 
             if (flowBookmarks == null)
             {
-                // Buat FlowLayoutPanel baru (seperti di DashboardUtama)
-                // Cari footer panel untuk menghitung tinggi yang tersedia
                 var footerPanel = this.Controls.OfType<Control>()
                     .FirstOrDefault(c => c.Name == "PnlInformasi" || c.Name.Contains("Footer"));
 
                 int xPosition = 512;
                 int yPosition = 200;
 
-                // Hitung tinggi yang tersedia (jangan sampai memotong footer)
                 int availableHeight;
-                const int safeMarginToFooter = 60; // margin aman ke footer
+                const int safeMarginToFooter = 60; 
 
                 if (footerPanel != null)
                 {
-                    // Tinggi panel = posisi atas footer - posisi Y panel - margin aman
                     availableHeight = Math.Max(300, footerPanel.Top - yPosition - safeMarginToFooter);
                 }
                 else
                 {
-                    // Fallback jika footer tidak ditemukan
-                    availableHeight = this.Height - yPosition - 100; // Gunakan tinggi form dikurangi margin
+                    availableHeight = this.Height - yPosition - 100; 
                 }
 
                 flowBookmarks = new FlowLayoutPanel
@@ -117,7 +110,6 @@ namespace SEARENA2025
             }
             else
             {
-                // Panel sudah ada, pastikan visible dan scroll aktif
                 flowBookmarks.Visible = true;
                 flowBookmarks.AutoScroll = true;
                 flowBookmarks.Padding = new Padding(10, 5, 10, 10);
@@ -263,7 +255,7 @@ namespace SEARENA2025
                     {
                         Width = 270,
                         Height = 160,
-                        Margin = new Padding(10), // Sesuaikan dengan DashboardUtama
+                        Margin = new Padding(10), 
                         Tag = wrapper.BookmarkId
                     };
 
@@ -287,7 +279,6 @@ namespace SEARENA2025
         {
             foreach (Control ctrl in flowBookmarks.Controls)
             {
-                // Hanya ubah warna background
                 if (ctrl is DestinasiCard card)
                 {
                     card.BackColor = Color.White;
@@ -302,7 +293,6 @@ namespace SEARENA2025
                 }
             }
 
-            // Highlight kartu yang dipilih
             selected.BackColor = Color.LightYellow;
         }
 
@@ -371,7 +361,6 @@ namespace SEARENA2025
                     await conn.OpenAsync();
                     DebugLog("Connection opened successfully");
 
-                    // Query untuk cek apakah bookmark ada
                     using (var checkCmd = new NpgsqlCommand("SELECT COUNT(*) FROM bookmarks WHERE bookmark_id = @bid", conn))
                     {
                         checkCmd.Parameters.AddWithValue("@bid", bookmarkId);

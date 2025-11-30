@@ -349,6 +349,7 @@
             this.Navbar.Size = new System.Drawing.Size(1203, 68);
             this.Navbar.TabIndex = 6;
             this.Navbar.UseWaitCursor = true;
+            this.Navbar.Paint += new System.Windows.Forms.PaintEventHandler(this.Navbar_Paint);
             // 
             // lblProfile
             // 
