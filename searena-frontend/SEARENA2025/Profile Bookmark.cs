@@ -15,7 +15,7 @@ namespace SEARENA2025
     public partial class Form3 : Form
     {
         private Form2 parentForm;
-        private string connectionString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
+        private static readonly string CONNECTION_STRING = DotNetEnv.Env.GetString("DB_CONNECTION");
         private List<BookmarkData> bookmarkList = new List<BookmarkData>();
         private FlowLayoutPanel flowBookmarks;
         private List<BookmarkWrapper> bookmarkWrappers = new List<BookmarkWrapper>();
@@ -191,7 +191,7 @@ namespace SEARENA2025
         {
             try
             {
-                using (var conn = new NpgsqlConnection(connectionString))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     conn.Open();
                     bookmarkWrappers.Clear();
@@ -365,7 +365,7 @@ namespace SEARENA2025
 
             try
             {
-                using (var conn = new NpgsqlConnection(connectionString))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     DebugLog("Opening connection...");
                     await conn.OpenAsync();

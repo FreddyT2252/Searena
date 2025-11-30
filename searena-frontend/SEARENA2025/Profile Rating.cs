@@ -14,8 +14,8 @@ namespace SEARENA2025
     {
         private Form dashboardParent;
         private bool _isLoggingOut = false;
+        private static readonly string CONNECTION_STRING = DotNetEnv.Env.GetString("DB_CONNECTION");
 
-        private const string Conn = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public Form2(Form dashboard = null)
         {
@@ -28,7 +28,7 @@ namespace SEARENA2025
         {
             try
             {
-                using (var conn = new Npgsql.NpgsqlConnection("Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123"))
+                using (var conn = new Npgsql.NpgsqlConnection(CONNECTION_STRING))
                 {
                     await conn.OpenAsync();
 
@@ -100,7 +100,7 @@ namespace SEARENA2025
         {
             try
             {
-                using (var conn = new NpgsqlConnection(Conn))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     await conn.OpenAsync();
                     using (var cmd = new NpgsqlCommand(@"
@@ -426,7 +426,7 @@ namespace SEARENA2025
 
             try
             {
-                using (var conn = new NpgsqlConnection(Conn))
+                using (var conn = new NpgsqlConnection(CONNECTION_STRING))
                 {
                     await conn.OpenAsync();
                     using (var cmd = new NpgsqlCommand(

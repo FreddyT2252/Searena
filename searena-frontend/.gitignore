@@ -7,5 +7,8 @@ obj/
 *.suo
 *.dbmdl
 packages/
+.env
+.env.*
+*.env
 *.log
 '@ | Out-File -Encoding utf8 .gitignore

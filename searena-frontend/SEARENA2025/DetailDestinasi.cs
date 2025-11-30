@@ -1,6 +1,4 @@
-﻿// DetailDestinasi.cs
-// DetailDestinasi.cs
-using Npgsql;
+﻿using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +15,13 @@ namespace SEARENA2025
     {
         private readonly int _destId;
         private readonly string _destName;
-        
 
-        // Pakai koneksi Supabase (punya kamu yang pertama)
-        private const string ConnString =
-            "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
-        // ===== Model review sederhana (untuk versi label tetap) =====
+       
+        private static readonly string ConnString = DotNetEnv.Env.GetString("DB_CONNECTION");
+
+
+      
         public class ReviewItem
         {
             public string Username { get; set; }

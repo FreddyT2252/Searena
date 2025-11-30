@@ -8,7 +8,7 @@ namespace SEARENA2025
 {
     internal static class DatabaseHelper
     {
-        private static readonly string connectionString = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
+        private static readonly string connectionString = DotNetEnv.Env.GetString("DB_CONNECTION");
 
         public static NpgsqlConnection GetConnection()
         {

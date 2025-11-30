@@ -17,8 +17,9 @@ namespace SEARENA2025
     {
         private static readonly HttpClient http = new HttpClient();
 
-        private const string ApiKey = "54d781e35ad94d948d732245252309";
-        private const string BaseUrl = "https://api.weatherapi.com/v1/current.json";
+        private static readonly string ApiKey = DotNetEnv.Env.GetString("WEATHER_API_KEY");
+        private static readonly string BaseUrl = DotNetEnv.Env.GetString("WEATHER_BASE_URL");
+
 
         public static async Task<WeatherInfo> GetCurrentAsync(string location)
         {

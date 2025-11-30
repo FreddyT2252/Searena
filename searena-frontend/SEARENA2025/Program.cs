@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DotNetEnv;
 
 namespace SEARENA2025
 {
@@ -14,6 +15,8 @@ namespace SEARENA2025
         [STAThread]
         static void Main()
         {
+            Env.TraversePath().Load();
+
             // Enable DPI awareness untuk .NET Framework 4.7+
             if (Environment.OSVersion.Version.Major >= 6)
             {
