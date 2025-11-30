@@ -341,16 +341,14 @@ namespace SEARENA2025
             if (UserSession.IsAdmin())
             {
                 var admin = new PageAdmin();
-                admin.FormClosed += (s, args) => Application.Exit();
                 admin.Show();
-                this.Hide();
+                this.Close();   
             }
             else
             {
                 var dash = new DashboardUtama();
-                dash.FormClosed += (s, args) => Application.Exit();
                 dash.Show();
-                this.Hide();
+                this.Close();   
             }
         }
 

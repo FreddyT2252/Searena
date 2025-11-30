@@ -14,6 +14,7 @@ namespace SEARENA2025
 
         private int selectedDestinasiId = -1;
         private int selectedReviewId = -1;
+        private bool _isLoggingOut = false;
 
         public PageAdmin()
         {
@@ -32,6 +33,7 @@ namespace SEARENA2025
             btnKirim.Click += BtnKirim_Click;
             dgvRiwayat.CellClick += DgvReview_CellClick;
             btnLogout.Click += btnLogout_Click;
+            this.FormClosed += PageAdmin_FormClosed;
         }
 
         private void LoadDestinasi()
@@ -467,19 +469,28 @@ namespace SEARENA2025
                 }
             }
         }
+        private void PageAdmin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (_isLoggingOut)
+                return;
+            var home = new DashboardItem();
+            home.Show();
+        }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            // Konfirmasi logout
-            if (MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi Logout",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                // Clear session
-                UserSession.Clear();
+            DialogResult result = MessageBox.Show(
+           "Apakah Anda yakin ingin keluar?",
+           "Konfirmasi Log Out",
+           MessageBoxButtons.YesNo,
+           MessageBoxIcon.Question);
 
-                // Kembali ke DashboardItem 
-                DashboardItem dashboardItem = new DashboardItem();
-                dashboardItem.Show();
+            if (result == DialogResult.Yes)
+            {
+                _isLoggingOut = true;
+                UserSession.Clear();
+                var home = new DashboardItem();
+                home.Show();
                 this.Close();
             }
         }
@@ -488,7 +499,7 @@ namespace SEARENA2025
         {
             List<string> waktu = new List<string>();
 
-            // Ambil semua checkbox bulan
+            
             if (cbJan.Checked) waktu.Add("Januari");
             if (cbFeb.Checked) waktu.Add("Februari");
             if (cbMar.Checked) waktu.Add("Maret");

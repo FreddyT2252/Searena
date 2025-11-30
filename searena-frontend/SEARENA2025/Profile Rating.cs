@@ -13,16 +13,16 @@ namespace SEARENA2025
     public partial class Form2 : Form
     {
         private Form dashboardParent;
+        private bool _isLoggingOut = false;
 
         private const string Conn = "Host=aws-1-ap-southeast-1.pooler.supabase.com;Port=5432;Database=postgres;Username=postgres.eeqqiyfukvhbwystupei;Password=SearenaDB123";
 
         public Form2(Form dashboard = null)
         {
-
-
             InitializeComponent();
             dashboardParent = dashboard;
             LoadUserProfile();
+            this.FormClosed += Form2_FormClosed;
         }
         private async void LoadUserProfile()
         {
@@ -319,36 +319,55 @@ namespace SEARENA2025
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi Log Out",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(
+            "Apakah Anda yakin ingin keluar?",
+            "Konfirmasi Log Out",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                Application.Exit();
+                _isLoggingOut = true;
+                UserSession.Clear();
+                DashboardItem home = new DashboardItem();
+                home.Show();
+                this.Close();  
+            }
+        }
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+            if (_isLoggingOut)
+                return;
+
+            
+            if (dashboardParent != null && !dashboardParent.IsDisposed)
+            {
+                dashboardParent.Show();
             }
         }
 
+
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            // PERBAIKI: Close form ini dan show parent form
+            
             if (dashboardParent != null)
             {
                 dashboardParent.Show();
             }
             else
             {
-                // Jika tidak ada parent, buka dashboard baru
+                
                 DashboardUtama dashboard = new DashboardUtama();
                 dashboard.Show();
             }
             this.Close();
         }
 
-        // ===== EVENT HANDLERS TAMBAHAN =====
+       
 
         private void guna2HtmlLabel3_Click(object sender, EventArgs e)
         {
-            // Menampilkan informasi bergabung
             MessageBox.Show("Bergabung sejak tahun 2021", "Info Bergabung");
         }
 

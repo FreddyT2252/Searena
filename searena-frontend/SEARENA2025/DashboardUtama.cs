@@ -482,7 +482,7 @@ namespace SEARENA2025
             try
             {
                 Form2 profileForm = new Form2(this); // PERBAIKI: Kirim reference parent form
-                profileForm.FormClosed += (s, args) => this.Show();
+                
                 profileForm.Show();
                 this.Hide(); // Hide saja, jangan Close
             }

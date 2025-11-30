@@ -436,22 +436,24 @@ namespace SEARENA2025
 
         private void btnKembali_Click(object sender, EventArgs e)
         {
-            if (parentForm != null)
-                parentForm.Close();
-
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
-            this.Close();
+        
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin keluar?", "Konfirmasi Log Out",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(
+             "Apakah Anda yakin ingin keluar?",
+             "Konfirmasi Log Out",
+             MessageBoxButtons.YesNo,
+             MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                Application.Exit();
+
+                UserSession.Clear();
+                DashboardItem home = new DashboardItem();
+                home.Show();
+                this.Close();
             }
         }
 
@@ -519,11 +521,12 @@ namespace SEARENA2025
 
         private void btnKembali_Click_1(object sender, EventArgs e)
         {
-            if (parentForm != null)
-                parentForm.Close();
+            if (parentForm != null && !parentForm.IsDisposed)
+            {
+                parentForm.Close();              
+            }
 
-            DashboardUtama dashboard = new DashboardUtama();
-            dashboard.Show();
+           
             this.Close();
         }
 
