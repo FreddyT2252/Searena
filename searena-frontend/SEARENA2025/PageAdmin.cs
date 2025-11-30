@@ -241,12 +241,6 @@ namespace SEARENA2025
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txtRekomendasiCuaca.Text))
-            {
-                MessageBox.Show("Rekomendasi cuaca harus diisi!");
-                txtRekomendasiCuaca.Focus();
-                return;
-            }
 
             // Validasi harga min
             string hargaMinText = txtTiketMin.Text.Trim().Replace(".", "").Replace(",", "");
@@ -519,8 +513,7 @@ namespace SEARENA2025
             txtPulau.Clear();
             txtTiketMin.Clear();
             txtTiketMax.Clear();
-            txtRekomendasiCuaca.Clear();
-
+           
             UncheckControl("cbJan");
             UncheckControl("cbFeb");
             UncheckControl("cbMar");

@@ -7,8 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEARENA2025", "SEARENA2025\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A41B8B7-C8F1-4DBC-BE8F-EFB701661363}"
 	ProjectSection(SolutionItems) = preProject
-		.env = .env
 		.gitignore = .gitignore
+		.env = .env
 	EndProjectSection
 EndProject
 Global
