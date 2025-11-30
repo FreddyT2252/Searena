@@ -1,0 +1,14 @@
+@'
+# Visual Studio build files
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.dbmdl
+packages/
+.env
+.env.*
+*.env
+*.log
+'@ | Out-File -Encoding utf8 .gitignore
