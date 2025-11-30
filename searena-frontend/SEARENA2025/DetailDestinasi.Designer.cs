@@ -549,6 +549,7 @@
             // 
             // PnlRatingReview
             // 
+            this.PnlRatingReview.AutoScroll = true;
             this.PnlRatingReview.BackColor = System.Drawing.Color.Transparent;
             this.PnlRatingReview.Controls.Add(this.lblReview2);
             this.PnlRatingReview.Controls.Add(this.guna2HtmlLabel24);
