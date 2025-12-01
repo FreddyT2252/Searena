@@ -113,51 +113,7 @@ Searena/
 3. Setup Database Melalui Supabase PostgreSQL
     - Masuk ke https://supabase.com
     - Buat project dan buka tab SQL Editor
-    - Jalankan schema berikut:
-   ```sql
-      create table if not exists users (
-      user_id serial primary key,
-      nama_lengkap varchar(255) not null,
-      email varchar(255) unique not null,
-      password varchar(255) not null,
-      tanggal_bergabung timestamp default now()
-      );
     
-      create table if not exists destinasi (
-      destinasi_id serial primary key,
-      nama_destinasi varchar(255) not null,
-      deskripsi text,
-      lokasi varchar(255),
-      pulau varchar(100),
-      harga_min int default 0,
-      harga_max int default 0,
-      rating_avg numeric(3,2) default 0,
-      total_review int default 0,
-      waktu_terbaik text,
-      activity text
-      );
-    
-      create table if not exists reviews (
-      review_id serial primary key,
-      user_id int references users(user_id),
-      destinasi_id int references destinasi(destinasi_id),
-      rating int check (rating between 1 and 5),
-      review_text text,
-      tanggal_review timestamp default now(),
-      response text
-      );
-    
-      create table if not exists bookmarks (
-      id serial primary key,
-      user_id int references users(user_id),
-      destinasi_id int references destinasi(destinasi_id),
-      created_at timestamp default now(),
-      unique(user_id, destinasi_id)
-      );
-   ```
-    - Ambil connection info dari menu Project Settings - Database
-
-
 ## **🔐 Environment Variables (.env)**
 Buat file `.env` di folder `SEARENA2025/`
 ```
