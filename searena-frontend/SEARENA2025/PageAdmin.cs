@@ -164,6 +164,8 @@ namespace SEARENA2025
                 return;
             }
 
+            string activity = GetSelectedActivity();
+
             try
             {
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
@@ -183,9 +185,9 @@ namespace SEARENA2025
                     }
 
                     string query = @"INSERT INTO destinasi (nama_destinasi, deskripsi, lokasi, pulau, 
-                                                           harga_min, harga_max, rating_avg, total_review, waktu_terbaik) 
+                                                           harga_min, harga_max, rating_avg, total_review, waktu_terbaik, activity) 
                                      VALUES (@nama, @deskripsi, @lokasi, @pulau, @harga_min, @harga_max, 
-                                             0, 0, @waktu)";
+                                             0, 0, @waktu, @activity)";
 
                     using (var cmd = new NpgsqlCommand(query, connection))
                     {
@@ -196,6 +198,7 @@ namespace SEARENA2025
                         cmd.Parameters.AddWithValue("@harga_min", hargaMin);
                         cmd.Parameters.AddWithValue("@harga_max", hargaMax);
                         cmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
+                        cmd.Parameters.AddWithValue("@activity", activity);
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Destinasi berhasil ditambahkan!");
@@ -274,6 +277,8 @@ namespace SEARENA2025
                 return;
             }
 
+            string activity = GetSelectedActivity();
+
             try
             {
                 using (var connection = new NpgsqlConnection(CONNECTION_STRING))
@@ -321,7 +326,7 @@ namespace SEARENA2025
                         // Update destinasi
                         string updateQuery = @"UPDATE destinasi SET deskripsi=@deskripsi, 
                                      lokasi=@lokasi, pulau=@pulau, harga_min=@harga_min, harga_max=@harga_max, 
-                                     rating_avg=@rating, total_review=@total_review, waktu_terbaik=@waktu 
+                                     rating_avg=@rating, total_review=@total_review, waktu_terbaik=@waktu, activity=@activity 
                                      WHERE destinasi_id=@id";
 
                         using (var updateCmd = new NpgsqlCommand(updateQuery, connection))
@@ -335,6 +340,7 @@ namespace SEARENA2025
                             updateCmd.Parameters.AddWithValue("@rating", avgRating);
                             updateCmd.Parameters.AddWithValue("@total_review", totalReviews);
                             updateCmd.Parameters.AddWithValue("@waktu", waktuTerbaik);
+                            updateCmd.Parameters.AddWithValue("@activity", activity);
 
                             updateCmd.ExecuteNonQuery();
                             MessageBox.Show($"Destinasi berhasil diupdate!\nRating: {avgRating:F2} | Total Review: {totalReviews}");
@@ -503,6 +509,18 @@ namespace SEARENA2025
             if (cbDec.Checked) waktu.Add("Desember");
 
             return string.Join(", ", waktu);
+        }
+
+        private string GetSelectedActivity()
+        {
+            List<string> activities = new List<string>();
+
+            if (cbSnorkling.Checked) activities.Add("Snorkeling");
+            if (cbDiving.Checked) activities.Add("Diving");
+            if (cbSunset.Checked) activities.Add("Sunset");
+            if (cbCamping.Checked) activities.Add("Camping");
+
+            return string.Join(", ", activities);
         }
 
         private void ClearForm()
