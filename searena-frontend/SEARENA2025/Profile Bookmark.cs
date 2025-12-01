@@ -126,7 +126,7 @@ namespace SEARENA2025
                 {
                     if (conn == null) return;
 
-                    using (var cmd = new NpgsqlCommand("SELECT nama_lengkap, email, no_telepon, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
+                    using (var cmd = new NpgsqlCommand("SELECT nama_lengkap, email, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
                     {
                         cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
 

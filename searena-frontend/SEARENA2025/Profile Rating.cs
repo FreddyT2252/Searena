@@ -32,7 +32,7 @@ namespace SEARENA2025
                 {
                     await conn.OpenAsync();
 
-                    using (var cmd = new Npgsql.NpgsqlCommand("SELECT nama_lengkap, email, no_telepon, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
+                    using (var cmd = new Npgsql.NpgsqlCommand("SELECT nama_lengkap, email, tanggal_bergabung FROM users WHERE user_id = @uid", conn))
                     {
                         cmd.Parameters.AddWithValue("@uid", UserSession.UserId);
 
@@ -42,7 +42,6 @@ namespace SEARENA2025
                             {
                                 lblNama.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblEmail.Text = reader["email"]?.ToString() ?? "-";
-                                lblTelepon.Text = reader["no_telepon"]?.ToString() ?? "-";
                                 guna2HtmlLabel1.Text = reader["nama_lengkap"]?.ToString() ?? "-";
                                 lblPengguna.Text = "Pengguna"; 
                                 
